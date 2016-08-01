@@ -4,4 +4,7 @@ in verschillende onderdelen die ik dan elk afzonderlijk kon oplossen. Er werd mi
 installer als een updater te maken voor het framework. De eerste logische opdeling die ik dan ook heb gemaakt
 is het opdelen van de installer en de updater. Deze zijn twee verschillende onderdelen en moeten dus ook elk
 op een andere manier worden aangepakt.
-Over de installer was er niet veel informatie te vinden. Hierbij ben ik 
+Over de installer was er niet veel informatie te vinden. Na even te zoeken heb ik verschillende manieren 
+gevonden waarmee het mogelijk is om een installer te maken. De verschillende manieren die ik heb gevonden zijn:
+WiX en NSIS. Bij WiX moet men een XML bestand maken waarmee men dan de commando's kan uitvoeren. Bij NSIS
+gaat men een script maken die gebruikt gaat worden om vervolgens de executable te maken.
