@@ -1,0 +1,25 @@
+- Dingen die ik eens moet gaan bekijken:
+	NSIS
+	Windows installer (MSI service)
+	WiX
+	
+- Vragen:
+	Wat zijn de doel OS'en
+	
+- Maken:
+	Installer -> keuze tussen twee verschillende mogelijkheden
+	-> installeren van de nodige libs en daarna het framework installeren
+		Mogelijke flow:
+		Selecteer welk type install je wilt (misschien kan je dat detecteren)
+		Download files van server voor install
+		Install files
+	Auto updater
+		Wannneer moet je gaan kijken voor nieuwe versie? server stuurt of client stuurt 
+			-> wat als client uitstaat tijdens server sturen?
+			
+	Logger maken voor troubleshooten -> kan zoals we in de lessen hebben gezien met aspects?
+	-> er vanuit gaan dat de mensen die het gebruiken niet weten wat ze doen
+
+- TODO:
+	Git opzetten
+	Tex bestand voor master
