@@ -14,10 +14,8 @@
 	Installer -> keuze tussen twee verschillende mogelijkheden
 	!!belangrijk de installer moet een command pattern zijn!!
 	-> installeren van de nodige libs en daarna het framework installeren
-		Mogelijke flow:
-		Selecteer welk type install je wilt (misschien kan je dat detecteren)
-		Download files van server voor install
-		Install files
+	PROBLEEM -> wat doe je met de output van de verschillende installers
+		
 	Auto updater
 		Wannneer moet je gaan kijken voor nieuwe versie? client vraagt op bij opstart
 			
@@ -29,7 +27,7 @@
 	1 EXE voor het updaten en framework op te starten -> zal XML aanpassen
 
 - TODO:
-	Git opzetten
-	Tex bestand voor master
+#	Git opzetten
+#	Tex bestand voor master
 	Virtualbox voor testomgeving
 	
