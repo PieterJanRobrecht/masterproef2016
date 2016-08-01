@@ -14,11 +14,13 @@
 		Download files van server voor install
 		Install files
 	Auto updater
-		Wannneer moet je gaan kijken voor nieuwe versie? server stuurt of client stuurt 
-			-> wat als client uitstaat tijdens server sturen?
+		Wannneer moet je gaan kijken voor nieuwe versie? client vraagt op bij opstart
 			
 	Logger maken voor troubleshooten -> kan zoals we in de lessen hebben gezien met aspects?
 	-> er vanuit gaan dat de mensen die het gebruiken niet weten wat ze doen
+
+-Structuur programma + uiterlijk
+	1 EXE voor op te starten -> kijkt ook voor nieuwe versie
 
 - TODO:
 	Git opzetten
