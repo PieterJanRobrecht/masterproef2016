@@ -1,10 +1,14 @@
 - Dingen die ik eens moet gaan bekijken:
-	NSIS
-	Windows installer (MSI service)
-	WiX
+	NSIS -> http://nsis.sourceforge.net/Features
+		+scriptbased
+		+Ziet er goed uit
+	WiX -> https://www.packtpub.com/sites/default/files/3722-chapter-1-getting-started%20.pdf
+		-Het is in XML
+		+Het ziet ernaar uit dat dit alles bevat dat nodig is
 	
 - Vragen:
 	Wat zijn de doel OS'en -> all windows
+	Is er een manier om een gewone computer te onderscheiden van een testtoren
 	
 - Maken:
 	Installer -> keuze tussen twee verschillende mogelijkheden
@@ -21,6 +25,7 @@
 
 -Structuur programma + uiterlijk
 	1 EXE voor op te starten -> kijkt ook voor nieuwe versie
+	registration file waarin de verschillende versies worden bijgehouden
 
 - TODO:
 	Git opzetten
