@@ -24,5 +24,3 @@
 	Git opzetten
 	Tex bestand voor master
 	
-	aanpassing na git init
-	
