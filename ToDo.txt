@@ -8,10 +8,11 @@
 	
 - Vragen:
 	Wat zijn de doel OS'en -> all windows
-	Is er een manier om een gewone computer te onderscheiden van een testtoren
+	Is er een manier om een gewone computer te onderscheiden van een testtoren -> driver installeren en wachten op fout melding?
 	
 - Maken:
 	Installer -> keuze tussen twee verschillende mogelijkheden
+	!!belangrijk de installer moet een command pattern zijn!!
 	-> installeren van de nodige libs en daarna het framework installeren
 		Mogelijke flow:
 		Selecteer welk type install je wilt (misschien kan je dat detecteren)
