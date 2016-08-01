@@ -4,7 +4,7 @@
 	WiX
 	
 - Vragen:
-	Wat zijn de doel OS'en
+	Wat zijn de doel OS'en -> all windows
 	
 - Maken:
 	Installer -> keuze tussen twee verschillende mogelijkheden
@@ -23,4 +23,5 @@
 - TODO:
 	Git opzetten
 	Tex bestand voor master
+	Virtualbox voor testomgeving
 	
