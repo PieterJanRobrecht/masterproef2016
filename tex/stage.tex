@@ -4,12 +4,12 @@
 \usepackage[autostyle]{csquotes} 
 \usepackage[dutch]{babel}
 \usepackage{pdfpages}
+\usepackage{natbib}
+\usepackage{graphicx}
 
 \title{Stageverslag}
 \author{\mbox{Pieter-Jan} Robrecht}
 \date{Maart 2016}
-\usepackage{natbib}
-\usepackage{graphicx}
 
 \begin{document}
 
@@ -19,8 +19,9 @@
 %Volgende lijn is om de titelpagina geen paginanummer te geven
 \clearpage
 \setcounter{page}{1}
+
 \tableofcontents
-\clearpage
+%\clearpage
 
 \section{Inleiding}
 In het kader van mijn masterproef was het mogelijk om bij Televic Rail een stage te lopen tijdens de zomer. 
@@ -35,7 +36,7 @@ Het doel is dan ook het maken van een installer en een updater waarmee dit proce
 Tijdens de duur van de stage werden de verschillende implementatie manieren onderzocht en werd er een algemene architectuur voor de installer-updater uitgedacht.
 In wat volgt wordt er beschreven welke stappen er werden ondernomen om het probleem onder te verdelen in enkele logische stappen en hoe deze problemen dan werden opgelost. 
 
-\section{Analyse van het probleem}
+\section{Analyse van het probleem} \label{section:analyse}
 Tijdens het bespreken van het probleem werd het al snel duidelijk dat er verschillende scenario's zijn waarin het framework gebruikt wordt. 
 Het framework wordt als een standalone programma op een laptop of desktop maar het zal ook moeten draaien op verschillende testtorens. 
 Voor de verschillende omgevingen zal iedere keer een andere configuratie nodig zijn maar ze wel beiden Windows gebruiken als besturingssysteem. 
@@ -55,9 +56,12 @@ Nieuwe versies van het framework zelf zullen ook snel en eenvoudig moeten worden
 
 De installer is best ook een programma dat zo eenvoudig mogelijk uit te breiden is aangezien het in de toekomst nog kan worden aangepast. 
 De interface naar de gebruiker toe is best ook zo eenvoudig mogelijk zodanig dat er geen problemen kunnen ontstaan tijdens de installatie van het framework.
-Uiteraard gaan we er vanuit moeten gaan dat er af en toe een probleem zal onstaan tijdens de installatie van enkele componenten.
+Uiteraard gaan we er vanuit moeten gaan dat er af en toe een probleem zal ontstaan tijdens de installatie van enkele componenten.
 Ook hiermee zullen we rekening moeten houden.
 
 \section{Oplossingen}
+
+\bibliographystyle{plain}
+\bibliography{bib/stagebib}
 
 \end{document}
