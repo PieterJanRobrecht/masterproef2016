@@ -12,13 +12,15 @@
 	
 - Maken:
 	Installer -> keuze tussen twee verschillende mogelijkheden
-	!!belangrijk de installer moet een command pattern zijn!!
+	!!BELANGRIJK DE INSTALLER MOET COMMAND PATTERN ZIJN!!
 	-> installeren van de nodige libs en daarna het framework installeren
-	PROBLEEM -> wat doe je met de output van de verschillende installers
+	PROBLEEM -> wat doe je met de output van de verschillende installers?
 		
 	Auto updater
 		Wannneer moet je gaan kijken voor nieuwe versie? client vraagt op bij opstart
-			
+		KIJKEN HOE WE HET FRAMEWORK KUNNEN UPDATEN
+		-> verschillende types van frameworks (PC, toren, raspberry pi)
+		
 	Logger maken voor troubleshooten -> kan zoals we in de lessen hebben gezien met aspects?
 	-> er vanuit gaan dat de mensen die het gebruiken niet weten wat ze doen
 
