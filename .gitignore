@@ -1,3 +1,5 @@
+#Gitignore for latex
+
 *.aux
 *.glo
 *.idx
@@ -21,3 +23,5 @@
 *.mtc1
 *.out
 *.synctex.gz
+
+#

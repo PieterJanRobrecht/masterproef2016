@@ -8,3 +8,6 @@ Over de installer was er niet veel informatie te vinden. Na even te zoeken heb i
 gevonden waarmee het mogelijk is om een installer te maken. De verschillende manieren die ik heb gevonden zijn:
 WiX en NSIS. Bij WiX moet men een XML bestand maken waarmee men dan de commando's kan uitvoeren. Bij NSIS
 gaat men een script maken die gebruikt gaat worden om vervolgens de executable te maken.
+
+Na stage wordt er verwacht dat er een stageverslag wordt ingeleverd waarin de verschillende frameworks
+worden besproken en aan de hand van de drivers wordt gekeken wat er mogelijk is.
