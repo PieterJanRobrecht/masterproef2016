@@ -5,6 +5,9 @@
 	WiX -> https://www.packtpub.com/sites/default/files/3722-chapter-1-getting-started%20.pdf
 		-Het is in XML
 		+Het ziet ernaar uit dat dit alles bevat dat nodig is
+	Chocolatey -> https://chocolatey.org/
+		+Linux like
+		-Gebruikers moeten om kunnen met cmd
 	
 - Vragen:
 	Wat zijn de doel OS'en -> all windows
@@ -13,6 +16,7 @@
 - Maken:
 	Installer -> keuze tussen twee verschillende mogelijkheden
 	!!BELANGRIJK DE INSTALLER MOET COMMAND PATTERN ZIJN!!
+	!!WERKEN IN EEN VEILIGE OMGEVING EN DAN PAS ROLLOUT DOEN!!
 	-> installeren van de nodige libs en daarna het framework installeren
 	PROBLEEM -> wat doe je met de output van de verschillende installers?
 		
