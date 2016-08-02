@@ -38,5 +38,5 @@
 - TODO:
 #	Git opzetten
 #	Tex bestand voor master
-	Virtualbox voor testomgeving
+	Virtualbox voor testomgeving -> upgrade naar 64 bit nodig
 	
