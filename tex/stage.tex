@@ -47,9 +47,16 @@ Aangezien linux distributies geen gebruik maken van .exe files voor het installe
 Aangezien de uitbreiding naar de Raspberry Pi een toekomst plan is, gaan we hier niet de focus leggen.
 
 Tijdens het installeren van het framework moeten we rekening houden met het feit dat iedere computer een andere configuratie en andere drivers zal nodig hebben.
-Er zal een manier moeten worden uitgedacht waardoor we kunnen achterhalen welke devices zijn geconnecteerd.
-We moeten vervolgens achterhalen of deze 
+Er zal een manier moeten worden uitgedacht waardoor we kunnen achterhalen welke devices zijn geconnecteerd en welke drivers deze exact nodig heeft.
+Het probleem van de drivers beperkt zich jammer genoeg niet enkel tot dit.
+Als er nieuwe hardware ontwikkelt wordt, zullen er ook verschillende nieuwe drivers nodig zijn. 
+Voor de installer is het dan ook belangrijk dat deze nieuwe drivers snel kunnen worden toegevoegd en dat dit geen grote problemen levert.
+Nieuwe versies van het framework zelf zullen ook snel en eenvoudig moeten worden gedistribueerd.
 
+De installer is best ook een programma dat zo eenvoudig mogelijk uit te breiden is aangezien het in de toekomst nog kan worden aangepast. 
+De interface naar de gebruiker toe is best ook zo eenvoudig mogelijk zodanig dat er geen problemen kunnen ontstaan tijdens de installatie van het framework.
+Uiteraard gaan we er vanuit moeten gaan dat er af en toe een probleem zal onstaan tijdens de installatie van enkele componenten.
+Ook hiermee zullen we rekening moeten houden.
 
 \section{Oplossingen}
 
