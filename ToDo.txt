@@ -6,12 +6,15 @@
 		-Het is in XML
 		+Het ziet ernaar uit dat dit alles bevat dat nodig is
 	Chocolatey -> https://chocolatey.org/
+	http://www.developerfusion.com/article/145913/apt-windows-lets-get-chocolatey-part-2-multiple-installs-and-package-creation/
 		+Linux like
 		-Gebruikers moeten om kunnen met cmd
 	
 - Vragen:
 	Wat zijn de doel OS'en -> all windows
 	Is er een manier om een gewone computer te onderscheiden van een testtoren -> driver installeren en wachten op fout melding?
+	Dus op laptop enkel de libs installeren, op de toren ook de basis installeren en daarna extra's afhankelijk van de geconnecteerde devices? -> wat als nieuw devices erbij komt?
+	Mogelijkheid om software eens aan de praat te zien -> geeft beter beeld van wat het is en moet doen 
 	
 - Maken:
 	Installer -> keuze tussen twee verschillende mogelijkheden

@@ -36,18 +36,19 @@ Tijdens de duur van de stage werden de verschillende implementatie manieren onde
 In wat volgt wordt er beschreven welke stappen er werden ondernomen om het probleem onder te verdelen in enkele logische stappen en hoe deze problemen dan werden opgelost. 
 
 \section{Analyse van het probleem}
-Tijdens het bespreken van het probleem werd het al snel duidelijk dat er verschillende scenario's zijn waarin het framework gebruikt wordt. Het framework wordt als een standalone programma op een laptop of desktop maar het zal ook moeten draaien op verschillende testtorens. 
+Tijdens het bespreken van het probleem werd het al snel duidelijk dat er verschillende scenario's zijn waarin het framework gebruikt wordt. 
+Het framework wordt als een standalone programma op een laptop of desktop maar het zal ook moeten draaien op verschillende testtorens. 
 Voor de verschillende omgevingen zal iedere keer een andere configuratie nodig zijn maar ze wel beiden Windows gebruiken als besturingssysteem. 
 Er zullen dus geen grote veranderingen moeten worden aangebracht in het maken van de installer aangezien beide omgevingen overweg kunnen met een .exe bestand. 
 Uiteraard moet er rekening worden gehouden met de toekomst. 
 Het framework zal in de nabije toekomst worden aangepast zodanig dat het mogelijks op een Raspberry Pi kan draaien.
 Dit zou wel voor verschillende problemen kunnen zorgen aangezien een Raspberry Pi een linux distributie zal gebruiken als zijn besturingssysteem.
-Er zal dus een alternatieve manier moeten zijn om de installer te kunnen gebruiken in linux.
-Op het einde van het onderzoek zal er gekeken worden welke aanpassingen nodig zouden zijn om dit mogelijk te maken.
+Aangezien linux distributies geen gebruik maken van .exe files voor het installeren van programma's zal er een alternatief worden gezocht zodanig dat het framework ook kan ge\"instaleerd kan worden op deze distributies.
+Aangezien de uitbreiding naar de Raspberry Pi een toekomst plan is, gaan we hier niet de focus leggen.
 
-Een ander probleem dat moet worden opgelost is het detecteren in welk scenario we ons bevinden.
-Hierna moet er gekeken worden welke componenten aanwezig zijn en welke drivers dan moeten worden ge\"installeerd.
-Er gaat een manier moeten gevonden worden om eenvoudig bij te houden welke drivers beschikbaar zijn en welke drivers al ge\"installeerd zijn.
+Tijdens het installeren van het framework moeten we rekening houden met het feit dat iedere computer een andere configuratie en andere drivers zal nodig hebben.
+Er zal een manier moeten worden uitgedacht waardoor we kunnen achterhalen welke devices zijn geconnecteerd.
+We moeten vervolgens achterhalen of deze 
 
 
 \section{Oplossingen}
