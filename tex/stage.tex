@@ -84,8 +84,14 @@ De overhead die NSIS zou cre\"eeren zou klein zijn maar dit zal uiteraard moeten
 NSIS is script-based en bied verschillende features aan die handig kunnen zijn voor deze toepassing \citep{nsisFeatures}.
 Net zoals WiX zal de het script van NSIS een installer generen en vervolgens kan deze dan gebruikt worden voor de initi\"ele installatie.
 
-\subsubsection{Chocolatey}
-
+\subsubsection{Chocolatey \citep{chocoMain}}
+Chocolatey is een Powershell execution engine dat gebruikt maakt van de NuGet packaging infrastructuur.
+Het systeem is te vergelijken met de package manager apt-get van linux.
+Chocolatey zal alle executables, zips, ... die nodig zijn voor een stuk software encapsuleren zodanig dat alles in \'e\'en package zit.
+Het packaging framework verstaat ook alle versioning en dependency requirements, iets dat zeker nodig is bij dit probleem \citep{chocoDoc}.
+Chocolatey biedt verschillende mogelijkheden zodanig dat installatie, upgrades en verwijdering van het programma in de handen van de programmeur liggen.
+Een mogelijk nadeel van deze methode is het gebruik van Powershell. 
+De gebruikers zullen overweg moeten kunnen met Powershell en dit kan voor problemen zorgen.
 
 \subsection{Architectuur}
 
