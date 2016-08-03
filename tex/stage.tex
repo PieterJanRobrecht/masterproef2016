@@ -58,6 +58,7 @@ Nieuwe versies van het framework zelf zullen ook snel en eenvoudig moeten worden
 De installer is best ook een programma dat zo eenvoudig mogelijk uit te breiden is aangezien het in de toekomst nog kan worden aangepast. 
 De interface naar de gebruiker toe is best ook zo eenvoudig mogelijk zodanig dat er geen problemen kunnen ontstaan tijdens de installatie van het framework.
 Uiteraard gaan we er vanuit moeten gaan dat er af en toe een probleem zal ontstaan tijdens de installatie van enkele componenten.
+Eventuele updates zullen dan in een afgesloten omgeving moeten gebeuren en na het correct uitvoeren pas in het grote geheel geplaatst worden.
 Ook hiermee zullen we rekening moeten houden.
 
 \section{Oplossingen}
@@ -68,7 +69,14 @@ In sectie~\vref{section:mogelijkheden} worden enkel de mogelijke oplossingen bes
 
 \subsection{Mogelijkheden}\label{section:mogelijkheden}
 \subsubsection{WiX \citep{wixMain}}
-Windows Installer XML Toolset is een toolset waarmee Windows Installer packages gemaakt kunnen worden vanuit XML code. 
+Windows Installer XML Toolset is een toolset waarmee Windows Installer packages gemaakt kunnen worden vanuit XML code.
+WiX valt onder de Microsoft Reciprocal License \citep{wixLicense}.
+Met de toolset is het mogelijk om een installer met als extensie .msi te maken.
+Hiernaast is het ook mogelijk om patches te schrijven en code van andere te includeren dankzij merge modules\citep{wixMergers}.
+Uitgaande van de eerste indruk, is het goed mogelijk dat deze genoeg opties aanbiedt om een degelijke installer te maken.
+Hiernaast moet het ook mogelijk zijn om dankzij het patch systeem updates uit te voeren.
+Er zal wel moeten gecontroleerd worden of dit systeem volautomatisch is.
+Als dit niet zo is, dan zal er gekeken moeten worden hoe een updater kan worden ge\"implementeerd zodanig dat er geen nieuwe code moet geschreven worden bij iedere update.
 
 \subsubsection{NSIS \citep{nsisFeatures}}
 
