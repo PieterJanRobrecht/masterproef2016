@@ -39,4 +39,4 @@
 #	Git opzetten
 #	Tex bestand voor master
 	Virtualbox voor testomgeving -> upgrade naar 64 bit nodig
-	
+	adres voor localhost op Vm te benaderen is 10.0.2.2
