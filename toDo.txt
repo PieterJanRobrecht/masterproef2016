@@ -40,3 +40,5 @@
 #	Tex bestand voor master
 	Virtualbox voor testomgeving -> upgrade naar 64 bit nodig
 	adres voor localhost op Vm te benaderen is 10.0.2.2 -> gwn ftp://10.0.2.2 gebruiken
+	
+	http://stackoverflow.com/questions/12758088/installer-and-updater-for-a-python-desktop-application
