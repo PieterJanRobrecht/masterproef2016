@@ -39,7 +39,7 @@ Het doel is dan ook het maken van een installer-updater waarmee dit proces kan w
 Tijdens de duur van de stage werden de verschillende implementatie manieren onderzocht en werd er een algemene architectuur voor de installer-updater uitgedacht.
 In wat volgt wordt er beschreven welke stappen er werden ondernomen om het probleem onder te verdelen in enkele logische onderdelen en hoe deze het probleem dan oplossen. 
 
-\section{Analyse van het probleem} \label{section:analyse}
+\section{Analyse van het probleem}\label{section:analyse}
 Tijdens het bespreken van het probleem werd het al snel duidelijk dat er verschillende scenario's zijn waarin het framework gebruikt wordt. 
 Het framework wordt als een standalone programma gebruikt op een laptop of desktop maar het zal ook moeten draaien op verschillende testtorens. 
 Voor de verschillende omgevingen zal iedere keer een andere configuratie nodig zijn maar beiden omgevingen gebruiken Windows als besturingssysteem.
@@ -75,7 +75,13 @@ Voor beiden zijn er oplossingen aanwezig en er zal gekeken moeten worden welke c
 
 \subsection{Mogelijkheden}\label{section:mogelijkheden}
 Laten we eerst kijken naar de besturingssysteem-onafhankelijkheid van het framework.
-Aangezien 
+De besturingssysteem-onafhankelijkheid van Pyhton hangt af van de code en van de bibliotheken die gebruikt worden.
+Zolang deze bibliotheken onafhankelijk zijn van het besturingssysteem is er geen enkel probleem.
+Java biedt ook een oplossing aan voor dit probleem aangezien Java ook volledig besturingssysteem-onafhankelijk is.
+Jammer genoeg zijn er amper tot geen programma's die een installer/updater kunnen maken in Java.
+Zo'n programma zal dus zelf geschreven moeten worden.
+\subsubsection{Qt Installer Framework \citep{qtDoc}}
+
 \subsubsection{WiX \citep{wixMain}}
 Windows Installer XML Toolset is een toolset waarmee Windows Installer packages gemaakt kunnen worden vanuit XML code.
 WiX valt onder de Microsoft Reciprocal License \citep{wixLicense}.
