@@ -67,7 +67,8 @@ In wat hierna volgt worden enkele mogelijkheden overlopen die gebruikt kunnen wo
 Alle verschillende opties gaan worden overlopen en de verschillende voor- en nadelen zullen besproken worden\footnote{Uiteraard is het mogelijk dat tijdens de duur van de masterproef nog mogelijk oplossingen worden gevonden.
 In sectie~\vref{section:mogelijkheden} worden enkel de mogelijke oplossingen besproken die tijdens de stage zijn gevonden.}.
 Van hieruit gaan we ook een opsplitsing maken tussen de installer en de updater.
-Deze hebben beiden verschillende eisen en zullen we dus als twee verschillende entiteiten beschouwen.
+Deze hebben beiden verschillende eisen en vanaf nu zullen we dus deze twee als verschillende entiteiten beschouwen.
+Het is mogelijk dat voor de updater een andere oplossing voorzien gaat moeten worden aangezien de eisen anders zijn.
 
 \subsection{Mogelijkheden}\label{section:mogelijkheden}
 \subsubsection{WiX \citep{wixMain}}
@@ -102,22 +103,33 @@ Vervolgens zal er, aan de hand van een kleine test, gekeken worden of de oplossi
 Nadat alle verschillende mogelijkheden zijn overlopen zijn, kan er een algemene architectuur van het programma opgesteld worden.
 
 \subsection{Testen}
-Zoals we in sectie~\vref{section:analyase} hebben besproken, zitten we met verschillende eisen waaraan de uiteindelijke oplossing moet voldoen.
+Zoals we in sectie~\vref{section:analyse} hebben besproken, zitten we met verschillende eisen waaraan de uiteindelijke oplossing moet voldoen.
 We gaan nu kort de verschillende eisen overlopen om vervolgens te bespreken hoe we deze eisen gaan testen bij de verschillende oplossingen die we in sectie~\vref{section:mogelijkheden} hebben aangehaald.
 Zoals reeds vermeld, zien we de installer en updater als twee verschillende entiteiten.
-Onze installer zal aan de volgende eisen moeten voldoen:
+Onze installer zal aan de volgende eisen moeten voldoen.
+De installer moet:
 \begin{itemize}
-\item 
-\item
-\item
+\item registreren welk drivers ge\"instaleerd moeten worden.
+\item de optie geven om extra drivers te installeren.
+\item de meest recente versie van het framework downloaden.
+\item de nodige programma's in de correcte volgorde installeren.
+\item de interface moet zo eenvoudig mogelijk zijn.
+\item \'e\'en executable produceren, namelijk de updater.
+\item een eenmalige internetverbinding opzetten voor het downloaden van de nodige bestanden.
 \end{itemize}
-Naast de installer hebben we ook de updater. Deze zal hoogst waarschijnlijk ge\"installeerd worden en de gebruiker zal voornamelijk met dit onderdeel in aanmerking komen.
-De updater moet zeker voldoen aan de volgende eisen:
+Dit moet allemaal gelogd worden zodanig dat bij fouten eenvoudig kan nagegaan worden waar de fout zit.
+
+Naast de installer hebben we ook de updater. Deze zal hoogst waarschijnlijk ge\"installeerd worden door de installer.
+De gebruiker zal voornamelijk met dit onderdeel in aanmerking komen.
+De updater moet zeker voldoen aan de volgende eisen.
+De updater moet:
 \begin{itemize}
-\item
-\item
-\item
+\item bij opstarten controleren of de versie van de drivers en het framework de meest recente is.
+\item een optie voorzien om handmatig nieuwe drivers te selecteren.
+\item een optie voorzien om het framework op te starten.
+\item bij iedere opstart zal een internetverbinding nodig zijn zodanig dat de nodige versiecontroles kunnen uitgevoerd worden.
 \end{itemize}
+De updater zal, net zoals de installer, een executable zijn.
 
 \subsection{Architectuur}
 
