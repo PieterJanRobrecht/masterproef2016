@@ -28,47 +28,50 @@
 In het kader van mijn masterproef was het mogelijk om bij Televic Rail een stage te lopen tijdens de zomer. 
 Gedurende deze stage heb ik mijn masterproef voorbereid en onderzoek gedaan naar de verschillende mogelijkheden die er zijn voor het uitvoeren van mijn opdracht.
 De opdracht die voltooid moet worden is de volgende:
+
 \begin{displayquote}
 Televic Rail heeft een Python test framework ontworpen. 
-Dit framework werd oorspronkelijk gebruikt om gebruikt te worden op een volledig uitgeruste testtoren, maar het framework werd aangepast zodanig dat het onafhankelijk van de testtoren gebruikt kan worden.
+Dit framework werd oorspronkelijk gebruikt op een volledig uitgeruste testtoren, maar het framework werd aangepast zodanig dat het onafhankelijk van de testtoren gebruikt kan worden.
 Aangezien het framework gebruik maakt van verschillende niet-standaard Python bibliotheken, is het installeren van het framework op een nieuw systeem een hele klus.
-Het doel is dan ook het maken van een installer en een updater waarmee dit proces kan worden vergemakkelijkt zodanig dat er zo min mogelijk interactie van de gebruiker moet zijn.
+Het doel is dan ook het maken van een installer-updater waarmee dit proces kan worden vergemakkelijkt zodanig dat er zo min mogelijk interactie van de gebruiker moet zijn.
 \end{displayquote}
+
 Tijdens de duur van de stage werden de verschillende implementatie manieren onderzocht en werd er een algemene architectuur voor de installer-updater uitgedacht.
-In wat volgt wordt er beschreven welke stappen er werden ondernomen om het probleem onder te verdelen in enkele logische stappen en hoe deze problemen dan werden opgelost. 
+In wat volgt wordt er beschreven welke stappen er werden ondernomen om het probleem onder te verdelen in enkele logische onderdelen en hoe deze het probleem dan oplossen. 
 
 \section{Analyse van het probleem} \label{section:analyse}
 Tijdens het bespreken van het probleem werd het al snel duidelijk dat er verschillende scenario's zijn waarin het framework gebruikt wordt. 
-Het framework wordt als een standalone programma op een laptop of desktop maar het zal ook moeten draaien op verschillende testtorens. 
-Voor de verschillende omgevingen zal iedere keer een andere configuratie nodig zijn maar ze wel beiden Windows gebruiken als besturingssysteem. 
-Er zullen dus geen grote veranderingen moeten worden aangebracht in het maken van de installer aangezien beide omgevingen overweg kunnen met een .exe bestand. 
-Uiteraard moet er rekening worden gehouden met de toekomst. 
-Het framework zal in de nabije toekomst worden aangepast zodanig dat het mogelijks op een Raspberry Pi kan draaien.
-Dit zou wel voor verschillende problemen kunnen zorgen aangezien een Raspberry Pi een linux distributie zal gebruiken als zijn besturingssysteem.
-Aangezien linux distributies geen gebruik maken van .exe files voor het installeren van programma's zal er een alternatief worden gezocht zodanig dat het framework ook kan ge\"instaleerd kan worden op deze distributies.
-Aangezien de uitbreiding naar de Raspberry Pi een toekomst plan is, gaan we hier niet de focus leggen.
+Het framework wordt als een standalone programma gebruikt op een laptop of desktop maar het zal ook moeten draaien op verschillende testtorens. 
+Voor de verschillende omgevingen zal iedere keer een andere configuratie nodig zijn maar beiden omgevingen gebruiken Windows als besturingssysteem.
+Uiteraard moeten we ervan uitgaan dat deze situatie slechts tijdelijk is.
+Er wordt best een applicatie geschreven die op verschillende types van systemen kan draaien.
+Ook zorgen we er best voor dat het programma besturingssysteem-onafhankelijk is.
 
 Tijdens het installeren van het framework moeten we rekening houden met het feit dat iedere computer een andere configuratie en andere drivers zal nodig hebben.
-Er zal een manier moeten worden uitgedacht waardoor we kunnen achterhalen welke devices zijn geconnecteerd en welke drivers deze exact nodig heeft.
+We zullen de gebruiker moeten vragen om de verschillende drivers te selecteren.
+Mocht het mogelijk zijn dan zou er een mapping kunnen gebeuren tussen de verbonden devices en de nodige drivers zodanig dat deze automatisch worden aangevinkt in een selectielijst.
 Het probleem van de drivers beperkt zich jammer genoeg niet enkel tot dit.
-Als er nieuwe hardware ontwikkelt wordt, zullen er ook verschillende nieuwe drivers nodig zijn. 
-Voor de installer is het dan ook belangrijk dat deze nieuwe drivers snel kunnen worden toegevoegd en dat dit geen grote problemen levert.
-Nieuwe versies van het framework zelf zullen ook snel en eenvoudig moeten worden gedistribueerd.
+Als er nieuwe hardware ontwikkelt wordt, zullen er ook verschillende nieuwe drivers nodig zijn.
+De lijst van beschikbare drivers zal dan tijdig moeten worden aangepast.
 
-De installer is best ook een programma dat zo eenvoudig mogelijk uit te breiden is aangezien het in de toekomst nog kan worden aangepast. 
+De installer is best ook een programma dat zo eenvoudig mogelijk uit te breiden is zodanig dat het in de toekomst nog kan worden aangepast. 
 De interface naar de gebruiker toe is best ook zo eenvoudig mogelijk zodanig dat er geen problemen kunnen ontstaan tijdens de installatie van het framework.
-Uiteraard gaan we er vanuit moeten gaan dat er af en toe een probleem zal ontstaan tijdens de installatie van enkele componenten.
-Eventuele updates zullen dan in een afgesloten omgeving moeten gebeuren en na het correct uitvoeren pas in het grote geheel geplaatst worden.
-Ook hiermee zullen we rekening moeten houden.
+Uiteraard gaan we er vanuit moeten gaan dat er af en toe een probleem zal ontstaan tijdens de installatie.
+Updates zullen dus dan in een afgesloten omgeving moeten gebeuren en na het correct uitvoeren in het grote geheel geplaatst worden.
+
+De updater bezit gelijkaardige problemen.
+We zullen een manier moeten zoeken waarmee we gemakkelijk kunnen controleren naar de versienummers van de software.
+De gebruiker zal ook de optie moeten krijgen om de update uit te voeren.
+De gebruiker moet zelf beslissen wanneer de update uitgevoerd zal worden zodanig dat de update gebeurd als de gebruiker er klaar voor is.
 
 \section{Oplossingen}
 Aangezien we een algemeen beeld hebben van wat we juist allemaal moeten voorzien, kunnen we vervolgens aan de slag met het zoeken naar een goede oplossing voor alle problemen.
-In wat hierna volgt worden enkele mogelijkheden overlopen die gebruikt kunnen worden om de installer te implementeren.
+In wat hierna volgt gaan we alle mogelijkheden overlopen die gebruikt kunnen worden om de installer-updater te implementeren.
 Alle verschillende opties gaan worden overlopen en de verschillende voor- en nadelen zullen besproken worden\footnote{Uiteraard is het mogelijk dat tijdens de duur van de masterproef nog mogelijk oplossingen worden gevonden.
-In sectie~\vref{section:mogelijkheden} worden enkel de mogelijke oplossingen besproken die tijdens de stage zijn gevonden.}.
+In sectie~\vref{section:mogelijkheden} worden enkel de oplossingen besproken die tijdens de stage zijn gevonden.}.
 Van hieruit gaan we ook een opsplitsing maken tussen de installer en de updater.
-Deze hebben beiden verschillende eisen en vanaf nu zullen we dus deze twee als verschillende entiteiten beschouwen.
-Het is mogelijk dat voor de updater een andere oplossing voorzien gaat moeten worden aangezien de eisen anders zijn.
+We gaan bij het zoeken naar een oplossing wel een opdeling maken tussen de oplossingen voor de installer en voor de updater.
+Voor beiden zijn er oplossingen aanwezig en er zal gekeken moeten worden welke combinaties mogelijk zijn.
 
 \subsection{Mogelijkheden}\label{section:mogelijkheden}
 \subsubsection{WiX \citep{wixMain}}

@@ -1,29 +1,15 @@
-- Dingen die ik eens moet gaan bekijken:
-	NSIS -> http://nsis.sourceforge.net/Features
-		+scriptbased
-		+Ziet er goed uit
-	WiX -> https://www.packtpub.com/sites/default/files/3722-chapter-1-getting-started%20.pdf
-		-Het is in XML
-		+Het ziet ernaar uit dat dit alles bevat dat nodig is
-	Chocolatey -> https://chocolatey.org/
-	http://www.developerfusion.com/article/145913/apt-windows-lets-get-chocolatey-part-2-multiple-installs-and-package-creation/
-		+Linux like
-		-Gebruikers moeten om kunnen met cmd
-	
 - Vragen:
-	Wat zijn de doel OS'en -> all windows / later ook nog linux
 	Is er een manier om een gewone computer te onderscheiden van een testtoren -> driver installeren en wachten op fout melding?
 	Dus op laptop enkel de libs installeren, op de toren ook de basis installeren en daarna extra's afhankelijk van de geconnecteerde devices? -> wat als nieuw devices erbij komt?
 	Als er een update is, worden dan alle nodige computers aangepast of blijven sommige op een oude versie draaien?
+	Sprake van een database die de versienummers bijhoudt en een mapping doet?
 	
 - Maken:
 	Installer -> keuze tussen twee verschillende mogelijkheden
-	!!BELANGRIJK DE INSTALLER MOET COMMAND PATTERN ZIJN!!
-	!!WERKEN IN EEN VEILIGE OMGEVING EN DAN PAS ROLLOUT DOEN!!
 	-> installeren van de nodige libs en daarna het framework installeren
 	PROBLEEM -> wat doe je met de output van de verschillende installers?
 		
-	Auto updater
+	Auto updater -> moet zelf kiezen wanneer de update uit te voeren
 		Wannneer moet je gaan kijken voor nieuwe versie? client vraagt op bij opstart
 		KIJKEN HOE WE HET FRAMEWORK KUNNEN UPDATEN
 		-> verschillende types van frameworks (PC, toren, raspberry pi)
@@ -42,3 +28,11 @@
 	adres voor localhost op Vm te benaderen is 10.0.2.2 -> gwn ftp://10.0.2.2 gebruiken
 	
 	http://stackoverflow.com/questions/12758088/installer-and-updater-for-a-python-desktop-application
+	
+Installer from Pieter-Jan Robrecht (student) needs to take drivers into account.
+
+How to organise OS dependencies (docker, VM, ...)?
+Handle config file to organise e.g. selection of SN Renesas programmer SRD.
+Does it make sense to make executable? (machine dependencies?)
+
+pyhton -> platform independent als de juiste libs worden gebruikt
