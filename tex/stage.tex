@@ -64,8 +64,10 @@ Ook hiermee zullen we rekening moeten houden.
 \section{Oplossingen}
 Aangezien we een algemeen beeld hebben van wat we juist allemaal moeten voorzien, kunnen we vervolgens aan de slag met het zoeken naar een goede oplossing voor alle problemen.
 In wat hierna volgt worden enkele mogelijkheden overlopen die gebruikt kunnen worden om de installer te implementeren.
-Alle verschillende opties gaan overlopen worden en de verschillende voor- en nadelen zullen besproken worden\footnote{Uiteraard is het mogelijk dat tijdens de duur van de masterproef nog mogelijk oplossingen worden gevonden.
+Alle verschillende opties gaan worden overlopen en de verschillende voor- en nadelen zullen besproken worden\footnote{Uiteraard is het mogelijk dat tijdens de duur van de masterproef nog mogelijk oplossingen worden gevonden.
 In sectie~\vref{section:mogelijkheden} worden enkel de mogelijke oplossingen besproken die tijdens de stage zijn gevonden.}.
+Van hieruit gaan we ook een opsplitsing maken tussen de installer en de updater.
+Deze hebben beiden verschillende eisen en zullen we dus als twee verschillende entiteiten beschouwen.
 
 \subsection{Mogelijkheden}\label{section:mogelijkheden}
 \subsubsection{WiX \citep{wixMain}}
@@ -91,9 +93,31 @@ Chocolatey zal alle executables, zips, ... die nodig zijn voor een stuk software
 Het packaging framework verstaat ook alle versioning en dependency requirements, iets dat zeker nodig is bij dit probleem \citep{chocoDoc}.
 Chocolatey biedt verschillende mogelijkheden zodanig dat installatie, upgrades en verwijdering van het programma in de handen van de programmeur liggen.
 Een mogelijk nadeel van deze methode is het gebruik van Powershell. 
-De gebruikers zullen overweg moeten kunnen met Powershell en dit kan voor problemen zorgen. \\[3mm]
+De gebruikers zullen overweg moeten kunnen met Powershell en dit kan voor problemen zorgen. 
+
+\paragraph{}
 Nu dat alle verschillende opties globaal zijn besproken, is het belangrijk dat deze ook worden uitgetest zodanig dat er een duidelijk beeld kan gevormd worden over de mogelijkheden die ze effectief aanbieden.
-Hiervoor zal een kleine testomgeving worden opgezet zodanig dat alle mogelijke opties overlopen kunnen worden en gekeken kan worden hoe gebruiksvriendelijk alle omgevingen zijn.
+In de volgende sectie zal een korte opsomming van de eisen een duidelijk beeld vormen over de verwachtingen van alle oplossingen.
+Vervolgens zal er, aan de hand van een kleine test, gekeken worden of de oplossingen voldoen aan de eisen en naar welke de voorkeur uitgaat.
+Nadat alle verschillende mogelijkheden zijn overlopen zijn, kan er een algemene architectuur van het programma opgesteld worden.
+
+\subsection{Testen}
+Zoals we in sectie~\vref{section:analyase} hebben besproken, zitten we met verschillende eisen waaraan de uiteindelijke oplossing moet voldoen.
+We gaan nu kort de verschillende eisen overlopen om vervolgens te bespreken hoe we deze eisen gaan testen bij de verschillende oplossingen die we in sectie~\vref{section:mogelijkheden} hebben aangehaald.
+Zoals reeds vermeld, zien we de installer en updater als twee verschillende entiteiten.
+Onze installer zal aan de volgende eisen moeten voldoen:
+\begin{itemize}
+\item 
+\item
+\item
+\end{itemize}
+Naast de installer hebben we ook de updater. Deze zal hoogst waarschijnlijk ge\"installeerd worden en de gebruiker zal voornamelijk met dit onderdeel in aanmerking komen.
+De updater moet zeker voldoen aan de volgende eisen:
+\begin{itemize}
+\item
+\item
+\item
+\end{itemize}
 
 \subsection{Architectuur}
 
