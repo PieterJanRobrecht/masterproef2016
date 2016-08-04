@@ -36,7 +36,7 @@ SetCompressor lzma
 	InstallDir "$PROGRAMFILES\Framework"
 	ShowInstDetails show
 
-	Section
+Section
 	# create the uninstaller
 	WriteUninstaller "$INSTDIR\uninstall.exe"
 
