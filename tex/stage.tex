@@ -155,6 +155,16 @@ Install update downloads the new version's installer and launches it.
 Het is dan ook niet duidelijk of er voor ieder update dan een nieuwe installer moet geschreven worden.
 Mocht dit het geval zijn, dan is dit een minder aangewezen oplossing aangezien dit voor veel overbodig werk zorgt.
 
+\subsubsection{esky \citep{eskyMain}}
+Nog een optie om een updater te implementeren is esky.
+Esky is een auto-update framework for frozen Python applicaties.
+Dankzij een eenvoudige API kunnen applicaties updates zoeken, ophalen en installeren.
+Er zit ook een mechanisme in dat de applicatie gaat beschermen tegen failed updates.
+Het is zeker mogelijk om de code van een programma up te daten met dit framework.
+Wat niet duidelijk is, is in hoeverre het mogelijk is om verschillende componenten up-te-daten.
+De updater zal ook de Python code omvormen tot een executable.
+Deze zijn jammer genoeg enkel bruikbaar op Windows.
+
 \paragraph{}
 Nu dat alle verschillende opties globaal zijn besproken, is het belangrijk dat deze ook worden uitgetest zodanig dat er een duidelijk beeld kan gevormd worden over de mogelijkheden die ze effectief aanbieden.
 In de volgende sectie zal een korte opsomming van de eisen een duidelijk beeld vormen over de verwachtingen van alle oplossingen.

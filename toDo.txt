@@ -36,4 +36,4 @@ How to organise OS dependencies (docker, VM, ...)?
 Handle config file to organise e.g. selection of SN Renesas programmer SRD.
 Does it make sense to make executable? (machine dependencies?)
 
-pyhton -> platform independent als de juiste libs worden gebruikt
+http://lanyrd.com/2012/pycon/spckh/ -> talk over frozen python en esky
