@@ -127,6 +127,9 @@ Of de installer de mogelijkheid bezit om een zip uit te pakken en de setup te do
 Er moet nog onderzocht worden of NSIS de mogelijkheid aanbiedt om een updater te includeren in de gemaakte installer.
 Mocht dit niet het geval zijn, dan zal ook bij deze optie gezocht moeten worden om een updater te implementeren.
 
+Naast NSIS is er ook nog Inno Setup.
+Dit is een zeer gelijkaardige tool en bezit gelijkaardige features \citep{innosetupMain}.
+
 \subsubsection{Chocolatey \citep{chocoMain}}
 Chocolatey is een Powershell execution engine dat gebruikt maakt van de NuGet packaging infrastructuur.
 Het systeem is te vergelijken met de package manager apt-get van Linux.
@@ -164,6 +167,11 @@ Het is zeker mogelijk om de code van een programma up te daten met dit framework
 Wat niet duidelijk is, is in hoeverre het mogelijk is om verschillende componenten up-te-daten.
 De updater zal ook de Python code omvormen tot een executable.
 Deze zijn jammer genoeg enkel bruikbaar op Windows.
+
+\subsubsection{Google Omaha \citep{omahaMain}}
+E\'en van de laatste opties om een updater te maken is Google Omaha.
+Het is de open-source versie van Google Update.
+Er is jammer genoeg niet veel te vinden over de mogelijkheden van Google Omaha en er zal dus moeten uitgezocht worden welke mogelijkheden deze aanbied.
 
 \paragraph{}
 Nu dat alle verschillende opties globaal zijn besproken, is het belangrijk dat deze ook worden uitgetest zodanig dat er een duidelijk beeld kan gevormd worden over de mogelijkheden die ze effectief aanbieden.
