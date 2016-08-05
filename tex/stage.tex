@@ -110,14 +110,22 @@ Het is dus mogelijk om executables te includeren in de installer \citep{wixMerge
 
 Dankzij het patch systeem moet het mogelijk zijn om updates uit te voeren.
 Er zal wel onderzocht moeten worden of een automatische version check kan uitgevoerd worden bij het opstarten.
-Als dit niet zo is, dan zal gekeken moeten worden om een updater te includeren in de installer.
+Het schrijven van een patch voor ieder update die uitkomt is geen optie.
+Als er dus geen automatische version check en installatie aanwezig is, dan zal gekeken moeten worden om een updater te includeren in de installer.
 Deze updater zal dan bij het opstarten van de software zoeken naar de nieuwe updates en eventueel de mogelijkheid geven om te updaten.
 
 \subsubsection{NSIS \citep{nsisMain}}
 Nullsoft Scriptable Install System is een opensource systeem waarmee Windows installers kunnen gemaakt worden.
-De overhead die NSIS zou cre\"eeren zou klein zijn maar dit zal uiteraard moeten gecontroleerd worden. 
-NSIS is script-based en bied verschillende features aan die handig kunnen zijn voor deze toepassing \citep{nsisFeatures}.
-Net zoals WiX zal de het script van NSIS een installer generen en vervolgens kan deze dan gebruikt worden voor de initi\"ele installatie.
+Een installer van NSIS zal dus ook enkel kunnen draaien op Windows.
+NSIS is script-based waardoor verschillende mogelijkheden ingebouwd kunnen worden in de installer.
+Een installer van NSIS kan ook uitgebreid worden met plug-ins waardoor de functionaliteit kan worden uitgebreid.
+Deze plug-ins kunnen geschreven worden in verschillende talen zoals C, C++, ... \citep{nsisFeatures}.
+Het is mogelijk om in de installer verschillende componenten te includeren.
+Dankzij dit systeem kunnen we executables die al bestaan, blijven gebruiken.
+Of de installer de mogelijkheid bezit om een zip uit te pakken en de setup te doorlopen, zal nog onderzocht moeten worden.
+
+Er moet nog onderzocht worden of NSIS de mogelijkheid aanbiedt om een updater te includeren in de gemaakte installer.
+Mocht dit niet het geval zijn, dan zal ook bij deze optie gezocht moeten worden om een updater te implementeren.
 
 \subsubsection{Chocolatey \citep{chocoMain}}
 Chocolatey is een Powershell execution engine dat gebruikt maakt van de NuGet packaging infrastructuur.
