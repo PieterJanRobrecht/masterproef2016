@@ -3,6 +3,7 @@
 \usepackage[dutch]{varioref}
 \usepackage[autostyle]{csquotes} 
 \usepackage[dutch]{babel}
+\usepackage{listings}
 \usepackage{pdfpages}
 \usepackage{url}
 \usepackage{natbib}
@@ -181,7 +182,15 @@ Met deze applicatie is het de bedoeling om te achterhalen hoe eenvoudig het is o
 We gaan tijdens het ontwikkelen van de HelloWorld applicaties ook zoeken naar tools waarmee we Windows executables kunnen draaien op Linux.
 
 \subsection{Testen}
+Zoals eerder vermeld gaan we nu enkele HelloWorld applicaties maken met de tools die we hebben besproken in sectie~\vref{section:mogelijkheden}.
+We gaan met deze tools een applicatie maken met als doel een executable in te pakken samen met een zip.
+De installer moet dan beide componenten correct installeren.
+Sommige tools bezitten de mogelijkheid om updates door te voeren.
+Tijdens deze testen zullen we ook kijken of het mogelijk is om \'e\'en van de twee componenten up te daten met zo min mogelijk extra code.
+De code die gebruikt werd is terug te vinden in sectie~\vref{section:code}.
 
+\section{Code}\label{section:code}
+\lstinputlisting[caption="Hello world programma met uninstaller"]{../code/nsis/HelloWorld/installer-uninstaller.nsi}
 
 %\subsection{Testen}
 %Zoals we in sectie~\vref{section:analyse} hebben besproken, zitten we met verschillende eisen waaraan de uiteindelijke oplossing moet voldoen.
