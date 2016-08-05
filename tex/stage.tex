@@ -78,9 +78,28 @@ Laten we eerst kijken naar de besturingssysteem-onafhankelijkheid van het framew
 De besturingssysteem-onafhankelijkheid van Pyhton hangt af van de code en van de bibliotheken die gebruikt worden.
 Zolang deze bibliotheken onafhankelijk zijn van het besturingssysteem is er geen enkel probleem.
 Java biedt ook een oplossing aan voor dit probleem aangezien Java ook volledig besturingssysteem-onafhankelijk is.
-Jammer genoeg zijn er amper tot geen programma's die een installer/updater kunnen maken in Java.
-Zo'n programma zal dus zelf geschreven moeten worden.
+Jammer genoeg zijn er amper tot geen programma's die een installer/updater kunnen genereren in Java.
+Alle code voor zo'n programma zal zelf geschreven moeten worden.
+
 \subsubsection{Qt Installer Framework \citep{qtDoc}}
+Het Qt framework zou in staat zijn om eenmalig installers te maken die vervolgens op de ondersteunde platforms zou kunnen draaien.
+De ondersteunde platforms zijn: Linux, Microsoft Windows en OS X \citep{qtOverview}.
+De software zou de gebruiker door het installatie, update en verwijderproces leiden.
+De programmeur moet enkel de nodige informatie over de te installeren software.
+Er kunnen scripts geschreven worden voor de installer zodanig dat er verschillende opties toegevoegd kunnen worden.
+bij iedere component kan een script toegevoegd worden zodanig dat de installatie kan worden gepersonaliseerd \citep{qtDocScript}.
+
+Het Framework biedt twee types installers aan: een online en een offline installer.
+Beide installers zullen een maintenance tool installer die gebruikt kan worden om componenten te updaten, toevoegen en verwijderen.
+Het verschil tussen de twee installers is het volgende: de offline installer zal alle nodige componenten bevatten in de installer.
+De online installer moet tijdens de installatie een verbinding maken met een online repository waar de nodige componenten worden gedownload. 
+Bij de offline installer zullen alle componenten ge\"installeerd worden terwijl bij de online installer de keuze is om verschillende componenten niet te installeren \citep{qtOverview}.
+
+Er zal wel moeten gekeken worden of dit een goede oplossing is voor ons probleem.
+Tijdens de installatie van het framework en drivers wordt er gebruik gemaakt van verschillende windows executables. 
+De installer zal deze moeten uitvoeren en tot een goed einde brengen.
+De grote vraag is dan: is het mogelijk om een installer te maken met deze executables in die ook draait op Linux?
+De installer zal ook de verschillende zip files moeten kunnen uitpakken en de setup uitvoeren.
 
 \subsubsection{WiX \citep{wixMain}}
 Windows Installer XML Toolset is een toolset waarmee Windows Installer packages gemaakt kunnen worden vanuit XML code.
@@ -113,38 +132,38 @@ In de volgende sectie zal een korte opsomming van de eisen een duidelijk beeld v
 Vervolgens zal er, aan de hand van een kleine test, gekeken worden of de oplossingen voldoen aan de eisen en naar welke de voorkeur uitgaat.
 Nadat alle verschillende mogelijkheden zijn overlopen zijn, kan er een algemene architectuur van het programma opgesteld worden.
 
-\subsection{Testen}
-Zoals we in sectie~\vref{section:analyse} hebben besproken, zitten we met verschillende eisen waaraan de uiteindelijke oplossing moet voldoen.
-We gaan nu kort de verschillende eisen overlopen om vervolgens te bespreken hoe we deze eisen gaan testen bij de verschillende oplossingen die we in sectie~\vref{section:mogelijkheden} hebben aangehaald.
-Zoals reeds vermeld, zien we de installer en updater als twee verschillende entiteiten.
-Onze installer zal aan de volgende eisen moeten voldoen.
-De installer moet:
-\begin{itemize}
-\item registreren welk drivers ge\"instaleerd moeten worden.
-\item de optie geven om extra drivers te installeren.
-\item de meest recente versie van het framework downloaden.
-\item de nodige programma's in de correcte volgorde installeren.
-\item de interface moet zo eenvoudig mogelijk zijn.
-\item \'e\'en executable produceren, namelijk de updater.
-\item een eenmalige internetverbinding opzetten voor het downloaden van de nodige bestanden.
-\end{itemize}
-Dit moet allemaal gelogd worden zodanig dat bij fouten eenvoudig kan nagegaan worden waar de fout zit.
-
-Naast de installer hebben we ook de updater. Deze zal hoogst waarschijnlijk ge\"installeerd worden door de installer.
-De gebruiker zal voornamelijk met dit onderdeel in aanmerking komen.
-De updater moet zeker voldoen aan de volgende eisen.
-De updater moet:
-\begin{itemize}
-\item bij opstarten controleren of de versie van de drivers en het framework de meest recente is.
-\item een optie voorzien om handmatig nieuwe drivers te selecteren.
-\item een optie voorzien om het framework op te starten.
-\item bij iedere opstart zal een internetverbinding nodig zijn zodanig dat de nodige versiecontroles kunnen uitgevoerd worden.
-\end{itemize}
-De updater zal, net zoals de installer, een executable zijn.
-
-We zullen beginnen met het onderzoeken van de installer mogelijkheden.
-Tijdens het testen gaan we kijken of de installer een internetverbinding kan maken, een .exe file kan installeren en verschillende zips kan uitpakken en installeren.
-\subsection{Architectuur}
+%\subsection{Testen}
+%Zoals we in sectie~\vref{section:analyse} hebben besproken, zitten we met verschillende eisen waaraan de uiteindelijke oplossing moet voldoen.
+%We gaan nu kort de verschillende eisen overlopen om vervolgens te bespreken hoe we deze eisen gaan testen bij de verschillende oplossingen die we in sectie~\vref{section:mogelijkheden} hebben aangehaald.
+%Zoals reeds vermeld, zien we de installer en updater als twee verschillende entiteiten.
+%Onze installer zal aan de volgende eisen moeten voldoen.
+%De installer moet:
+%\begin{itemize}
+%\item registreren welk drivers ge\"instaleerd moeten worden.
+%\item de optie geven om extra drivers te installeren.
+%\item de meest recente versie van het framework downloaden.
+%\item de nodige programma's in de correcte volgorde installeren.
+%\item de interface moet zo eenvoudig mogelijk zijn.
+%\item \'e\'en executable produceren, namelijk de updater.
+%\item een eenmalige internetverbinding opzetten voor het downloaden van de nodige bestanden.
+%\end{itemize}
+%Dit moet allemaal gelogd worden zodanig dat bij fouten eenvoudig kan nagegaan worden waar de fout zit.
+%
+%Naast de installer hebben we ook de updater. Deze zal hoogst waarschijnlijk ge\"installeerd worden door de installer.
+%De gebruiker zal voornamelijk met dit onderdeel in aanmerking komen.
+%De updater moet zeker voldoen aan de volgende eisen.
+%De updater moet:
+%\begin{itemize}
+%\item bij opstarten controleren of de versie van de drivers en het framework de meest recente is.
+%\item een optie voorzien om handmatig nieuwe drivers te selecteren.
+%\item een optie voorzien om het framework op te starten.
+%\item bij iedere opstart zal een internetverbinding nodig zijn zodanig dat de nodige versiecontroles kunnen uitgevoerd worden.
+%\end{itemize}
+%De updater zal, net zoals de installer, een executable zijn.
+%
+%We zullen beginnen met het onderzoeken van de installer mogelijkheden.
+%Tijdens het testen gaan we kijken of de installer een internetverbinding kan maken, een .exe file kan installeren en verschillende zips kan uitpakken en installeren.
+%\subsection{Architectuur}
 
 %Alfabetische volgorde
 \bibliographystyle{plain}
