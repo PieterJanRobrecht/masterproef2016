@@ -96,7 +96,7 @@ De online installer moet tijdens de installatie een verbinding maken met een onl
 Bij de offline installer zullen alle componenten ge\"installeerd worden terwijl bij de online installer de keuze is om verschillende componenten niet te installeren \citep{qtOverview}.
 
 Er zal wel moeten gekeken worden of dit een goede oplossing is voor ons probleem.
-Tijdens de installatie van het framework en drivers wordt er gebruik gemaakt van verschillende windows executables. 
+Tijdens de installatie van het framework en drivers wordt er gebruik gemaakt van verschillende Windows executables. 
 De installer zal deze moeten uitvoeren en tot een goed einde brengen.
 De grote vraag is dan: is het mogelijk om een installer te maken met deze executables in die ook draait op Linux?
 De installer zal ook de verschillende zip files moeten kunnen uitpakken en de setup uitvoeren.
@@ -129,12 +129,16 @@ Mocht dit niet het geval zijn, dan zal ook bij deze optie gezocht moeten worden 
 
 \subsubsection{Chocolatey \citep{chocoMain}}
 Chocolatey is een Powershell execution engine dat gebruikt maakt van de NuGet packaging infrastructuur.
-Het systeem is te vergelijken met de package manager apt-get van linux.
+Het systeem is te vergelijken met de package manager apt-get van Linux.
 Chocolatey zal alle executables, zips, ... die nodig zijn voor een stuk software encapsuleren zodanig dat alles in \'e\'en package zit.
-Het packaging framework verstaat ook alle versioning en dependency requirements, iets dat zeker nodig is bij dit probleem \citep{chocoDoc}.
-Chocolatey biedt verschillende mogelijkheden zodanig dat installatie, upgrades en verwijdering van het programma in de handen van de programmeur liggen.
-Een mogelijk nadeel van deze methode is het gebruik van Powershell. 
-De gebruikers zullen overweg moeten kunnen met Powershell en dit kan voor problemen zorgen. 
+Of de software de zips dan ook kan uitpakken en de setup starten is niet geweten uit de documentatie \citep{chocoDoc}.
+Chocolatey biedt mogelijkheden aan zodanig dat installatie, upgrades en verwijdering van het programma in de handen van de programmeur ligt.
+Er zal wel nog onderzocht moeten worden hoe het installatie en update systeem werkt.
+De nodige programma's moeten op de juiste locatie geplaatst worden om een goede werking te verzekeren.
+Het grootste nadeel van Chocolatey is het feit dat de gebruiker de Powershell moet gebruiken om de componenten up te daten en te installeren.
+Aangezien alles in de Powershell gebeurd moet het wel mogelijk zijn dat er batch files gemaakt worden.
+Deze zouden dan een deel van het werk van de gebruiker kunnen wegnemen.
+Net zoals de vorige oplossingen is deze ook enkel toepasbaar voor Windows.
 
 \paragraph{}
 Nu dat alle verschillende opties globaal zijn besproken, is het belangrijk dat deze ook worden uitgetest zodanig dat er een duidelijk beeld kan gevormd worden over de mogelijkheden die ze effectief aanbieden.
