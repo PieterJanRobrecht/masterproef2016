@@ -25,4 +25,4 @@
 *.synctex.gz
 
 *.exe
-*/data/*
+data/

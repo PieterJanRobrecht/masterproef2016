@@ -38,3 +38,8 @@ Does it make sense to make executable? (machine dependencies?)
 http://lanyrd.com/2012/pycon/spckh/ -> talk over frozen python en esky
 DOSbox en DOSemu als opties om op linux een exe uit te voeren.
 https://forum.qt.io/topic/49325/qt-app-auto-update-alternatives -> Qt framework auto-updater alternatives
+
+QT TODO:
+	-installer silent runnen
+	-zip unzippen en python gebruiken om te installeren
+	-update uitvoeren -> vraag 
