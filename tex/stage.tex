@@ -103,14 +103,14 @@ De installer zal ook de verschillende zip files moeten kunnen uitpakken en de se
 
 \subsubsection{WiX \citep{wixMain}}
 Windows Installer XML Toolset is een toolset waarmee Windows Installer packages gemaakt kunnen worden vanuit XML code.
-Met de toolset is het mogelijk om een installer met als extensie .msi te maken.
+Met de toolset is het mogelijk om een installer te maken met als extensie .msi.
 De installer zal dus enkel bruikbaar zijn in Windows.
-Met WiX is het mogelijk om een installer te schrijven die code van anderen gebruikt.
+Met WiX is het mogelijk om een installer te schrijven die code van derde partijen gebruikt.
 Het is dus mogelijk om executables te includeren in de installer \citep{wixMergers}.
 
 Dankzij het patch systeem moet het mogelijk zijn om updates uit te voeren.
 Er zal wel onderzocht moeten worden of een automatische version check kan uitgevoerd worden bij het opstarten.
-Het schrijven van een patch voor ieder update die uitkomt is geen optie.
+Het schrijven van een patch voor ieder update die uitkomt is geen goede oplossing.
 Als er dus geen automatische version check en installatie aanwezig is, dan zal gekeken moeten worden om een updater te includeren in de installer.
 Deze updater zal dan bij het opstarten van de software zoeken naar de nieuwe updates en eventueel de mogelijkheid geven om te updaten.
 
@@ -121,7 +121,7 @@ NSIS is script-based waardoor verschillende mogelijkheden ingebouwd kunnen worde
 Een installer van NSIS kan ook uitgebreid worden met plug-ins waardoor de functionaliteit kan worden uitgebreid.
 Deze plug-ins kunnen geschreven worden in verschillende talen zoals C, C++, ... \citep{nsisFeatures}.
 Het is mogelijk om in de installer verschillende componenten te includeren.
-Dankzij dit systeem kunnen we executables die al bestaan, blijven gebruiken.
+Dankzij dit systeem kunnen we executables die al bestaan, includeren in de installer.
 Of de installer de mogelijkheid bezit om een zip uit te pakken en de setup te doorlopen, zal nog onderzocht moeten worden.
 
 Er moet nog onderzocht worden of NSIS de mogelijkheid aanbiedt om een updater te includeren in de gemaakte installer.
@@ -139,7 +139,7 @@ Chocolatey biedt mogelijkheden aan zodanig dat installatie, upgrades en verwijde
 Er zal wel nog onderzocht moeten worden hoe het installatie en update systeem werkt.
 De nodige programma's moeten op de juiste locatie geplaatst worden om een goede werking te verzekeren.
 Het grootste nadeel van Chocolatey is het feit dat de gebruiker de Powershell moet gebruiken om de componenten up te daten en te installeren.
-Aangezien alles in de Powershell gebeurd moet het wel mogelijk zijn dat er batch files gemaakt worden.
+Aangezien alles in de Powershell gebeurd moet het wel mogelijk zijn dat er batch files gemaakt worden die deze taken uitvoeren.
 Deze zouden dan een deel van het werk van de gebruiker kunnen wegnemen.
 Net zoals de vorige oplossingen is deze ook enkel toepasbaar voor Windows.
 
@@ -152,7 +152,7 @@ Doordat er niet veel documentatie aanwezig is, kan de implementatie van WinSpark
 In de documentatie wordt ook het volgende vermeld \citep{winsparkleDocUser}:
 
 \begin{displayquote}
-Install update downloads the new version's installer and launches it.
+Update downloads the new version's installer and launches it.
 \end{displayquote}
 
 Het is dan ook niet duidelijk of er voor ieder update dan een nieuwe installer moet geschreven worden.
@@ -160,7 +160,7 @@ Mocht dit het geval zijn, dan is dit een minder aangewezen oplossing aangezien d
 
 \subsubsection{esky \citep{eskyMain}}
 Nog een optie om een updater te implementeren is esky.
-Esky is een auto-update framework for frozen Python applicaties.
+Esky is een auto-update framework voor frozen Python applicaties.
 Dankzij een eenvoudige API kunnen applicaties updates zoeken, ophalen en installeren.
 Er zit ook een mechanisme in dat de applicatie gaat beschermen tegen failed updates.
 Het is zeker mogelijk om de code van een programma up te daten met dit framework.
@@ -180,18 +180,19 @@ Daarom gaan we van de meesten opties een HelloWorld applicatie maken.
 Met deze applicatie kunnen we dan achterhalen hoe eenvoudig het is om deze tool te gebruiken maar wat de mogelijkheden van deze tool zijn.
 We gaan tijdens het ontwikkelen van de HelloWorld applicaties ook zoeken naar tools waarmee we Windows executables kunnen draaien op Linux.
 
-%\subsection{Testen}
-%Zoals eerder vermeld gaan we nu enkele HelloWorld applicaties maken met de tools die we hebben besproken in sectie~\vref{section:mogelijkheden}.
-%We gaan met deze tools een applicatie maken met als doel een executable in te pakken samen met een zip.
-%De installer moet dan beide componenten correct installeren.
-%Sommige tools bezitten de mogelijkheid om updates door te voeren.
-%Tijdens deze testen zullen we ook kijken of het mogelijk is om \'e\'en van de twee componenten up te daten met zo min mogelijk extra code.
-%De code die gebruikt werd is terug te vinden in sectie~\vref{section:code}.
-%
-%\section{Code}\label{section:code}
-%\lstinputlisting[caption="Hello world programma met uninstaller"]{../code/nsis/HelloWorld/installer-uninstaller.nsi}
-%
-%\subsection{Architectuur}
+\subsection{Testen}
+Zoals eerder vermeld gaan we nu enkele HelloWorld applicaties maken met de tools die we hebben besproken in sectie~\vref{section:mogelijkheden}.
+We gaan met deze tools een applicatie maken met als doel een executable in te pakken samen met een zip.
+De installer moet dan beide componenten correct installeren.
+Sommige tools bezitten de mogelijkheid om updates door te voeren.
+Tijdens deze testen zullen we ook kijken of het mogelijk is om \'e\'en van de twee componenten up te daten met zo min mogelijk extra code.
+De code die gebruikt werd is terug te vinden in sectie~\vref{section:code}.
+
+\subsection{Architectuur}
+Nu er geweten wat de verschillende opties aanbieden, kunnen we een beter inschatting maken van hoe de uiteindelijke applicatie eruit moet zijn.
+
+\section{Code}\label{section:code}
+\lstinputlisting[caption="Hello world programma met uninstaller"]{../code/nsis/HelloWorld/installer-uninstaller.nsi}
 
 %Alfabetische volgorde
 \bibliographystyle{plain}
