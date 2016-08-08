@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Eerste Test</Name>
+    <Version>1.0.0</Version>
+    <Title>Playground</Title>
+    <Publisher>PJ Industries</Publisher>
+    <!-- Directory name is used in component.xml -->
+    <StartMenuDir>PythonFrameWork</StartMenuDir>
+    <TargetDir>@HomeDir@/IfwExamples/eigenTest</TargetDir>
+    <RemoteRepositories>
+        <Repository>
+            <Url>http://localhost/repository</Url>
+        </Repository>
+    </RemoteRepositories>
+</Installer>
