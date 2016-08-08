@@ -1,0 +1,2 @@
+-QT Installer Framework
+	INSTALL file gebruikt in repo https://github.com/qtproject/installer-framework
