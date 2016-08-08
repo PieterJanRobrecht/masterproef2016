@@ -1,2 +1,5 @@
 -QT Installer Framework
 	INSTALL file gebruikt in repo https://github.com/qtproject/installer-framework
+	Microsoft Visual Studio installeren
+	https://www.qt.io/download-open-source/#section-2 -> bevat installer voor framework
+	https://www.youtube.com/watch?v=iCZwv6oo7Gw -> geeft voorbeeld code voor tutorial voorbeeld
