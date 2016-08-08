@@ -1,1 +1,0 @@
-Zip die moet worden uitgepakt en vervolgens het commando python setup.py install uitgevoerd.
