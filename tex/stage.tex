@@ -190,6 +190,23 @@ De code die gebruikt werd is terug te vinden in sectie~\vref{section:code}.
 De verschillende tutorials zullen ook worden bijgehouden zodanig dat het mogelijk is om het bekomen resultaat te repliceren.
 
 \subsubsection{Qt Installer Framework}
+De eerste optie waarmee een installer geschreven is geweest, is Qt Installer Framework.
+Het is mogelijk om een installer te maken die bestaat uit verschillende componenten.
+Bij deze componenten kan dan een script geschreven worden waarmee de installatie gepersonaliseerd kan worden.
+Zo was het dus mogelijk om een executable mee te nemen in de installer en deze effectief op te roepen vanuit de installer.
+Deze executable was de installer van Python.
+Aangezien de executable een installer is, zal deze zijn eigen UI hebben waar de gebruiker zich zal moeten door navigeren. 
+Het zou handig zijn mocht deze UI onderdrukt kunnen worden aangezien alle verschillende instellingen al goed staan en interactie met de gebruiker niet nodig is.
+Naast het uitvoeren van de executable, kon de installer ook een zip bestand uitpakken.
+Dit gebeurde weliswaar niet op meest aangewezen manier.
+In de eerste iteraties van de installer was het nog niet mogelijk om de setup van deze zip te doorlopen en er zal dus moeten gecontroleerd worden of dit wel mogelijk is.
+
+Het schrijven van deze eerste installer was zeker niet eenvoudig maar ik had wel de indruk dat het framework gebruikt kan worden om degelijke installers te maken.
+Jammer genoeg is er niet veel voorbeeld code aanwezig en zal het schrijven van grotere installers tijd vragen en zal gezocht worden naar manieren om code te schrijven die goed geschreven is.
+
+%Nog paragraaf over hoe de updates verlopen. Dit moet nog uitgezocht worden.
+
+\subsubsection{NSIS}
 
 
 \subsection{Architectuur}
