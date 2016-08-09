@@ -15,23 +15,18 @@ Component.prototype.createOperations = function()
 		, "/c"
 		, "C:\\\"Program Files\"\\WinRAR\\WinRAR.exe"
 		, "x"
-		, "@TargetDir@\\scp.py-master.zip"
-		, "@TargetDir@"
-		, "UNDOEXECUTE"
+		, "@TargetDir@\\pyusb-1.0.0a2.zip"
+		, "@TargetDir@")
+	
+		component.addOperation("Execute"
+		, "cmd"
+		, "cd"
+		, "@TargetDir@\\pyusb-1.0.0a2"
+		, "&&"
 		, "cmd"
 		, "/c"
-		, "rm"
-		, "/f"
-		, "@TargetDir@\\scp.py-master.zip")
-	
-		//component.addOperation("Execute"
-		//, "msiexec"
-		//, "/i"
-		//, "@TargetDir@\\python-2.7.3.msi"
-		//, "UNDOEXECUTE"
-		//, "msiexec"
-		//, "/qb"
-		//, "/x"
-		//, "@TargetDir@\\python-2.7.3.msi")
+		, "C:\\Python27\\python.exe"
+		, "setup.py"
+		, "install")
     }
 }
