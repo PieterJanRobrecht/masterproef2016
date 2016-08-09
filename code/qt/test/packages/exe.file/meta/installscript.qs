@@ -14,6 +14,7 @@ Component.prototype.createOperations = function()
 		, "msiexec"
 		, "/i"
 		, "@TargetDir@\\python-2.7.3.msi"
+		, "/quiet"
 		, "UNDOEXECUTE"
 		, "msiexec"
 		, "/qb"
