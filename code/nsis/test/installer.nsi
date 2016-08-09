@@ -1,7 +1,7 @@
 !include ZipDLL.nsh
 
 # define installer name
-OutFile "installer0.0.4.exe"
+OutFile "installer0.0.5.exe"
  
 # set desktop as install directory
 InstallDir $PROFILE\NsisExample
@@ -37,6 +37,9 @@ Section
 #!insertmacro ZIPDLL_EXTRACT "$INSTDIR\pyusb-1.0.0a2.zip" "$INSTDIR" "<ALL>"
 ZipDLL::extractall "$INSTDIR\pyusb-1.0.0a2.zip" "$INSTDIR"
 
+nsExec::ExecToLog '"C:\Python27\python27" $INSTDIR\pyusb-1.0.0a2\setup.py install'
+nsExec::ExecToLog 'ECHO hello'
+
 SectionEnd
  
 # create a section to define what the uninstaller does.
@@ -51,5 +54,7 @@ Delete $INSTDIR\uninstaller.exe
 # now delete installed file
 Delete $INSTDIR\python-2.7.3.msi
 Delete $INSTDIR\pyusb-1.0.0a2.zip
+
+RMDir /r $INSTDIR\pyusb-1.0.0a2
  
 SectionEnd
