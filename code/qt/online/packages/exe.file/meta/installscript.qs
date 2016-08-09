@@ -1,6 +1,7 @@
 function Component()
 {
     //Default component
+	//Script van exe
 }
 
 Component.prototype.createOperations = function()

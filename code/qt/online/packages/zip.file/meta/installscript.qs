@@ -1,6 +1,7 @@
 function Component()
 {
     //Default component
+	//Script van zip
 }
 
 Component.prototype.createOperations = function()
@@ -9,17 +10,28 @@ Component.prototype.createOperations = function()
     component.createOperations();
 
     if (systemInfo.productType === "windows") {
-        component.addOperation("Extract", "@TargetDir@\\scp.py-master.zip", "/tmp");
 		component.addOperation("Execute"
-		, "msiexec"
-		, "python"
-		, "/i"
-		, "@TargetDir@\\scp.py-maste\\setup.py"
-		, "install"
+		, "cmd"
+		, "/c"
+		, "C:\\\"Program Files\"\\WinRAR\\WinRAR.exe"
+		, "x"
+		, "@TargetDir@\\scp.py-master.zip"
+		, "@TargetDir@"
 		, "UNDOEXECUTE"
-		, "msiexec"
-		, "/qb"
-		, "/x"
-		, "@TargetDir@\\scp.py-maste\\setup.py");
+		, "cmd"
+		, "/c"
+		, "rm"
+		, "/f"
+		, "@TargetDir@\\scp.py-master.zip")
+	
+		//component.addOperation("Execute"
+		//, "msiexec"
+		//, "/i"
+		//, "@TargetDir@\\python-2.7.3.msi"
+		//, "UNDOEXECUTE"
+		//, "msiexec"
+		//, "/qb"
+		//, "/x"
+		//, "@TargetDir@\\python-2.7.3.msi")
     }
 }
