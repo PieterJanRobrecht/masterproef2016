@@ -19,14 +19,15 @@ Component.prototype.createOperations = function()
 		, "@TargetDir@")
 	
 		component.addOperation("Execute"
-		, "cmd"
-		, "cd"
-		, "@TargetDir@\\pyusb-1.0.0a2"
-		, "&&"
-		, "cmd"
-		, "/c"
-		, "C:\\Python27\\python.exe"
-		, "setup.py"
-		, "install")
-    }
+		, "cmd"	
+		, "/K" 
+		, "\"cd" 
+		, "@TargetDir@\\pyusb-1.0.0a2" 
+		, "&&" 
+		, "C:\\Python27\\python.exe" 
+		, "setup.py" 
+		, "install" 
+		, "&&" 
+		, "exit\"")
+	}
 }
