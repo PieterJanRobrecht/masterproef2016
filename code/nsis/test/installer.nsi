@@ -1,12 +1,8 @@
-!include ZipDLL.nsh
-
 # define installer name
-OutFile "installer0.0.5.exe"
+OutFile "installer0.2.0.exe"
  
 # set desktop as install directory
 InstallDir $PROFILE\NsisExample
- 
-!define TestDLL '"${NSISDIR}\Plugins\ZipDLL.dll"' 
  
 # default section start
 Section
@@ -35,10 +31,14 @@ SectionEnd
 Section
 
 #!insertmacro ZIPDLL_EXTRACT "$INSTDIR\pyusb-1.0.0a2.zip" "$INSTDIR" "<ALL>"
+#nsExec::ExecToLog 'ECHO hello'
+#Exec 'cmd ECHO hello'
+
 ZipDLL::extractall "$INSTDIR\pyusb-1.0.0a2.zip" "$INSTDIR"
 
-nsExec::ExecToLog '"C:\Python27\python27" $INSTDIR\pyusb-1.0.0a2\setup.py install'
-nsExec::ExecToLog 'ECHO hello'
+#nsExec::ExecToLog '"C:\Python27\python27" "$INSTDIR\pyusb-1.0.0a2\setup.py" install'
+ExecWait 'cmd /K "cd "$INSTDIR\pyusb-1.0.0a2" && "C:\Python27\python.exe" "setup.py" install && exit"'
+#ExecWait '"C:\Python27\python.exe" "setup.py" install'
 
 SectionEnd
  
