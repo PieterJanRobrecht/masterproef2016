@@ -203,11 +203,20 @@ In de eerste iteraties van de installer was het nog niet mogelijk om de setup va
 
 Het schrijven van deze eerste installer was zeker niet eenvoudig maar ik had wel de indruk dat het framework gebruikt kan worden om degelijke installers te maken.
 Jammer genoeg is er niet veel voorbeeld code aanwezig en zal het schrijven van grotere installers tijd vragen en zal gezocht worden naar manieren om code te schrijven die goed geschreven is.
+Zo werd in de installer de namen van de executable en het zip bestand hard coded in de installer geprogrammeerd.
+In de toekomst zal er gekeken moeten worden om dit te vermijden zodanig dat de installer niet moet worden aangepast als een driver van naam veranderd.
 
 %Nog paragraaf over hoe de updates verlopen. Dit moet nog uitgezocht worden.
 
 \subsubsection{NSIS}
-
+Het maken van een installer met NSIS verliep een pak eenvoudiger in vergelijking met het maken van een installer in Qt.
+De installer zelf omvat dan ook veel minder de Qt isntaller.
+De Qt installer installeerde een maintenance tool waarmee het dan mogelijk was om verschillende componenten te updaten en aan te passen.
+Met deze maintenance tool was het ook mogelijk om alle verschillende componenten te verwijderen.
+Dit zit allemaal standaard in de installer van Qt.
+Bij NSIS moet zelf een uninstaller geschreven worden en moet de programmeur dan zelf kijken wat er verwijderd moet worden.
+Het schrijven van de installer is wel veel eenvoudiger in vergelijking met Qt.
+Deze tool geeft geen mogelijkheid om een updater te implementeren dus er zal gekeken moeten worden hoe dit toch ge\"implementeerd kan worden.
 
 \subsection{Architectuur}
 Nu er geweten wat de verschillende opties aanbieden, kunnen we een beter inschatting maken van hoe de uiteindelijke applicatie eruit moet zijn.
