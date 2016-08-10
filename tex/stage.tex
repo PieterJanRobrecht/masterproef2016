@@ -219,6 +219,16 @@ Bij NSIS moet zelf een uninstaller geschreven worden en moet de programmeur dan 
 Het schrijven van de installer is wel veel eenvoudiger in vergelijking met Qt.
 Deze tool geeft geen mogelijkheid om een updater te implementeren dus er zal gekeken moeten worden hoe dit toch ge\"implementeerd kan worden.
 
+\subsubsection{WiX Toolset}
+WiX is de derde tool die uitgetest is geweest en direct ook de lastigste van de drie tools.
+Het schrijven van de code is heel verwarrend en zal meerdere dagen nodig hebben om enkele tutorials door te lopen zodanig dat ik weet wat ik juist aan het doen ben.
+Het maken van de HelloWorld applicatie verloopt heel langzaam.
+Tot op heden is het gelukt om een zip en executable te encapsuleren in de installer en deze op een doelmachine te plaatsen.
+Verder is het zoeken naar manieren om de executable op te starten en de zip uit te pakken.
+Uit verscheidene forums blijkt dat het uitpakken van de zip niet mogelijk zal zijn.
+Ook het uitvoeren van de executable wordt afgeraden aangezien MSI niet weet wat er gebeurd tijdens deze installatie en dus niet kan helpen mocht er een fout zijn.
+Dit is weliswaar volglens mij ook het geval bij NSIS en Qt.
+
 \subsection{Architectuur}
 Nu er geweten wat de verschillende opties aanbieden, kunnen we een beter inschatting maken van hoe de uiteindelijke applicatie eruit moet zijn.
 
