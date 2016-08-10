@@ -26,8 +26,9 @@
       <Feature Id="DefaultFeature" Level="1">
          <ComponentRef Id="ApplicationFiles"/>
       </Feature>
+	  
+      <InstallExecuteSequence>
+         <Custom Action='FooAction' After='InstallFiles'/>
+      </InstallExecuteSequence>
    </Product>
-   <Fragment>
-	<CustomAction Id="LicenseInfoCustomAction" BinaryKey="CustomActionBinary" DllEntry="ShowLicenseInfo" Execute="immediate" Return="check"/>
-	</Fragment>
 </Wix>
