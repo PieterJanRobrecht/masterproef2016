@@ -229,6 +229,11 @@ Deze tool geeft geen mogelijkheid om een updater te implementeren dus er zal gek
 WiX is de derde tool die uitgetest is geweest en direct ook de lastigste tot dan.
 Door een gebrek aan volledige code was het niet mogelijk om een goed voorbeeld te schrijven.
 Het is was niet mogelijk om een executable op te starten vanuit de installer.
+Aangezien het niet mogelijk is om twee msi executables op hetzelfde moment uit te voeren, zal een andere manier gevonden moeten worden om dit uit te voeren.
+Dit zorgt wel voor verschillende problemen:
+De huidige installer voor Python is zelf een msi executable.
+Het is dus niet mogelijk om tijdens de installatie van het framework een msi op te roepen, kan Python dus niet ge\"instaleerd worden als \'e\'en van de eerste programma's.
+Dit zorgt voor verschillende complicaties aangezien Python nodig is voor verschillende drivers voor het framework te installeren.
 Het was ook niet mogelijk om een zip bestand uit te pakken.
 Om een goede installer te maken zouden verschillende dagen gebruikt moeten worden zodanig dat er verschillende tutorials doorlopen kunnen worden.
 
