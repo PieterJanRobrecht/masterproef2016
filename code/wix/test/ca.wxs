@@ -1,9 +1,8 @@
 <?xml version='1.0'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
    <Fragment>
-      <CustomAction Id='FooAction' BinaryKey='FooBinary' ExeCommand='[SystemFolder]cmd.exe /K &quot; pause &quot;' Execute='deferred'
+   <Property Id='Unzipper'>C:\Windows\system32\cmd.exe</Property>
+      <CustomAction Id='FooAction' Property='Unzipper' ExeCommand='&qout; echo hello &amp; exit &qout;' Execute='deferred'
                     Return='check'/>
- 
-      <Binary Id='FooBinary' SourceFile='C:\Windows\system32\msiexec.exe'/>
    </Fragment>
 </Wix>
