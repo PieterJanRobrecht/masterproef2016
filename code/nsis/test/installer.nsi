@@ -30,15 +30,9 @@ SectionEnd
 
 Section
 
-#!insertmacro ZIPDLL_EXTRACT "$INSTDIR\pyusb-1.0.0a2.zip" "$INSTDIR" "<ALL>"
-#nsExec::ExecToLog 'ECHO hello'
-#Exec 'cmd ECHO hello'
-
 ZipDLL::extractall "$INSTDIR\pyusb-1.0.0a2.zip" "$INSTDIR"
 
-#nsExec::ExecToLog '"C:\Python27\python27" "$INSTDIR\pyusb-1.0.0a2\setup.py" install'
 ExecWait 'cmd /K "cd "$INSTDIR\pyusb-1.0.0a2" && "C:\Python27\python.exe" "setup.py" install && exit"'
-#ExecWait '"C:\Python27\python.exe" "setup.py" install'
 
 SectionEnd
  

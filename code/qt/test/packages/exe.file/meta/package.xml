@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package>
     <DisplayName>Executable</DisplayName>
-    <Description>Python die moet worden geïsntaleerd</Description>
+    <Description>Python die moet worden geinstaleerd</Description>
     <Version>1.0.2-1</Version>
 	<Script>installscript.qs</Script>
 	<SortingPriority>100</SortingPriority>

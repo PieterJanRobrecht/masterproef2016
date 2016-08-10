@@ -23,6 +23,7 @@
 *.mtc1
 *.out
 *.synctex.gz
+*.lol
 
 *.exe
 data/

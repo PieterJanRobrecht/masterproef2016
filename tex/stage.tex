@@ -23,22 +23,23 @@
 \setcounter{page}{1}
 
 \tableofcontents
+\lstlistoflistings
 %\clearpage
 
-%\section{Inleiding}
-%In het kader van mijn masterproef was het mogelijk om bij Televic Rail een stage te lopen tijdens de zomer. 
-%Gedurende deze stage heb ik mijn masterproef voorbereid en onderzoek gedaan naar de verschillende mogelijkheden die er zijn voor het uitvoeren van mijn opdracht.
-%De opdracht die voltooid moet worden is de volgende:
-%
-%\begin{displayquote}
-%Televic Rail heeft een Python test framework ontworpen. 
-%Dit framework werd oorspronkelijk gebruikt op een volledig uitgeruste testtoren, maar het framework werd aangepast zodanig dat het onafhankelijk van de testtoren gebruikt kan worden.
-%Aangezien het framework gebruik maakt van verschillende niet-standaard Python bibliotheken, is het installeren van het framework op een nieuw systeem een hele klus.
-%Het doel is dan ook het maken van een installer-updater waarmee dit proces kan worden vergemakkelijkt zodanig dat er zo min mogelijk interactie van de gebruiker moet zijn.
-%\end{displayquote}
-%
-%Tijdens de duur van de stage werden de verschillende implementatie manieren onderzocht en werd er een algemene architectuur voor de installer-updater uitgedacht.
-%In wat volgt wordt er beschreven welke stappen er werden ondernomen om het probleem onder te verdelen in enkele logische onderdelen en hoe deze het probleem dan oplossen. 
+\section{Inleiding}
+In het kader van mijn masterproef was het mogelijk om bij Televic Rail een stage te lopen tijdens de zomer. 
+Gedurende deze stage heb ik mijn masterproef voorbereid en onderzoek gedaan naar de verschillende mogelijkheden die er zijn voor het uitvoeren van mijn opdracht.
+De opdracht die voltooid moet worden is de volgende:
+
+\begin{displayquote}
+Televic Rail heeft een Python test framework ontworpen. 
+Dit framework werd oorspronkelijk gebruikt op een volledig uitgeruste testtoren, maar het framework werd aangepast zodanig dat het onafhankelijk van de testtoren gebruikt kan worden.
+Aangezien het framework gebruik maakt van verschillende niet-standaard Python bibliotheken, is het installeren van het framework op een nieuw systeem een hele klus.
+Het doel is dan ook het maken van een installer-updater waarmee dit proces kan worden vergemakkelijkt zodanig dat er zo min mogelijk interactie van de gebruiker moet zijn.
+\end{displayquote}
+
+Tijdens de duur van de stage werden de verschillende implementatie manieren onderzocht en werd er een algemene architectuur voor de installer-updater uitgedacht.
+In wat volgt wordt er beschreven welke stappen er werden ondernomen om het probleem onder te verdelen in enkele logische onderdelen en hoe deze het probleem dan oplossen. 
 
 \section{Analyse van het probleem}\label{section:analyse}
 Tijdens het bespreken van het probleem werd het al snel duidelijk dat er verschillende scenario's zijn waarin het framework gebruikt wordt. 
@@ -222,7 +223,17 @@ Deze tool geeft geen mogelijkheid om een updater te implementeren dus er zal gek
 Nu er geweten wat de verschillende opties aanbieden, kunnen we een beter inschatting maken van hoe de uiteindelijke applicatie eruit moet zijn.
 
 \section{Code}\label{section:code}
-\lstinputlisting[caption={Hello world programma met uninstaller}, label={list:nsis}]{../code/nsis/HelloWorld/installer-uninstaller.nsi}
+\lstinputlisting[caption={Qt config.xml}, label={list:qtConfig}]{../code/qt/test/config/config.xml}
+
+\lstinputlisting[caption={Qt package.xml voor een executable}, label={list:qtPackageExe}]{../code/qt/test/packages/exe.file/meta/package.xml}
+
+\lstinputlisting[caption={Qt installscript.qs voor een executable}, label={list:qtScriptExe}]{../code/qt/test/packages/exe.file/meta/installscript.qs}
+
+\lstinputlisting[caption={Qt package.xml voor een zip}, label={list:qtPackageZip}]{../code/qt/test/packages/zip.file/meta/package.xml}
+
+\lstinputlisting[caption={Qt installscript.qs voor een zip}, label={list:qtScriptZip}]{../code/qt/test/packages/zip.file/meta/installscript.qs}
+
+\lstinputlisting[caption={NSIS nsi bestand}, label={list:nsis}]{../code/nsis/test/installer.nsi}
 
 %Alfabetische volgorde
 \bibliographystyle{plain}
