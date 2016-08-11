@@ -32,3 +32,5 @@ data/
 *.rar
 *.wixobj
 *.wixpdb
+*.nupkg
+*.md
