@@ -54,7 +54,7 @@ $packageArgs = @{
 Get-WebFile -Url $download -FileName $hulp\$zipNaam
 Get-ChocolateyUnzip -FileFullPath $hulp\$zipNaam -Destination $hulp
 cd $test
-C:\Python27\python.exe setup.py install
+python setup.py install
 #Install-ChocolateyZipPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-zip-package
 ## If you are making your own internal packages (organizations), you can embed the installer or 
 ## put on internal file share and use the following instead (you'll need to add $file to the above)
