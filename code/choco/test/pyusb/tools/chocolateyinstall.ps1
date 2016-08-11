@@ -9,6 +9,7 @@ $packageName= 'pyusb' # arbitrary name for the package, used in messages
 $zipNaam 	= "hulp.zip"
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $hulp 		= "$toolsDir"
+$test		= "$hulp/pyusb-1.0.0a2"
 $url 		= 'http://10.0.2.2:51468/nuget'
 $download        = 'http://10.0.2.2/nsis/test/pyusb-1.0.0a2.zip' # download url
 $url64      = '' # 64bit URL here or remove - if installer contains both (very rare), use $url
@@ -52,7 +53,8 @@ $packageArgs = @{
 #Install-ChocolateyPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-package
 Get-WebFile -Url $download -FileName $hulp\$zipNaam
 Get-ChocolateyUnzip -FileFullPath $hulp\$zipNaam -Destination $hulp
-cmd /c " echo Hello && pause"
+cd $test
+C:\Python27\python.exe setup.py install
 #Install-ChocolateyZipPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-zip-package
 ## If you are making your own internal packages (organizations), you can embed the installer or 
 ## put on internal file share and use the following instead (you'll need to add $file to the above)
