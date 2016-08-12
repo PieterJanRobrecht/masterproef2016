@@ -239,17 +239,22 @@ Er is minder tijd nodig om een installer te maken die iets eenvoudig kan en het 
 \subsubsection{Chocolatey}
 Als \'e\'en van de laatste installer tools is het aan de beurt van Chocolatey om onderzocht te worden.
 Op het eerste zicht is het gebruik van Chocolatey gelijkaardig aan het gebruik van Qt.
-Chocolatey is op het eerste zicht een zeer degelijk tool en kan volgens mij wel goed gebruikt worden.
-Het grote voordeel van deze tool, is de mogelijkheid om powershell te gebruiken.
-Hierdoor kan de installatie van ieder component gepersonaliseerd worden.
-De tool geeft een gelijkaardig gevoel als Qt.
-Deze had ook een xml bestand met algemene informatie, hier heeft deze wel de extensie .nuspec .
-Vervolgens heeft iedere component dan nog een script die uitgevoerd zal worden bij installatie, updaten en verwijderen.
-Het gepersonaliseerde installeren is uitgetest geweest en kan effectief uitgevoerd worden.
-Het gebruik van de powershell voelt ook heel vertrouwd aan.
-Het updaten van componenten is jammer genoeg niet uitgetest geweest aangezien het teveel tijd vroeg om een goede testomgeving op te zetten.
-Gebruikers moeten voor deze tool wel vertrouwd zijn met de command prompt.
-Dit kan wel vergemakkelijkt worden met batch scripts.
+De opbouw van de package in Chocolatey is zeer gelijkaardig aan dat van Qt.
+Beiden hebben een algemeen bestand waarin de configuratie van de component zit en ze hebben een script dat kan uitgevoerd worden bij het installeren, verwijderen, ... .
+Chocolatey heeft \'e\'en groot voordeel en dat is de mogelijkheid om de powershell van Windows te gebruiken bij het upgraden, installeren en verwijderen.
+Hierdoor kan de installatie van iedere component gepersonaliseerd worden naar de noden van deze component.
+Hiernaast voelt Chocolatey ook aan als een zeer degelijk tool.
+Voor het verzenden van een update is er een NuGet server nodig waarin de nieuwe versie van de component zit.
+Deze kan dan gedownload worden bij het upgraden en kan dan ook ge\"installerd worden mocht dit nodig zijn.
+Het grootste voordeel van Chocolatey is ook zijn grootste nadeel, alle handelingen verlopen via de Command Prompt van Windows.
+Gebruikers hebben dus geen GUI waarmee ze kunnen interageren, maar het moet wel mogelijk zijn om een GUI rond de Command Prompt te maken met bijvoorbeeld Java.
+
+\paragraph{}
+Nu dat we alle verschillende tools hebben besproken waarmee het mogelijk is om een installer te schrijven, is het nu aan de beurt van de tools om een updater te implementeren.
+Aangezien sommige installer tools, zoals NSIS, niet de mogelijkheid aanbied om een updater te implementeren, moet er dus gekeken worden naar extra software om updates te realiseren.
+Tijdens het testen zal er gebruik gemaakt worden van de HelloWorld applicatie die gemaakt geweest is met NSIS.
+Deze zullen we uitbreiden en we gaan proberen \'e\'en van de componenten in de installer te vervangen met een nieuwe versie.
+Gedurende het testen gaan we vooral letten op hoe eenvoudig het is om de update uit te voeren.
 
 \subsubsection{Google Omaha}
 E\'en van de eerste tools die we gaan uitproberen om updates uit te proberen is Google Omaha.
