@@ -34,3 +34,5 @@ data/
 *.wixpdb
 *.nupkg
 *.md
+*.pyd
+*.dll
