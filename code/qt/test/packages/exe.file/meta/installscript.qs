@@ -20,5 +20,23 @@ Component.prototype.createOperations = function()
 		, "/qb"
 		, "/x"
 		, "@TargetDir@\\python-2.7.3.msi")
-    }
+    } else {
+		component.addOperation("Execute"
+		, "tar"
+		, "-xvzf"
+		, "@TargetDir@/Python-2.7.11.tgz"
+		, "-C"
+		, "@TargetDir@/"		
+		)
+		component.addOperation("Execute"
+		, "@TargetDir@/Python-2.7.11/configure"
+		)
+		component.addOperation("Execute"
+		, "make"
+		)
+		component.addOperation("Execute"
+		, "make"
+		, "install"
+		)	
+	}
 }
