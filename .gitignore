@@ -24,6 +24,7 @@
 *.out
 *.synctex.gz
 *.lol
+*.ps
 
 *.exe
 data/

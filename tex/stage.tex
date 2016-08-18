@@ -273,6 +273,39 @@ De tool zal kijken om in de applicatiecode naar aanpassingen en deze zullen dan 
 De tool heeft niet de mogelijkheden om verschillende versies van verschillende componenten bij te houden.
 Aangezien we dit nodig hebben om ons probleem op te lossen, zullen we moeten kijken naar een andere oplossing.
 
+\subsubsection{Winsparkle}
+Als laatste updater tool werd Winsparkle onder de loep genomen.
+Het is jammer genoeg niet gelukt om Winsparkle in te bouwen in een applicatie.
+De tool zou ook vooral bedoelt zijn om ingebouwd worden in C++ applicaties.
+Het is eventueel wel mogelijk om deze tool in te bouwen in het framework zelf maar dan zou esky een beter oplossing vormen aangezien deze bedoelt is voor Python.
+
+\subsection{Linux}
+Het testframework is een framework dat momenteel enkel gebruikt wordt op Windows.
+In de nabije toekomst is het dan ook mogelijk dat het framework wordt aangepast zodanig dat het ook kan gebruikt worden op Linux in combinatie met een Raspberry Pi.
+De installer die gemaakt gaat worden, zal dus best onafhankelijk zijn van het onderliggende besturingssysteem.
+
+Er zijn verschillende opties die ik tijdens de duur van de stage heb onderzocht:
+\begin{itemize}
+
+\item Qt Installer Framework: het Qt installer framework kan ook gebruikt worden om installers te maken voor Linux systemen.
+Dit verloopt op een gelijkaardige manier als het maken van de Windows installer.
+De code kan zelfs zodanig geschreven worden dat er keuzes gemaakt kunnen worden aan de hand van het besturingssysteem. 
+
+\item wine \citep{wineMain}: met Wine is het mogelijk om Windows programma's te laten draaien op Linux systemen.
+Dit gebeurt door het vertalen van de Windows API calls naar Linux API calls.
+Het zal dus niet werken zoals een virtuele machine.
+Met Wine kunnen dus installers die bedoelt zijn voor Windows systemen dus ook uitgevoerd worden op Linux.
+De installers moeten dan wel zodanig geschreven zijn dat er deze geen gebruik maken van de Windows specifieke taal, zoals bijvoorbeeld het vormen van paden (C:/Program Files/).
+
+\item Docker \citep{dockerMain}: Docker is een tool waarmee het mogelijk is om verschillende software componenten te verschepen in containers.
+Het grootste voordeel van Docker is het feit dat de software altijd op dezelfde manier uitgevoerd worden ongeacht van de omgeving.
+De software zal dus op een zelfde manier draaien op een testtoren als op een gewone computer.
+Er zal wel nog onderzocht moeten worden of dit de beste oplossing is, aangezien de testtoren meer drivers nodig hebben dan de gewone computers.
+
+\end{itemize}
+De meest gebruikte manier om een installer te maken voor Linux distributies is met Autotools \citep{autoMain}.
+Tijdens de stage is het niet gelukt om tijd te maken om deze tool uit te testen.
+
 \subsection{Architectuur}
 Nu er geweten wat de verschillende opties aanbieden, kunnen we een beter inschatting maken van hoe de uiteindelijke applicatie eruit moet zijn.
 
@@ -290,6 +323,8 @@ Nu er geweten wat de verschillende opties aanbieden, kunnen we een beter inschat
 \lstinputlisting[caption={NSIS nsi bestand}, label={list:nsis}]{../code/nsis/test/installer.nsi}
 
 \lstinputlisting[caption={WiX wxs bestand}, label={list:wix}]{../code/wix/test/installer.wxs}
+
+\lstinputlisting[caption={Docker dockerfile}, label={list:wix}]{../code/docker/test/Dockerfile}
 
 %Alfabetische volgorde
 \bibliographystyle{plain}
