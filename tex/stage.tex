@@ -103,8 +103,8 @@ Beide installers zullen een maintenance tool installer die gebruikt kan worden o
 Het verschil tussen de twee installers is het volgende: de offline installer zal alle nodige componenten bevatten in de installer zelf terwijl de online versie deze zal downloaden van een repository.
 Bij de offline installer zullen ook al deze componenten ge\"installeerd worden terwijl bij de online installer de keuze gemaakt kan worden tussen de verschillende componenten \citep{qtOverview}.
 
-Dit framework lijkt op het eerste zicht als een goede kandidaat maar het installer van het Python testframework is momenteel gepersonaliseerd voor Windows.
-Dit komt omdat het testframework gebruik maakt van executables die enkel op Windows kunnen draaien.
+Dit framework lijkt op het eerste zicht als een goede kandidaat maar het installer van het Python test framework is momenteel gepersonaliseerd voor Windows.
+Dit komt omdat het test framework gebruik maakt van executables die enkel op Windows kunnen draaien.
 De grote vraag is dan: is het mogelijk om deze executables in een installer te steken die ontworpen is voor Linux, en zal deze installer dan wel werken?
 De installer zal ook de verschillende zip files moeten kunnen uitpakken en de setup uitvoeren.
 
@@ -228,7 +228,7 @@ WiX is de derde tool die uitgetest is geweest en direct ook de lastigste om mee 
 Het was relatief eenvoudig om online verschillende stukken code te vinden die nodig waren voor enkele functionaliteiten te implementeren.
 Jammer genoeg waren dit vaak losstaande stukken code en was het zeer moeilijk om deze stukken in het grotere geheel te plaatsen.
 WiX zal een installer produceren met als extensie .msi, dit zorgt voor het volgende probleem: het is niet mogelijk om tijdens het uitvoeren van de installer, een tweede installer op te roepen met een .msi extensie.
-Hierdoor kon dus de installer van Python (een toch wel belangrijke component voor het test framework) niet uitgevoerd worden op hetzelfde moment als de installer van WiX.
+Hierdoor kon de installer van Python (een toch wel belangrijke component voor het test framework) niet uitgevoerd worden op hetzelfde moment als de installer van WiX.
 Het uitpakken van een zip bestand is ook niet gelukt met deze tool.
 Waarschijnlijk is het wel mogelijk om degelijke installers te maken met deze tool, maar het gebruik van enkel xml om de installer te defini\"eren maakt het niet eenvoudig.
 Volgens mij is het dan ook eenvoudiger om tools zoals NSIS te gebruiken.
@@ -239,25 +239,25 @@ Als \'e\'en van de laatste installer tools is het aan de beurt van Chocolatey om
 Op het eerste zicht is het gebruik van Chocolatey gelijkaardig aan het gebruik van Qt.
 De opbouw van de package in Chocolatey is zeer gelijkaardig aan dat van Qt.
 Beiden hebben een algemeen bestand waarin de configuratie van de component zit en ze hebben een script dat kan uitgevoerd worden bij het installeren, verwijderen, ... .
-Chocolatey heeft \'e\'en groot voordeel en dat is de mogelijkheid om de powershell van Windows te gebruiken bij het upgraden, installeren en verwijderen.
+Chocolatey heeft \'e\'en groot voordeel en dat is de mogelijkheid om de Powershell van Windows te gebruiken bij het upgraden, installeren en verwijderen.
 Hierdoor kan de installatie van iedere component gepersonaliseerd worden naar de noden van deze component.
 Hiernaast voelt Chocolatey ook aan als een zeer degelijk tool.
 Voor het verzenden van een update is er een NuGet server nodig waarin de nieuwe versie van de component zit.
 Deze kan dan gedownload worden bij het upgraden en kan dan ook ge\"installerd worden mocht dit nodig zijn.
-Het grootste voordeel van Chocolatey is ook zijn grootste nadeel, alle handelingen verlopen via de Command Prompt van Windows.
+Het grootste voordeel van Chocolatey is ook zijn grootste nadeel, alle handelingen verlopen via de Powershell of Command Prompt van Windows.
 Gebruikers hebben dus geen GUI waarmee ze kunnen interageren, maar het moet wel mogelijk zijn om een GUI rond de Command Prompt te maken met bijvoorbeeld Java.
 
 \paragraph{}
-Nu dat we alle verschillende tools hebben besproken waarmee het mogelijk is om een installer te schrijven, is het nu aan de beurt van de tools om een updater te implementeren.
-Aangezien sommige installer tools, zoals NSIS, niet de mogelijkheid aanbied om een updater te implementeren, moet er dus gekeken worden naar extra software om updates te realiseren.
+Nu dat we alle verschillende tools hebben besproken waarmee het mogelijk is om een installer te schrijven, is het nu aan de beurt van de updater tools.
+Aangezien sommige installer tools, zoals NSIS, niet de mogelijkheid aanbieden om een updater te implementeren, moet er dus gekeken worden naar extra software om updates te realiseren.
 Tijdens het testen zal er gebruik gemaakt worden van de HelloWorld applicatie die gemaakt geweest is met NSIS.
 Deze zullen we uitbreiden en we gaan proberen \'e\'en van de componenten in de installer te vervangen met een nieuwe versie.
 Gedurende het testen gaan we vooral letten op hoe eenvoudig het is om de update uit te voeren.
 
 \subsubsection{Google Omaha}
-E\'en van de eerste tools die we gaan uitproberen om updates uit te proberen is Google Omaha.
-Het opzetten van de Google Omaha server is tot op heden nog niet gelukt aangezien dit een zeer uitgebreide procedure volgt.
-Na een dag uittesten en proberen het draaiende te krijgen is er dan ook beslist om niet verder te proberen om deze tool op te starten.
+E\'en van de eerste tools die we gaan uitproberen om updates uit te voeren is Google Omaha.
+Het opzetten van de Google Omaha server is tot op heden nog niet gelukt aangezien dit een zeer uitgebreide procedure is.
+Na een dag uittesten en proberen is er dan ook beslist om niet verder te proberen om deze tool op te starten.
 
 \subsubsection{esky}
 Na Google Omaha is het aan esky om uitgetest te worden.
