@@ -261,54 +261,73 @@ Na een dag uittesten en proberen is er dan ook beslist om niet verder te probere
 
 \subsubsection{esky}
 Na Google Omaha is het aan esky om uitgetest te worden.
-Esky is een tool waarmee pyhton scripts kunnen omgevormd worden tot executables die we later dan nog kunnen updaten.
+Esky is een tool waarmee Python scripts kunnen omgevormd worden tot executables die we later dan nog kunnen updaten.
 We zijn dan vooral ge\"intereseerd in wat de mogelijkheden van deze updater tool zijn, en of het een oplossing kan bieden voor ons probleem.
 
 Na enkel tutorials was het mogelijk om een goed genoeg beeld te vormen van wat esky kan aanbieden.
 Het is een goede tool om \'e\'en applicatie up te daten.
-Mocht het testframework geen drivers nodig hebben, dan zou deze tool ideaal zijn om een executable te maken die gemakkelijk kan ge\"udatet worden.
+Mocht het test framework geen drivers nodig hebben, dan zou deze tool ideaal zijn om een executable te maken die gemakkelijk kan ge\"udatet worden.
 Dit is hier niet het geval.
-De tool zal kijken om in de applicatiecode naar aanpassingen en deze zullen dan aangepast worden bij een update.
 De tool heeft niet de mogelijkheden om verschillende versies van verschillende componenten bij te houden.
 Aangezien we dit nodig hebben om ons probleem op te lossen, zullen we moeten kijken naar een andere oplossing.
 
 \subsubsection{Winsparkle}
 Als laatste updater tool werd Winsparkle onder de loep genomen.
 Het is jammer genoeg niet gelukt om Winsparkle in te bouwen in een applicatie.
-De tool zou ook vooral bedoelt zijn om ingebouwd worden in C++ applicaties.
-Het is eventueel wel mogelijk om deze tool in te bouwen in het framework zelf maar dan zou esky een beter oplossing vormen aangezien deze bedoelt is voor Python.
+De tool zou ook vooral bedoelt zijn om ingebouwd worden in C++ applicaties, en zou dus niet echt passen voor ons probleem.
+Het is misschien wel mogelijk om deze tool in te bouwen in het framework zelf maar dan zou esky een beter oplossing vormen aangezien deze bedoelt is voor Python.
 
 \subsection{Linux}
-Het testframework is een framework dat momenteel enkel gebruikt wordt op Windows.
-In de nabije toekomst is het dan ook mogelijk dat het framework wordt aangepast zodanig dat het ook kan gebruikt worden op Linux in combinatie met een Raspberry Pi.
+Het test framework is een framework dat momenteel enkel gebruikt wordt op computers met Windows als besturingssysteem.
+In de nabije toekomst is het dan ook mogelijk dat het framework wordt aangepast zodanig dat het ook kan gebruikt worden op computers die draaien met een Linux distributie, zoals bij voorbeeld een Raspberry Pi.
 De installer die gemaakt gaat worden, zal dus best onafhankelijk zijn van het onderliggende besturingssysteem.
 
-Er zijn verschillende opties die ik tijdens de duur van de stage heb onderzocht:
+Tijdens de duur van de stage heb ik gezocht naar verschillende manieren om een installer te maken voor computers met Linux als besturingssyteem.
+Dit zijn de verschillende opties die ik heb gevonden:
 \begin{itemize}
 
 \item Qt Installer Framework: het Qt installer framework kan ook gebruikt worden om installers te maken voor Linux systemen.
 Dit verloopt op een gelijkaardige manier als het maken van de Windows installer.
-De code kan zelfs zodanig geschreven worden dat er keuzes gemaakt kunnen worden aan de hand van het besturingssysteem. 
+De code kan zelfs zodanig geschreven worden dat er keuzes gemaakt kunnen worden aan de hand van het besturingssysteem.
+Hierdoor kan de installatie van het programma echt gepersonaliseerd worden aan de hand van het onderliggende besturingssysteem.
 
 \item wine \citep{wineMain}: met Wine is het mogelijk om Windows programma's te laten draaien op Linux systemen.
 Dit gebeurt door het vertalen van de Windows API calls naar Linux API calls.
 Het zal dus niet werken zoals een virtuele machine.
 Met Wine kunnen dus installers die bedoelt zijn voor Windows systemen dus ook uitgevoerd worden op Linux.
 De installers moeten dan wel zodanig geschreven zijn dat er deze geen gebruik maken van de Windows specifieke taal, zoals bijvoorbeeld het vormen van paden (C:/Program Files/).
+Mocht dit toch het geval zijn, dan zal de installer wel doorlopen worden maar de uitkomst niet het gewenste effect hebben.
 
 \item Docker \citep{dockerMain}: Docker is een tool waarmee het mogelijk is om verschillende software componenten te verschepen in containers.
 Het grootste voordeel van Docker is het feit dat de software altijd op dezelfde manier uitgevoerd worden ongeacht van de omgeving.
 De software zal dus op een zelfde manier draaien op een testtoren als op een gewone computer.
-Er zal wel nog onderzocht moeten worden of dit de beste oplossing is, aangezien de testtoren meer drivers nodig hebben dan de gewone computers.
+Dit kan zowel positief als negatief zijn.
+We willen juist dat er een opdeling gebeurd tussen de twee omgevingen aangezien de ene meer drivers zal nodig hebben dan de ander.
+Er zal dus eventueel verder moeten onderzocht worden naar de mogelijkheid om dit aan te passen afhankelijk van het systeem waarop het ge\"installeerd moet worden.
 
 \end{itemize}
 De meest gebruikte manier om een installer te maken voor Linux distributies is met Autotools \citep{autoMain}.
-Tijdens de stage is het niet gelukt om tijd te maken om deze tool uit te testen.
+Tijdens de stage is het niet gelukt om tijd te maken om deze tool uit te testen, maar dit zou eventueel wel een oplossing kunnen zijn voor het maken van de Linux specifieke installer.
+De installer zal dan waarschijnlijk enkel bruikbaar zijn op Linux aangezien Autotools gebruik maakt van een shell script interpreter die Windows niet heeft \citep{autoScript}.
 
-\subsection{Architectuur}
+\section{Architectuur}
 Nu er geweten wat de verschillende opties aanbieden, kunnen we een beter inschatting maken van hoe de uiteindelijke applicatie eruit moet zijn.
+In de volgende sectie bespreek ik dan ook kort wat mij het beste lijkt naar het begin van de masterproef toe.
+
+Als een mogelijke architectuur stel ik dan ook het volgende voor:
+Volgens mij is het best om gebruik te maken van de verschillende tools die bestaan uit de combinatie van een installer met updater, zoals bijvoorbeeld Qt installer framework en Chocolatey.
+Deze tools gaven de meest robuuste indruk en boden het meest aan tijdens het uittesten.
+Het gebruik van package managers wordt ook alsmaar meer alledaags, zie apt-get van Linux en OneGet voor Windows \citep{oneget}, het zou dan ook niet slecht zijn om gebruik te maken van deze al bestaande infrastructuur.
+Het zou wel mogelijk zijn om een installer-updater combinatie te maken met tools zoals WiX en NSIS maar deze gaven niet de juiste indruk tijdens het uittesten.
+Er wordt dan ook best een applicatie geschreven die zeer gemakkelijk te begrijpen is en eventueel ook uit te breiden.
+Tools zoals WiX en NSIS boden die eigenschappen niet aan.
+
+Ik opteer wel voor een meer diepgaande studie van de verschillende voorgestelde tools, zodanig dat de meest effici\"ente keuze kan gemaakt worden.
+Tijdens de stage was er dan ook onvoldoende tijd om een degelijk onderzoek te doen naar deze tools waardoor het volledige potentiaal niet onderzocht kon worden.
 
 \section{Code}\label{section:code}
+Hieronder zijn de verschillende bestanden terug te vinden die gebruikt werden voor het genereren van de verschillende installers.
+
 \lstinputlisting[caption={Qt config.xml}, label={list:qtConfig}]{../code/qt/test/config/config.xml}
 
 \lstinputlisting[caption={Qt package.xml voor een executable}, label={list:qtPackageExe}]{../code/qt/test/packages/exe.file/meta/package.xml}
