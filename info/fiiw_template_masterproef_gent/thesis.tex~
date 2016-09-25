@@ -1,0 +1,108 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                      %
+% LaTeX, FIIW thesis template                                          %
+% 13/12/2013 v1.1                                                      %
+%                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,a4paper]{report}
+% Indien je je thesis recto-verso wil afdrukken gebruik je onderstaande opties i.p.v. bovenstaande
+%\documentclass[11pt,a4paper,twoside,openright]{report}
+
+\usepackage[a4paper,left=3.5cm, right=2.5cm, top=3.5cm, bottom=3.5cm]{geometry}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}           % om niet ascii karakters rechtstreeks te kunnen inputten
+%\usepackage[utf8]{inputenc}            % commentarieer deze regel uit als je utf8 encoded files gebruikt in plaats van latin1
+\usepackage{natbib}
+\usepackage{listings}             		% voor het weergeven van broncode
+\usepackage{verbatim}					% weergeven van code, commando's, ...
+\usepackage{hyperref}					% maak PDF van de thesis navigeerbaar
+\usepackage{url}						% URL's invoegen in tekst met behulp van \url{http://}
+\usepackage[small,bf,hang]{caption}     % om de captions wat te verbeteren
+\usepackage[final]{pdfpages}            % gebruikt voor het invoegen van het artikel in pdf-formaat
+\usepackage{pslatex}					% andere lettertype's dan de standaard types
+
+\usepackage{sectsty}					% aanpassen van de fonts van sections en chapters
+\allsectionsfont{\sffamily}
+\chapterfont{\raggedleft\sffamily}
+
+\usepackage{float}                      % De optie H voor de plaatsing van figuren op de plaats waar je ze invoegt. bvb. \begin{figure}[H]
+%\usepackage{longtable}					% tabellen die over meerdere pagina's gespreid worden
+%\usepackage[times]{quotchap}           % indien je fancy hoofdstuktitels wil
+%\usepackage[none]{hyphenat}
+%\usepackage{latexsym}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{setspace}
+\setstretch{1.5}
+
+\usepackage{fiiw_gent}
+
+%door onderstaande regels in commentaar te zetten, of op false, kan je pagina's weglaten
+%bijvoorbeeld het weglaten van een voorwoord, lijst met symbolen, ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%voorwoord toevoegen?
+\acknowledgementspagetrue
+\acknowledgements{voorwoord}			%.tex file met daarin het voorwoord
+%abstract toevoegen?
+\abstractpagetrue
+\abstracts{abstract}					%.tex file met daarin het abstract
+%lijst van figuren toevoegen?
+\listoffigurespagetrue
+%lijst van tabellen toevoegen?
+\listoftablespagetrue
+%lijst van symbolen toevoegen?
+%\listofsymbolspagetrue
+%\listofsymbols{symbolen}				%.tex file met daarin de lijst van symbolen
+
+
+
+%informatie over het eindwerk, de promotor, ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\opleiding{Elektronica-ICT}
+\afdeling{Afstudeerrichting informatie- en communicatietechnieken}
+%\afdeling{Elektronica-ICT\\Afstudeerrichting elektronica
+
+\title{Titel masterproef}
+\subtitle{Ondertitel (facultatief)}
+% \author{naam student}
+\forename{Voornaam}
+\surname{Achternaam}
+\academicyear{2013 - 2014}
+
+\promotorA[Promotor]{My Promotor}
+\promotorB[Co-promotoren]{(My Co-promotor)\\(My company promotor)}
+
+\begin{document}
+\selectlanguage{dutch}
+\preface
+
+\input{hfdst1}
+\input{hfdst2}
+\input{hfdst3}
+
+% Bibliografie: referenties. De items zitten in bibliografie.bib
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indien je ook de niet geciteerde werken in je bibliografie wil opnemen, commentarieer dan onderstaande regel uit!
+%\nocite{*}
+\bibliographystyle{apalike}
+\bibliography{bibliografie}
+
+% Eventueel enkele appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\input{bijlage1}
+
+% Bijlage met daarin het wetenschappelijk artikel
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Beschrijving van deze masterproef in de vorm van een wetenschappelijk artikel}
+%\includepdf{artikel.pdf}
+
+% Bijlage met daarin de poster
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Poster}
+%\includepdf{poster.pdf}
+
+\includepdf{back_fiiw_gent.pdf}
+
+\end{document}
