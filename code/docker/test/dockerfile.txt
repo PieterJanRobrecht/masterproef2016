@@ -1,4 +1,4 @@
-# This is a comment
+# Base image
 FROM ubuntu
 MAINTAINER me@gmail.com
 RUN apt-get -y update && apt-get install -y unzip \
