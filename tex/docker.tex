@@ -41,14 +41,16 @@ Deze containers zijn dan uitvoerbare instanties \citep{docker}.
 
 \section{Bespreking}
 Al snel blijkt dat Docker verschillende plus- maar ook minpunten heeft.
-Zo is het bijvoorbeeld enkel mogelijk om Docker te installeren op een computer met Windows 10 Professional of Enterprise (Anniversary Edition) \citep{microsoft}.
+Zo is het bijvoorbeeld enkel mogelijk om Docker te installeren op een computer met Windows 10 Professional, Enterprise (Anniversary Edition) of Windows server 2016 \citep{microsoft}.
 Gelukkig kon ik wel gebruik maken van de Docker toolbox waarmee ik dan aan de slag kon.
-Jammer genoeg kon ik met de toolbox versie van Docker niet aan de slag voor het maken van Windows containers.
-In listing~\vref{list:dockerfile} kan u zien dat als base image ubuntu wordt gekozen.
-Het uitvoeren van de verschillende executables is dus niet gelukt.
+Jammer genoeg kon ik met de toolbox versie van Docker Windows containers maken.
+In listing~\vref{list:dockerfile} kan u zien dat als base image Ubuntu werd gekozen.
+Aangezien de base image Ubuntu is, is het niet mogelijk om Windows executables uit te voeren.
+Hiernaast was het ook niet mogelijk om de setup.py uit te voeren aangezien deze geschreven is voor Windows systemen.
 Het installeren en opzetten van de omgeving ging zeer vlot en verliep verder zonder problemen.
-De Docker toolbox is een goede tool voor het maken van enkele images.
 
+
+\section{Code}
 \lstinputlisting[caption={Docker Dockerfile}, label={list:dockerfile}]{../code/docker/test/dockerfile.txt}
 
 %Alfabetische volgorde
