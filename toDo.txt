@@ -4,42 +4,12 @@
 	Als er een update is, worden dan alle nodige computers aangepast of blijven sommige op een oude versie draaien?
 	Sprake van een database die de versienummers bijhoudt en een mapping doet?
 	
-- Maken:
-	Installer -> keuze tussen twee verschillende mogelijkheden
-	-> installeren van de nodige libs en daarna het framework installeren
-	PROBLEEM -> wat doe je met de output van de verschillende installers?
-		
-	Auto updater -> moet zelf kiezen wanneer de update uit te voeren
-		Wannneer moet je gaan kijken voor nieuwe versie? client vraagt op bij opstart
-		KIJKEN HOE WE HET FRAMEWORK KUNNEN UPDATEN
-		-> verschillende types van frameworks (PC, toren, raspberry pi)
-		
-	Logger maken voor troubleshooten -> kan zoals we in de lessen hebben gezien met aspects?
-	-> er vanuit gaan dat de mensen die het gebruiken niet weten wat ze doen
-
--Structuur programma + uiterlijk
-	1 EXE voor op te starten -> alles van server halen en installeren + aanmaak XML
-	1 EXE voor het updaten en framework op te starten -> zal XML aanpassen
-
-- TODO:
-#	Git opzetten
-#	Tex bestand voor master
-#	Virtualbox voor testomgeving -> upgrade naar 64 bit nodig
-#	adres voor localhost op Vm te benaderen is 10.0.2.2 -> gwn ftp://10.0.2.2 gebruiken
-	
-	https://en.wikipedia.org/wiki/List_of_installation_software
-	
 Installer from Pieter-Jan Robrecht (student) needs to take drivers into account.
 
 How to organise OS dependencies (docker, VM, ...)?
 Handle config file to organise e.g. selection of SN Renesas programmer SRD.
 Does it make sense to make executable? (machine dependencies?)
 
-http://lanyrd.com/2012/pycon/spckh/ -> talk over frozen python en esky
-DOSbox en DOSemu als opties om op linux een exe uit te voeren.
 https://forum.qt.io/topic/49325/qt-app-auto-update-alternatives -> Qt framework auto-updater alternatives
 
-QT TODO:
-	-installer silent runnen
-	-zip unzippen en python gebruiken om te installeren
-	-update uitvoeren -> vraag 
+https://blog.sixeyed.com/windows-containers-and-docker-5-things-you-need-to-know/ -> info over Docker op Windows
