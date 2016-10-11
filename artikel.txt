@@ -7,14 +7,37 @@ Zoekterm: installation software
 	Package Management Systems
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_ieee10.1109%2fMS.2012.38&indx=4&recIds=TN_ieee10.1109%2fMS.2012.38&recIdxs=3&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=1&tab=all_content_tab&dstmp=1475324125836&frbg=&rfnGrpCounter=1&frbrVersion=6&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=articles&srt=rank&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
 		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/stamp/stamp.jsp?arnumber=6155145
+		
 	Verifying installation environments
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_proquest202690702&indx=15&recIds=TN_proquest202690702&recIdxs=14&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=2&rfnGrp=1&tab=all_content_tab&dstmp=1475324695152&frbg=&rfnGrpCounter=2&frbrVersion=5&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=%5B2000%2BTO%2B2016%5D&fctV=articles&srt=rank&fctN=facet_searchcreationdate&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
 		http://search.proquest.com.kuleuven.ezproxy.kuleuven.be/docview/202690702?accountid=17215&rfr_id=info%3Axri%2Fsid%3Aprimo
+		
 	The atlas software installation system for lcg/egee
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_iop10.1088%2f1742-6596%2f119%2f5%2f052013&indx=28&recIds=TN_iop10.1088%2f1742-6596%2f119%2f5%2f052013&recIdxs=7&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=2&rfnGrp=1&tab=all_content_tab&dstmp=1475325015942&frbg=&rfnGrpCounter=2&frbrVersion=2&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=%5B2000%2BTO%2B2016%5D&fctV=articles&srt=rank&fctN=facet_searchcreationdate&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
 		http://iopscience.iop.org.kuleuven.ezproxy.kuleuven.be/article/10.1088/1742-6596/119/5/052013/pdf
-		Miss beter, geeft meer uitleg over de architectuur van ATLAS
-
+		
+		Het LHC experiment in Cern heeft nood aan een systeem voor het automatisch installeren van software. Dit is nodig voor de grote hoeveelheid aan resources die aanwezig zijn in GRID aan te kunnen.
+		Met behulp van Light Job Submission Framework for installation, was het mogelijk om zo'n systeem uit te bouwen.
+		Het framework is een dunne laag van software over de GRID middleware.
+		De kern bestaat uit een installation database en een CLI.
+		De CLI zorgt voor de interactie met GRID en in de database worden de verschillende job definities bijgehouden.
+		Iedere component van LJSFi maakt gebruik van de database om de configuratie van verschillende jobs te krijgen, hun status op te slaan, ...
+		De architectuur is modulair en het is mogelijk om andere GRID middleware te gebruiken door de kern uit te breiden.
+		Het systeem bestaat uit verschillende modules die instaan voor het afhandelen van een installatie request.
+		*RAI: een web interface waarin gebruikers een aanvraag kunnen indienen. Er wordt een goed veiligheidsprotocol gebruikt waardoor enkel zij met het goed certificaat binnen kunnen.
+		*AIR: de installatie wordt getriggered door de informatie die wordt opgeslagen in de DB.
+		Van zodra een release wordt getagged als autoinstall, dan zal de AIR module de gevraagd releases installeren/verwijderen.
+		Dit gebeurd ongeveer om het uur.
+		*InAgent: deze zal de DB om de 10 minuten lezen en vervolgens de installatie processen opstarten. De taken kunnen worden uitgevoerd door verschillende agents.
+		Het is ook mogelijk om terug te vallen op een handmatige modus waarin het installatie team de nodige aanpassingen kunnen maken in de web interface.
+		Voor de gebruikers is het mogelijk om gebruik te maken van enkele specifieke services, zoals bijvoorbeeld het subscriben voor notificatie mails voor een site.
+		Alle acties die worden ondernomen voor het installeren van software, maar ook de acties van het LJSFi, worden in de gaten gehouden door de GriBB.
+		GriBB kan gebruikt worden om processen te sluiten die bijvoorbeeld teveel CPU gebruiken, ...
+		De installatie van de software gebeurd in enkele stappen:
+		-site checks: dit is een pilot job die goed moet worden uitgevoerd voordat de echte installatie kan beginnen.
+		-installation task
+		-output vallidation: hier zal LJSFi de job output van GRID halen en zal de exit code gebruiken om de DB te updaten.
+		
 Zoekterm: Software Deployment
 	QUIET: A Methodology for Autonomous Software Deployment using Mobile Agents
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_sciversesciencedirect_elsevierS1084-8045(10)00050-0&indx=5&recIds=TN_sciversesciencedirect_elsevierS1084-8045(10)00050-0&recIdxs=4&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=1&tab=all_content_tab&dstmp=1475326119313&frbg=&rfnGrpCounter=1&frbrVersion=5&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=articles&srt=rank&fctN=facet_rtype&dum=true&vl(freeText0)=software%20deployment&fromTabHeaderButtonPopout=true
