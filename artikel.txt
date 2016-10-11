@@ -2,11 +2,20 @@ Zoekterm: installation software
 	Software installation and condition data distribution via CernVM File System in ATLAS
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_iop10.1088%2f1742-6596%2f396%2f3%2f032030&indx=3&recIds=TN_iop10.1088%2f1742-6596%2f396%2f3%2f032030&recIdxs=2&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=1&tab=all_content_tab&dstmp=1475323961072&frbg=&rfnGrpCounter=1&frbrVersion=3&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=articles&srt=rank&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
 		http://iopscience.iop.org.kuleuven.ezproxy.kuleuven.be/article/10.1088/1742-6596/396/3/032030/pdf
-		Niet echt de moeite waard (na halverwege te lezen)
+		
+		CernVM-FS is een project in Cern met als bedoeling het delen van data over een gedistribueerde HTTP-filesystem.
+		Alle bestanden staan geinstaleerd op een centrale repository. Mocht een ander systeem de bestanden nodig hebben, dan worden deze gedeeld.
+		Het systeem wordt onder andere geruikt bij HEP (high energy particle) experimenten voor het distribueren van on-demand software voor data analyse, ...
+		Door de manier van opslag is het niet mogelijk om twee dezelfde bestanden te hebben, ...
+		Het systeem maakt gebruik van de installatie DB van het ATLAS installation systeem.
 		
 	Package Management Systems
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_ieee10.1109%2fMS.2012.38&indx=4&recIds=TN_ieee10.1109%2fMS.2012.38&recIdxs=3&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=1&tab=all_content_tab&dstmp=1475324125836&frbg=&rfnGrpCounter=1&frbrVersion=6&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=articles&srt=rank&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
 		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/stamp/stamp.jsp?arnumber=6155145
+		
+		Software installatie en onderhoud wordt vergemakkelijkt door het standariseren en organiseren van de productie en consumptie van software.
+		Systeem bestaat uit: repositories met alle packages, installatie en management software.
+		Per host is 
 		
 	Verifying installation environments
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_proquest202690702&indx=15&recIds=TN_proquest202690702&recIdxs=14&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=2&rfnGrp=1&tab=all_content_tab&dstmp=1475324695152&frbg=&rfnGrpCounter=2&frbrVersion=5&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=%5B2000%2BTO%2B2016%5D&fctV=articles&srt=rank&fctN=facet_searchcreationdate&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
