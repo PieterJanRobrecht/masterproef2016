@@ -15,7 +15,13 @@ Zoekterm: installation software
 		
 		Software installatie en onderhoud wordt vergemakkelijkt door het standariseren en organiseren van de productie en consumptie van software.
 		Systeem bestaat uit: repositories met alle packages, installatie en management software.
-		Per host is 
+		Per host wordt er data bijgehouden over de geinstaleerde pakketten.
+		De pakketten bevatten vaak meta-data met daarin de versie, ... .
+		De manager zorgt er dan voor dat de nodige dependencies en dergelijke worden geinstalleerd. Vaak bevatten ze ook de logica om de pakketten te upgraden en verwijderen.
+		Voordeel voor developers is dat ze heel gemakkelijk een omgeving kunne opzetten door enkel de nodige packages op te lijsten.
+		Nadeel is dat het installeren van software die niet in een package zit, moeilijk kan zijn.
+		Als je een package hebt die goed werkt dan is het wel heel goed en gemakkelijk te gebruiken.
+		Gebruikers moeten niet weten wat de achterliggende handelingen zijn wat het gemakkelijker maakt. 
 		
 	Verifying installation environments
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_proquest202690702&indx=15&recIds=TN_proquest202690702&recIdxs=14&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=2&rfnGrp=1&tab=all_content_tab&dstmp=1475324695152&frbg=&rfnGrpCounter=2&frbrVersion=5&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=%5B2000%2BTO%2B2016%5D&fctV=articles&srt=rank&fctN=facet_searchcreationdate&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
