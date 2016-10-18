@@ -27,6 +27,19 @@ Zoekterm: installation software
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_proquest202690702&indx=15&recIds=TN_proquest202690702&recIdxs=14&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=2&rfnGrp=1&tab=all_content_tab&dstmp=1475324695152&frbg=&rfnGrpCounter=2&frbrVersion=5&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=%5B2000%2BTO%2B2016%5D&fctV=articles&srt=rank&fctN=facet_searchcreationdate&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
 		http://search.proquest.com.kuleuven.ezproxy.kuleuven.be/docview/202690702?accountid=17215&rfr_id=info%3Axri%2Fsid%3Aprimo
 		
+		Het doel van de schrijver van het artikel was het creeeren van een applicatie waarmee het mogelijk is om de installatie omgeving te controleren.
+		Door software die al geinstalleerd is op een systeem kan het zijn dat verschillende DLLs niet aanwezig zijn.
+		Verder kan het zijn, dat door het installeren van nieuwe software de oude niet meer werkt.
+		In het artikel beschrijft de schrijver zijn systeem waarmee het mogelijk wordt om het verificatie proces af te scheiden van het installatie proces.
+		Hierdoor wordt zijn installer niet geclutterd met extra software en bezit de gebruiker een tool waarmee die kan kijken of alles naar behoren werkt.
+		Vervolgens legt de schrijver uit hoe hij te werk is gegaan voor het maken van zijn systeem.
+		De schrijver concludeert met de drie grote voordelen van het opsplisten van de twee systemen:
+		-easy environment verification
+		-installation program minder geclutterd
+		-verfication tool na het installeren
+		
+		Dit is miss wel interessant want hij legt zijn structuur uit.
+		
 	The atlas software installation system for lcg/egee
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_iop10.1088%2f1742-6596%2f119%2f5%2f052013&indx=28&recIds=TN_iop10.1088%2f1742-6596%2f119%2f5%2f052013&recIdxs=7&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=2&rfnGrp=1&tab=all_content_tab&dstmp=1475325015942&frbg=&rfnGrpCounter=2&frbrVersion=2&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=%5B2000%2BTO%2B2016%5D&fctV=articles&srt=rank&fctN=facet_searchcreationdate&fctN=facet_rtype&dum=true&vl(freeText0)=installation%20software&fromTabHeaderButtonPopout=true
 		http://iopscience.iop.org.kuleuven.ezproxy.kuleuven.be/article/10.1088/1742-6596/119/5/052013/pdf
@@ -57,6 +70,13 @@ Zoekterm: Software Deployment
 	QUIET: A Methodology for Autonomous Software Deployment using Mobile Agents
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_sciversesciencedirect_elsevierS1084-8045(10)00050-0&indx=5&recIds=TN_sciversesciencedirect_elsevierS1084-8045(10)00050-0&recIdxs=4&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?gathStatTab=true&dscnt=0&mode=Basic&vid=KULeuven_ODISEE&rfnGrp=1&tab=all_content_tab&dstmp=1475326119313&frbg=&rfnGrpCounter=1&frbrVersion=5&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&fctV=articles&srt=rank&fctN=facet_rtype&dum=true&vl(freeText0)=software%20deployment&fromTabHeaderButtonPopout=true
 		http://www.sciencedirect.com.kuleuven.ezproxy.kuleuven.be/science/article/pii/S1084804510000500
+		
+		Het silently installeren van software over een netwerk. (Ik denk dat het is zoals het installeren van software in een klaslokaal waarbij niemand moet zitten)
+		Het doel van het onderzoek is het maken van een systeem waarmee silent installations kunnen gebeuren op een netwerk.
+		Er wordt gebruik gemaakt van agents (programma's die autonoom kunnen werken en dingen kunnen doen in plaats van de gebruiker).
+		Deze agents worden dan gebruikt in het model.
+		
+		Kan gebruikt worden voor het silent installeren van de drivers te verklaren/onderbouwen?
 		
 Zoekterm: Software Packaging
 	Software packaging approaches - A comparison framework (Boek p. 438)
