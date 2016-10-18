@@ -75,6 +75,8 @@ Zoekterm: Software Deployment
 		Het doel van het onderzoek is het maken van een systeem waarmee silent installations kunnen gebeuren op een netwerk.
 		Er wordt gebruik gemaakt van agents (programma's die autonoom kunnen werken en dingen kunnen doen in plaats van de gebruiker).
 		Deze agents worden dan gebruikt in het model.
+		Er is een controller en die zorgt voor het inladen van de nodige installaties en zal dan alle agents beheren.
+		Verder wordt er uitgelegd hoe ze te werk zijn gegaan.
 		
 		Kan gebruikt worden voor het silent installeren van de drivers te verklaren/onderbouwen?
 		
