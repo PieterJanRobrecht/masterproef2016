@@ -1,9 +1,15 @@
 %Belangrijke componenten van een abstract
 %Achtergrond
-%Duidelijke omschrijving van de opgave en de oplossingsmethode
 Televic Rail maakt gebruik van een Python framework voor het uittesten van de hardware die zijn produceren.
-Het installeren van dit framework op een nieuwe computer of testtoren is een uitgebreide klus die eenvoudiger moet kunnen.
+Het installeren van dit framework op een nieuwe computer of testtoren is een uitgebreide klus, aangezien er verschillende hardware drivers ge\"installeerd moeten worden en er verschillende bibliotheken gebruikt worden om het framework correct te laten functioneren.
+De klus zou eenvoudiger moeten zodanig dat het updaten en installeren van het framework vlotter verloopt.
+%
+%Omschrijving
 Het doel van deze scriptie is dan ook het onderzoeken en het produceren van een duurzame oplossing voor het installatie probleem.
-
+Het probleem werd opgedeeld in drie grote componenten: de packager, de deployment server en de deployment environment.
+Met deze structuur is er een prototype opgebouwd die de verschillende basiscomponenten implementeert.
+Voor de packager te implementeren werd er gebruik gemaakt van het Qt Installer Framework.
+De deployment environment werd gerealiseerd met behulp van Docker en op de deployment server draaide ElectricFlow als software management tool.
+Na het testen van dit prototype, werd het ontwerp bijgeschaafd en de aanpassingen uitgevoerd om zo een goede oplossing te krijgen op het oorspronkelijke probleem.
 
 \underline{Trefwoorden:} latex, thesis, stijl
