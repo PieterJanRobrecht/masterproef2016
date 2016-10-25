@@ -2,10 +2,28 @@
 %-Uitleggen van het probleem
 %-Hoe ik tewerk ga gaan
 %-Gaan we concluderen met de onderzoeksvraag
-\chapter{Inleiding}
-
+\chapter{Situering}
+Televic Rail heeft een Python test framework ontworpen waarmee zij in staat zijn om verschillende hardware componenten te controleren op fouten.
+Dit framework wordt dan ook zeer intensief gebruikt tijdens het productieproces.
+Het framework werd initieel ontworpen om enkel te werken op testtorens, maar werd later aangepast zodanig dat het onafhankelijk van de testtoren gebruikt kan worden.
 
 \section{Het probleem}
+Aangezien het Python framework gebruikt van verschillende niet-Python bibliotheken en verschillende drivers voor de hardware, is het installeren van dit framework op een nieuw systeem een ganse klus.
+Updates uitvoeren geeft ook verschillende problemen.
+Het doel van deze thesis is dan ook het vinden van een langdurige oplossing van dit probleem.
+Na een kleine analyse van het probleem, werd het al snel duidelijk dat er op verschillende onderliggende problemen een oplossing moet gevonden worden.
+
+De installatie van het framework gebeurt best in een speciale deployment omgeving.
+Mocht er een fout optreden tijdens de installatie, of tijdens een update, van het framework, dan moet een vorige, werkende, versie van het framework herstelt worden.
+Hierdoor voorkomen we verschillende problemen, zoals het stilleggen van de productie.
+Er moet dus onderzocht worden of het mogelijk is om een omgeving te creëren waarin een update/installatie kan plaatsen vinden en, mocht dit nodig zijn, de aanpassingen kunnen ongedaan worden gemaakt.
+
+Naast het updaten/installeren zijn er nog problemen.
+Het framework wordt gebruikt op verschillende sites en niet ieder site zal dezelfde versie van het framework hebben.
+Bij een rollout van een nieuwe versie is het mogelijk dat de update lukt in de ene site maar niet op de andere.
+Om die redenen zou er best een overkoepelende manager voorzien worden.
+Met deze manager kan er overzicht gecreeerd worden waarmee zichtbaar wordt welke deployments geslaagd zijn, hoeveel updates gelukt zijn, de versie van het framework dat gebruikt wordt op één bepaalde site, \ldots .
+Dit onderdeel moet zeer schaalbaar zijn zodanig dat naar de toekomst toe het zeer eenvoudig is om nieuwe systemen toe te voegen.
 
 \section{Werkwijze}
 
