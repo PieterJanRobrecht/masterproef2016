@@ -84,7 +84,17 @@ Zoekterm: Software Packaging
 	Software packaging approaches - A comparison framework (Boek p. 438)
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=detailsTab&ct=display&fn=search&doc=TN_scopus2-s2.0-80053189994&indx=1&recIds=TN_scopus2-s2.0-80053189994&recIdxs=0&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=&prefetch=true&dscnt=1&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&srt=rank&tab=all_content_tab&vl(freeText0)=Software%20packaging&dum=true&dstmp=1476533211812&fromTabHeaderButtonPopout=true
 		http://download.springer.com.kuleuven.ezproxy.kuleuven.be/static/pdf/484/bok%253A978-3-642-23798-0.pdf?originUrl=http%3A%2F%2Flink.springer.com%2Fbook%2F10.1007%2F978-3-642-23798-0&token2=exp=1476534447~acl=%2Fstatic%2Fpdf%2F484%2Fbok%25253A978-3-642-23798-0.pdf%3ForiginUrl%3Dhttp%253A%252F%252Flink.springer.com%252Fbook%252F10.1007%252F978-3-642-23798-0*~hmac=23428eec5b87ddcd2e0fdb0a2ec4079bd1074bf03b12d47fa9f9f4e3709113e0
-		Gaat over OO maar misschien wel handig om ideeen uit te halen
+		
+		Bij OO wordt project verdeelt in verschillende componenten zodat het gemakkelijker te begrijpen is.
+		Van zodra het aantal klassen teveel wordt, dan zal die niet meer voldoende zijn om als architectuur te dienen,
+		aangezien het dan averechts werkt.
+		Packages worden gebruikt om te architectuur te definieren.
+		Ze hebben een framework gemaakt met als doel het klassificeren en vergelijken van packages gebasseerd op een set van attributen.
+		Vervolgens gaan ze te werk om verschillende packaging aanpakken te vergelijken met elkaar.
+		Hierna leggen ze uit waarop zij zich hebben gebasseerd en leggen ze de verschillende packaging strategien uit die ze gaan beoordelen.
+		En dan leggen ze hun waarnemingen uit. 
+		
+		Misschien wel handig om een bepaalde manier van packaging te verklaren/onderbouwen?
 
 	Atlas software packaging
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_iop10.1088%2f1742-6596%2f396%2f5%2f052063&indx=6&recIds=TN_iop10.1088%2f1742-6596%2f396%2f5%2f052063&recIdxs=5&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=4&gathStatTab=true&dscnt=0&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&tab=all_content_tab&srt=rank&dum=true&vl(freeText0)=Software%20packaging&dstmp=1476533697088&fromTabHeaderButtonPopout=true
@@ -93,3 +103,22 @@ Zoekterm: Software Packaging
 	Software Deployment, Past, Present and Future
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_ieee10.1109%2fFOSE.2007.20&indx=1&recIds=TN_ieee10.1109%2fFOSE.2007.20&recIdxs=0&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=2&gathStatTab=true&dscnt=0&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&tab=all_content_tab&srt=rank&dum=true&vl(freeText0)=Software%20Deployment%2C%20Past%2C%20Present%20and%20Future&dstmp=1476536812473&fromTabHeaderButtonPopout=true
 		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/document/4221626/
+		
+		Sectie 1.1 bespreekt de verschillende termen die gebruikt worden in het artikel.
+		Hierna leggen ze ook de lifecycle uit. Dit is ook misschien wel handig.
+		Vervolgens worden er verschillende manieren van deployment besproken zoals javabeans, linux package manager,...
+		
+		
+		Misschien wel een bron waarmee ik de gekozen benameningen kan belichten. Haalt virtualisatie aan als mogelijke oplossing!!!!
+
+Zoekterm: datacenter
+	The datacenter as a computer an introduction to the design of warehouse-scale machines
+		http://limo.libis.be/primo_library/libweb/action/index.html?afterTimeout=F3B2C6192F36F7154ACCE25F7510C111&vid=KULeuven_ODISEE&dscnt=0
+		http://www.morganclaypool.com.kuleuven.ezproxy.kuleuven.be/doi/pdf/10.2200/S00193ED1V01Y200905CAC006
+		Bezit een hoofdstuk over failure dat eventueel zou kunnen gebruikt worden.
+		
+Zoekterm: Docker
+	Docker
+		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_ieee10.1109%2fMS.2015.62&indx=2&recIds=TN_ieee10.1109%2fMS.2015.62&recIdxs=1&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=6&gathStatTab=true&dscnt=0&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&tab=all_content_tab&srt=rank&dum=true&vl(freeText0)=docker&dstmp=1477129247116&fromTabHeaderButtonPopout=true
+		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/document/7093032/
+		Waarom docker gebruiken en niet gwn VM wordt hierin uitgelegd.
