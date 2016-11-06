@@ -100,6 +100,12 @@ Zoekterm: Software Packaging
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_iop10.1088%2f1742-6596%2f396%2f5%2f052063&indx=6&recIds=TN_iop10.1088%2f1742-6596%2f396%2f5%2f052063&recIdxs=5&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=4&gathStatTab=true&dscnt=0&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&tab=all_content_tab&srt=rank&dum=true&vl(freeText0)=Software%20packaging&dstmp=1476533697088&fromTabHeaderButtonPopout=true
 		http://iopscience.iop.org.kuleuven.ezproxy.kuleuven.be/article/10.1088/1742-6596/396/5/052063/pdf
 		
+		Software is ontworpen om data te analyseren en simuleren van data.
+		Hun systeem bestaat ui ongeveer 2000 packages. Zware taak om alles te verspreiden want veel mensen moeten snel aan nieuwe releases kunnen.
+		Zij gebruiken PackDist voor het packaging en leggen uit wat de feautres zijn.
+		
+		Misschien gebruiken voor Packager, uitleggen waarom ik het op zo'n manier opdeel.
+		
 	Software Deployment, Past, Present and Future
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_ieee10.1109%2fFOSE.2007.20&indx=1&recIds=TN_ieee10.1109%2fFOSE.2007.20&recIdxs=0&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=2&gathStatTab=true&dscnt=0&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&tab=all_content_tab&srt=rank&dum=true&vl(freeText0)=Software%20Deployment%2C%20Past%2C%20Present%20and%20Future&dstmp=1476536812473&fromTabHeaderButtonPopout=true
 		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/document/4221626/
