@@ -2,30 +2,52 @@
 %-Uitleggen van het probleem
 %-Hoe ik tewerk ga gaan
 %-Gaan we concluderen met de onderzoeksvraag
-\chapter{Situering}
+\chapter{Situering}\label{hfdst:situering}
 Televic Rail heeft een Python test framework ontworpen waarmee zij in staat zijn om verschillende hardware componenten te controleren op fouten.
 Dit framework wordt dan ook zeer intensief gebruikt tijdens het productieproces.
 Het framework werd initieel ontworpen om enkel te werken op testtorens, maar werd later aangepast zodanig dat het onafhankelijk van de testtoren gebruikt kan worden.
 
-\section{Het probleem}
+\section{Het probleem}\label{sec:probleem}
 Aangezien het Python framework gebruikt van verschillende niet-Python bibliotheken en verschillende drivers voor de hardware, is het installeren van dit framework op een nieuw systeem een ganse klus.
 Updates uitvoeren geeft ook verschillende problemen.
 Het doel van deze thesis is dan ook het vinden van een langdurige oplossing van dit probleem.
 Na een kleine analyse van het probleem, werd het al snel duidelijk dat er op verschillende onderliggende problemen een oplossing moet gevonden worden.
 
+Het framework bestaat uit verschillende componenten en drivers.
+Al deze componenten en drivers hebben hun eigen installatie wijze en moeten in een bepaalde volgorde geïnstalleerd worden.
+Hiernaast hebben sommige doelsystemen een specifiek configuratiebestand nodig om goed te kunnen functioneren.
+Tijdens deze thesis zal er dan ook onderzocht worden hoe alle verschillende componenten kunnen worden gepackaged tot één groot geheel dan kan worden verzonden naar de verscheidene doelsystemen.
+
 De installatie van het framework gebeurt best in een speciale deployment omgeving.
-Mocht er een fout optreden tijdens de installatie, of tijdens een update, van het framework, dan moet een vorige, werkende, versie van het framework herstelt worden.
+Mocht er een fout optreden tijdens de installatie, of tijdens een update, van het framework, dan moet een vorige, nog werkende, versie van het framework herstelt worden.
 Hierdoor voorkomen we verschillende problemen, zoals het stilleggen van de productie.
 Er moet dus onderzocht worden of het mogelijk is om een omgeving te creëren waarin een update/installatie kan plaatsen vinden en, mocht dit nodig zijn, de aanpassingen kunnen ongedaan worden gemaakt.
 
 Naast het updaten/installeren zijn er nog problemen.
-Het framework wordt gebruikt op verschillende sites en niet ieder site zal dezelfde versie van het framework hebben.
-Bij een rollout van een nieuwe versie is het mogelijk dat de update lukt in de ene site maar niet op de andere.
-Om die redenen zou er best een overkoepelende manager voorzien worden.
-Met deze manager kan er overzicht gecreeerd worden waarmee zichtbaar wordt welke deployments geslaagd zijn, hoeveel updates gelukt zijn, de versie van het framework dat gebruikt wordt op één bepaalde site, \ldots .
-Dit onderdeel moet zeer schaalbaar zijn zodanig dat naar de toekomst toe het zeer eenvoudig is om nieuwe systemen toe te voegen.
+Het framework wordt gebruikt op verschillende sites en niet ieder site zal dezelfde versie van het framework gebruiken.
+Bij een rollout van een nieuwe versie is het mogelijk dat de update slaagt in de ene site maar niet op de andere.
+Het bijhouden van de verschillende, al dan niet geslaagde, deployments moeten centraal zichtbaar zijn.
+Om die redenen zal er onderzocht moeten worden om een overkoepelende manager te voorzien.
+Met deze manager kan er een overzicht gecreëerd worden waarmee zichtbaar wordt welke deployments geslaagd zijn, hoeveel updates gelukt zijn, de versie van het framework dat gebruikt wordt op één bepaalde site, \ldots .
+Dit onderdeel moet zeer schaalbaar zijn zodanig dat naar de toekomst toe, het zeer eenvoudig is om nieuwe systemen toe te voegen.
 
 \section{Werkwijze}
+In Sectie~\ref{sec:probleem} heb ik besproken welke verschillende problemen opgelost moeten worden.
+In wat volgt ga ik bespreken hoe ik dit ga aanpakken en op welke wijze ik te werk ga gaan.
 
+Tijdens de bespreking van de problemen werd het al snel duidelijk dat het werk op te delen valt in drie grote componenten.
+De oplossing die opgebouwd wordt tijdens deze thesis zal dan ook uit deze drie componenten bestaan en alle verschillende stappen worden uit gelegd aan de hand van deze drie onderdelen.
+Het eerste onderdeel is de packager.
+Deze component zal instaan voor het inpakken van de verschillende drivers en zal ook de software bevatten die het installatieproces in goede banen zal leiden.
+Naast de packager hebben we dan de deployment server.
+De server zal functioneren als manager in het grote geheel met als doel het weergeven van alle verschillende deployments en verschillende gegevens, zoals bijvoorbeeld de versie van het framework.
+Het laatste onderdeel dat voorzien zou moeten worden is dan de deployment omgeving.
+De omgeving draait op de verschillende systemen en zal dienen als een sandbox voor het installeren/updaten van het framework.
+
+Verder gaat deze thesis nog onderverdeelt worden in twee grote delen.
+In het eerste deel gaat er een prototype worden gemaakt met de bovengenoemde elementen.
+Als het prototype gemaakt is, zal het systeem getest worden en zal er gecontroleerd worden of alle nodige componenten goed geïmplementeerd werden.
+Na deze stap zal het ontwerp aangepast worden en zal de einde demo gemaakt worden.
+De laatste fase van deze thesis bestaat dan uit het testen van deze demo waarna het dan mogelijk is om een conclusie te trekken uit het geleverde werk.
 
 %In dit hoofdstuk\index{hoofdstuk} gaan we een voorbeeld geven van een voetnoot\footnote{Dit is dus een voetnoot}. Een referentie naar hoofdstuk ~\ref{verwijzing}, dat zich op pagina \pageref{verwijzing} bevindt, is dus ook een koud kunstje. Zorg er wel voor dat je de namen van de labels een beetje verstandig kiest. Hoofdstukken label je het best als hfdstk:naam, plaatjes als img:naam en tabellen\index{tabellen} als tabel:naam. Zo verlies je zelf de bomen in het bos niet.

@@ -1,15 +1,22 @@
 %Belangrijke componenten van een abstract
 %Achtergrond
-Televic Rail maakt gebruik van een Python framework voor het uittesten van de hardware die zijn produceren.
-Het installeren van dit framework op een nieuwe computer of testtoren is een uitgebreide klus, aangezien er verschillende hardware drivers ge\"installeerd moeten worden en er verschillende bibliotheken gebruikt worden om het framework correct te laten functioneren.
-De klus zou eenvoudiger moeten zodanig dat het updaten en installeren van het framework vlotter verloopt.
+Televic Rail maakt gebruik van een Python framework voor het uittesten van de hardware die zij produceren.
+Het installeren van dit framework op een nieuwe computer of testtoren is een uitgebreide klus.
+Er moeten verschillende hardware drivers geïnstalleerd worden en er zijn meerdere bibliotheken nodig om het framework correct te laten functioneren.
+Een meer efficiënte werkwijze voor het updaten en installeren van het framework is wenselijk.
+Opzet van deze scriptie is dit te onderzoeken en vervolgens uit te werken.
+Het aantal drivers en bibliotheken zal enkel toenemen.
+Bovendien moet de applicatie ook schaalbaar zijn naar de toekomst toe.
 %
-%Omschrijving
-Het doel van deze scriptie is dan ook het onderzoeken en het produceren van een duurzame oplossing voor het installatie probleem.
-Het probleem werd opgedeeld in drie grote componenten: de packager, de deployment server en de deployment environment.
-Met deze structuur is er een prototype opgebouwd die de verschillende basiscomponenten implementeert.
-Voor de packager te implementeren werd er gebruik gemaakt van het Qt Installer Framework.
-De deployment environment werd gerealiseerd met behulp van Docker en op de deployment server draaide ElectricFlow als software management tool.
-Na het testen van dit prototype, werd het ontwerp bijgeschaafd en de aanpassingen uitgevoerd om zo een goede oplossing te krijgen op het oorspronkelijke probleem.
+%Oplossing
+Het probleem werd uitgesplitst in drie logische componenten: de packager, de deployment server en de deployment environment.
+Deze structuur wordt doorheen de thesis aangehouden en vormt de basis voor het ontwerp van de installer/updater.
+In een eerste fase wordt een prototype ontworpen.
+Dit prototype bevat elke component en is tegelijk op een zo efficiënt mogelijke manier gebouwd.
+Er werden test uitgevoerd op dit prototype.
+Met behulp van de uitslagen is het ontwerp aangepast.
+Fase twee van de thesis bouwt verder op deze resultaten.
+Het ontwerp is waar nodig aangepast.
+Uiteindelijk is een demo applicatie ontwikkeld.
 
-\underline{Trefwoorden:} latex, thesis, stijl
+\underline{Trefwoorden:} installer, updater, Python, Docker
