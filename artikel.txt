@@ -128,3 +128,13 @@ Zoekterm: Docker
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_ieee10.1109%2fMS.2015.62&indx=2&recIds=TN_ieee10.1109%2fMS.2015.62&recIdxs=1&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=6&gathStatTab=true&dscnt=0&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&tab=all_content_tab&srt=rank&dum=true&vl(freeText0)=docker&dstmp=1477129247116&fromTabHeaderButtonPopout=true
 		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/document/7093032/
 		Waarom docker gebruiken en niet gwn VM wordt hierin uitgelegd.
+		
+		
+	Multi-platform Automated software building and packaging
+		http://iopscience.iop.org/article/10.1088/1742-6596/396/5/052001
+		Bevat misschien wel informatie die ik kan gebruiken voor de packager.
+		
+	Minimum-cost virtual machine migration strategy in datacenter
+		http://onlinelibrary.wiley.com.kuleuven.ezproxy.kuleuven.be/doi/10.1002/cpe.3554/full
+		Niet echt handig waarschijnlijk.
+		Gaat vooral over hun algortime voor een low-cost migration (hebben algemene informatie nodig)
