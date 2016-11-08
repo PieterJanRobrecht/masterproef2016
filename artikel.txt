@@ -138,3 +138,15 @@ Zoekterm: Docker
 		http://onlinelibrary.wiley.com.kuleuven.ezproxy.kuleuven.be/doi/10.1002/cpe.3554/full
 		Niet echt handig waarschijnlijk.
 		Gaat vooral over hun algortime voor een low-cost migration (hebben algemene informatie nodig)
+	
+	Sustainable automated software deployment practices
+		http://dl.acm.org.kuleuven.ezproxy.kuleuven.be/citation.cfm?doid=2504776.2504802
+		http://delivery.acm.org.kuleuven.ezproxy.kuleuven.be/10.1145/2510000/2504802/p189-herrick.pdf?ip=134.58.253.30&id=2504802&acc=ACTIVE%20SERVICE&key=D7FC43CABE88BEAA%2E81A3642E1B350DE9%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&CFID=691679095&CFTOKEN=30403120&__acm__=1478598681_69d036bb8bcc8e9eb3f3a23dd16de2ea
+		Misschien wel handig voor de deployment server
+		
+	A Novel Software Deployment Method Based on Installation Packages
+		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/document/5562875/
+		
+	Software Process definition and management p87
+		http://download.springer.com.kuleuven.ezproxy.kuleuven.be/static/pdf/660/bok%253A978-3-642-24291-5.pdf?originUrl=http%3A%2F%2Flink.springer.com%2Fbook%2F10.1007%2F978-3-642-24291-5&token2=exp=1478602769~acl=%2Fstatic%2Fpdf%2F660%2Fbok%25253A978-3-642-24291-5.pdf%3ForiginUrl%3Dhttp%253A%252F%252Flink.springer.com%252Fbook%252F10.1007%252F978-3-642-24291-5*~hmac=dfc1a8102c9ab0224a877203883592a9bd4e1b6e4fa92f2596917b087409551b
+		Op p87 verschillende manieren van deployment uitgelegd.
