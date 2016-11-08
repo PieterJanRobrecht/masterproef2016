@@ -18,7 +18,7 @@
     \node (packagerServer) [naveqs] {Packager Interface};
     % Note the use of \path instead of \node at ... below. 
     \path (packagerServer.140)+(-\blockdist,0) node (gyros) [sensor] {Rapport};
-    \path (packagerServer.-150)+(-\blockdist,0) node (collect) [sensor] {Data collector};
+    \path (packagerServer.-150)+(-\blockdist,0) node (collect) [sensor] {Data Collector};
     
     % Unfortunately we cant use the convenient \path (fromnode) -- (tonode) 
     % syntax here. This is because TikZ draws the path from the node centers
@@ -51,11 +51,11 @@
     
     
     
-	\node[below = 2cm of packagerServer] (test) [naveqs] {Navigation equations};
+	\node[below = 2cm of packagerServer] (receiver) [naveqq] {Package Receiver};
     % Note the use of \path instead of \node at ... below. 
-    \path (test.140)+(-\blockdist,0) node (gyros) [naveqq] {Status};
-    \path (test.-150)+(-\blockdist,0) node (accel) [naveqq] {Accelero-meters};
-    
+    \path (receiver.180)+(-\blockdist,0) node (gyros) [naveqq] {Status};
+    \path (receiver.270)+(0,-1.5) node (accel) [naveqq] {Unpacker};
+    \path (accel.180)+(-\blockdist,0) node (installer) [naveqq] {Installer};
     % Unfortunately we cant use the convenient \path (fromnode) -- (tonode) 
     % syntax here. This is because TikZ draws the path from the node centers
     % and clip the path at the node boundaries. We want horizontal lines, but
@@ -63,62 +63,64 @@
     % the line intersection syntax |- to calculate the correct coordinate
     \path [draw, ->] (gyros) -- node [left] {data} 
         (gyros |- collect.south) ;
+    \path [draw, ->] (receiver) -- node [right] {New package} 
+        (receiver |- accel.north) ;
+	\path [draw, ->] (accel) -- node [above] {} 
+        (installer.east |- accel) ;
+	\path [draw, ->] (installer) -- node [right] {OK} 
+        (installer |- gyros.south) ;
+    \path [draw, ->] (packagerServer) -- node [above] {} 
+        (packagerServer.south |- receiver.north);        
     % We could simply have written (gyros) .. (naveq.140). However, it's
     % best to avoid hard coding coordinates
-    \path [draw, ->] (accel) -- node [above] {$\vc{f}^b$} 
-        (test.west |- accel);
-    \path (test.south west)+(-0.6,-0.4) node (INS) {Deployment Environment};
-    \draw [->] (test.50) -- node [ann] {Velocity } + (\edgedist,0) 
-        node[right] {$\vc{v}^l$};
+    \path (accel.south west)+(-0.6,-0.4) node (INS) {Deployment Environment};
+
 
     % Now it's time to draw the colored IMU and INS rectangles.
     % To draw them behind the blocks we use pgf layers. This way we  
     % can use the above block coordinates to place the backgrounds   
     \begin{pgfonlayer}{background}
         % Compute a few helper coordinates
-        \path (gyros.west |- test.north)+(-0.5,0.3) node (a) {};
-        \path (INS.south -| test.east)+(+0.3,-0.2) node (b) {};
+        \path (gyros.west |- receiver.north)+(-0.5,0.3) node (a) {};
+        \path (INS.south -| receiver.east)+(+0.3,-0.2) node (b) {};
         \path[fill=yellow!20,rounded corners, draw=black!50, dashed]
             (a) rectangle (b);
-%        \path (gyros.north west)+(-0.2,0.2) node (a) {};
-%        \path (IMU.south -| gyros.east)+(+0.2,-0.2) node (b) {};
-%        \path[fill=blue!10,rounded corners, draw=black!50, dashed]
-%            (a) rectangle (b);
     \end{pgfonlayer}
     
     
-	\node[right = 5cm of packagerServer] (test) [naveqs] {Navigation equations};
+	\node[right= 4cm of packagerServer.north, anchor=north](mapper) [naveqq] {Mapper};
     % Note the use of \path instead of \node at ... below. 
-    \path (test.140)+(-\blockdist,0) node (gyros) [naveqq] {Mapper};
-    \path (test.-150)+(-\blockdist,0) node (accel) [naveqq] {Packager Interface};
+    \path (mapper.-90)+(0,-1.5) node (interface) [naveqq] {Packager Interface};
+    \path (mapper)+(3,0) node (accel) [naveqq] {Package Producer};
     
     % Unfortunately we cant use the convenient \path (fromnode) -- (tonode) 
     % syntax here. This is because TikZ draws the path from the node centers
     % and clip the path at the node boundaries. We want horizontal lines, but
     % the sensor and naveq blocks aren't aligned horizontally. Instead we use
     % the line intersection syntax |- to calculate the correct coordinate
-    \path [draw, ->] (gyros) -- node [above] {$\vc{\omega}_{ib}^b$} 
-        (test.west |- gyros) ;
-    % We could simply have written (gyros) .. (naveq.140). However, it's
-    % best to avoid hard coding coordinates
-    \path [draw, ->] (accel) -- node [above] {$\vc{f}^b$} 
-        (test.west |- accel);
-    \path (test.south west)+(-0.6,-0.4) node (INS) {Packager};
-    \draw [->] (test.50) -- node [ann] {Velocity } + (\edgedist,0) 
-        node[right] {$\vc{v}^l$};
+%    \path [draw, ->] (gyros) -- node [above] {$\vc{\omega}_{ib}^b$} 
+%        (test.west |- gyros) ;
+%    % We could simply have written (gyros) .. (naveq.140). However, it's
+%    % best to avoid hard coding coordinates
+    \path [draw, ->] (mapper) -- node [above] {} 
+        (accel.west |- mapper);
+    \path [draw, ->] (accel.south) -- (interface.east);
+    \path [draw, ->] (interface) -- node [above] {} 
+        (packagerServer.east |- interface);
+	\path (mapper.90)+(0,1.5) node (db) {Database};
+    \path [draw, -] (db) -- node [above] {} 
+        (db.south |- mapper.north);
+    \path (interface.south east)+(0.3,-0.4) node (INS) {Packager};
+
 
     % Now it's time to draw the colored IMU and INS rectangles.
     % To draw them behind the blocks we use pgf layers. This way we  
     % can use the above block coordinates to place the backgrounds   
     \begin{pgfonlayer}{background}
         % Compute a few helper coordinates
-        \path (gyros.west |- test.north)+(-0.5,0.3) node (a) {};
-        \path (INS.south -| test.east)+(+0.3,-0.2) node (b) {};
+        \path (interface.west |- mapper.north)+(-0.5,0.3) node (a) {};
+        \path (INS.south -| accel.east)+(+0.3,-0.2) node (b) {};
         \path[fill=yellow!20,rounded corners, draw=black!50, dashed]
             (a) rectangle (b);
-%        \path (gyros.north west)+(-0.2,0.2) node (a) {};
-%        \path (IMU.south -| gyros.east)+(+0.2,-0.2) node (b) {};
-%        \path[fill=blue!10,rounded corners, draw=black!50, dashed]
-%            (a) rectangle (b);
     \end{pgfonlayer}
 \end{tikzpicture}
