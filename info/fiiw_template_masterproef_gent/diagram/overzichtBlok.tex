@@ -105,7 +105,7 @@
     \path [draw, ->] (mapper) -- node [above] {} 
         (accel.west |- mapper);
     \path [draw, ->] (accel.south) -- (interface.east);
-    \path [draw, ->] (interface) -- node [above] {} 
+    \path [draw, ->] (interface) -- node [above, align=left] {New\\Installer} 
         (packagerServer.east |- interface);
 	\path (mapper.90)+(0,1.5) node (db) {Database};
     \path [draw, -] (db) -- node [above] {} 

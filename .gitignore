@@ -39,3 +39,5 @@ data/
 *.dll
 appdata/
 *.ignore
+
+/install_folder/

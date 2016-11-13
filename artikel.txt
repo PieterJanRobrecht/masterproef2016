@@ -129,7 +129,6 @@ Zoekterm: Docker
 		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/document/7093032/
 		Waarom docker gebruiken en niet gwn VM wordt hierin uitgelegd.
 		
-		
 	Multi-platform Automated software building and packaging
 		http://iopscience.iop.org/article/10.1088/1742-6596/396/5/052001
 		Bevat misschien wel informatie die ik kan gebruiken voor de packager.
