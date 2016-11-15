@@ -149,3 +149,7 @@ Zoekterm: Docker
 	Software Process definition and management p87
 		http://download.springer.com.kuleuven.ezproxy.kuleuven.be/static/pdf/660/bok%253A978-3-642-24291-5.pdf?originUrl=http%3A%2F%2Flink.springer.com%2Fbook%2F10.1007%2F978-3-642-24291-5&token2=exp=1478602769~acl=%2Fstatic%2Fpdf%2F660%2Fbok%25253A978-3-642-24291-5.pdf%3ForiginUrl%3Dhttp%253A%252F%252Flink.springer.com%252Fbook%252F10.1007%252F978-3-642-24291-5*~hmac=dfc1a8102c9ab0224a877203883592a9bd4e1b6e4fa92f2596917b087409551b
 		Op p87 verschillende manieren van deployment uitgelegd.
+		
+	The purely functional software deployment model
+		http://dspace.library.uu.nl/handle/1874/7540
+		Handig voor deployment server?
