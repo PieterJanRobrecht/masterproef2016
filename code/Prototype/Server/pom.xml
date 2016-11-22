@@ -8,9 +8,9 @@
     <artifactId>PrototypeServer</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
+    <aPackages>
         <module>../Client</module>
-    </modules>
+    </aPackages>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -38,6 +38,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.2.6</version>
         </dependency>
 
     </dependencies>

@@ -24,11 +24,13 @@
         <processorPath useClasspath="true" />
         <module name="Client" />
         <module name="Database" />
+        <module name="PrototypeClient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Client" target="1.8" />
       <module name="Database" target="1.8" />
+      <module name="PrototypeClient" target="1.8" />
       <module name="Server" target="1.8" />
     </bytecodeTargetLevel>
   </component>

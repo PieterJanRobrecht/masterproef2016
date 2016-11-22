@@ -1,6 +1,7 @@
 package Main;
 
 import Model.*;
+import Model.Installer;
 import Model.Package;
 
 import java.sql.*;
@@ -48,8 +49,8 @@ public class Database extends Observable {
                     String serverUID = rs.getString("serverUID");
                     int versionId = rs.getInt("Version_idVersion");
                     Server s = new Server(id, serverUID, versionId);
-                    Package v = getVersion(versionId);
-                    s.setaPackage(v);
+                    Installer v = getVersion(versionId);
+                    s.setInstaller(v);
                     servers.add(s);
                 }
             }
@@ -59,9 +60,9 @@ public class Database extends Observable {
         return servers;
     }
 
-    private Package getVersion(int versionId) {
+    private Installer getVersion(int versionId) {
         try {
-            String query = "SELECT * FROM package WHERE idVersion = ?";
+            String query = "SELECT * FROM installer WHERE idVersion = ?";
             PreparedStatement pst = databaseConnection.prepareStatement(query);
             pst.setString(1, versionId + "");
 
@@ -70,7 +71,7 @@ public class Database extends Observable {
                     int id = rs.getInt("idVersion");
                     String version = rs.getString("versionNumber");
                     String disk = rs.getString("diskLocation");
-                    return new Package(id,version,disk);
+                    return new Installer(id, version, disk);
                 }
             }
         } catch (SQLException e) {
@@ -84,27 +85,45 @@ public class Database extends Observable {
         notifyObservers();
     }
 
-    public List<Module> getModules() {
-        List<Module> modules = new ArrayList<>();
+    public List<Package> getPackages() {
+        List<Package> aPackages = new ArrayList<>();
 
         try {
-            String query = "SELECT * FROM MODULE";
+            String query = "SELECT * FROM package";
             PreparedStatement pst = databaseConnection.prepareStatement(query);
 
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("idModule");
-                    String number = rs.getString("moduleNumber");
-                    String name = rs.getString("moduleName");
+                    String number = rs.getString("packageVersionNumber");
+                    String name = rs.getString("packageName");
                     String location = rs.getString("diskLocation");
+                    int priority = rs.getInt("priority");
+                    String description = rs.getString("description");
 
-                    Module m = new Module(id,number,name,location);
-                    modules.add(m);
+                    Package m = new Package(id, number, name, location, priority, description);
+                    aPackages.add(m);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return modules;
+        return aPackages;
+    }
+
+    public void createPackage(Package newPackage) {
+        try {
+            String query = "INSERT INTO package (packageName, description, packageVersionNumber, priority, diskLocation) VALUES (?,?,?,?,?)";
+            PreparedStatement pst = databaseConnection.prepareStatement(query);
+            pst.setString(1, newPackage.getPackageName());
+            pst.setString(2, newPackage.getDescription());
+            pst.setString(3, newPackage.getPackageVersionNumber());
+            pst.setString(4, newPackage.getPriority() + "");
+            pst.setString(5, newPackage.getDiskLocation());
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

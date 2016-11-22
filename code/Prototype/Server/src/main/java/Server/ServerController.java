@@ -1,8 +1,8 @@
 package Server;
 
+import InstallerMaker.InstallerCreator;
 import Main.Database;
-import Model.Package;
-import Packager.Packager;
+import Model.Installer;
 import Model.Server;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
@@ -35,22 +34,22 @@ public class ServerController implements Observer {
     private TableColumn<Server, String> serverStatus;
 
     @FXML
-    private TableView<Package> versionTable;
+    private TableView<Installer> versionTable;
 
     @FXML
-    private TableColumn<Package, String> version;
+    private TableColumn<Installer, String> version;
 
     private File folder = null;
 
 
     private Database database;
     private List<Server> servers;
-    private List<Package> aPackages;
+    private List<Installer> installers;
 
     @FXML
     void createNewDeployment(ActionEvent event) {
         if (folder != null && folder.isDirectory()) {
-            Packager p = new Packager((Stage) versionTable.getScene().getWindow(), database, folder);
+            InstallerCreator p = new InstallerCreator((Stage) versionTable.getScene().getWindow(), database, folder);
         }else{
             Notifications.create()
                     .title("Select Folder")
@@ -80,18 +79,18 @@ public class ServerController implements Observer {
         serverVersion.setCellValueFactory(new PropertyValueFactory<Server, String>("versionNumber"));
         serverStatus.setCellValueFactory(new PropertyValueFactory<Server, String>("status"));
 
-        version.setCellValueFactory(new PropertyValueFactory<Package, String>("versionNumber"));
+        version.setCellValueFactory(new PropertyValueFactory<Installer, String>("versionNumber"));
     }
 
     public void initData() {
-        aPackages = new ArrayList<>();
+        installers = new ArrayList<>();
         servers = database.getServers();
         statusTable.getItems().setAll(servers);
         for (int i = 0; i < servers.size(); i++) {
-            if (servers.get(i).getaPackage() != null)
-                aPackages.add(servers.get(i).getaPackage());
+            if (servers.get(i).getInstaller() != null)
+                installers.add(servers.get(i).getInstaller());
         }
-        versionTable.getItems().setAll(aPackages);
+        versionTable.getItems().setAll(installers);
     }
 
 

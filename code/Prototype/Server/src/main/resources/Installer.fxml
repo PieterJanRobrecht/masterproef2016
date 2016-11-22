@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Packager.PackagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InstallerMaker.InstallerController">
    <children>
       <BorderPane layoutX="84.0" layoutY="68.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -13,7 +13,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="All Modules">
+                        <Label text="All Packages">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -34,7 +34,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Selected Modules">
+                        <Label text="Selected Packages">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -59,20 +59,25 @@
          <right>
             <VBox BorderPane.alignment="CENTER">
                <children>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#makeNewModule" text="New Module">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#makeNewModule" text="New Package">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                   <Region VBox.vgrow="ALWAYS" />
-                  <TextField fx:id="packageName" promptText="Name">
+                  <TextField fx:id="installerName" promptText="Name">
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="installerVersion" promptText="Version">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#createPackage" text="Create Package">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#createPackage" text="Create Installer">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin>
                   </Button>
                </children>

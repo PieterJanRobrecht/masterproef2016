@@ -1,4 +1,4 @@
-package Packager;
+package InstallerMaker;
 
 import Main.Database;
 import javafx.fxml.FXMLLoader;
@@ -9,22 +9,21 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Created by Pieter-Jan on 15/11/2016.
  */
-public class Packager {
+public class InstallerCreator {
     private Stage lobbyStage;
     private Database database;
     private File installFolder;
 
-    public Packager(Stage lobbyStage, Database database, File folder) {
+    public InstallerCreator(Stage lobbyStage, Database database, File folder) {
         this.lobbyStage = lobbyStage;
         this.database = database;
         installFolder = folder;
         createTempFolder();
-        setView("Packager.fxml");
+        setView("Installer.fxml");
     }
 
     private void createTempFolder() {
@@ -47,7 +46,7 @@ public class Packager {
 
         //get reference to the button's stage
         stage = lobbyStage;
-        stage.setTitle("New Package");
+        stage.setTitle("New InstallerMaker");
         FXMLLoader loader = new FXMLLoader();
 
         try {
@@ -62,14 +61,14 @@ public class Packager {
         stage.setScene(scene);
         stage.show();
 
-        PackagerController packagerController = loader.<PackagerController>getController();
-        assert (packagerController != null);
+        InstallerController installerController = loader.<InstallerController>getController();
+        assert (installerController != null);
 
         Database data = database;
-        packagerController.setDatabase(data);
-        packagerController.initData();
-        packagerController.setFolder(installFolder);
-        data.addObserver(packagerController);
+        installerController.setDatabase(data);
+        installerController.initData();
+        installerController.setFolder(installFolder);
+        data.addObserver(installerController);
 
     }
 

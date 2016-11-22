@@ -12,6 +12,7 @@ import java.io.IOException;
  * Created by Pieter-Jan on 15/11/2016.
  */
 public class MainServer extends Application{
+
     public static void main(String[] args) {
         System.out.println("Booting Server");
         launch(args);

@@ -1,7 +1,6 @@
-package ModuleMaker;
+package PackagerMaker;
 
 import Main.Database;
-import Packager.PackagerController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,12 +12,12 @@ import java.io.IOException;
 /**
  * Created by Pieter-Jan on 19/11/2016.
  */
-public class ModuleCreator {
+public class PackagerCreator {
     private Stage stage;
     private Database database;
     private File installFolder;
 
-    public ModuleCreator(Stage stage, Database database, File folder) {
+    public PackagerCreator(Stage stage, Database database, File folder) {
         this.stage = stage;
         this.database = database;
         installFolder = folder;
@@ -29,12 +28,12 @@ public class ModuleCreator {
         Parent root = null;
 
         //get reference to the button's stage
-        stage.setTitle("New Module");
+        stage.setTitle("New Package");
         FXMLLoader loader = new FXMLLoader();
 
         try {
             //root = FXMLLoader.load(getClass().getResource("Lobby.fxml"));
-            root = (Parent) loader.load(getClass().getClassLoader().getResource("Module.fxml").openStream());
+            root = (Parent) loader.load(getClass().getClassLoader().getResource("Package.fxml").openStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +43,7 @@ public class ModuleCreator {
         stage.setScene(scene);
         stage.show();
 
-        ModuleController packagerController = loader.getController();
+        PackagerController packagerController = loader.getController();
         assert (packagerController != null);
 
         Database data = database;

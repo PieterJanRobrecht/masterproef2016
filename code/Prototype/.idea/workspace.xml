@@ -31,6 +31,38 @@
         <option name="myItemId" />
         <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
       </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - masterdb@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - masterdb@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="package" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - masterdb@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="installer" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
     </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
@@ -38,12 +70,12 @@
     <favorites_list name="Prototype" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="MainServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/src/main/java/MainServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+            <state relative-caret-position="85">
+              <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -52,41 +84,54 @@
       <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+            <state relative-caret-position="220">
+              <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Packager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/main/java/Packager/Packager.java">
+      <file leaf-file-name="InstallerCreator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+            <state relative-caret-position="441">
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstallerController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="373">
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+              <folding>
+                <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+                <element signature="method#handle#0;class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="PackagerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/main/java/Packager/PackagerController.java">
+        <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="47" column="112" selection-start-line="47" selection-start-column="112" selection-end-line="47" selection-end-column="112" />
+            <state relative-caret-position="184">
+              <caret line="125" column="36" selection-start-line="125" selection-start-column="28" selection-end-line="125" selection-end-column="36" />
               <folding>
-                <element signature="e#2122#2123#0" expanded="true" />
-                <element signature="e#2158#2159#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#setValues#0;class#PackagerController#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModuleCreator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleCreator.java">
+      <file leaf-file-name="PackagerCreator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
+            <state relative-caret-position="271">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,28 +139,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModuleController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleController.java">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="79" column="33" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+            <state relative-caret-position="197">
+              <caret line="115" column="95" selection-start-line="115" selection-start-column="95" selection-end-line="115" selection-end-column="95" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3280#3281#0" expanded="true" />
-                <element signature="e#3320#3321#0" expanded="true" />
-                <element signature="e#3363#3364#0" expanded="true" />
-                <element signature="e#3399#3400#0" expanded="true" />
+                <marker date="1479810378308" expanded="true" signature="1190:1210" ph="SELECT * FRO... server" />
+                <marker date="1479810378308" expanded="true" signature="2004:2047" ph="SELECT * FRO... installer" />
+                <marker date="1479810378308" expanded="true" signature="2887:2908" ph="SELECT * FRO... package" />
+                <marker date="1479810378308" expanded="true" signature="3839:3950" ph="INSERT INTO package... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MetaXml.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/main/java/Xml/MetaXml.java">
+      <file leaf-file-name="Package.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Package.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="305">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#817#818#0" expanded="true" />
+                <element signature="e#842#843#0" expanded="true" />
+                <element signature="e#893#894#0" expanded="true" />
+                <element signature="e#921#922#0" expanded="true" />
+                <element signature="e#959#960#0" expanded="true" />
+                <element signature="e#993#994#0" expanded="true" />
+                <element signature="e#1085#1086#0" expanded="true" />
+                <element signature="e#1131#1132#0" expanded="true" />
+                <element signature="e#1169#1170#0" expanded="true" />
+                <element signature="e#1203#1204#0" expanded="true" />
+                <element signature="e#1295#1296#0" expanded="true" />
+                <element signature="e#1341#1342#0" expanded="true" />
+                <element signature="e#1388#1389#0" expanded="true" />
+                <element signature="e#1431#1432#0" expanded="true" />
+                <element signature="e#1633#1634#0" expanded="true" />
+                <element signature="e#1664#1665#0" expanded="true" />
+                <element signature="e#1751#1752#0" expanded="true" />
+                <element signature="e#1791#1792#0" expanded="true" />
+                <element signature="e#1830#1831#0" expanded="true" />
+                <element signature="e#1865#1866#0" expanded="true" />
+                <element signature="e#1939#1940#0" expanded="true" />
+                <element signature="e#1987#1988#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,18 +209,22 @@
         <option value="$PROJECT_DIR$/Database/src/main/java/Main/Connection.java" />
         <option value="$PROJECT_DIR$/Database/src/main/java/Model/Server.java" />
         <option value="$PROJECT_DIR$/Database/src/main/java/Main/DatabaseMain.java" />
-        <option value="$PROJECT_DIR$/Database/src/main/java/Main/Database.java" />
-        <option value="$PROJECT_DIR$/Server/src/main/java/MainServer.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/ServerController.java" />
         <option value="$PROJECT_DIR$/Database/pom.xml" />
         <option value="$PROJECT_DIR$/Client/pom.xml" />
-        <option value="$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/Packager/PackagerController.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/Packager/Packager.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleCreator.java" />
         <option value="$PROJECT_DIR$/Server/src/main/resources/Module.fxml" />
-        <option value="$PROJECT_DIR$/Server/pom.xml" />
         <option value="$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleController.java" />
+        <option value="$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java" />
+        <option value="$PROJECT_DIR$/Server/pom.xml" />
+        <option value="$PROJECT_DIR$/Server/src/main/resources/Package.fxml" />
+        <option value="$PROJECT_DIR$/Database/src/main/java/Model/Package.java" />
+        <option value="$PROJECT_DIR$/Server/src/main/java/MainServer.java" />
+        <option value="$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java" />
+        <option value="$PROJECT_DIR$/Database/src/main/java/Main/Database.java" />
+        <option value="$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java" />
       </list>
     </option>
   </component>
@@ -208,6 +280,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -230,7 +303,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Xml" />
+              <option name="myItemId" value="Server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -244,7 +317,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Packager" />
+              <option name="myItemId" value="PackagerMaker" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -258,7 +331,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ModuleMaker" />
+              <option name="myItemId" value="InstallerMaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Prototype" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Prototype" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Prototype" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -270,16 +381,15 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane />
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/mysql-connector-java-5.1.40-bin.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Client/pom.xml" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -292,7 +402,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="pom&#9;FILE&#9;file://C:/Users/Pieter-Jan/Documents/school/GIT/masterproef2016/code/Prototype/Server/pom.xml&#10;server&#9;PSI&#9;JAVA://Server.ServerController" />
+    <property name="SearchEverywhereHistoryKey" value="om&#9;FILE&#9;file://C:/Users/Pieter-Jan/Documents/school/GIT/masterproef2016/code/Prototype/Server/pom.xml&#10;pom&#9;FILE&#9;file://C:/Users/Pieter-Jan/Documents/school/GIT/masterproef2016/code/Prototype/Server/pom.xml&#10;server&#9;PSI&#9;JAVA://Server.ServerController" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -569,6 +679,7 @@
       <setting name="cmdLine" value="run-app" />
       <setting name="passParentEnv" value="true" />
       <setting name="launchBrowser" value="true" />
+      <setting name="depsClasspath" value="false" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
@@ -734,6 +845,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -774,12 +891,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1479546849831</updated>
-      <workItem from="1479546853099" duration="20794000" />
+      <workItem from="1479546853099" duration="21391000" />
+      <workItem from="1479800146136" duration="10887000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20794000" />
+    <option name="totallyTimeSpent" value="32278000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -792,13 +910,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5021322" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33802816" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33802816" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13113007" sideWeight="0.48949918" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="JPA Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17217484" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -806,13 +923,14 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29144096" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13113007" sideWeight="0.5105008" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="JPA Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13113007" sideWeight="0.5105008" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -835,19 +953,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleController.java</url>
-          <line>43</line>
+          <url>file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java</url>
+          <line>126</line>
           <properties />
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleController.java</url>
-          <line>45</line>
+          <url>file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java</url>
+          <line>123</line>
           <properties />
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="9" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -856,6 +974,70 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/MainServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="47" column="112" selection-start-line="47" selection-start-column="112" selection-end-line="47" selection-end-column="112" />
+          <folding>
+            <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+            <element signature="method#handle#0;class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setValues#0;class#PackagerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Xml/MetaXml.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="uml://Persistence/JavaeeElement:/366e4eea/NewPersistenceUnit/Database/jpa/JPA/PersistenceModel">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -864,13 +1046,14 @@
           <nodes />
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="505.5" y="434.0" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="506.0" y="434.0" />
           <SelectedNodes />
           <Categories>
-            <Category>Properties</Category>
             <Category>Embeddables</Category>
+            <Category>Properties</Category>
             <Category>Superclasses</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
@@ -887,32 +1070,19 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="190.0" y="187.5" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="190.0" y="188.0" />
           <SelectedNodes />
           <Categories>
-            <Category>Properties</Category>
             <Category>Embeddables</Category>
+            <Category>Properties</Category>
             <Category>Superclasses</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database/src/main/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/src/main/resources/META-INF/persistence.xml" />
+    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Connection.java" />
     <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/DatabaseMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -925,11 +1095,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Package.java">
+    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Installer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="22" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="22" />
@@ -937,23 +1106,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Packager/MainServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Packager/MainServer.java" />
     <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-          <folding>
-            <element signature="method#getVersionNumber#0;class#Server#0" expanded="false" />
-            <element signature="e#1272#1273#0" expanded="true" />
-            <element signature="e#1305#1306#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -973,90 +1131,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#537#538#0" expanded="true" />
-            <element signature="e#570#571#0" expanded="true" />
-            <marker date="1479552173660" expanded="true" signature="1166:1186" ph="SELECT * FRO... server" />
-            <marker date="1479552173660" expanded="true" signature="1975:2016" ph="SELECT * FRO... package" />
-            <marker date="1479552173660" expanded="true" signature="2847:2867" ph="SELECT * FRO... MODULE" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/MainServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/resources/Module.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Packager/PackagerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="47" column="112" selection-start-line="47" selection-start-column="112" selection-end-line="47" selection-end-column="112" />
-          <folding>
-            <element signature="e#2122#2123#0" expanded="true" />
-            <element signature="e#2158#2159#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Packager/Packager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/nio/file/StandardCopyOption.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1068,16 +1146,157 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/ModuleMaker/ModuleController.java">
+    <entry file="file://$PROJECT_DIR$/Server/src/main/resources/Server.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="79" column="33" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/resources/Module.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/resources/Package.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/MainServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Package.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3280#3281#0" expanded="true" />
-            <element signature="e#3320#3321#0" expanded="true" />
-            <element signature="e#3363#3364#0" expanded="true" />
-            <element signature="e#3399#3400#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#893#894#0" expanded="true" />
+            <element signature="e#921#922#0" expanded="true" />
+            <element signature="e#959#960#0" expanded="true" />
+            <element signature="e#993#994#0" expanded="true" />
+            <element signature="e#1085#1086#0" expanded="true" />
+            <element signature="e#1131#1132#0" expanded="true" />
+            <element signature="e#1169#1170#0" expanded="true" />
+            <element signature="e#1203#1204#0" expanded="true" />
+            <element signature="e#1295#1296#0" expanded="true" />
+            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1388#1389#0" expanded="true" />
+            <element signature="e#1431#1432#0" expanded="true" />
+            <element signature="e#1633#1634#0" expanded="true" />
+            <element signature="e#1664#1665#0" expanded="true" />
+            <element signature="e#1751#1752#0" expanded="true" />
+            <element signature="e#1791#1792#0" expanded="true" />
+            <element signature="e#1830#1831#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#1939#1940#0" expanded="true" />
+            <element signature="e#1987#1988#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="115" column="95" selection-start-line="115" selection-start-column="95" selection-end-line="115" selection-end-column="95" />
+          <folding>
+            <marker date="1479810378308" expanded="true" signature="1190:1210" ph="SELECT * FRO... server" />
+            <marker date="1479810378308" expanded="true" signature="2004:2047" ph="SELECT * FRO... installer" />
+            <marker date="1479810378308" expanded="true" signature="2887:2908" ph="SELECT * FRO... package" />
+            <marker date="1479810378308" expanded="true" signature="3839:3950" ph="INSERT INTO package... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.package">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="125" column="36" selection-start-line="125" selection-start-column="28" selection-end-line="125" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setValues#0;class#PackagerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+            <element signature="method#handle#0;class#EventOnTable#0;class#InstallerController#0" expanded="false" />
           </folding>
         </state>
       </provider>

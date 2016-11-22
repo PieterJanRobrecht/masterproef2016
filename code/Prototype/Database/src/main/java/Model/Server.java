@@ -1,13 +1,12 @@
 package Model;
 
-import Model.Package;
 /**
  * Created by Pieter-Jan on 15/11/2016.
  */
 public class Server {
     private int id;
     private String UID;
-    private Package aPackage;
+    private Installer installer;
     private int versionId;
     private String versionNumber;
     private String status;
@@ -19,8 +18,8 @@ public class Server {
         status = "Not Connected";
     }
 
-    public Package getaPackage() {
-        return aPackage;
+    public Installer getInstaller() {
+        return installer;
     }
 
     public int getId() {
@@ -57,13 +56,13 @@ public class Server {
     }
 
     public String getVersionNumber() {
-        if(aPackage !=null){
-            versionNumber = aPackage.getVersionNumber();
+        if(installer !=null){
+            versionNumber = installer.getVersionNumber();
         }
         return versionNumber;
     }
 
-    public void setaPackage(Package v) {
-        this.aPackage = v;
+    public void setInstaller(Installer v) {
+        this.installer = v;
     }
 }
