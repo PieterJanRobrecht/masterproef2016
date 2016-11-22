@@ -26,10 +26,10 @@ public class Installer {
         this.diskLocation = disk;
         executableLocation = exe;
         installerName = name;
-        publisher = "Pieter-Jan The Awesome";
-        title = "Python Framework Installer";
-        startMenuDir = "InstallerFolder";
-        targetDir = "@HomeDir@/FrameWork/InstallFolder";
+        setPublisher("Pieter-Jan The Awesome");
+        setTitle("Python Framework Installer");
+        setStartMenuDir("InstallerFolder");
+        setTargetDir("@HomeDir@/FrameWork/InstallFolder");
     }
 
     public Installer() {

@@ -18,7 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,21 +72,54 @@ public class InstallerController implements Observer {
         //In de juiste map plaatsen
         //Naam nemen en packages locatie updaten
         newInstaller = new Installer();
-        List<Package> geslecteerde = selectedModulesTable.getItems();
-        if(geslecteerde != null && geslecteerde.size() != 0){
+        List<Package> geselecteerde = selectedModulesTable.getItems();
+        if(geselecteerde != null && geselecteerde.size() != 0){
             if(setValues()){
                 //add installer to db
                 //kopieer pakketen als dat nodig is + update die db
                 //link leggen in db tussen pakket en installer
                 //maken van effectieve installer
+                transportPackages(geselecteerde);
                 changeFolderName(newInstaller.getInstallerName());
-                database.saveData(newInstaller,geslecteerde);
+                makeXml();
+                database.saveData(newInstaller, geselecteerde);
                 createExecutable();
-                System.out.println("Klaar met exe maken");
                 setView("Server.fxml");
             }
         }else {
             PackagerController.createMessage("Gelieve minstens 1 package te selecteren");
+        }
+    }
+
+    private void transportPackages(List<Package> geslecteerde) {
+        for (Package p : geslecteerde){
+            if(!p.getDiskLocation().contains(newInstaller.getDiskLocation())){
+                File hulp = new File(newInstaller.getDiskLocation(), "packages");
+                File dest = new File(hulp, p.getPackageName());
+                try {
+                    FileUtils.copyDirectory(new File(p.getDiskLocation()), dest);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void makeXml() {
+        //TODO wordt nog niet goed gedaan
+        try {
+            //print XML string representation of Student object
+            File metaXml = new File(new File(folder, "config"), "config.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Installer.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+            // output pretty printed
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            jaxbMarshaller.marshal(newInstaller, metaXml);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
         }
     }
 
@@ -121,7 +158,6 @@ public class InstallerController implements Observer {
         folder = newName;
 
         newInstaller.setDiskLocation(folder.toPath().toString());
-        System.out.println("Klaar met het aanpassen van de folder naam");
         database.changeFolderNames(newInstaller.getDiskLocation(),selectedModulesTable.getItems());
     }
 

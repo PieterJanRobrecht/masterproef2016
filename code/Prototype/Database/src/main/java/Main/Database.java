@@ -138,6 +138,7 @@ public class Database extends Observable {
     private void linkPackagesToInstaller(Installer newInstaller, List<Package> geslecteerde) {
         int installerId = getInstallerId(newInstaller);
         if(installerId != -1){
+            //TODO controleren of alle linken worden gelegd
             for (Package p : geslecteerde){
                 setLink(installerId, p);
             }

@@ -113,7 +113,7 @@
         <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="249">
-              <caret line="120" column="25" selection-start-line="120" selection-start-column="25" selection-end-line="120" selection-end-column="25" />
+              <caret line="160" column="23" selection-start-line="160" selection-start-column="23" selection-end-line="160" selection-end-column="23" />
               <folding>
                 <element signature="method#setView#0;class#InstallerController#0" expanded="false" />
                 <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
@@ -126,46 +126,46 @@
       <file leaf-file-name="Installer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Installer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+            <state relative-caret-position="527">
+              <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1063#1064#0" expanded="true" />
-                <element signature="e#1098#1099#0" expanded="true" />
-                <element signature="e#1172#1173#0" expanded="true" />
-                <element signature="e#1220#1221#0" expanded="true" />
-                <element signature="e#1246#1247#0" expanded="true" />
-                <element signature="e#1271#1272#0" expanded="true" />
-                <element signature="e#1321#1322#0" expanded="true" />
-                <element signature="e#1349#1350#0" expanded="true" />
-                <element signature="e#1389#1390#0" expanded="true" />
-                <element signature="e#1425#1426#0" expanded="true" />
-                <element signature="e#1514#1515#0" expanded="true" />
-                <element signature="e#1564#1565#0" expanded="true" />
-                <element signature="e#1607#1608#0" expanded="true" />
-                <element signature="e#1646#1647#0" expanded="true" />
-                <element signature="e#1744#1745#0" expanded="true" />
-                <element signature="e#1800#1801#0" expanded="true" />
-                <element signature="e#1832#1833#0" expanded="true" />
-                <element signature="e#1860#1861#0" expanded="true" />
-                <element signature="e#1934#1935#0" expanded="true" />
-                <element signature="e#1968#1969#0" expanded="true" />
-                <element signature="e#2004#2005#0" expanded="true" />
-                <element signature="e#2036#2037#0" expanded="true" />
-                <element signature="e#2122#2123#0" expanded="true" />
-                <element signature="e#2164#2165#0" expanded="true" />
-                <element signature="e#2203#2204#0" expanded="true" />
-                <element signature="e#2238#2239#0" expanded="true" />
-                <element signature="e#2333#2334#0" expanded="true" />
-                <element signature="e#2381#2382#0" expanded="true" />
-                <element signature="e#2417#2418#0" expanded="true" />
-                <element signature="e#2449#2450#0" expanded="true" />
-                <element signature="e#2535#2536#0" expanded="true" />
-                <element signature="e#2577#2578#0" expanded="true" />
-                <element signature="e#2622#2623#0" expanded="true" />
-                <element signature="e#2663#2664#0" expanded="true" />
-                <element signature="e#2749#2750#0" expanded="true" />
-                <element signature="e#2809#2810#0" expanded="true" />
+                <element signature="e#1071#1072#0" expanded="true" />
+                <element signature="e#1106#1107#0" expanded="true" />
+                <element signature="e#1180#1181#0" expanded="true" />
+                <element signature="e#1228#1229#0" expanded="true" />
+                <element signature="e#1254#1255#0" expanded="true" />
+                <element signature="e#1279#1280#0" expanded="true" />
+                <element signature="e#1329#1330#0" expanded="true" />
+                <element signature="e#1357#1358#0" expanded="true" />
+                <element signature="e#1397#1398#0" expanded="true" />
+                <element signature="e#1433#1434#0" expanded="true" />
+                <element signature="e#1522#1523#0" expanded="true" />
+                <element signature="e#1572#1573#0" expanded="true" />
+                <element signature="e#1615#1616#0" expanded="true" />
+                <element signature="e#1654#1655#0" expanded="true" />
+                <element signature="e#1752#1753#0" expanded="true" />
+                <element signature="e#1808#1809#0" expanded="true" />
+                <element signature="e#1840#1841#0" expanded="true" />
+                <element signature="e#1868#1869#0" expanded="true" />
+                <element signature="e#1942#1943#0" expanded="true" />
+                <element signature="e#1976#1977#0" expanded="true" />
+                <element signature="e#2012#2013#0" expanded="true" />
+                <element signature="e#2044#2045#0" expanded="true" />
+                <element signature="e#2130#2131#0" expanded="true" />
+                <element signature="e#2172#2173#0" expanded="true" />
+                <element signature="e#2211#2212#0" expanded="true" />
+                <element signature="e#2246#2247#0" expanded="true" />
+                <element signature="e#2341#2342#0" expanded="true" />
+                <element signature="e#2389#2390#0" expanded="true" />
+                <element signature="e#2425#2426#0" expanded="true" />
+                <element signature="e#2457#2458#0" expanded="true" />
+                <element signature="e#2543#2544#0" expanded="true" />
+                <element signature="e#2585#2586#0" expanded="true" />
+                <element signature="e#2630#2631#0" expanded="true" />
+                <element signature="e#2671#2672#0" expanded="true" />
+                <element signature="e#2757#2758#0" expanded="true" />
+                <element signature="e#2817#2818#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,8 +189,8 @@
       <file leaf-file-name="PackagerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1027">
-              <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+            <state relative-caret-position="247">
+              <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="198" selection-end-column="95" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -210,30 +210,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
+            <state relative-caret-position="84">
+              <caret line="210" column="34" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
               <folding>
-                <marker date="1479825031852" expanded="true" signature="1232:1252" ph="SELECT * FRO... server" />
-                <marker date="1479825031852" expanded="true" signature="2050:2095" ph="SELECT * FRO... installer" />
-                <marker date="1479825031852" expanded="true" signature="3089:3110" ph="SELECT * FRO... package" />
-                <marker date="1479825031852" expanded="true" signature="4041:4152" ph="INSERT INTO package... " />
-                <marker date="1479825031852" expanded="true" signature="5321:5410" ph="INSERT INTO installer_has_package... " />
-                <marker date="1479825031852" expanded="true" signature="5849:5921" ph="SELECT * FRO... package" />
-                <marker date="1479825031852" expanded="true" signature="6508:6586" ph="SELECT * FRO... installer" />
-                <marker date="1479825031852" expanded="true" signature="7176:7266" ph="INSERT INTO package... " />
-                <marker date="1479825031852" expanded="true" signature="7835:7868" ph="UPDATE packa... " />
-                <marker date="1479825031852" expanded="true" signature="7835:7892" ph="UPDATE packa... " />
-                <marker date="1479825031852" expanded="true" signature="7835:7921" ph="UPDATE packa... " />
-                <marker date="1479825031852" expanded="true" signature="8554:8577" ph="SELECT * FRO... installer" />
+                <marker date="1479828602054" expanded="true" signature="1232:1252" ph="SELECT * FRO... server" />
+                <marker date="1479828602054" expanded="true" signature="2050:2095" ph="SELECT * FRO... installer" />
+                <marker date="1479828602054" expanded="true" signature="3089:3110" ph="SELECT * FRO... package" />
+                <marker date="1479828602054" expanded="true" signature="4041:4152" ph="INSERT INTO package... " />
+                <marker date="1479828602054" expanded="true" signature="5381:5470" ph="INSERT INTO installer_has_package... " />
+                <marker date="1479828602054" expanded="true" signature="5909:5981" ph="SELECT * FRO... package" />
+                <marker date="1479828602054" expanded="true" signature="6568:6646" ph="SELECT * FRO... installer" />
+                <marker date="1479828602054" expanded="true" signature="7236:7326" ph="INSERT INTO package... " />
+                <marker date="1479828602054" expanded="true" signature="7895:7928" ph="UPDATE packa... " />
+                <marker date="1479828602054" expanded="true" signature="7895:7952" ph="UPDATE packa... " />
+                <marker date="1479828602054" expanded="true" signature="7895:7981" ph="UPDATE packa... " />
+                <marker date="1479828602054" expanded="true" signature="8614:8637" ph="SELECT * FRO... installer" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="masterdb.installer" pinned="false" current-in-tab="true">
+      <file leaf-file-name="masterdb.installer" pinned="false" current-in-tab="false">
         <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer">
           <provider editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -296,9 +296,9 @@
         <option value="$PROJECT_DIR$/Server/src/main/resources/Package.fxml" />
         <option value="$PROJECT_DIR$/Database/src/main/java/Model/Package.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/MainServer.java" />
-        <option value="$PROJECT_DIR$/Database/src/main/java/Model/Installer.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java" />
+        <option value="$PROJECT_DIR$/Database/src/main/java/Model/Installer.java" />
         <option value="$PROJECT_DIR$/Database/src/main/java/Main/Database.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java" />
       </list>
@@ -408,6 +408,30 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="InstallerMaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Prototype" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Prototype" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -930,12 +954,12 @@
       <option name="presentableId" value="Default" />
       <updated>1479546849831</updated>
       <workItem from="1479546853099" duration="21391000" />
-      <workItem from="1479800146136" duration="21271000" />
+      <workItem from="1479800146136" duration="23602000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42662000" />
+    <option name="totallyTimeSpent" value="44993000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -992,30 +1016,48 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java</url>
-          <line>119</line>
+          <line>156</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java</url>
-          <line>219</line>
+          <line>220</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java</url>
-          <line>224</line>
+          <line>225</line>
           <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java</url>
-          <line>122</line>
+          <line>159</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java</url>
+          <line>95</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java</url>
+          <line>141</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java</url>
+          <line>148</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="20" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1269,65 +1311,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Installer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1063#1064#0" expanded="true" />
-            <element signature="e#1098#1099#0" expanded="true" />
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1220#1221#0" expanded="true" />
-            <element signature="e#1246#1247#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
-            <element signature="e#1321#1322#0" expanded="true" />
-            <element signature="e#1349#1350#0" expanded="true" />
-            <element signature="e#1389#1390#0" expanded="true" />
-            <element signature="e#1425#1426#0" expanded="true" />
-            <element signature="e#1514#1515#0" expanded="true" />
-            <element signature="e#1564#1565#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
-            <element signature="e#1646#1647#0" expanded="true" />
-            <element signature="e#1744#1745#0" expanded="true" />
-            <element signature="e#1800#1801#0" expanded="true" />
-            <element signature="e#1832#1833#0" expanded="true" />
-            <element signature="e#1860#1861#0" expanded="true" />
-            <element signature="e#1934#1935#0" expanded="true" />
-            <element signature="e#1968#1969#0" expanded="true" />
-            <element signature="e#2004#2005#0" expanded="true" />
-            <element signature="e#2036#2037#0" expanded="true" />
-            <element signature="e#2122#2123#0" expanded="true" />
-            <element signature="e#2164#2165#0" expanded="true" />
-            <element signature="e#2203#2204#0" expanded="true" />
-            <element signature="e#2238#2239#0" expanded="true" />
-            <element signature="e#2333#2334#0" expanded="true" />
-            <element signature="e#2381#2382#0" expanded="true" />
-            <element signature="e#2417#2418#0" expanded="true" />
-            <element signature="e#2449#2450#0" expanded="true" />
-            <element signature="e#2535#2536#0" expanded="true" />
-            <element signature="e#2577#2578#0" expanded="true" />
-            <element signature="e#2622#2623#0" expanded="true" />
-            <element signature="e#2663#2664#0" expanded="true" />
-            <element signature="e#2749#2750#0" expanded="true" />
-            <element signature="e#2809#2810#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer_has_package">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.server">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1349,36 +1332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1027">
-          <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="120" column="25" selection-start-line="120" selection-start-column="25" selection-end-line="120" selection-end-column="25" />
-          <folding>
-            <element signature="method#setView#0;class#InstallerController#0" expanded="false" />
-            <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
-            <element signature="method#handle#0;class#EventOnTable#0;class#InstallerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -1389,28 +1342,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
+        <state relative-caret-position="1360">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Installer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
           <folding>
-            <marker date="1479825031852" expanded="true" signature="1232:1252" ph="SELECT * FRO... server" />
-            <marker date="1479825031852" expanded="true" signature="2050:2095" ph="SELECT * FRO... installer" />
-            <marker date="1479825031852" expanded="true" signature="3089:3110" ph="SELECT * FRO... package" />
-            <marker date="1479825031852" expanded="true" signature="4041:4152" ph="INSERT INTO package... " />
-            <marker date="1479825031852" expanded="true" signature="5321:5410" ph="INSERT INTO installer_has_package... " />
-            <marker date="1479825031852" expanded="true" signature="5849:5921" ph="SELECT * FRO... package" />
-            <marker date="1479825031852" expanded="true" signature="6508:6586" ph="SELECT * FRO... installer" />
-            <marker date="1479825031852" expanded="true" signature="7176:7266" ph="INSERT INTO package... " />
-            <marker date="1479825031852" expanded="true" signature="7835:7868" ph="UPDATE packa... " />
-            <marker date="1479825031852" expanded="true" signature="7835:7892" ph="UPDATE packa... " />
-            <marker date="1479825031852" expanded="true" signature="7835:7921" ph="UPDATE packa... " />
-            <marker date="1479825031852" expanded="true" signature="8554:8577" ph="SELECT * FRO... installer" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1071#1072#0" expanded="true" />
+            <element signature="e#1106#1107#0" expanded="true" />
+            <element signature="e#1180#1181#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+            <element signature="e#1254#1255#0" expanded="true" />
+            <element signature="e#1279#1280#0" expanded="true" />
+            <element signature="e#1329#1330#0" expanded="true" />
+            <element signature="e#1357#1358#0" expanded="true" />
+            <element signature="e#1397#1398#0" expanded="true" />
+            <element signature="e#1433#1434#0" expanded="true" />
+            <element signature="e#1522#1523#0" expanded="true" />
+            <element signature="e#1572#1573#0" expanded="true" />
+            <element signature="e#1615#1616#0" expanded="true" />
+            <element signature="e#1654#1655#0" expanded="true" />
+            <element signature="e#1752#1753#0" expanded="true" />
+            <element signature="e#1808#1809#0" expanded="true" />
+            <element signature="e#1840#1841#0" expanded="true" />
+            <element signature="e#1868#1869#0" expanded="true" />
+            <element signature="e#1942#1943#0" expanded="true" />
+            <element signature="e#1976#1977#0" expanded="true" />
+            <element signature="e#2012#2013#0" expanded="true" />
+            <element signature="e#2044#2045#0" expanded="true" />
+            <element signature="e#2130#2131#0" expanded="true" />
+            <element signature="e#2172#2173#0" expanded="true" />
+            <element signature="e#2211#2212#0" expanded="true" />
+            <element signature="e#2246#2247#0" expanded="true" />
+            <element signature="e#2341#2342#0" expanded="true" />
+            <element signature="e#2389#2390#0" expanded="true" />
+            <element signature="e#2425#2426#0" expanded="true" />
+            <element signature="e#2457#2458#0" expanded="true" />
+            <element signature="e#2543#2544#0" expanded="true" />
+            <element signature="e#2585#2586#0" expanded="true" />
+            <element signature="e#2630#2631#0" expanded="true" />
+            <element signature="e#2671#2672#0" expanded="true" />
+            <element signature="e#2757#2758#0" expanded="true" />
+            <element signature="e#2817#2818#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.package">
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/PackagerMaker/PackagerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="198" selection-end-column="95" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer_has_package">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1433,6 +1429,52 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.package">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="160" column="23" selection-start-line="160" selection-start-column="23" selection-end-line="160" selection-end-column="23" />
+          <folding>
+            <element signature="method#setView#0;class#InstallerController#0" expanded="false" />
+            <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+            <element signature="method#handle#0;class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="210" column="34" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
+          <folding>
+            <marker date="1479828602054" expanded="true" signature="1232:1252" ph="SELECT * FRO... server" />
+            <marker date="1479828602054" expanded="true" signature="2050:2095" ph="SELECT * FRO... installer" />
+            <marker date="1479828602054" expanded="true" signature="3089:3110" ph="SELECT * FRO... package" />
+            <marker date="1479828602054" expanded="true" signature="4041:4152" ph="INSERT INTO package... " />
+            <marker date="1479828602054" expanded="true" signature="5381:5470" ph="INSERT INTO installer_has_package... " />
+            <marker date="1479828602054" expanded="true" signature="5909:5981" ph="SELECT * FRO... package" />
+            <marker date="1479828602054" expanded="true" signature="6568:6646" ph="SELECT * FRO... installer" />
+            <marker date="1479828602054" expanded="true" signature="7236:7326" ph="INSERT INTO package... " />
+            <marker date="1479828602054" expanded="true" signature="7895:7928" ph="UPDATE packa... " />
+            <marker date="1479828602054" expanded="true" signature="7895:7952" ph="UPDATE packa... " />
+            <marker date="1479828602054" expanded="true" signature="7895:7981" ph="UPDATE packa... " />
+            <marker date="1479828602054" expanded="true" signature="8614:8637" ph="SELECT * FRO... installer" />
+          </folding>
         </state>
       </provider>
     </entry>
