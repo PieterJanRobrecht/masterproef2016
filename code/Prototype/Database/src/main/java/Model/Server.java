@@ -57,7 +57,7 @@ public class Server {
 
     public String getVersionNumber() {
         if(installer !=null){
-            versionNumber = installer.getVersionNumber();
+            versionNumber = installer.getInstallerVersion();
         }
         return versionNumber;
     }

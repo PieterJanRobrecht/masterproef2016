@@ -3,6 +3,7 @@ package Main;
 import Model.*;
 import Model.Installer;
 import Model.Package;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Database extends Observable {
                 while (rs.next()) {
                     int id = rs.getInt("idServer");
                     String serverUID = rs.getString("serverUID");
-                    int versionId = rs.getInt("Version_idVersion");
+                    int versionId = rs.getInt("Installer_idInstaller");
                     Server s = new Server(id, serverUID, versionId);
                     Installer v = getVersion(versionId);
                     s.setInstaller(v);
@@ -62,16 +63,18 @@ public class Database extends Observable {
 
     private Installer getVersion(int versionId) {
         try {
-            String query = "SELECT * FROM installer WHERE idVersion = ?";
+            String query = "SELECT * FROM installer WHERE idInstaller = ?";
             PreparedStatement pst = databaseConnection.prepareStatement(query);
             pst.setString(1, versionId + "");
 
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
-                    int id = rs.getInt("idVersion");
-                    String version = rs.getString("versionNumber");
+                    int id = rs.getInt("idInstaller");
+                    String version = rs.getString("installerVersionNumber");
                     String disk = rs.getString("diskLocation");
-                    return new Installer(id, version, disk);
+                    String name = rs.getString("installerName");
+                    String exe = rs.getString("executableLocation");
+                    return new Installer(id, version, disk,name,exe);
                 }
             }
         } catch (SQLException e) {
@@ -125,5 +128,127 @@ public class Database extends Observable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveData(Installer newInstaller, List<Package> geslecteerde) {
+        createInstaller(newInstaller);
+        linkPackagesToInstaller(newInstaller, geslecteerde);
+    }
+
+    private void linkPackagesToInstaller(Installer newInstaller, List<Package> geslecteerde) {
+        int installerId = getInstallerId(newInstaller);
+        if(installerId != -1){
+            for (Package p : geslecteerde){
+                setLink(installerId, p);
+            }
+        }
+    }
+
+    private void setLink(int installerId, Package p) {
+        int packageId = getPackageId(p);
+        if(packageId != -1) {
+            try {
+                String query = "INSERT INTO installer_has_package (Installer_idInstaller, Package_idPackage) VALUES (?,?)";
+                PreparedStatement pst = databaseConnection.prepareStatement(query);
+                pst.setString(1, installerId + "");
+                pst.setString(2, packageId + "");
+
+                pst.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private int getPackageId(Package p) {
+        int id = -1;
+        try {
+            String query = "SELECT * FROM package WHERE packageName = ? AND packageVersionNumber = ?";
+            PreparedStatement pst = databaseConnection.prepareStatement(query);
+            pst.setString(1, p.getPackageName());
+            pst.setString(2, p.getPackageVersionNumber());
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    id = rs.getInt("idModule");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    private int getInstallerId(Installer newInstaller) {
+        int id = -1;
+        try {
+            String query = "SELECT * FROM installer WHERE installerName = ? AND installerVersionNumber = ?";
+            PreparedStatement pst = databaseConnection.prepareStatement(query);
+            pst.setString(1, newInstaller.getInstallerName());
+            pst.setString(2,newInstaller.getInstallerVersion());
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    id = rs.getInt("idInstaller");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    private void createInstaller(Installer newInstaller) {
+        try {
+            String query = "INSERT INTO installer (installerName, diskLocation, installerVersionNumber) VALUES (?,?,?)";
+            PreparedStatement pst = databaseConnection.prepareStatement(query);
+            pst.setString(1, newInstaller.getInstallerName());
+            pst.setString(2, newInstaller.getDiskLocation());
+            pst.setString(3, newInstaller.getInstallerVersion());
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeFolderNames(String installerLocation, ObservableList<Package> items) {
+        for (Package p : items){
+            try {
+                String query = "UPDATE package SET diskLocation = ? WHERE packageName = ? AND packageVersionNumber = ?";
+                PreparedStatement pst = databaseConnection.prepareStatement(query);
+                String fullLocation = installerLocation +"\\packages\\"+p.getPackageName();
+                pst.setString(1, fullLocation);
+                pst.setString(2, p.getPackageName());
+                pst.setString(3, p.getPackageVersionNumber());
+
+                pst.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public List<Installer> getInstallers() {
+        List<Installer> installers = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM installer";
+            PreparedStatement pst = databaseConnection.prepareStatement(query);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("idInstaller");
+                    String version = rs.getString("installerVersionNumber");
+                    String location = rs.getString("diskLocation");
+                    String name = rs.getString("installerName");
+                    String exe = rs.getString("executableLocation");
+                    installers.add(new Installer(id,version,location,name,exe));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return installers;
     }
 }

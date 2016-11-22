@@ -79,17 +79,14 @@ public class ServerController implements Observer {
         serverVersion.setCellValueFactory(new PropertyValueFactory<Server, String>("versionNumber"));
         serverStatus.setCellValueFactory(new PropertyValueFactory<Server, String>("status"));
 
-        version.setCellValueFactory(new PropertyValueFactory<Installer, String>("versionNumber"));
+        version.setCellValueFactory(new PropertyValueFactory<Installer, String>("installerVersion"));
     }
 
     public void initData() {
-        installers = new ArrayList<>();
         servers = database.getServers();
         statusTable.getItems().setAll(servers);
-        for (int i = 0; i < servers.size(); i++) {
-            if (servers.get(i).getInstaller() != null)
-                installers.add(servers.get(i).getInstaller());
-        }
+
+        installers = database.getInstallers();
         versionTable.getItems().setAll(installers);
     }
 

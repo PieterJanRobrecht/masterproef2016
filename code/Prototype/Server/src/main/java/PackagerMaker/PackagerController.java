@@ -89,6 +89,7 @@ public class PackagerController {
             String name = packageName.getText();
             //TODO kijken naar keuze voor het bepalen van handeling
             createModuleFolders(name);
+            newPackage.setDiskLocation(moduleBase.toPath().toString());
             copyFile();
             makeMetaXml();
             makeScript();
@@ -134,12 +135,6 @@ public class PackagerController {
 
     private boolean setValues() {
         boolean alles = true;
-        if (fileLocation.getText() != null) {
-            newPackage.setDiskLocation(fileLocation.getText());
-        } else {
-            createMessage("Geen geldig pad");
-            alles = false;
-        }
         if (packageName.getText() != null) {
             newPackage.setPackageName(packageName.getText());
         } else {
@@ -235,7 +230,7 @@ public class PackagerController {
         this.folder = folder;
     }
 
-    void createMessage(String s) {
+    public static void createMessage(String s) {
         Notifications.create()
                 .title("Error")
                 .text(s)
