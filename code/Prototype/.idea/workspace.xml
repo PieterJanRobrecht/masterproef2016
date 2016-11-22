@@ -102,7 +102,7 @@
       <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1360">
+            <state relative-caret-position="1132">
               <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
@@ -210,11 +210,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="210" column="34" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
+            <state relative-caret-position="333">
+              <caret line="246" column="25" selection-start-line="246" selection-start-column="25" selection-end-line="246" selection-end-column="25" />
               <folding>
                 <marker date="1479828602054" expanded="true" signature="1232:1252" ph="SELECT * FRO... server" />
                 <marker date="1479828602054" expanded="true" signature="2050:2095" ph="SELECT * FRO... installer" />
@@ -233,7 +233,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="masterdb.installer" pinned="false" current-in-tab="false">
+      <file leaf-file-name="masterdb.installer" pinned="false" current-in-tab="true">
         <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer">
           <provider editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -954,16 +954,16 @@
       <option name="presentableId" value="Default" />
       <updated>1479546849831</updated>
       <workItem from="1479546853099" duration="21391000" />
-      <workItem from="1479800146136" duration="23602000" />
+      <workItem from="1479800146136" duration="24316000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44993000" />
+    <option name="totallyTimeSpent" value="45707000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -973,7 +973,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5021322" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33802816" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33802816" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1342,14 +1342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Database/src/main/java/Model/Installer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -1406,20 +1398,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer_has_package">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="160" column="23" selection-start-line="160" selection-start-column="23" selection-end-line="160" selection-end-column="23" />
+          <folding>
+            <element signature="method#setView#0;class#InstallerController#0" expanded="false" />
+            <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+            <element signature="method#handle#0;class#EventOnTable#0;class#InstallerController#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer">
+    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="246" column="25" selection-start-line="246" selection-start-column="25" selection-end-line="246" selection-end-column="25" />
+          <folding>
+            <marker date="1479828602054" expanded="true" signature="1232:1252" ph="SELECT * FRO... server" />
+            <marker date="1479828602054" expanded="true" signature="2050:2095" ph="SELECT * FRO... installer" />
+            <marker date="1479828602054" expanded="true" signature="3089:3110" ph="SELECT * FRO... package" />
+            <marker date="1479828602054" expanded="true" signature="4041:4152" ph="INSERT INTO package... " />
+            <marker date="1479828602054" expanded="true" signature="5381:5470" ph="INSERT INTO installer_has_package... " />
+            <marker date="1479828602054" expanded="true" signature="5909:5981" ph="SELECT * FRO... package" />
+            <marker date="1479828602054" expanded="true" signature="6568:6646" ph="SELECT * FRO... installer" />
+            <marker date="1479828602054" expanded="true" signature="7236:7326" ph="INSERT INTO package... " />
+            <marker date="1479828602054" expanded="true" signature="7895:7928" ph="UPDATE packa... " />
+            <marker date="1479828602054" expanded="true" signature="7895:7952" ph="UPDATE packa... " />
+            <marker date="1479828602054" expanded="true" signature="7895:7981" ph="UPDATE packa... " />
+            <marker date="1479828602054" expanded="true" signature="8614:8637" ph="SELECT * FRO... installer" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/Server/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1132">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer_has_package">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1445,36 +1465,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/InstallerMaker/InstallerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="160" column="23" selection-start-line="160" selection-start-column="23" selection-end-line="160" selection-end-column="23" />
-          <folding>
-            <element signature="method#setView#0;class#InstallerController#0" expanded="false" />
-            <element signature="class#EventOnTable#0;class#InstallerController#0" expanded="false" />
-            <element signature="method#handle#0;class#EventOnTable#0;class#InstallerController#0" expanded="false" />
-          </folding>
+    <entry file="dbDummy://dbtable:/366e4eea/04968df2-89ca-4a4a-aff0-85147a191e92/masterdb.installer">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database/src/main/java/Main/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="210" column="34" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
-          <folding>
-            <marker date="1479828602054" expanded="true" signature="1232:1252" ph="SELECT * FRO... server" />
-            <marker date="1479828602054" expanded="true" signature="2050:2095" ph="SELECT * FRO... installer" />
-            <marker date="1479828602054" expanded="true" signature="3089:3110" ph="SELECT * FRO... package" />
-            <marker date="1479828602054" expanded="true" signature="4041:4152" ph="INSERT INTO package... " />
-            <marker date="1479828602054" expanded="true" signature="5381:5470" ph="INSERT INTO installer_has_package... " />
-            <marker date="1479828602054" expanded="true" signature="5909:5981" ph="SELECT * FRO... package" />
-            <marker date="1479828602054" expanded="true" signature="6568:6646" ph="SELECT * FRO... installer" />
-            <marker date="1479828602054" expanded="true" signature="7236:7326" ph="INSERT INTO package... " />
-            <marker date="1479828602054" expanded="true" signature="7895:7928" ph="UPDATE packa... " />
-            <marker date="1479828602054" expanded="true" signature="7895:7952" ph="UPDATE packa... " />
-            <marker date="1479828602054" expanded="true" signature="7895:7981" ph="UPDATE packa... " />
-            <marker date="1479828602054" expanded="true" signature="8614:8637" ph="SELECT * FRO... installer" />
-          </folding>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
