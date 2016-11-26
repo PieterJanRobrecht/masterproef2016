@@ -1,8 +1,12 @@
 package Model;
 
+import XmlAdapter.DateAdapter;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.sql.Date;
 
 /**
  * Created by Pieter-Jan on 15/11/2016.
@@ -21,16 +25,19 @@ public class Package {
 
     private String diskLocation;
 
+    private Date releaseDate;
+
     public Package() {
     }
 
-    public Package(int id, String number, String name, String location, int priority, String description) {
+    public Package(int id, String number, String name, String location, int priority, String description, Date releaseDate) {
         this.id = id;
         packageName = name;
         packageVersionNumber = number;
         diskLocation = location;
         this.priority = priority;
         this.description = description;
+        this.releaseDate = releaseDate;
     }
 
     public int getId() {
@@ -67,6 +74,16 @@ public class Package {
     @XmlElement(name = "Version")
     public void setPackageVersionNumber(String packageVersionNumber) {
         this.packageVersionNumber = packageVersionNumber;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    @XmlElement(name = "ReleaseDate")
+    @XmlJavaTypeAdapter(DateAdapter.class)
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public int getPriority() {

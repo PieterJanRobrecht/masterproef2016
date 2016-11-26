@@ -74,7 +74,8 @@ public class Database extends Observable {
                     String disk = rs.getString("diskLocation");
                     String name = rs.getString("installerName");
                     String exe = rs.getString("executableLocation");
-                    return new Installer(id, version, disk,name,exe);
+                    Installer newInstaller = new Installer(id, version, disk,name,exe);
+                    return newInstaller;
                 }
             }
         } catch (SQLException e) {
@@ -103,8 +104,9 @@ public class Database extends Observable {
                     String location = rs.getString("diskLocation");
                     int priority = rs.getInt("priority");
                     String description = rs.getString("description");
+                    Date date = rs.getDate("releaseDate");
 
-                    Package m = new Package(id, number, name, location, priority, description);
+                    Package m = new Package(id, number, name, location, priority, description, date);
                     aPackages.add(m);
                 }
             }
@@ -116,13 +118,14 @@ public class Database extends Observable {
 
     public void createPackage(Package newPackage) {
         try {
-            String query = "INSERT INTO package (packageName, description, packageVersionNumber, priority, diskLocation) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO package (packageName, description, packageVersionNumber, priority, diskLocation,releaseDate) VALUES (?,?,?,?,?,?)";
             PreparedStatement pst = databaseConnection.prepareStatement(query);
             pst.setString(1, newPackage.getPackageName());
             pst.setString(2, newPackage.getDescription());
             pst.setString(3, newPackage.getPackageVersionNumber());
             pst.setString(4, newPackage.getPriority() + "");
             pst.setString(5, newPackage.getDiskLocation());
+            pst.setDate(6,newPackage.getReleaseDate());
 
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -244,7 +247,8 @@ public class Database extends Observable {
                     String location = rs.getString("diskLocation");
                     String name = rs.getString("installerName");
                     String exe = rs.getString("executableLocation");
-                    installers.add(new Installer(id,version,location,name,exe));
+                    Installer newInstaller = new Installer(id,version,location,name,exe);
+                    installers.add(newInstaller);
                 }
             }
         } catch (SQLException e) {

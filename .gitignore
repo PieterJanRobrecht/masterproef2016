@@ -50,24 +50,24 @@ appdata/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
+code/Prototype/.idea/
+code/Prototype/.idea/tasks.xml
 
 # Sensitive or high-churn files:
-.idea/dataSources/
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/dataSources.local.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
+code/Prototype/.idea/dataSources/
+code/Prototype/.idea/dataSources.ids
+code/Prototype/.idea/dataSources.xml
+code/Prototype/.idea/dataSources.local.xml
+code/Prototype/.idea/sqlDataSources.xml
+code/Prototype/.idea/dynamic.xml
+code/Prototype/.idea/uiDesigner.xml
 
 # Gradle:
-.idea/gradle.xml
-.idea/libraries
+code/Prototype/.idea/gradle.xml
+code/Prototype/.idea/libraries
 
 # Mongo Explorer plugin:
-.idea/mongoSettings.xml
+code/Prototype/.idea/mongoSettings.xml
 
 ## File-based project format:
 *.iws
@@ -94,7 +94,7 @@ fabric.properties
 
 # *.iml
 # modules.xml
-# .idea/misc.xml 
+# code/Prototype/.idea/misc.xml 
 # *.ipr
 
 

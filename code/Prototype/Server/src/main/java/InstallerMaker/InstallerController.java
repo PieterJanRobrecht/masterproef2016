@@ -106,7 +106,6 @@ public class InstallerController implements Observer {
     }
 
     private void makeXml() {
-        //TODO wordt nog niet goed gedaan
         try {
             //print XML string representation of Student object
             File metaXml = new File(new File(folder, "config"), "config.xml");
@@ -202,7 +201,7 @@ public class InstallerController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        //TODO update view?
     }
 
     private void showInformation(Package selected) {

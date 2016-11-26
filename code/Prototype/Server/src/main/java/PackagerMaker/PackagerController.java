@@ -15,19 +15,18 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.Date;
+import java.util.Calendar;
 
 import static java.nio.file.Files.createDirectories;
-import static java.nio.file.Files.setOwner;
+import static java.nio.file.Files.write;
 
 public class PackagerController {
 
@@ -135,13 +134,13 @@ public class PackagerController {
 
     private boolean setValues() {
         boolean alles = true;
-        if (packageName.getText() != null) {
+        if (!packageName.getText().equals("")) {
             newPackage.setPackageName(packageName.getText());
         } else {
             createMessage("Gelieve een naam in te vullen");
             alles = false;
         }
-        if (description.getText() != null) {
+        if (!description.getText().equals("")) {
             newPackage.setDescription(description.getText());
         } else {
             createMessage("Een description moet ingevuld worden");
@@ -159,17 +158,120 @@ public class PackagerController {
             createMessage("Gelieve een getal in te vullen");
             alles = false;
         }
-        if (version.getText() != null) {
+        //TODO controleren dat er geen letters in zitten -> error in qt
+        if (!version.getText().equals("")) {
             newPackage.setPackageVersionNumber(version.getText());
         } else {
             createMessage("Gelieve een version number in te vullen");
             alles = false;
         }
+        newPackage.setReleaseDate(new Date(Calendar.getInstance().getTime().getTime()));
         return alles;
     }
 
     private void makeScript() {
         //TODO script maken (dikke miserie)
+        try {
+            File script = new File(meta, "installscript.qs");
+            PrintWriter writer = new PrintWriter(script);
+            writeFirstBlock(writer);
+
+            String selected = moduleType.getSelectionModel().getSelectedItem();
+            if (selected == null) {
+                createMessage("Gelieve een type te selecteren");
+            } else {
+                writeActionWindows(writer, selected);
+            }
+
+            writeLastBlock(writer);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeLastBlock(PrintWriter writer) {
+        writer.println("}");
+    }
+
+    private void writeActionWindows(PrintWriter writer, String selected) {
+        String[] split = file.toPath().toString().split("\\\\");
+        String name = split[split.length - 1];
+
+        switch (selected) {
+            case ".exe":
+                writeExe(writer, name);
+                break;
+            case ".zip":
+                writeZip(writer, name);
+                break;
+        }
+    }
+
+    private void writeZip(PrintWriter writer, String name) {
+        writer.println(
+                "if (systemInfo.productType === \"windows\") {\r\n" +
+                        "\t\tcomponent.addOperation(\"Execute\"\r\n" +
+                        "\t\t, \"cmd\"\r\n" +
+                        "\t\t, \"/c\"\r\n" +
+                        "\t\t, \"C:\\\\\\\"Program Files\\\"\\\\WinRAR\\\\WinRAR.exe\"\r\n" +
+                        "\t\t, \"x\"\r\n" +
+                        "\t\t, \"@TargetDir@\\\\" +
+                        name + "\"\r\n" +
+                        "\t\t, \"@TargetDir@\")\r\n" +
+                        "\t\r\n" +
+                        "\t\tcomponent.addOperation(\"Execute\"\r\n" +
+                        "\t\t, \"cmd\"\t\r\n" +
+                        "\t\t, \"/K\" \r\n" +
+                        "\t\t, \"\\\"cd\" \r\n" +
+                        "\t\t, \"@TargetDir@\\\\" +
+                        name +
+                        "\" \r\n" +
+                        "\t\t, \"&&\" \r\n" +
+                        "\t\t, \"C:\\\\Python27\\\\python.exe\" \r\n" +
+                        "\t\t, \"setup.py\" \r\n" +
+                        "\t\t, \"install\" \r\n" +
+                        "\t\t, \"&&\" \r\n" +
+                        "\t\t, \"exit\\\"\")\r\n" +
+                        "\t}"
+        );
+    }
+
+    private void writeExe(PrintWriter writer, String name) {
+        writer.println(
+                "\tif (systemInfo.productType === \"windows\") {" +
+                        "\t\tcomponent.addOperation(\"Execute\"\r\n" +
+                        "\t\t, \"msiexec\"\r\n" +
+                        "\t\t, \"/i\"\r\n" +
+                        "\t\t, \"@TargetDir@\\\\" +
+                        name +
+                        "\"\r\n" +
+                        "\t\t, \"/quiet\"\r\n" +
+                        "\t\t, \"UNDOEXECUTE\"\r\n" +
+                        "\t\t, \"msiexec\"\r\n" +
+                        "\t\t, \"/qb\"\r\n" +
+                        "\t\t, \"/x\"\r\n" +
+                        "\t\t, \"@TargetDir@\\\\" +
+                        name +
+                        "\")\r\n" +
+                        "    } else {\r\n" +
+                        "\t\t //Kijken wat de beste manier is voor linux\r\n" +
+                        "\t}"
+        );
+    }
+
+    private void writeFirstBlock(PrintWriter writer) {
+        writer.println(
+                "function Component()\r\n" +
+                        "{\r\n" +
+                        "}\r\n"
+        );
+        writer.println(
+                "Component.prototype.createOperations = function()\r\n" +
+                        "{\r\n" +
+                        "\tcomponent.createOperations();\r\n" +
+                        "\r\n"
+        );
     }
 
     private void makeMetaXml() {
