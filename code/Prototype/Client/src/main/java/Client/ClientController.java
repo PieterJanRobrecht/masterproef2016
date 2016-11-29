@@ -58,7 +58,9 @@ public class ClientController {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        if (check != null && check.getInstaller()!=null && state!=null && state.getCurrentDeployment().getInstaller().getId() == check.getInstaller().getId()) {
+        if (check !=null && check.getInstaller() == null) {
+            PackagerController.createMessage("No installers available on the server");
+        } else if (state.getCurrentDeployment() != null && state.getCurrentDeployment().getInstaller().getId() == check.getInstaller().getId()) {
             PackagerController.createMessage("No new version available");
         } else {
             PackagerController.createMessage("New version available");
@@ -102,7 +104,7 @@ public class ClientController {
     public void initData() {
         loadState();
         try {
-            if(checkInstalled()){
+            if (checkInstalled()) {
                 setCurrentData();
             }
             implementation.setStatus(state.getClientID(), "Running");
@@ -135,13 +137,13 @@ public class ClientController {
     }
 
     private void setNewData() {
-        if (newDeployment!=null && newDeployment.getInstaller()!=null){
+        if (newDeployment != null && newDeployment.getInstaller() != null) {
             newNameLabel.setText(newDeployment.getInstaller().getInstallerName());
             newVersionLabel.setText(newDeployment.getInstaller().getInstallerVersion());
 
             List<Package> packageList = getPackages(newDeployment.getInstaller());
             newTable.getItems().addAll(packageList);
-        }else {
+        } else {
             newNameLabel.setText("");
             newVersionLabel.setText("");
 
