@@ -3,12 +3,14 @@ package Model;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
 
 /**
  * Created by Pieter-Jan on 15/11/2016.
  */
 @XmlRootElement(name = "Installer")
-public class Installer {
+public class Installer implements Serializable {
+    private static final long serialVersionUID = 2L;
     private String diskLocation;
     private int id;
     private String installerName;

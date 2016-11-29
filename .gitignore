@@ -41,6 +41,7 @@ appdata/
 *.ignore
 
 /install_folder/
+/code/Prototype/Client/target
 
 
 # Created by https://www.gitignore.io/api/intellij,java

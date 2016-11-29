@@ -125,7 +125,6 @@ public class PackagerController {
         installerController.setDatabase(data);
         installerController.initData();
         installerController.setFolder(folder);
-        data.addObserver(installerController);
     }
 
     private void updateDatabase() {
@@ -239,7 +238,7 @@ public class PackagerController {
 
     private void writeExe(PrintWriter writer, String name) {
         writer.println(
-                "\tif (systemInfo.productType === \"windows\") {" +
+                "\tif (systemInfo.productType === \"windows\") {\r\n" +
                         "\t\tcomponent.addOperation(\"Execute\"\r\n" +
                         "\t\t, \"msiexec\"\r\n" +
                         "\t\t, \"/i\"\r\n" +

@@ -6,13 +6,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created by Pieter-Jan on 15/11/2016.
  */
 @XmlRootElement(name = "Package")
-public class Package {
+public class Package implements Serializable {
     private int id;
 
     private String packageName;
@@ -27,7 +28,10 @@ public class Package {
 
     private Date releaseDate;
 
+    private String script;
+
     public Package() {
+        setScript("installscript.qs");
     }
 
     public Package(int id, String number, String name, String location, int priority, String description, Date releaseDate) {
@@ -38,6 +42,7 @@ public class Package {
         this.priority = priority;
         this.description = description;
         this.releaseDate = releaseDate;
+        setScript("installscript.qs");
     }
 
     public int getId() {
@@ -93,6 +98,15 @@ public class Package {
     @XmlElement(name = "SortingPriority")
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public String getScript() {
+        return script;
+    }
+
+    @XmlElement(name = "Script")
+    public void setScript(String script) {
+        this.script = script;
     }
 
     public String getDiskLocation() {

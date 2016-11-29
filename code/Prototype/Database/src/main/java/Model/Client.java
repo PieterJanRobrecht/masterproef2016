@@ -3,7 +3,7 @@ package Model;
 /**
  * Created by Pieter-Jan on 15/11/2016.
  */
-public class Server {
+public class Client {
     private int id;
     private String UID;
     private Installer installer;
@@ -11,11 +11,11 @@ public class Server {
     private String versionNumber;
     private String status;
 
-    public Server(int id, String serverUID, int versionId) {
+    public Client(int id, String serverUID, int versionId, String status) {
         this.id = id;
         this.UID = serverUID;
         this.versionId = versionId;
-        status = "Not Connected";
+        this.status = status;
     }
 
     public Installer getInstaller() {

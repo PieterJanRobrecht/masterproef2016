@@ -2,8 +2,10 @@ package Server;
 
 import InstallerMaker.InstallerCreator;
 import Main.Database;
+import Model.Client;
+import Model.Deployment;
 import Model.Installer;
-import Model.Server;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -22,16 +24,16 @@ import java.util.Observer;
 public class ServerController implements Observer {
 
     @FXML
-    private TableView<Server> statusTable;
+    private TableView<Client> statusTable;
 
     @FXML
-    private TableColumn<Server, String> serverName;
+    private TableColumn<Client, String> clientName;
 
     @FXML
-    private TableColumn<Server, String> serverVersion;
+    private TableColumn<Client, String> clientVersion;
 
     @FXML
-    private TableColumn<Server, String> serverStatus;
+    private TableColumn<Client, String> clientStatus;
 
     @FXML
     private TableView<Installer> versionTable;
@@ -41,9 +43,8 @@ public class ServerController implements Observer {
 
     private File folder = null;
 
-
     private Database database;
-    private List<Server> servers;
+    private List<Client> clients;
     private List<Installer> installers;
 
     @FXML
@@ -70,21 +71,24 @@ public class ServerController implements Observer {
 
     @FXML
     void deploy(ActionEvent event) {
-
+        Installer selected = versionTable.getSelectionModel().getSelectedItem();
+        Deployment newDeployment = new Deployment(selected);
+        database.setActiveInstaller(newDeployment);
     }
 
     @FXML
     public void initialize() {
-        serverName.setCellValueFactory(new PropertyValueFactory<Server, String>("UID"));
-        serverVersion.setCellValueFactory(new PropertyValueFactory<Server, String>("versionNumber"));
-        serverStatus.setCellValueFactory(new PropertyValueFactory<Server, String>("status"));
+        clientName.setCellValueFactory(new PropertyValueFactory<Client, String>("UID"));
+        clientVersion.setCellValueFactory(new PropertyValueFactory<Client, String>("versionNumber"));
+        clientStatus.setCellValueFactory(new PropertyValueFactory<Client, String>("status"));
 
         version.setCellValueFactory(new PropertyValueFactory<Installer, String>("installerVersion"));
+        clients = new ArrayList<>();
     }
 
     public void initData() {
-        servers = database.getServers();
-        statusTable.getItems().setAll(servers);
+        clients = database.getClients();
+        statusTable.getItems().setAll(clients);
 
         installers = database.getInstallers();
         versionTable.getItems().setAll(installers);
@@ -97,7 +101,9 @@ public class ServerController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        clients = database.getClients();
+        statusTable.getItems().clear();
+        Platform.runLater(() -> statusTable.getItems().setAll(clients));
     }
 
 }

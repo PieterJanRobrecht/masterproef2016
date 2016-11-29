@@ -18,16 +18,6 @@
                           <MenuItem mnemonicParsing="false" onAction="#setInstallFolder" text="Select Folder" />
                         </items>
                       </Menu>
-                      <Menu mnemonicParsing="false" text="Edit">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Delete" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
-                        </items>
-                      </Menu>
                     </menus>
                   </MenuBar>
                </children>
@@ -53,9 +43,9 @@
                   </HBox>
                   <TableView fx:id="statusTable">
                     <columns>
-                      <TableColumn fx:id="serverName" prefWidth="224.0" text="Server" />
-                      <TableColumn fx:id="serverVersion" prefWidth="108.0" text="Version" />
-                        <TableColumn fx:id="serverStatus" prefWidth="116.0" text="Status" />
+                      <TableColumn fx:id="clientName" prefWidth="224.0" text="Server" />
+                      <TableColumn fx:id="clientVersion" prefWidth="108.0" text="Version" />
+                        <TableColumn fx:id="clientStatus" prefWidth="116.0" text="Status" />
                     </columns>
                      <VBox.margin>
                         <Insets />
@@ -70,7 +60,7 @@
          <right>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Packages">
+                  <Label text="Installers">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>

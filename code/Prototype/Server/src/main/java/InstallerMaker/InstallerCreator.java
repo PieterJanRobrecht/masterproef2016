@@ -68,7 +68,6 @@ public class InstallerCreator {
         installerController.setDatabase(data);
         installerController.initData();
         installerController.setFolder(installFolder);
-        data.addObserver(installerController);
 
     }
 

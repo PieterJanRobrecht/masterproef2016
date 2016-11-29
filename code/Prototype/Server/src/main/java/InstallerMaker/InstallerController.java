@@ -12,25 +12,27 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public class InstallerController implements Observer {
+public class InstallerController {
 
     @FXML
     private TableView<Package> allModulesTable;
@@ -55,6 +57,12 @@ public class InstallerController implements Observer {
 
     @FXML
     private TextField installerName;
+
+    @FXML
+    private Label locationLabel;
+
+    @FXML
+    private Label descriptionLabel;
 
     private Database database;
     private File folder;
@@ -147,7 +155,22 @@ public class InstallerController implements Observer {
     }
 
     private void createExecutable() {
-        //TODO qt gebruiken voor deze stap
+        String command = "cd "+folder.toPath()+" && binarycreator --offline-only -c config/config.xml -p packages PythonFrameworkInstaller";
+        ProcessBuilder builder = new ProcessBuilder(
+                "cmd.exe", "/c", command);
+        builder.redirectErrorStream(true);
+        try {
+            Process p = builder.start();
+            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while (true) {
+                line = r.readLine();
+                if (line == null) { break; }
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void changeFolderName(String installerName) {
@@ -192,20 +215,20 @@ public class InstallerController implements Observer {
     }
 
     public void initData() {
-        List<Package> allPackages = database.getPackages();
+        List<Package> allPackages = database.getAllPackages();
         allModulesTable.getItems().setAll(allPackages);
 
         List<Package> selectedPackages = new ArrayList<>();
         selectedModulesTable.getItems().setAll(selectedPackages);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        //TODO update view?
-    }
-
     private void showInformation(Package selected) {
-        //TODO details tonen van package
+        descriptionLabel.setText(selected.getDescription());
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.setTextAlignment(TextAlignment.JUSTIFY);
+        locationLabel.setText(selected.getDiskLocation());
+        locationLabel.setWrapText(true);
+        locationLabel.setTextAlignment(TextAlignment.JUSTIFY);
     }
 
     public void setDatabase(Database database) {
