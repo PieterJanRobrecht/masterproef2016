@@ -1,0 +1,7 @@
+XmlAdapter\DateAdapter.class
+Main\Database.class
+Model\Installer.class
+Model\Client.class
+Main\DatabaseMain.class
+Model\Deployment.class
+Model\Package.class

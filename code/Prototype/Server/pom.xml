@@ -6,15 +6,13 @@
 
     <groupId>MasterPrototype</groupId>
     <artifactId>PrototypeServer</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <aPackages>
-        <module>../Client</module>
-    </aPackages>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>MasterPrototype</groupId>
@@ -45,7 +43,6 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.2.6</version>
         </dependency>
-
     </dependencies>
 
 
