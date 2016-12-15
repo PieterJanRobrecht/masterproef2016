@@ -1,22 +1,3 @@
-%Belangrijke componenten van een abstract
-%Achtergrond
-Televic Rail maakt gebruik van een Python framework voor het uittesten van de hardware die zij produceren.
-Het installeren van dit framework op een nieuwe computer of testtoren is een uitgebreide klus.
-Er moeten verschillende hardware drivers geïnstalleerd worden en er zijn meerdere bibliotheken nodig om het framework correct te laten functioneren.
-Een meer efficiënte werkwijze voor het updaten en installeren van het framework is wenselijk.
-Opzet van deze scriptie is dit te onderzoeken en vervolgens uit te werken.
-Het aantal drivers en bibliotheken zal enkel toenemen.
-Bovendien moet de applicatie ook schaalbaar zijn naar de toekomst toe.
-%
-%Oplossing
-Het probleem werd uitgesplitst in drie logische componenten: de packager, de deployment server en de deployment environment.
-Deze structuur wordt doorheen de thesis aangehouden en vormt de basis voor het ontwerp van de installer/updater.
-In een eerste fase wordt een prototype ontworpen.
-Dit prototype bevat elke component en is tegelijk op een zo efficiënt mogelijke manier gebouwd.
-Er werden test uitgevoerd op dit prototype.
-Met behulp van de uitslagen is het ontwerp aangepast.
-Fase twee van de thesis bouwt verder op deze resultaten.
-Het ontwerp is waar nodig aangepast.
-Uiteindelijk is een demo applicatie ontwikkeld.
+Televic Rail ontwikkelde een Python testraamwerk voor het testen van verschillende producten. De ontwikkelde software, die op verschillende platformen moet draaien, gebruikt verschillende drivers en bibliotheken. Om producten correct te kunnen testen, wordt het raamwerk vaak geüpdatet, bijvoorbeeld bij het uitbrengen van een nieuwe driver, bibliotheek of om nieuwe producten te ondersteunen. Het installatieproces is tijdrovend, foutgevoelig en wordt best geautomatiseerd. Door dit proces te automatiseren wordt het mogelijk om informatie over het installatie- en updateproces te verzamelen. Het doel van de thesis is het uitvoeren van onderzoek naar een efficiënte oplossing en het ontwikkelen van een prototype. Dit prototype wordt onderverdeeld in drie componenten: een packager, een deployment server en een deployment omgeving. In een eerste fase wordt de packager ontworpen. Deze staat in voor het samenvoegen van de software componenten. Fase twee van de thesis bestaat uit het uitwerken van de deployment server. Met de server worden de verschillende installers verspreid en wordt er informatie verzameld over de deployment environments. Als laatste wordt dan de deployment environment behandeld. In deze geïsoleerde omgeving kan het installatie- en updateproces veilig gebeuren. Na een grondige evaluatie van een eerste basisprototype wordt het ontwerp eventueel aangepast. Het prototype wordt in een laatste fase uitgebreid zodat een rapportering over geïnstalleerde versies, deployment status, … beschikbaar wordt voor het bedrijf.
 
-\underline{Trefwoorden:} installer, updater, Python, Docker
+\underline{Trefwoorden:} Automatische – installer –  testraamwerk - Python

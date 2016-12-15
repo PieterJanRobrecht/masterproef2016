@@ -25,7 +25,8 @@
 *.synctex.gz
 *.lol
 *.ps
-
+*.run.xml
+*.bcf
 *.exe
 data/
 *.msi
