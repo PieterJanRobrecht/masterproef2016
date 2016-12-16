@@ -9,13 +9,58 @@ Naar het einde van het hoofdstuk toe, zal een keuze gemaakt worden en zal voor i
 \section{Packager}
 De eerste component die besproken wordt is de packager.
 Zoals reeds besproken, moet tijdens het ontwerpen van deze component rekening gehouden worden met enkele eigenschappen.
-%Bron zoeken die aanhaalt waarom ik op een bepaalde manier alles verdeel
 Alvorens bepaald wordt welke technologie geschikt is, moet onderzocht worden wat ingepakt moet worden en op welke manier.
 Om een correct werkende applicatie te hebben, heeft het Python raamwerk verschillende drivers en bibliotheken nodig.
+\citet{Obreshkov2008244} bespreekt hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
+Het ATLAS project gebruikt CMT als configuratie manager.
+Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen \citep{Obreshkov2008244}.
+Een gelijkaardige structuur is wenselijk voor het probleem.
+Net zoals \citet{Obreshkov2008244} zou er voor ieder bibliotheek en driver een pakket voorzien worden.
+Hierdoor wordt de herbruikbaarheid bevordert en kan voor ieder pakket apart behandelt worden.
+%%% SAUCE gebruiken om statement te ondersteunen
+\citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
+Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
+Met behulp van een "Pacman file" is geweten hoe de ingepakte software behandelt moet worden.
+
+In voorbereiding op het academiejaar, was het mogelijk om een stage te lopen bij het bedrijf.
+Het doel van deze stage was het voorbereiden van de thesis.
+Tijdens deze voorbereiding, werd er vooral gezocht naar een goede technologie die gebruikt kon worden voor de packager.
+In wat volgt, gaat er een opsomming volgen van de onderzochte technologieën samen met hun voor- en nadelen.
+
+%%% LAYOUT neem ik hier subparagraph of subsection
+%%% SAUCE op welke manier bron naar wix main page zetten
+\subsection{WiX Toolset}
+Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt kunnen worden.
+Bron code wordt gecompileerd en vervolgens gelinkt om een executable te maken.
+De toolset zal .msi installatie pakketten, .msm merge modules en .msp patches combineren \citep{wixToolset}.
+
+
+\subsection{NSIS}
+
+
+\subsection{Chocolatey}
+
+
+\subsection{Qt Installer Framework}
+
+
+\section{Database}
+Het aantal pakketten die gebruikt gaan worden, gaan alleen toenemen.
+Naast deze groei zullen ook het aantal gebruikers toenemen.
+Daarom werd er geopteerd om een databank te ontwerpen.
+In overleg met het bedrijf werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
+Het ontwerp van de databank is terug te vinden in Figuur~\vref{fig:databank}.
+
+\begin{figure}[h!]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/databankOntwerp.png}}
+\caption{Ontwerp van de databank}
+\label{fig:databank}
+\end{figure}
+
 %bespreken van technologieen
 %manier van opdeling bespreken
-\citep{packAtlas} gaat op een gelijkaardig manier te werk. 
-Met behulp van een "Pacman file" is geweten hoe de ingepakte software moet worden behandelt.
+
 
 
 %\begin{figure}[!h]
@@ -25,9 +70,6 @@ Met behulp van een "Pacman file" is geweten hoe de ingepakte software moet worde
 %  \label{fig:overzichtBlok}
 %\end{figure}
 
-\section{Packager}
-Het eerste onderdeel van de applicatie is de packager.
-Zoals in Sectie~\ref{sec:probleem} is uitgelegd, moet de packager instaan voor het samenvoegen van alle drivers en bibliotheken.
 %
 %BlokSchema met de algemene structuur van de packager
 %

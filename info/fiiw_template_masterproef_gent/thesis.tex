@@ -35,6 +35,7 @@
 \newcommand{\vc}[1]{\mathbf{\bm{#1}}} % Vector command
 \usepackage[style=apa,natbib=true,backend=biber]{biblatex}
 \DeclareLanguageMapping{dutch}{dutch-apa}
+\usepackage{csquotes}
 \addbibresource{bibliografie.bib}
 \addbibresource{referenties.bib}
 
@@ -102,6 +103,7 @@
 %\bibliography{bibliografie, referenties}
 \nocite{*}
 \printbibliography[title={Referenties},keyword=referenties]
+\nocite{*}
 \printbibliography[title={Bibliografie},notkeyword=referenties]
 
 % Eventueel enkele appendices

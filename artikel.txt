@@ -106,6 +106,9 @@ Zoekterm: Software Packaging
 		
 		Misschien gebruiken voor Packager, uitleggen waarom ik het op zo'n manier opdeel.
 		
+	Organization and management of ATLAS offline software releases 
+		http://www.sciencedirect.com.kuleuven.ezproxy.kuleuven.be/science/article/pii/S0168900207020967
+		
 	Software Deployment, Past, Present and Future
 		http://limo.libis.be/primo_library/libweb/action/display.do?tabs=viewOnlineTab&ct=display&fn=search&doc=TN_ieee10.1109%2fFOSE.2007.20&indx=1&recIds=TN_ieee10.1109%2fFOSE.2007.20&recIdxs=0&elementId=&renderMode=poppedOut&displayMode=full&http://limo.libis.be:80/primo_library/libweb/action/expand.do?frbg=&frbrVersion=2&gathStatTab=true&dscnt=0&scp.scps=scope%3A%2832LIBIS_ALMA_DS_P%29%2Cscope%3A%28SCOPE_773%29%2Cscope%3A%28KUL%29%2Cprimo_central_multiple_fe&tb=t&mode=Basic&vid=KULeuven_ODISEE&tab=all_content_tab&srt=rank&dum=true&vl(freeText0)=Software%20Deployment%2C%20Past%2C%20Present%20and%20Future&dstmp=1476536812473&fromTabHeaderButtonPopout=true
 		http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/document/4221626/
