@@ -156,3 +156,15 @@ Zoekterm: Docker
 	The purely functional software deployment model
 		http://dspace.library.uu.nl/handle/1874/7540
 		Handig voor deployment server?
+		
+	Implications of Virtualization
+		http://www.dell.com/downloads/global/power/ps4q04-20040152-Shumate.pdf
+		miss wel een goede bron voor virtualisatie
+		
+	A Tailorable Environment for Assessing the Quality of Deployment Architectures in Highly Distributed Settings 
+		http://citeseerx.ist.psu.edu.kuleuven.ezproxy.kuleuven.be/viewdoc/download?doi=10.1.1.143.420&rep=rep1&type=pdf
+		geeft miss wel een goede gedistribueerde architectuur aan 
+		
+	Foundations of enterprise software deployment
+		https://www.researchgate.net/publication/3841553_Foundations_of_enterprise_software_deployment
+		Miss gebruiken voor case study?

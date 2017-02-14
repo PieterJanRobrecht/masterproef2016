@@ -27,6 +27,7 @@
 \allsectionsfont{\sffamily}
 \chapterfont{\raggedleft\sffamily}
 
+% Custom packages and commands
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{amsmath,bm,times}
@@ -36,6 +37,11 @@
 \usepackage[style=apa,natbib=true,backend=biber]{biblatex}
 \DeclareLanguageMapping{dutch}{dutch-apa}
 \usepackage{csquotes}
+\usepackage{booktabs}
+\usepackage{amsbsy}
+\usepackage{tabularx}
+\usepackage{pgffor}
+\usepackage{caption}
 \addbibresource{bibliografie.bib}
 \addbibresource{referenties.bib}
 
@@ -89,11 +95,11 @@
 % \selectlanguage{english} % For the english version
 \preface
 
-\input{hfdst1}
-\input{hfdst2}
-\input{hfdst3}
-\input{hfdst4}
-\input{hfdst5}
+\input{situering}
+\input{bespreking}
+\input{prototype}
+%\input{eindproduct}
+\input{conclusie}
 
 % Bibliografie: referenties. De items zitten in bibliografie.bib
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,7 +115,7 @@
 % Eventueel enkele appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
-\input{bijlage1}
+\input{flowcharts}
 
 % Bijlage met daarin het wetenschappelijk artikel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
