@@ -1,0 +1,11 @@
+{
+  "Package": {
+    "DisplayName": "Package",
+    "Description": "Cruciale package voor een correcte werking van het testframework",
+    "Version": "1.0.2-1",
+    "Script": "installscript.py",
+    "SortingPriority": 100,
+    "ReleaseDate": "2015-01-01",
+    "Default": "true"
+  }
+}

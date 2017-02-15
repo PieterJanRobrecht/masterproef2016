@@ -1,0 +1,10 @@
+# het maken van een image naam=releasedock en tag=1
+docker build -t releasedock:1 .
+# verwijderen van een image met force
+docker rmi -f TAG
+# oplijsten van containers
+docker ps
+# container laten lopen
+docker run --name containernaam -it imagenaam:tag 
+# commandline uitvoeren in container
+docker exec -it containernaam bash
