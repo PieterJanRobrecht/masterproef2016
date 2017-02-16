@@ -34,6 +34,8 @@ data/
 *.rar
 *.wixobj
 *.wixpdb
+*.gz
+*.run
 *.nupkg
 *.md
 *.pyd
