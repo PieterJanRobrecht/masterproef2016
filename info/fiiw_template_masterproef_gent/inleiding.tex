@@ -1,0 +1,41 @@
+%In dit hoofdstuk moet het volgende besproken worden:
+%-Uitleggen van het probleem
+%-Hoe ik tewerk ga gaan
+%-Gaan we concluderen met de onderzoeksvraag
+\chapter{Inleiding}\label{hfdst:situering}
+\section{Situering}
+%%% TODO meer schrijven over wat televic rail doet en wat zij maken -> uitleggen dat framework daarbij te pas komt
+%http://www.railway-technology.com/contractors/operation/televic-rail/
+Met meer dan 30 jaar ervaring in het ontwerpen en onderhouden van on-board communicatiesystemen, Televic Rail is een toonaangevende leverancier voor Passenger Information Systems, Entertainment Systems and Infotainment Systems.
+Dit internationale bedrijf, met vestingen in zowel Europa als de Verenigde State, combineren hun kennis en ervaring met een constante drang naar innovatie en zijn zo in staat om projectgerichte, cutting-edge oplossingen af te leveren die betrouwbare communicatie in treinen voorzien.
+
+LiveCom is Televic Rail nieuwste generatie van informatie management systemen, de integratie van alle aspecten van de on- en off-board reizigersinformatie, infotainment en entertainment. 
+Het stelt operatoren in staan om hun volledige verkeer schema's, dienstregelingen, routes, stations en alles met betrekking tot informatie en infotainment omtrent passagiers te beheren, met behulp van off-board software tools.
+
+iCoM, de geïntegreerde oplossing van Televic Rail voor passagiersgegevens en communicatie management, biedt het openbaar vervoer en spoorwegondernemingen een centraal systeem voor het creëren, beheren, distribueren en uitvoeren van real-time on en off-board generieke en commerciële passagiersinformatie op de vloot, in stations en bij haltes.
+
+Naast deze systemen heeft Televic verschillende mechatronica sensoren en veiligheid controlesystemen ontworpen.
+Alle systemen en apparaten zijn ontworpen in overeenstemming met de betreffende spoorwegsector normen en geschikt voor auto-body, draaistel en as montage eisen te voldoen. 
+On-board controllers verwerken sensordata informatie, sturen deze naar de betreffende actuators en treinbeheersingssystemen.
+Fysische parameters die momenteel worden ondersteund zijn onder andere versnelling, druk, rotatie, temperatuur, akoestische muziek en de verplaatsing.
+
+Om te voldoen aan de strenge veiligheidsnormen heeft Televic Rail een Python test framework ontworpen waarmee zij in staat zijn om verschillende producten te onderwerpen aan verschillende testscenario's.
+Het framework werd ontworpen om gebruikt te worden op verschillende testtorens en werd later aangepast om bruikbaar te zijn op gewone computers.
+Dit framework wordt intensief gebruikt tijdens het productieproces en is cruciaal voor het afleveren van producten die voldoen aan de strenge veiligheidsnormen.
+
+\section{Probleemstelling}\label{sec:probleem}
+Om een goede werking te verkrijgen steunt het Python testraamwerk op een verschillende drivers en bibliotheken.
+Hiernaast moet het raamwerk correct functioneren met de grote hoeveelheid aan producten die Televic fabriceert.
+Om ook deze te ondersteunen zijn er wederom verschillende drivers en bibliotheken nodig.
+Het gevolg hiervan is dat het installatieproces tijdrovend is en foutgevoelig.
+Bij het uitbrengen van een nieuwe versie van de applicatie, bijvoorbeeld bij het uitbrengen van een nieuwe driver, bibliotheek of om nieuwe producten te ondersteunen, moet de applicatie geüpdatet worden.
+Dit proces lijdt aan dezelfde gebreken als het installatieproces.
+Het installatie- en updateproces vraagt om een vereenvoudiging zodanig dat het testraamwerk gebruiksvriendelijker wordt.
+
+Naast het installatie- en updateproces vormt ook de groeiende hoeveelheid een probleem.
+Naarmate het aantal gebruikers stijgt, stijgt ook de vraag naar een algemene administratie interface.
+Hiermee wordt het mogelijk om verschillende gebruikers bij te staan maar ook om bij te houden hoe het uitrollen van een nieuwe versie van het testraamwerk verloopt.
+Deze informatie kan gebruikt worden om het verspreidingsproces bij te sturen zodanig dat een volgende keer het proces vlotter verloopt.
+
+\section{Overzicht}
+Het doel van deze thesis is dan ook een oplossing te vinden voor het bovengenoemde probleem.

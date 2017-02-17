@@ -6,124 +6,124 @@ In het volgende hoofdstuk worden de verschillende keuze toegelicht en vervolgens
 
 \section{Uitwerking}
 
-\subsection{Architectuur}
-De gekozen architectuur berust op verschillende concepten die gezien zijn in Hoofdstuk~\vref{hfdst:bespreking}.
-Wederom wordt het project opgedeeld in de drie grote componenten: de packager, deployment server en de deployment environment.
-Elke component wordt apart belicht, gevolgd door een globale bespreking.
-
-\subsubsection{Packager}
-De architectuur van de packager wordt gebaseerd op de architectuur en structuur van het Qt installer framework.
-Hierbij wordt bedoelt dat één overkoepelende installer wordt geproduceerd die bestaat uit verschillende kleine componenten.
-Het Qt installer framework wordt hiervoor niet zelf gebruikt.
-Deze keuze werd gemaakt op basis van verschillende argumenten.
-%het zorgt voor een beter bereik van de verschillende packages -> kunnen test tussendoor uitvoeren
-Door het personaliseren van de packager, is het mogelijk om iedere stap in het deployment proces te personaliseren.
-Op deze manier kan na het installeren van een pakket een verbeterde afhandeling plaats vinden.
-Een test kan uitgevoerd worden op het einde van de installatie, een handeling die met het Qt installer framework mogelijk is maar moeilijk te realiseren is.
-%geen gedoe met docker
-Doordat een gepersonaliseerde packager wordt ontworpen, worden problemen met Docker vermeden.
-In de deployment environment wordt Docker gebruikt om verscheidene problemen met het deployment proces op te vangen (dit wordt verder besproken).
-De Docker omgeving, zoals reeds vermeld in Sectie~\vref{sec:virtualisatie}, gebruikt van LXC.
-Het besturingssysteem van de containers aan de client side is hierdoor Linux.
-Windows gebruiken als besturingssysteem is mogelijk maar deze optie staat nog altijd in beta schoenen.
-De installer geproduceerd door het Qt installer framework moet dus compatibel zijn met Linux.
-Dit is mogelijk met het framework maar de productie van de installer moet ook plaatsvinden in een Linux besturingssysteem.
-Om dit te realiseren zou Docker gebruikt kunnen worden zodanig dat er een abstractie gedaan wordt van het host besturingssysteem.
-Zo'n opstelling creëren, waarbij een container gebruikt wordt met het Qt installer framework in verwerkt, brengt meer werkt en is omslachtiger ten opzichte van het zelf fabriceren van een packager met een gelijkaardige structuur en gelijkaardige functionaliteiten.
-
-%%% TODO schrijven hoe het er dan wel uit gaat zien
-De packager gaat een gelijkaardige structuur hebben als het Qt installer framework.
-Om de packager te maken wordt Python gebruikt als programmeertaal.
-Een installer bestaat uit verschillende pakketten en functioneert als overkoepelend geheel.
-Per test framework wordt één installer geassocieerd.
-Voor alle drivers/bibliotheken die nodig zijn, worden verschillende pakketten voorzien waarbij één driver hoort bij één pakket.
-Ieder pakket bestaat uit twee delen: een data en metadata gedeelte.
-Het data gedeelte bevat de effectieve driver/bibliotheek en het metadata gedeelte bevat de nodige beschrijving van het pakket in de vorm van een ``package.json''.
-Hiernaast zijn verschillende scripts aanwezig die gebruikt worden voor een gepersonaliseerde installatie.
-De structuur van een mogelijke installer is terug te vinden in Figuur~\vref{fig:installerStructuur}.
-In het voorbeeld wordt een installer opgebouwd bestaande uit twee delen.
-Het eerste deel bestaat uitsluitend uit configuratie bestanden en het tweede deel bestaat uit de pakketten.
-De twee onderdelen zijn terug te vinden in de rode rechthoek.
-Verder worden de packages ook opgedeeld in twee categorieën.
-De eerste categorie is cruciaal voor de correcte werking van het test framework.
-Dit onderdeel bestaat uit een versie van het test framework gecombineerd met de pakketten die nodig zijn voor een fatsoenlijke werking (deze pakketten worden aangegeven door de gele rechthoek).
-Hiernaast is er één pakket aanwezig die niet cruciaal is voor het testraamwerk maar wel nodig is om een correcte werking te verzekeren op de site zelf (aangegeven door de groene rechthoek).
-Deze bevindt zich in de tweede categorie.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/installerStructuur.png}}
-\caption{Structuur van een installer bestaande uit drie pakketten}
-\label{fig:installerStructuur}
-\end{figure}
-
-Om een dergelijke structuur op te bouwen, werkt de packager nauw samen met de databank waarin alle informatie vervat zit.
-Het ontwerp van de databank werd al uitvoerig besproken in Sectie~\vref{sec:databank} en is terug te vinden in Figuur~\vref{fig:databank}.
-
-\subsubsection{Deployment server}
-Het centrale systeem in de architectuur is de deployment server.
-Zoals reeds uitgelegd zal dit onderdeel instaan voor het verspreiden van de verschillende installers en functioneren als een verzamelcenter voor alle informatie.
-De architectuur van de deployment server wordt gebaseerd op de software dock architectuur die besproken werd in Sectie~\vref{sec:softwareDock} en is terug te vinden in Figuur~\vref{fig:softwareDockAangepast}.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/softwareDockAangepast.png}}
-\caption{Software Dock Architectuur \citep{hall1999cooperative}}
-\label{fig:softwareDockAangepast}
-\end{figure}
-
-De software dock architectuur bestaat uit 4 grote componenten, namelijk het release dock, field dock, event service en de agenten.
-Het release dock bevindt zich aan de serverzijde en bevat alle software van de packager.
-Met hulp van de packager worden verschillende releases geproduceerd.
-Als een release klaar is voor deployement wordt een event afgevuurd naar de event service.
-Alle agenten die geabonneerd zijn op het gepaste event worden vervolgens op de hoogte gebracht.
-Deze gedistribueerde architectuur laat een eenvoudige uitbreiding van het aantal docks toe.
-Het tweede type dock dat aanwezig is in de architectuur is de field dock.
-De verschillende clients functioneren als een field dock en zullen communiceren met het release dock aan de hand van de event-service.
-
-%%schrijven over hoe de agenten werken en hoe ze gaan werken volgens de handelingen van ORYA
-Naast de docks bevat de architectuur agenten.
-Deze staan in voor het uitvoeren van allerlei deployment gerelateerde handelingen.
-Iedere agent is gekoppeld aan één stap uit de software levenscyclus die besproken werd in Sectie~\vref{sec:softwareLevenscyclus}.
-Hiernaast zal aan iedere release van het release dock een subset van alle agenten toegevoegd en verscheept worden naar het field dock.
-Zo wordt bijvoorbeeld een agent voorzien die instaat voor het installatieproces.
-De agent wordt samen met de release verscheept naar het field dock waarna de agent in actie schiet.
-De agent begint met het creëren van een nieuwe Docker container waarin de installer losgelaten kan worden.
-Vervolgens zal de agent de installatie aanvangen en zullen de scripts horende bij de pakketten uitgevoerd worden in de container.
-Ieder agent zal een bepaalde set van handelingen uitvoeren die overeenkomt met een deployment proces die besproken werd in de ORYA case studie in Sectie~\vref{sec:ORYA}.
-Net zoals bij ORYA wordt ieder deployment proces beschreven aan de hand van andere deployment processen en basis activiteiten.
-Het creëren van een nieuwe container in de installatie agent wordt gezien als zo'n basis activiteit.
-In Figuur~\vref{fig:fieldDock} wordt de algemene structuur van een field dock weergegeven.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/fieldDock.png}}
-\caption{Structuur van een field dock}
-\label{fig:fieldDock}
-\end{figure}
-
-Door agenten te gebruiken, een strategie die ook gezien werd in de Atlas case studie in Sectie~\vref{sec:ATLAS}, wordt het mogelijk om alle stappen in de software levenscyclus uniek te behandelen.
-Hiernaast kan bij iedere release een andere set van agenten geassocieerd worden waardoor iedere release verder kan gepersonaliseerd worden.
-De volledige architectuur is terug te vinden in Figuur~\vref{fig:architectuur}.
-In de figuur zijn zowel de packager als de deployment environment toegevoegd.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/architectuur.png}}
-\caption{Architectuur van het prototype}
-\label{fig:architectuur}
-\end{figure}
-
-\subsubsection{Deployment environment}
-De deployment environment komt overeen met de field dock in de software dock architectuur.
-In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodanig dat het test framework geïnstalleerd wordt.
-Aan dit proces zijn de verschillende problemen verbonden die besproken zijn in Sectie~\vref{sec:softwareLevenscyclus}.
-Om de verschillende deployment problemen te vermijden en om ervoor te zorgen dat geen uitgebreide rollback strategieën nodig zijn, wordt een geïsoleerde omgeving voorzien waarin de software gedeployed kan worden. 
-Dit wordt gerealiseerd aan de hand van virtualisatie technieken, meer bepaald aan de hand van Docker.
-Docker wordt verkozen boven een gewone virtuele machine omdat het uitvoeren van handelingen (zoals opstarten, stoppen, \ldots) op een container minder resources en tijd vraagt in vergelijking met een virtuele machine.
-De container wordt vervolgens gebruikt om het testraamwerk in te installeren.
-Doordat een virtualisatie techniek wordt gebruikt, wordt het zeer eenvoudig om problemen tijdens het deployment en installatieproces op te vangen.
-In Figuur~\vref{fig:flow:install} en Figuur~\vref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollback proces zeer eenvoudig is.
+%\subsection{Architectuur}
+%De gekozen architectuur berust op verschillende concepten die gezien zijn in Hoofdstuk~\vref{hfdst:bespreking}.
+%Wederom wordt het project opgedeeld in de drie grote componenten: de packager, deployment server en de deployment environment.
+%Elke component wordt apart belicht, gevolgd door een globale bespreking.
+%
+%\subsubsection{Packager}
+%De architectuur van de packager wordt gebaseerd op de architectuur en structuur van het Qt installer framework.
+%Hierbij wordt bedoelt dat één overkoepelende installer wordt geproduceerd die bestaat uit verschillende kleine componenten.
+%Het Qt installer framework wordt hiervoor niet zelf gebruikt.
+%Deze keuze werd gemaakt op basis van verschillende argumenten.
+%%het zorgt voor een beter bereik van de verschillende packages -> kunnen test tussendoor uitvoeren
+%Door het personaliseren van de packager, is het mogelijk om iedere stap in het deployment proces te personaliseren.
+%Op deze manier kan na het installeren van een pakket een verbeterde afhandeling plaats vinden.
+%Een test kan uitgevoerd worden op het einde van de installatie, een handeling die met het Qt installer framework mogelijk is maar moeilijk te realiseren is.
+%%geen gedoe met docker
+%Doordat een gepersonaliseerde packager wordt ontworpen, worden problemen met Docker vermeden.
+%In de deployment environment wordt Docker gebruikt om verscheidene problemen met het deployment proces op te vangen (dit wordt verder besproken).
+%De Docker omgeving, zoals reeds vermeld in Sectie~\vref{sec:virtualisatie}, gebruikt van LXC.
+%Het besturingssysteem van de containers aan de client side is hierdoor Linux.
+%Windows gebruiken als besturingssysteem is mogelijk maar deze optie staat nog altijd in beta schoenen.
+%De installer geproduceerd door het Qt installer framework moet dus compatibel zijn met Linux.
+%Dit is mogelijk met het framework maar de productie van de installer moet ook plaatsvinden in een Linux besturingssysteem.
+%Om dit te realiseren zou Docker gebruikt kunnen worden zodanig dat er een abstractie gedaan wordt van het host besturingssysteem.
+%Zo'n opstelling creëren, waarbij een container gebruikt wordt met het Qt installer framework in verwerkt, brengt meer werkt en is omslachtiger ten opzichte van het zelf fabriceren van een packager met een gelijkaardige structuur en gelijkaardige functionaliteiten.
+%
+%%%% TODO schrijven hoe het er dan wel uit gaat zien
+%De packager gaat een gelijkaardige structuur hebben als het Qt installer framework.
+%Om de packager te maken wordt Python gebruikt als programmeertaal.
+%Een installer bestaat uit verschillende pakketten en functioneert als overkoepelend geheel.
+%Per test framework wordt één installer geassocieerd.
+%Voor alle drivers/bibliotheken die nodig zijn, worden verschillende pakketten voorzien waarbij één driver hoort bij één pakket.
+%Ieder pakket bestaat uit twee delen: een data en metadata gedeelte.
+%Het data gedeelte bevat de effectieve driver/bibliotheek en het metadata gedeelte bevat de nodige beschrijving van het pakket in de vorm van een ``package.json''.
+%Hiernaast zijn verschillende scripts aanwezig die gebruikt worden voor een gepersonaliseerde installatie.
+%De structuur van een mogelijke installer is terug te vinden in Figuur~\vref{fig:installerStructuur}.
+%In het voorbeeld wordt een installer opgebouwd bestaande uit twee delen.
+%Het eerste deel bestaat uitsluitend uit configuratie bestanden en het tweede deel bestaat uit de pakketten.
+%De twee onderdelen zijn terug te vinden in de rode rechthoek.
+%Verder worden de packages ook opgedeeld in twee categorieën.
+%De eerste categorie is cruciaal voor de correcte werking van het test framework.
+%Dit onderdeel bestaat uit een versie van het test framework gecombineerd met de pakketten die nodig zijn voor een fatsoenlijke werking (deze pakketten worden aangegeven door de gele rechthoek).
+%Hiernaast is er één pakket aanwezig die niet cruciaal is voor het testraamwerk maar wel nodig is om een correcte werking te verzekeren op de site zelf (aangegeven door de groene rechthoek).
+%Deze bevindt zich in de tweede categorie.
+%
+%\begin{figure}[!ht]
+%\centering
+%\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/installerStructuur.png}}
+%\caption{Structuur van een installer bestaande uit drie pakketten}
+%\label{fig:installerStructuur}
+%\end{figure}
+%
+%Om een dergelijke structuur op te bouwen, werkt de packager nauw samen met de databank waarin alle informatie vervat zit.
+%Het ontwerp van de databank werd al uitvoerig besproken in Sectie~\vref{sec:databank} en is terug te vinden in Figuur~\vref{fig:databank}.
+%
+%\subsubsection{Deployment server}
+%Het centrale systeem in de architectuur is de deployment server.
+%Zoals reeds uitgelegd zal dit onderdeel instaan voor het verspreiden van de verschillende installers en functioneren als een verzamelcenter voor alle informatie.
+%De architectuur van de deployment server wordt gebaseerd op de software dock architectuur die besproken werd in Sectie~\vref{sec:softwareDock} en is terug te vinden in Figuur~\vref{fig:softwareDockAangepast}.
+%
+%\begin{figure}[!ht]
+%\centering
+%\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/softwareDockAangepast.png}}
+%\caption{Software Dock Architectuur \citep{hall1999cooperative}}
+%\label{fig:softwareDockAangepast}
+%\end{figure}
+%
+%De software dock architectuur bestaat uit 4 grote componenten, namelijk het release dock, field dock, event service en de agenten.
+%Het release dock bevindt zich aan de serverzijde en bevat alle software van de packager.
+%Met hulp van de packager worden verschillende releases geproduceerd.
+%Als een release klaar is voor deployement wordt een event afgevuurd naar de event service.
+%Alle agenten die geabonneerd zijn op het gepaste event worden vervolgens op de hoogte gebracht.
+%Deze gedistribueerde architectuur laat een eenvoudige uitbreiding van het aantal docks toe.
+%Het tweede type dock dat aanwezig is in de architectuur is de field dock.
+%De verschillende clients functioneren als een field dock en zullen communiceren met het release dock aan de hand van de event-service.
+%
+%%%schrijven over hoe de agenten werken en hoe ze gaan werken volgens de handelingen van ORYA
+%Naast de docks bevat de architectuur agenten.
+%Deze staan in voor het uitvoeren van allerlei deployment gerelateerde handelingen.
+%Iedere agent is gekoppeld aan één stap uit de software levenscyclus die besproken werd in Sectie~\vref{sec:softwareLevenscyclus}.
+%Hiernaast zal aan iedere release van het release dock een subset van alle agenten toegevoegd en verscheept worden naar het field dock.
+%Zo wordt bijvoorbeeld een agent voorzien die instaat voor het installatieproces.
+%De agent wordt samen met de release verscheept naar het field dock waarna de agent in actie schiet.
+%De agent begint met het creëren van een nieuwe Docker container waarin de installer losgelaten kan worden.
+%Vervolgens zal de agent de installatie aanvangen en zullen de scripts horende bij de pakketten uitgevoerd worden in de container.
+%Ieder agent zal een bepaalde set van handelingen uitvoeren die overeenkomt met een deployment proces die besproken werd in de ORYA case studie in Sectie~\vref{sec:ORYA}.
+%Net zoals bij ORYA wordt ieder deployment proces beschreven aan de hand van andere deployment processen en basis activiteiten.
+%Het creëren van een nieuwe container in de installatie agent wordt gezien als zo'n basis activiteit.
+%In Figuur~\vref{fig:fieldDock} wordt de algemene structuur van een field dock weergegeven.
+%
+%\begin{figure}[!ht]
+%\centering
+%\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/fieldDock.png}}
+%\caption{Structuur van een field dock}
+%\label{fig:fieldDock}
+%\end{figure}
+%
+%Door agenten te gebruiken, een strategie die ook gezien werd in de Atlas case studie in Sectie~\vref{sec:ATLAS}, wordt het mogelijk om alle stappen in de software levenscyclus uniek te behandelen.
+%Hiernaast kan bij iedere release een andere set van agenten geassocieerd worden waardoor iedere release verder kan gepersonaliseerd worden.
+%De volledige architectuur is terug te vinden in Figuur~\vref{fig:architectuur}.
+%In de figuur zijn zowel de packager als de deployment environment toegevoegd.
+%
+%\begin{figure}[!ht]
+%\centering
+%\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/architectuur.png}}
+%\caption{Architectuur van het prototype}
+%\label{fig:architectuur}
+%\end{figure}
+%
+%\subsubsection{Deployment environment}
+%De deployment environment komt overeen met de field dock in de software dock architectuur.
+%In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodanig dat het test framework geïnstalleerd wordt.
+%Aan dit proces zijn de verschillende problemen verbonden die besproken zijn in Sectie~\vref{sec:softwareLevenscyclus}.
+%Om de verschillende deployment problemen te vermijden en om ervoor te zorgen dat geen uitgebreide rollback strategieën nodig zijn, wordt een geïsoleerde omgeving voorzien waarin de software gedeployed kan worden. 
+%Dit wordt gerealiseerd aan de hand van virtualisatie technieken, meer bepaald aan de hand van Docker.
+%Docker wordt verkozen boven een gewone virtuele machine omdat het uitvoeren van handelingen (zoals opstarten, stoppen, \ldots) op een container minder resources en tijd vraagt in vergelijking met een virtuele machine.
+%De container wordt vervolgens gebruikt om het testraamwerk in te installeren.
+%Doordat een virtualisatie techniek wordt gebruikt, wordt het zeer eenvoudig om problemen tijdens het deployment en installatieproces op te vangen.
+%In Figuur~\vref{fig:flow:install} en Figuur~\vref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollback proces zeer eenvoudig is.
 
 \subsection{Flowcharts}
 
