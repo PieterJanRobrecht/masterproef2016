@@ -376,67 +376,78 @@ Een voordeel van de VMs ten opzichte van Docker is hun maturiteit.
 VMs bestaan langer en hebben zichzelf kunnen bewijzen in verschillende situaties.
 
 \subsection{Technologieën}
-In voorbereiding op het academiejaar, was het mogelijk om een stage te lopen bij het bedrijf.
-Het doel van deze stage was het voorbereiden van de thesis.
-Tijdens deze voorbereiding, werd er vooral gezocht naar een goede technologie die gebruikt kon worden voor de packager.
-In wat volgt, gaat er een opsomming volgen van de onderzochte technologieën samen met hun voor- en nadelen.
+Implementaties in verschillende programmeertalen, verschillende data representatie formats of incompatibele runtime environments kunnen aan de basis liggen voor een lastige integratie van computerprogramma's.
+Door gebruik te maken van additionele software, wordt het mogelijk om het gat tussen de verschillen te overbruggen  \citep{callahan1998software}.
+Het Python testraamwerk is een verzameling van verschillende drivers en bibliotheken elk met een eigen implementatie.
+In de volgende Sectie wordt er gekeken naar verschillende software oplossingen waarmee dit probleem opgelost kan worden.
 
-%%% TODO schrijven van voor- en nadelen van de verschillende techs
-%%% LAYOUT paragraph of subsection?
-%%% LAYOUT 1 of meerdere tabellen?
-\subsubsection{WiX Toolset}
-Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt kunnen worden.
-Bron code wordt gecompileerd en vervolgens gelinkt om een executable te maken.
-De toolset zal .msi installatie pakketten, .msm merge modules en .msp patches combineren \citep{wixToolset}.
-
-Aan deze technologie zijn verschillende plus- en minpunten verbonden.
-Een vergelijking van de verschillende voor- en nadelen is terug te vinden in Tabel~\ref{tab:voorNadelen}.
-In de tabel wordt vermeld dat WiX een diepe integratie heeft met Windows.
-Dit komt doordat WiX installers produceert voor de Windows Installer, het Windows installation engine.
-Zulke installers worden gemaakt aan de hand van XML bestanden die de verschillende elementen definiëren  \citep{wixTutorial}.
-\citet{xmill} haalt verschillende eigenschappen aan van XML waar rekening gehouden moet worden.
-XML is niet het meest efficiënte dataformaat maar biedt een verhoogde flexibiliteit aan.
+Om de verschillende technologieën te vergelijken werd een algemeen testscenario uitgedacht.
+Het scenario ziet er als volgt uit: er moet een installer gemaakt worden waarmee twee verschillende pakketten (die drivers en bibliotheken moeten voorstellen) geïnstalleerd moeten worden.
+Hierna werd er onderzocht hoe één van de twee pakketten geüpdatet kon worden.
+Door de technologieën te onderwerpen aan een test, wordt het mogelijk om de voor- en nadelen van iedere technologie te achterhalen.
+Hiernaast wordt het ook mogelijk om de technologieën te vergelijken aangezien zij eenzelfde functionaliteit moeten voorzien.
 
 \begin{table}[]
 \centering
-\caption{My caption}
-\label{tab:voorNadelen}
-\begin{tabular}{clll}
+\begin{tabular*}{\linewidth}{clll}
 \hline
-\multicolumn{4}{c}{\textbf{WiX Toolset}}                    \\ \hline
-\multicolumn{2}{c}{Pro} & \multicolumn{2}{c}{Cons} \\ \hline
-\multicolumn{2}{l}{Diepe integratie met Windows \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{l}{XML structuren zorgt voor veel schrijfwerk \par Niet cross-platform}    \\ \hline
-\multicolumn{4}{c}{\textbf{NSIS}}                           \\ \hline
-\multicolumn{2}{c}{Pro} & \multicolumn{2}{c}{Cons} \\ \hline
-\multicolumn{2}{l}{Scripting taal \par Verschillende plug-ins beschikbaar}   & \multicolumn{2}{l}{ Niet cross-platform \par Geen structuur voor packages}    \\ \hline
-\multicolumn{4}{c}{\textbf{Chocolatey}}                     \\ \hline
-\multicolumn{2}{c}{Pro} & \multicolumn{2}{c}{Cons} \\ \hline
-\multicolumn{2}{l}{Volledige deployment infrastructuur al aanwezig}   & \multicolumn{2}{l}{Niet cross-platform \par Command-line tool}    \\ \hline
-\multicolumn{4}{c}{\textbf{Qt Installer Framework}}         \\ \hline
-\multicolumn{2}{c}{Pro} & \multicolumn{2}{c}{Cons} \\ \hline
-\multicolumn{2}{l}{Cross-platform \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{l}{XML structuren zorgt voor veel schrijfwerk \par Enkel Linux installer maken in Linux} \\ \hline
-\end{tabular}
+\multicolumn{4}{p{\linewidth}}{\centering \textbf{WiX Toolset}}                    \\ 
+\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+\multicolumn{2}{p{0.5\linewidth}}{Diepe integratie met Windows \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{p{0.5\linewidth}}{XML structuren zorgt voor veel overhead \par Niet cross-platform}    \\ \hline
+\multicolumn{4}{p{\linewidth}}{\centering \textbf{NSIS}}                           \\ 
+\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+\multicolumn{2}{p{0.5\linewidth}}{Scripting taal \par Verschillende plug-ins beschikbaar}   & \multicolumn{2}{p{0.5\linewidth}}{ Niet cross-platform \par Geen structuur voor packages}    \\ \hline
+\multicolumn{4}{p{\linewidth}}{\centering \textbf{Chocolatey}}                     \\ 
+\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+\multicolumn{2}{p{0.5\linewidth}}{Volledige deployment infrastructuur al aanwezig}   & \multicolumn{2}{p{0.5\linewidth}}{Niet cross-platform \par Command-line tool}    \\ \hline
+\multicolumn{4}{p{\linewidth}}{\centering \textbf{Qt Installer Framework}}         \\ 
+\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+\multicolumn{2}{p{0.5\linewidth}}{Cross-platform \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{p{0.5\linewidth}}{XML structuren zorgt voor veel schrijfwerk \par Enkel Linux installer maken in Linux} \\ \hline
+\end{tabular*}
+\caption{Voor- en nadelen van de verschillende technologieën}
+\label{tab:voorNadelen}
 \end{table}
+
+%%% TODO schrijven van voor- en nadelen van de verschillende techs
+\subsubsection{WiX Toolset}
+Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt worden van XML broncode.
+De toolset is geschreven in C\# en heeft het .Net framework nodig om te kunnen functioneren.
+Bron code wordt gecompileerd en vervolgens gelinkt om een executable te maken.
+Met de toolset kunnen .msi installatie pakketten, .msm merge modules en .msp patches gecombineerd worden tot een Windows executabel.\citep{wixToolset}.
+
+Aan deze technologie zijn verschillende voor- en nadelen verbonden (zie Tabel~\ref{tab:voorNadelen}).
+Een fragment van de WiX toolset code is terug te vinden in Listing~\vref{list:wix}.
+De WiX toolset maakt installer uitsluitend bedoelt voor de Windows installation engine.
+Hierdoor worden verscheidene functionaliteiten eenvoudig te gebruiken, zoals het maken van uitzonderingen in de Windows Firewall.
+Door gebruik te maken van de Windows installation engine is het niet mogelijk om de executabel te gebruiken in Linux omgevingen\footnote{Dit kan eventueel omzeilt worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}. Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.}.
+WiX maakt gebruik van XML broncode om verschillende elementen te definiëren.
+\citet{xmill} geeft al aan dat XML niet een van de meest efficiënte dataformaten is, maar het verhoogd de flexibiliteit wel.
+Het creëren van een XML bestand met de hand is een langdradig en moeilijk werk.
 
 \subsubsection{NSIS}
 Nullsoft Scriptable Install System is een open source systeem waarmee Windows installers gemaakt kunnen worden.
-Zoals de naam aangeeft, is NSIS script-based waardoor installers logica bevatten waarmee verschillende installatie taken  behandelt kunnen worden.
-Hiernaast bestaan er al verschillende plug-ins en scripts voor verschillende taken af te handelen \citep{nsisMain}.
+Zoals de naam aangeeft, is NSIS script-based.
+Hierdoor bevatten installers de nodige om verschillende installatie taken uit te voeren.
+Door de grote gebruikersbasis is een grote hoeveelheid plug-ins en scripts beschikbaar.
+Alle plug-ins en scripts kunnen op een eenvoudige manier aan een installer toegevoegd worden voor een verhoogde functionaliteit \citep{nsisMain}.
 
-Aan deze technologie zijn verschillende plus- en minpunten verbonden.
-Een vergelijking van de verschillende voor- en nadelen is terug te vinden in Tabel~\ref{tab:voorNadelen}.
-Aangezien NSIS een scripting taal gebruikt om een installer te definiëren, is het zeer eenvoudig om een eenvoudige installer te creëren.
-Gecombineerd met de grote hoeveelheid aan plug-ins die aanwezig zijn door de community, wordt het eenvoudig om een installer te produceren die het probleem kan oplossen.
-De tool ondersteunt geen structuur waarmee verschillende pakketten gedefinieerd kunnen worden.
-Zoals WiX Toolset is deze technologie uitsluitend voor Windows.
+De voor- en nadelen verbonden aan NSIS zijn terug te vinden in Tabel~\ref{tab:voorNadelen}.
+Met de scripting taal van NSIS is het mogelijk om eenvoudige installer te definiëren (een voorbeeld hiervan is terug te vinden in Listing~\vref{list:nsis}).
+De scripting taal is intuïtiever te gebruiken in vergelijking met de XML bestanden van Wix Toolset.
+Dankzij grote hoeveelheid aan plug-ins die aanwezig zijn, is het eenvoudig om een installer te creëren met verschillende functionaliteiten.
+De gecreëerde installer is een Windows executabel en de opmerking gegeven bij de WiX Toolset is hier ook van toepassing.
+Het feit dat NSIS bedoelt is om eenvoudige installers te maken zorgt ervoor dat het niet mogelijk is om aparte pakketten te definiëren.
+Ieder pakket kan wel een eigen configuratie hebben maar dit wordt allemaal toegevoegd aan één script.
+Bij een grote hoeveelheid aan pakketten leidt tot wanorde en is er geen globaal overzicht.
+NSIS beidt ook geen mogelijkheden aan om geïnstalleerde software up te daten.
+Om die eigenschappen toe te voegen moet er beroep gedaan worden op andere software.
 
 \subsubsection{Chocolatey}
 Volgens \citet{chocoAbout} is Chocolatey een package mangager voor Windows net zoals apt-get voor Linux is.
 Het is ontworpen als een gedecentraliseerd framework met als doel het snel installeren van applicaties en tools.
-Het werd gebouwd boven op het NuGet infrastructuur en gebruikt PowerShell als zijn focus voor het verspreiden van de packages.
+Chocolatey werd gebouwd boven op de NuGet infrastructuur gecombineerd voor het verspreiden van de packages en gebruikt PowerShell voor een gepersonaliseerde installatie.
 
-Aan deze technologie zijn verschillende plus- en minpunten verbonden.
-Een vergelijking van de verschillende voor- en nadelen is terug te vinden in Tabel~\ref{tab:voorNadelen}.
+In Tabel~\ref{tab:voorNadelen} zijn de verschillende voor- en nadelen gekoppeld aan Chocolatey terug te vinden.
 Het grootste voordeel dat bekomen wordt bij het gebruiken van een package manager is het al bestaan van een deployment infrastructuur. 
 Na het installeren van Chocolatey op de client kunnen alle nodige packages voor het framework geïnstalleerd worden.
 Hiernaast kunnen scripts gekoppeld worden aan iedere package zodanig dat een aangepaste installatie mogelijk is.
@@ -457,8 +468,6 @@ Een nadeel dat hieraan verbonden is, is dat een Linux installer enkel kan gemaak
 Het is niet mogelijk om een Linux installer te maken op een Windows systeem.
 Hiernaast is het wel mogelijk om voor ieder pakket een aparte installatieprocedure te implementeren.
 
-%%% TODO
-Schrijven over het gebruiken van Windows .exe in Linux? Bijvoorbeeld hoe Wine misschien een oplossing is?
+%%% TODO Schrijven over het gebruiken van Windows .exe in Linux? Bijvoorbeeld hoe Wine misschien een oplossing is?
 
-%%% TODO
-Schrijven over de test setup voor de verschillende technologieën die gebruikt is tijdens de stage?
+%%% TODO Schrijven over de test setup voor de verschillende technologieën die gebruikt is tijdens de stage?
