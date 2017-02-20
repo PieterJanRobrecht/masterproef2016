@@ -1,18 +1,35 @@
-from subprocess import call
+import threading
+import time
 
 
-class Agent(object):
-    def __init__(self, name):
-        self.name = name
+class ThreadingExample(object):
+    """ Threading example class
+    The run() method will be started and it will run in the background
+    until the application exits.
+    """
 
-    def start(self):
-        print('Print in Agent')
+    def __init__(self, interval=1):
+        """ Constructor
+        :type interval: int
+        :param interval: Check interval, in seconds
+        """
+        self.interval = interval
 
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True                            # Daemonize thread
+        thread.start()                                  # Start the execution
+        print("hiero")
 
-class InstallAgent(Agent):
-    def __init__(self):
-        super(InstallAgent, self).__init__("install")
+    def run(self):
+        """ Method that runs forever """
+        while True:
+            # Do something
+            print('Doing something imporant in the background')
 
-    def start(self):
-        # Don't use shell=True together with a command from external input, it will result in shell injection
-        call(['docker build -t releasedock'], shell=True)
+            time.sleep(self.interval)
+
+example = ThreadingExample()
+time.sleep(3)
+print('Checkpoint')
+time.sleep(2)
+print('Bye')

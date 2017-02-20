@@ -5,45 +5,50 @@ Aan de hand van deze bevindingen gaat een architectuur en structuur ontworpen wo
 Deze vormen de basis voor de implementatie van de demo.
 
 \section{Analyse}
+Het probleem van Televic was het volgende:
+Televic fabriceert producten die moeten voldoen aan strenge veiligheidsnormen.
+Om hun producten hierop te kunnen testen heeft Televic een Python testraamwerk ontworpen waarmee het mogelijk wordt om de producten aan verschillende testscenario's te onderwerpen.
+Dit testraamwerk maakt gebruik van een grote set aan drivers en bibliotheken om een correcte werking te garanderen.
+Een direct gevolg hiervan is dat het installatieproces op een nieuwe testtoren een uitgebreide klus is.
+Hiernaast groeit het aantal gebruikers van het testraamwerk continu samen met het aantal drivers en bibliotheken.
+Het doel is om een systeem te ontwikkelen dat Televic kan bijstaan bij het installatie en verspreidingsproces.
+Een verdere analyse is wel nodig.
+Zo is het mogelijk om een applicatie te ontwikkelen die voldoet aan de initiële probleemstelling maar ook uitbreidbaar is naar de toekomst toe.
+
 %Packager
-Een probleemanalyse onthulde al snel dat dit probleem onder te verdelen is in verschillende deelproblemen.
-Het framework bestaat uit verschillende componenten, hieronder vallen de drivers en bibliotheken.
-Elke component heeft een unieke installatiewijze en de componenten moeten in een specifieke volgorde geïnstalleerd worden.
-Hiernaast moeten verscheidene componenten geconfigureerd worden aan de hand van een configuratiebestand.
-Dit configuratiebestand is doelsysteem specifiek.
-Tijdens het onderzoek zal er onderzocht welke technologieën gebruikt zal worden om al deze componenten te combineren tot één uitvoerbaar bestand.
-Bij het selectieproces moet er rekening gehouden worden met de toekomst.
-Er wordt best een technologie gekozen die cross-platform is, zodanig dat het bedrijf niet beperkt wordt in de toekomst.
+De probleemanalyse onthulde al snel dat dit probleem onder te verdelen is in verschillende deelproblemen.
+Het testraamwerk bestaat uit verschillende componenten, hieronder vallen de drivers en bibliotheken.
+Elke component heeft een aparte installatiewijze en moeten sommige componenten voor andere geïnstalleerd worden.
+Zo zal Python één van de eerste componenten zijn die geïnstalleerd moet worden.
+Hiernaast moeten verscheidene componenten geconfigureerd tijdens het installatieproces aan de hand van een configuratiebestand.
+Dit configuratiebestand hoort samen met de testtoren waarop het testraamwerk op geïnstalleerd word.
+Door gebruik te maken van additionele software worden verschillen in implementaties, door bijvoorbeeld verschillende programmeertalen, opgevangen.
+Een stuk van de applicatie zal dus bestaan uit deze additionele software die instaat voor het inpakken van de componenten.
+In de rest van de thesis zal naar dit onderdeel de \emph{packager} heten.
+Hiervoor kan beroep gedaan worden op verscheidene technologieën, structuren en architecturen die besproken werden in Sectie~\vref{sec:technologieen}.
 
 %Server
 De probleemanalyse onthulde ook dat de verschillende executables verspreidt moeten worden.
 Door dit proces te automatiseren, is het mogelijk om waardevolle informatie te verzamelen.
-Hiermee zouden rapporten gegeneerd kunnen worden voor het bedrijf.
-Tijdens het ontwerpen zal schaalbaarheid een belangrijke factor spelen.
-Naar de toekomst toe zal het aantal systemen waarop de applicatie geïnstalleerd wordt toenemen.
+Met deze informatie kunnen rapporten gegeneerd worden over het deployment proces.
+In Secties~\ref{sec:deployment} - \ref{sec:caseStudies} werden verschillende problemen maar ook oplossingen besproken die aan de basis liggen voor het ontwerp van dit onderdeel van de applicatie. 
+In het vervolg van de thesis zal dit onderdeel (dat zal instaan voor het verspreiden van het testraamwerk maar ook voor de communicatie tussen de producten van het testraamwerk en de gebruikers) vermeld worden als de \emph{deployment server}.
 
 %Environment
-Zoals reeds hierboven vermeld, is het installatieproces foutgevoelig.
-Na de foutanalyse bleek dat hiervoor een schaalbare oplossing voor gevonden moet worden.
-Bij het finaliseren van een component installatie, moeten de functionaliteiten van de component gecontroleerd worden.
-Mocht deze incorrect functioneren dan moet een gepaste actie, eventueel een rollback, gebeuren. 
-Ook na de volledige installatie moet gecontroleerd worden of het geheel correct functioneert.
-Hierdoor wordt er voorkomen dat er nodeloos veel tijd verloren gaat in het herinstalleren van de applicatie.
-Robuustheid zal een belangrijke component zijn tijdens de ontwerpfase.
-Bij het ontwerpen moet gebruiksvriendelijkheid in het achterhoofd gehouden worden.
+In Sectie~\vref{sec:softwareLevenscyclus} werd besproken welke problemen kunnen optreden tijdens het installatieproces.
+Deze problemen moeten opgevangen worden om een schaalbare oplossing te bedenken voor Televic.
+Om dit op te vangen, kan er gebruik gemaakt worden van één (of meerdere) strategieën die besproken werd in Sectie~\vref{sec:rollback}.
+Dit onderdeel van de applicatie vooral aanwezig aan de client-side aangezien dat de plaats is waar het testraamwerk aanwezig zal zijn.
+In de loop van de thesis zal naar dit onderdeel verwezen worden als de \emph{deployment environment}.
 
-Na de probleemanalyse werd het al snel duidelijk dat het werk op te delen valt in drie grote componenten.
+Na de probleemanalyse is het nu duidelijk dat het werk op te delen valt in drie grote componenten.
 Deze drie onderdelen zullen de basis vormen voor de architectuur en zullen gebruikt worden als leidraad.
-Het eerste onderdeel zal bestaan uit een packager met als doel het inpakken van de nodige drivers, bibliotheken, ... .
-Naast de packager is er een deployment server nodig die instaat voor het verspreiden van de installers die de packager aflevert.
-Dankzij het automatiseren van de deployment, kan het installatieproces per client getrackt worden. %getrackt is juist
-Om deze stap te vereenvoudigen, moet aan de client-side een deployment environment voorzien worden.
-In die omgeving wordt de installatie geïsoleerd.
+Het eerste onderdeel zal bestaan uit de packager met als doel het inpakken van de nodige drivers, bibliotheken, ... .
+Naast de packager is er de deployment server instaat voor het verspreiden van de installers die de packager aflevert.
+Aan de client-side zal de deployment environment aanwezig zijn waardoor installatie-complicaties vermindert worden door de installatie te isoleren.
 Mocht een rollback nodig zijn, dan kan deze op een eenvoudige manier gebeuren.
-
-Gedurende deze thesis wordt een prototype ontworpen.
 In Figuur~\vref{fig:overzichtsDiagram} wordt de algemene structuur van de applicatie weergegeven.
-Met behulp van deze basis is het mogelijk om een demo te produceren die de verschillende problemen verhelpt.
+Met behulp van deze basis is het mogelijk om een demo te produceren voor de finale verdediging.
 
 \begin{figure}[!hbt]
 \centering
@@ -52,7 +57,7 @@ Met behulp van deze basis is het mogelijk om een demo te produceren die de versc
   \label{fig:overzichtsDiagram}
 \end{figure}
 
-\section{Databank}\label{sec:databank}
+\section{Databank ontwerp}\label{sec:databank}
 Het aantal pakketten die gebruikt gaan worden, gaan alleen toenemen.
 Naast deze groei zullen ook het aantal gebruikers toenemen.
 Daarom werd er geopteerd om een databank te ontwerpen voor het opslaan van alle cruciale data.

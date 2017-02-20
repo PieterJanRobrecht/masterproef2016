@@ -82,7 +82,7 @@ Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Deployment strategieën}
+\section{Deployment strategieën}\label{sec:deployment}
 De eerste stap in de softwarelevenscyclus bestaat uit het uitbrengen van de software.
 De software moet bij de gebruiker terecht komen voordat hij/zij deze kan gebruiken.
 
@@ -157,7 +157,7 @@ Op basis van deze informatie wordt een context opgebouwd waarin de releases van 
 De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het verbruikers systeem ondervragen.
 Aangezien kritische client-side informatie op een gestandaardiseerde wijze aangeboden wordt, met behulp van een geneste collectie van pair-values die een hiërarchie vormen, kan de installatie van de software gepersonaliseerd worden \citep{hall1999cooperative}.
 
-\section{Case studies}
+\section{Case studies}\label{sec:caseStudies}
 Door de jaren heen zijn er verschillende technologieën ontwikkeld die het probleem van software deployment aanpakken.
 In wat volgt, worden enkele van deze technologieën besproken gebaseerd op enkele case studies die \citet{softwareDeployment} aanreikt.
 
@@ -299,7 +299,10 @@ Met deze strategie is het even eenvoudig om pakketten te installeren en up-to-da
 Via de website van de verdeler kan een link gebruikt worden om het nodige pakket te installeren.
 \end{itemize}
 
-\section{Rollback}
+\subsection{Ansible}
+%https://cdn2.hubspot.net/hub/330046/file-480366556-pdf/pdf_content/Ansible_in_Depth.pdf?t=1487567092458
+
+\section{Rollback}\label{sec:rollback}
 Het deployen van software op een doelsysteem brengt verscheidene problemen met zich mee.
 In de levenscyclus van software zijn er verschillende staten waarin de software moet aangepast worden.
 Zoals reeds besproken in Sectie~\vref{sec:softwareLevenscyclus}, zijn er verschillende problemen die kunnen optreden tijdens één van deze staten.
@@ -375,7 +378,7 @@ Dit komt omdat er enkel een proces moet afgesloten worden in tegenstelling tot h
 Een voordeel van de VMs ten opzichte van Docker is hun maturiteit.
 VMs bestaan langer en hebben zichzelf kunnen bewijzen in verschillende situaties.
 
-\subsection{Technologieën}
+\subsection{Technologieën}\label{sec:technologieen}
 Implementaties in verschillende programmeertalen, verschillende data representatie formats of incompatibele runtime environments kunnen aan de basis liggen voor een lastige integratie van computerprogramma's.
 Door gebruik te maken van additionele software, wordt het mogelijk om het gat tussen de verschillen te overbruggen  \citep{callahan1998software}.
 Het Python testraamwerk is een verzameling van verschillende drivers en bibliotheken elk met een eigen implementatie.
