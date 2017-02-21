@@ -58,7 +58,7 @@ Met behulp van deze basis is het mogelijk om een demo te produceren voor de fina
 \end{figure}
 
 \section{Databank ontwerp}\label{sec:databank}
-Het aantal pakketten die gebruikt gaan worden, gaan alleen toenemen.
+Het aantal pakketten die gebruikt gaan worden, gaat alleen toenemen.
 Naast deze groei zullen ook het aantal gebruikers toenemen.
 Daarom werd er geopteerd om een databank te ontwerpen voor het opslaan van alle cruciale data.
 In overleg met het bedrijf werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
@@ -71,14 +71,11 @@ Het ontwerp van de databank is terug te vinden in Figuur~\vref{fig:databank}.
 \label{fig:databank}
 \end{figure}
 
-Tijdens het ontwerp van de databank, in overleg met het bedrijf, zijn er verschillende keuzes gemaakt die moeten toegelicht worden.
-Dit ontwerp weerspiegelt de structuur die aangehaald werd in Figuur~\vref{fig:overzichtsDiagram} met als verschil dat in het ontwerp de client centraal staat en niet de server.
-Verder zullen de verschillende tabellen overlopen worden en enkele termen vastgelegd worden zodanig dat deze een eenduidige betekenis gedurende de rest van de thesis.
-Centraal staan alle tabellen horende bij de een testtoren.
+Centraal staan alle tabellen horende bij een testtoren.
 Iedere toren heeft een ID, naam en serienummer. 
-De combinatie van deze drie waarden zijn uniek binnen het bedrijf.
-Aangezien deze combinatie niet betekenisvol is, wordt er een alias gekoppeld aan iedere toren.
-Elke toren bevat verschillende hardware componenten, zoals voedingen of netwerkkaarten, die nodig zijn om testen uit te voeren.
+De combinatie van deze drie waarden is uniek binnen het bedrijf.
+Aangezien deze combinatie niet betekenisvol is, wordt een alias gekoppeld aan iedere toren.
+Elke toren bestaat uit verschillende hardware componenten, zoals voedingen of netwerkkaarten, die nodig zijn om testen uit te voeren.
 Iedere component is gemaakt door een bepaalde fabrikant en krijgt daar een serienummer.
 Vanuit het bedrijf wordt er nummer toegekend aan iedere component die gebruikt wordt om de calibratie te achterhalen.
 Naast het calibratienummer heeft een component een firmware versie.

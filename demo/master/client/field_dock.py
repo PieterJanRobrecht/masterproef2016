@@ -1,15 +1,13 @@
-from server import dock
+from server.dock import Dock
 
 
-class FieldDock(dock):
-    def __init__(self, release_host, release_port):
-        super(FieldDock, self).__init()
-        self.release_host = release_host
-        self.release_port = release_host
-        print("New FieldDock made")
+class FieldDock(Dock):
+    def __init__(self, host, port):
+        super(FieldDock, self).__init__()
+        self.host = host
+        self.port = port
 
     def start_service(self):
-        print("Starting FieldDock service")
-        # check description file
-        # start GUI
-        # check messages
+        print("FIELD DOCK -- Starting services")
+        super(FieldDock, self).start_service()
+        print("FIELD DOCK -- Services started")

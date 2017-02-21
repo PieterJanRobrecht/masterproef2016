@@ -8,3 +8,6 @@ docker ps
 docker run --name containernaam -it imagenaam:tag 
 # commandline uitvoeren in container
 docker exec -it containernaam bash
+# bestanden van pc naar docker kopieren
+docker cp foo.txt mycontainer:/foo.txt
+docker cp mycontainer:/foo.txt foo.txt

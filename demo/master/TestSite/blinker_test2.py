@@ -18,3 +18,4 @@ def printing(round):
 started.connect(printing)
 thread = Thread(target=waiting)
 thread.start()
+print('still here')
