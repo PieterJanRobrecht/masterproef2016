@@ -1,13 +1,21 @@
 import socket
 import time
+from Queue import Queue
 from threading import Thread
 
 
 class Dock(object):
     def __init__(self):
+        # Used for opening a socket on the host machine
         self.port = None
         self.host = None
         self.data_socket = None
+        # Used for communicating with the broker
+        self.broker_host = None
+        self.broker_port = None
+        # Used for transferring message from listening thread to handle_message thread
+        # A message can be anything here since there is no content check
+        self.message_queue = Queue()
 
     def start_service(self):
         """Start all the necessary services for a Dock
@@ -20,6 +28,10 @@ class Dock(object):
         thread = Thread(target=self.listen_for_data, args=())
         thread.daemon = True
         thread.start()
+
+        message_thread = Thread(target=self.handle_message, args=())
+        message_thread.daemon = True
+        message_thread.start()
         return thread
 
     def open_socket(self):
@@ -44,13 +56,23 @@ class Dock(object):
         print("DOCK -- Listening to port " + str(self.port) + " on interface " + self.host)
         # timeout in sec
         timeout = 3
-        # print("Dock listening for data on port " + str(self.data_socket.getsockname()[1]))
         while True:
             conn, address = self.data_socket.accept()
-            print('Connected by', address)
+            print("DOCK -- Connected by \n\t\t" + str(address))
             data = conn.recv(1024)
-            if not data:
-                break
-            conn.sendall(data)
+            if data:
+                print("DOCK -- received data: \n\t\t" + data)
+                self.message_queue.put(data)
             time.sleep(timeout)
-        conn.close()
+
+    def handle_message(self):
+        while True:
+            data = self.message_queue.get()
+            print("You should really do something with this " + data)
+
+    def send_message(self, message):
+        print("DOCK -- sending new message \n\t\t" + str(message))
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((self.broker_host, self.broker_port))
+        s.sendall(str(message))
+        s.close()

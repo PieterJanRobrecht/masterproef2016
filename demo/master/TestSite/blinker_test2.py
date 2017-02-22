@@ -1,21 +1,13 @@
-from blinker import signal
+from server.message import Message
 import time
-from threading import Thread
 
-started = signal('round-started')
+message = Message()
+message.create_message("new", "just some data")
 
+message2 = Message()
+message2.create_message("change", "again just some data")
 
-def waiting():
-    while True:
-        print("wachten")
-        time.sleep(2)
-
-
-def printing(round):
-    print("ja hoor het werkt")
-
-
-started.connect(printing)
-thread = Thread(target=waiting)
-thread.start()
-print('still here')
+while True:
+    print message
+    print message2
+    time.sleep(3)
