@@ -6,7 +6,7 @@ def start_release_dock():
     print("RELEASE DOCK -- Initialisation")
     release_dock = ReleaseDock('localhost', 12345, 'root', 'root', 'localhost', 'mydb')
     # '' = symbolic meaning for all interfaces
-    return release_dock.start_service()
+    return release_dock, release_dock.start_service()
 
 
 def start_broker():
@@ -16,8 +16,11 @@ def start_broker():
 
 
 def main():
-    release_dock_thread = start_release_dock()
+    release_dock, release_dock_thread = start_release_dock()
     broker_thread = start_broker()
+    # Subscribing to broker
+    sub_dict = {"type": ["new", "change", "rapport"]}
+    release_dock.connect_to_broker(sub_dict)
 
     # Waiting until threads are finished
     release_dock_thread.join()

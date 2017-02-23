@@ -42,3 +42,8 @@ class ReleaseDock(Dock):
             else:
                 print ("RELEASE DOCK -- No connection with database")
                 return False
+
+    def connect_to_broker(self, sub_dict):
+        print("RELEASE DOCK -- Connecting to Broker")
+        super(ReleaseDock, self).connect_to_broker(sub_dict)
+        print("RELEASE DOCK -- Subscribed and ready")

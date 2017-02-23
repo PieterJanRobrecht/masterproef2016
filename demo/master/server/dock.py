@@ -2,7 +2,7 @@ import socket
 import time
 from Queue import Queue
 from threading import Thread
-
+from message import Message
 
 class Dock(object):
     def __init__(self):
@@ -76,3 +76,13 @@ class Dock(object):
         s.connect((self.broker_host, self.broker_port))
         s.sendall(str(message))
         s.close()
+
+    def connect_to_broker(self, sub_dict):
+        self.broker_host = 'localhost'
+        self.broker_port = 12346
+        self.subscribe_to_messages(sub_dict)
+
+    def subscribe_to_messages(self, sub_dict):
+        subscribe_message = Message()
+        subscribe_message.create_message(self.host, "subscribe", sub_dict)
+        self.send_message(subscribe_message)
