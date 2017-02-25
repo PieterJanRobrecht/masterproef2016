@@ -4,6 +4,7 @@ from Queue import Queue
 from threading import Thread
 from message import Message
 
+
 class Dock(object):
     def __init__(self):
         # Used for opening a socket on the host machine
@@ -66,6 +67,11 @@ class Dock(object):
             time.sleep(timeout)
 
     def handle_message(self):
+        """Handling all messages in the message_queue
+
+            All messages in the message_queue will be handled
+            If there are no messages the thread will be stopped until a new message arrives
+        """
         while True:
             data = self.message_queue.get()
             print("You should really do something with this " + data)
@@ -78,11 +84,18 @@ class Dock(object):
         s.close()
 
     def connect_to_broker(self, sub_dict):
+        """Set parameters and subscribe with broker
+
+            All necessary socket parameters are set
+            A dictionary with subscription type is sent
+        """
         self.broker_host = 'localhost'
         self.broker_port = 12346
         self.subscribe_to_messages(sub_dict)
 
     def subscribe_to_messages(self, sub_dict):
+        """"Create subscribe message and send it to the broker
+        """
         subscribe_message = Message()
         subscribe_message.create_message(self.host, "subscribe", sub_dict)
         self.send_message(subscribe_message)

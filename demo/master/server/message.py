@@ -29,11 +29,15 @@ class Message(object):
 
     @classmethod
     def check_format(cls, data):
+        # TODO
         return True
 
     @classmethod
     def convert_to_message(cls, data):
-        d = ast.literal_eval(data)
+        if type(data) is not dict:
+            d = ast.literal_eval(data)
+        else:
+            d = data
         message = Message()
         message.id = d["id"]
         message.sender = d["sender"]

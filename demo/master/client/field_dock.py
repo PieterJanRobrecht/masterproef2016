@@ -11,7 +11,7 @@ def create_file(file_name):
     return description_file
 
 
-def start_description_gui(description_file):
+def start_description_gui():
     gettext.install("description") # replace with the appropriate catalog name
     description = DescriptionGui(0)
     description.MainLoop()
@@ -47,9 +47,10 @@ class FieldDock(Dock):
         if not os.path.isfile(file_name):
             # Creating new description file
             description_file = create_file(file_name)
+
             # Altering description file with GUI
-            start_description_gui(description_file)
-            # TODO Sending file to broker or directly to release dock?
+            start_description_gui()
+
             data = description_file.read()
             message = Message()
             message.create_message(self.host, "new", data)

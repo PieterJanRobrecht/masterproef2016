@@ -92,9 +92,9 @@ Tijdens het installeren van het framework kunnen verschillende tests uitgevoerd 
 Op basis van de gegevens van een component kan, bij het falen van de test, gecontroleerd worden wat bijvoorbeeld de firmware versie van de component is.
 Ook na de volledige installatie van het framework kan een test uitgevoerd worden zodat gecontroleerd wordt of de connecties tussen de componenten goed werkt.
 
-\subsection{Architectuur}
+\section{Architectuur}
 
-\subsubsection{Packager}
+\subsection{Packager}
 De architectuur van de packager wordt gebaseerd op de architectuur en structuur van het Qt installer framework.
 Hierbij wordt bedoelt dat één overkoepelende installer wordt geproduceerd die bestaat uit verschillende kleine componenten.
 Het Qt installer framework wordt hiervoor niet zelf gebruikt.
@@ -143,7 +143,7 @@ Deze bevindt zich in de tweede categorie.
 Om een dergelijke structuur op te bouwen, werkt de packager nauw samen met de databank waarin alle informatie vervat zit.
 Het ontwerp van de databank werd al uitvoerig besproken in Sectie~\ref{sec:databank} en is terug te vinden in Figuur~\ref{fig:databank}.
 
-\subsubsection{Deployment server}
+\subsection{Deployment server}
 Het centrale systeem in de architectuur is de deployment server.
 Zoals reeds uitgelegd zal dit onderdeel instaan voor het verspreiden van de verschillende installers en functioneren als een verzamelcenter voor alle informatie.
 De architectuur van de deployment server wordt gebaseerd op de software dock architectuur die besproken werd in Sectie~\vref{sec:softwareDock} en is terug te vinden in Figuur~\vref{fig:softwareDockAangepast}.
@@ -197,7 +197,7 @@ In de figuur zijn zowel de packager als de deployment environment toegevoegd.
 \label{fig:architectuur}
 \end{figure}
 
-\subsubsection{Deployment environment}
+\subsection{Deployment environment}
 De deployment environment komt overeen met de field dock in de software dock architectuur.
 In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodanig dat het test framework geïnstalleerd wordt.
 Aan dit proces zijn de verschillende problemen verbonden die besproken zijn in Sectie~\vref{sec:softwareLevenscyclus}.
