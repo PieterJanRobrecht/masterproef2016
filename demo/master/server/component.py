@@ -31,10 +31,10 @@ class Component(object):
         component.product_number = d["product_number"]
         component.calibration_number = d["calibration_number"]
         component.serial_number = d["serial_number"]
-        component.serial_number = d["firmware_version"]
+        component.firmware_version = d["firmware_version"]
         return component
 
     @classmethod
-    def to_tuple(cls, component):
-        return (component.manufacturer, component.product_number, component.calibration_number, component.serial_number,
+    def to_tuple(cls, id_tower, component):
+        return (id_tower, component.manufacturer, component.product_number, component.calibration_number, component.serial_number,
                 component.firmware_version)

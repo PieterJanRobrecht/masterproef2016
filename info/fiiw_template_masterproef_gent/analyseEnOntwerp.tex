@@ -43,7 +43,7 @@ In de loop van de thesis zal naar dit onderdeel verwezen worden als de \emph{dep
 
 Na de probleemanalyse is het nu duidelijk dat het werk op te delen valt in drie grote componenten.
 Deze drie onderdelen zullen de basis vormen voor de architectuur en zullen gebruikt worden als leidraad.
-Het eerste onderdeel zal bestaan uit de packager met als doel het inpakken van de nodige drivers, bibliotheken, ... .
+Het eerste onderdeel zal bestaan uit de packager met als doel het inpakken van de nodige drivers, bibliotheken, \ldots .
 Naast de packager is er de deployment server instaat voor het verspreiden van de installers die de packager aflevert.
 Aan de client-side zal de deployment environment aanwezig zijn waardoor installatie-complicaties vermindert worden door de installatie te isoleren.
 Mocht een rollback nodig zijn, dan kan deze op een eenvoudige manier gebeuren.
@@ -58,10 +58,10 @@ Met behulp van deze basis is het mogelijk om een demo te produceren voor de fina
 \end{figure}
 
 \section{Databank ontwerp}\label{sec:databank}
-Het aantal pakketten die gebruikt gaan worden, gaat alleen toenemen.
-Naast deze groei zullen ook het aantal gebruikers toenemen.
-Daarom werd er geopteerd om een databank te ontwerpen voor het opslaan van alle cruciale data.
-In overleg met het bedrijf werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
+In de voorgaande Sectie werd aangehaald met welke problemen Televic kampt.
+Eén van de problemen is de continue groei van pakketten waar het framework gebruikt van maakt en het aantal gebruikers die het framework gebruiken.
+Om dit probleem aan te pakken wordt best een databank ontworpen voor het opslaan van alle cruciale data over zowel het installatieproces en alle gebruikers.
+In overleg met Televic werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
 Het ontwerp van de databank is terug te vinden in Figuur~\vref{fig:databank}.
 
 \begin{figure}[!ht]
@@ -71,26 +71,50 @@ Het ontwerp van de databank is terug te vinden in Figuur~\vref{fig:databank}.
 \label{fig:databank}
 \end{figure}
 
-Centraal staan alle tabellen horende bij een testtoren.
-Iedere toren heeft een ID, naam en serienummer. 
-De combinatie van deze drie waarden is uniek binnen het bedrijf.
-Aangezien deze combinatie niet betekenisvol is, wordt een alias gekoppeld aan iedere toren.
+De tabellen tower en component dienen om iedere gebruiker (zoals een testtoren) te beschrijven.
+Iedere toren heeft een ID, naam en serienummer.
+De combinatie van deze drie waarden is uniek binnen het bedrijf en de combinatie kan gebruikt worden als identificatie binnen het systeem.
+Deze combinatie draagt geen betekenis.
+Om dit op te vangen wordt aan iedere toren een alias gekoppeld waardoor de identificatie voor mensen vlotter kan verlopen.
 Elke toren bestaat uit verschillende hardware componenten, zoals voedingen of netwerkkaarten, die nodig zijn om testen uit te voeren.
-Iedere component is gemaakt door een bepaalde fabrikant en krijgt daar een serienummer.
-Vanuit het bedrijf wordt er nummer toegekend aan iedere component die gebruikt wordt om de calibratie te achterhalen.
-Naast het calibratienummer heeft een component een firmware versie.
+Iedere component is gemaakt door een bepaalde fabrikant en krijgt van de fabrikant een serienummer.
+Vanuit het bedrijf wordt losstaand hiervan een nummer toegekend aan iedere component die gebruikt wordt om de calibratie instellingen te achterhalen.
+Iedere hardware component zal gebruik maken van firmware om correct te functioneren.
+Naast alle bovengenoemde informatie wordt ook de versie van de firmware opgeslagen.
+Door het opslaan van al deze informatie wordt het mogelijk om:
+\begin{enumerate}
+\item torens van elkaar te onderscheiden
+\item te achterhalen welke hardware aanwezig is bij welke toren
+\item welke firmware versie draait op welke hardware component
+\end{enumerate}
 
-Rechts van de client bevinden zich alle tabellen die horen bij de packager.
-De packager levert verschillende installers af die bestaan uit packages.
-Iedere package heeft een naam en versienummer die uniek is.
-Bij iedere package wordt bijgehouden welk type package het is, de prioriteit voor de installatievolgorde, een korte beschrijving en de release datum.
-Een package wordt gekoppeld aan een installer maar kan gebruikt worden in verschillende installers.
-Uiteraard draait op iedere toren een bepaalde installer en wordt één installer gebruikt op verschillende torens.
+Naast informatie over de gebruikers, wordt er ook informatie over de verschillende installers en pakketten bijgehouden.
+Iedere installer is een combinatie van verschillende onderdelen, namelijk een versie van het Python testraamwerk, verscheidene pakketten en een configuratie gedeelte (deze structuur is zichtbaar in Figuur~\vref{fig:installerStructuur}).
+Het doel is om iedere testtoren te voorzien van één versie van het Python testraamwerk.
+Iedere toren zal dus gekoppeld zijn aan één installer.
+Hiernaast zullen sommige pakketten gekoppeld zijn aan hardware componenten.
+Zo kan een driver voor een voeding gekoppeld worden aan de voeding zelf die aanwezig is in de hardware component tabel.
+De hardware-software afhankelijkheden worden op deze manier bijgehouden.
+Bij iedere pakket wordt bijgehouden welk type het is (een executabel, zip bestand, \ldots), de prioriteit voor de installatievolgorde, een korte beschrijving en de release datum.
+Naast al deze informatie wordt er ook bijgehouden welke pakketten afhankelijk zijn van elkaar.
+Een voorbeeld is hiervan is een testraamwerk pakket en een Python installer pakket.
+Het testraamwerk is afhankelijk van Python. 
+Bij het verschepen van een installer, waar een testraamwerk in aanwezig is, zal dan ook Python aanwezig moeten zijn.
+Zo worden de software-software afhankelijkheden bijgehouden.
 
-Aan de linkerzijde bevinden zich de tabellen die horen bij het logger gedeelte.
-Tijdens het installeren van het framework kunnen verschillende tests uitgevoerd worden om te testen of een component correct is geïnstalleerd.
-Op basis van de gegevens van een component kan, bij het falen van de test, gecontroleerd worden wat bijvoorbeeld de firmware versie van de component is.
-Ook na de volledige installatie van het framework kan een test uitgevoerd worden zodat gecontroleerd wordt of de connecties tussen de componenten goed werkt.
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/installerStructuur.png}}
+\caption{Structuur van een installer bestaande uit drie pakketten}
+\label{fig:installerStructuur}
+\end{figure}
+
+Verder zijn er enkele tabellen aanwezig voor het ondersteunen van testen.
+Tijdens en na het installatieproces moet het mogelijk zijn om testen uit te voeren.
+Dankzij deze testen is het duidelijk of een bepaald pakket correct werkt en op het einde kan gecontroleerd worden of het volledige testraamwerk correct functioneert.
+Doordat er een link wordt bijgehouden tussen een hardware component en een pakket, is het mogelijk om hieruit waardevolle informatie uit te halen.
+Zo kan bijvoorbeeld een verband gelegd worden tussen een bepaalde versie van een driver en de firmware die aanwezig is in een hardware component.
+Deze informatie kan gebruikt worden om problemen in testtorens te vermijden.
 
 \section{Architectuur}
 
@@ -125,20 +149,12 @@ Het data gedeelte bevat de effectieve driver/bibliotheek en het metadata gedeelt
 Hiernaast zijn verschillende scripts aanwezig die gebruikt worden voor een gepersonaliseerde installatie.
 De structuur van een mogelijke installer is terug te vinden in Figuur~\vref{fig:installerStructuur}.
 In het voorbeeld wordt een installer opgebouwd bestaande uit twee delen.
-Het eerste deel bestaat uitsluitend uit configuratie bestanden en het tweede deel bestaat uit de pakketten.
+Het eerste deel bestaat uitsluitend uit configuratie bestanden voor de volledige installer (deze bevat bijvoorbeeld de installatie folder) en het tweede deel bestaat uit de pakketten.
 De twee onderdelen zijn terug te vinden in de rode rechthoek.
-Verder worden de packages ook opgedeeld in twee categorieën.
-De eerste categorie is cruciaal voor de correcte werking van het test framework.
-Dit onderdeel bestaat uit een versie van het test framework gecombineerd met de pakketten die nodig zijn voor een fatsoenlijke werking (deze pakketten worden aangegeven door de gele rechthoek).
-Hiernaast is er één pakket aanwezig die niet cruciaal is voor het testraamwerk maar wel nodig is om een correcte werking te verzekeren op de site zelf (aangegeven door de groene rechthoek).
-Deze bevindt zich in de tweede categorie.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/installerStructuur.png}}
-\caption{Structuur van een installer bestaande uit drie pakketten}
-\label{fig:installerStructuur}
-\end{figure}
+Eén van de packages is het testraamwerk zelf.
+Hiernaast zijn er ook twee cruciale pakketten aanwezig die de correcte werking voorzien.
+Zo kan Python dienen als een voorbeeld voor deze pakketten.
+Voordat het raamwerk geïnstalleerd kan worden, moet eerst Python aanwezig zijn.
 
 Om een dergelijke structuur op te bouwen, werkt de packager nauw samen met de databank waarin alle informatie vervat zit.
 Het ontwerp van de databank werd al uitvoerig besproken in Sectie~\ref{sec:databank} en is terug te vinden in Figuur~\ref{fig:databank}.

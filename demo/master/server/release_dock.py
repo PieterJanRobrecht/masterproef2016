@@ -7,6 +7,7 @@ from component import Component
 from tower import Tower
 
 
+# noinspection SqlDialectInspection
 class ReleaseDock(Dock):
     def __init__(self, host, port, database_user, database_password, database_host, database_name):
         super(ReleaseDock, self).__init__()
@@ -77,15 +78,26 @@ class ReleaseDock(Dock):
         self.actions["change"] = self.change_tower
 
     def write_tower(self, tower):
+        print("RELEASE DOCK -- Writing new tower to database")
         try:
             query = "INSERT INTO Tower (name, alias, geolocation, idInCompany, serialNumber) VALUES " \
-                    + Tower.to_tuple(tower) + ";"
+                    + str(Tower.to_tuple(tower)) + ";"
             self.cursor.execute(query)
             self.cnx.commit()
 
+            query = "SELECT idTower FROM tower ORDER BY idTower DESC LIMIT 1;"
+            self.cursor.execute(query)
+            for row in self.cursor:
+                id_tower = row['idTower']
+
             for component in tower.components:
-                query = "INSERT INTO Component () VALUES " + Component.to_tuple(component) + ";"
-                self.cursor.execute()
+                query = "INSERT INTO hardware_component " \
+                        "(Tower_idTower, manufacturer, productNumber," \
+                        " calibrationNumber, serialNumber, firmwareVersion) VALUES "\
+                        + str(Component.to_tuple(id_tower, component)) + ";"
+                self.cursor.execute(query)
                 self.cnx.commit()
-        except:
+                print("RELEASE DOCK -- Writing successful")
+        except mysql.connector.Error as err:
+            print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
             self.cnx.rollback()
