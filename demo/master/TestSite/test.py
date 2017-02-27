@@ -1,40 +1,27 @@
-from Tkinter import *
-import mysql.connector
+# importing wx files
+import wx
+
+# import the newly created GUI file
+import noname
+
+# importing * : to enable writing sin(13) instead of math.sin(13)
+from math import *
 
 
-def connect_to_db():
-    cnx = mysql.connector.connect(user='root', password='root',
-                                  host='127.0.0.1',
-                                  database='mydb')
+# inherit from the MainFrame created in wxFowmBuilder and create CalcFrame
+class CalcFrame(noname.MyFrame1):
+    # constructor
+    def __init__(self, parent):
+        # initialize parent class
+        noname.MyFrame1.__init__(self, parent)
 
-    cursor = cnx.cursor(dictionary=True)
-    return cursor, cnx
+# mandatory in wx, create an app, False stands for not deteriction stdin/stdout
+# refer manual for details
+app = wx.App(False)
 
-cursor, cnx = connect_to_db()
-query = "SELECT * FROM installer"
-cursor.execute(query)
-print type(cursor)
-for row in cursor:
-    print row['name']
-cnx.close()
-
-
-def button_click(event):
-    print("click")
-
-
-root = Tk()
-topFrame = Frame(root)
-topFrame.pack()
-
-bottomFrame = Frame(root)
-bottomFrame.pack(side=BOTTOM)
-
-label = Label(bottomFrame, text="Test")
-label.pack()
-
-button = Button(topFrame, text="Ik ben een button")
-button.bind("<Button-1>", func=button_click)
-button.pack(side=RIGHT)
-
-root.mainloop()
+# create an object of CalcFrame
+frame = CalcFrame(None)
+# show the frame
+frame.Show(True)
+# start the applications
+app.MainLoop()

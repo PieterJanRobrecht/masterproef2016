@@ -9,14 +9,15 @@ from tower import Tower
 
 # noinspection SqlDialectInspection
 class ReleaseDock(Dock):
-    def __init__(self, host, port, database_user, database_password, database_host, database_name):
+    database_user = 'root'
+    database_password = 'root'
+    database_host = 'localhost'
+    database_name = 'mydb'
+
+    def __init__(self, host, port):
         super(ReleaseDock, self).__init__()
         self.host = host
         self.port = port
-        self.database_user = database_user
-        self.database_password = database_password
-        self.database_host = database_host
-        self.database_name = database_name
         self.cursor = None
         self.cnx = None
         self.actions = {}
@@ -31,9 +32,9 @@ class ReleaseDock(Dock):
 
     def connect_to_database(self):
         print("RELEASE DOCK -- Connecting to database")
-        self.cnx = mysql.connector.connect(user=self.database_user, password=self.database_password,
-                                           host=self.database_host,
-                                           database=self.database_name)
+        self.cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
+                                           host=ReleaseDock.database_host,
+                                           database=ReleaseDock.database_name)
         self.cursor = self.cnx.cursor(dictionary=True)
         print("RELEASE DOCK -- Connected to database")
 

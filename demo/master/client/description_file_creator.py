@@ -9,7 +9,6 @@ import wx
 # begin wxGlade: dependencies
 import gettext
 
-
 # end wxGlade
 
 # begin wxGlade: extracode
@@ -190,12 +189,3 @@ class DescriptionGui(wx.App):
         self.SetTopWindow(frame_1)
         frame_1.Show()
         return True
-
-
-# end of class DescriptionGui
-
-if __name__ == "__main__":
-    gettext.install("description")  # replace with the appropriate catalog name
-
-    description = DescriptionGui(0)
-    description.MainLoop()

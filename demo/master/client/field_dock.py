@@ -1,7 +1,7 @@
-import gettext
+import wx
 import os.path
 
-from description_file_creator import DescriptionGui
+from client.description_file_impl import DescriptionCreator
 from server.dock import Dock
 from server.message import Message
 
@@ -12,9 +12,11 @@ def create_file(file_name):
 
 
 def start_description_gui():
-    gettext.install("description") # replace with the appropriate catalog name
-    description = DescriptionGui(0)
-    description.MainLoop()
+    app = wx.App(False)
+    frame = DescriptionCreator(None)
+    frame.Show(True)
+    app.MainLoop()
+    app.Destroy()
 
 
 class FieldDock(Dock):
