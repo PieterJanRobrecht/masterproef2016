@@ -9,8 +9,8 @@ from server.release_creator_impl import ReleaseCreator
 
 def start_release_dock():
     print("RELEASE DOCK -- Initialisation")
-    release_dock = ReleaseDock('localhost', 12345)
     # '' = symbolic meaning for all interfaces
+    release_dock = ReleaseDock('localhost', 12345)
     return release_dock, release_dock.start_service()
 
 

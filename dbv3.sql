@@ -15,6 +15,37 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
 
 -- -----------------------------------------------------
+-- Table `mydb`.`test`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`test` (
+  `idTest` INT(11) NOT NULL,
+  `purpose` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idTest`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`diagnosecheck`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`diagnosecheck` (
+  `idDiagnoseCheck` INT(11) NOT NULL AUTO_INCREMENT,
+  `endResult` VARCHAR(45) NULL DEFAULT NULL,
+  `startTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `endTime` DATETIME NULL DEFAULT NULL,
+  `Test_idTest` INT(11) NOT NULL,
+  PRIMARY KEY (`idDiagnoseCheck`),
+  INDEX `fk_DiagnoseCheck_Test1_idx` (`Test_idTest` ASC),
+  CONSTRAINT `fk_DiagnoseCheck_Test1`
+    FOREIGN KEY (`Test_idTest`)
+    REFERENCES `mydb`.`test` (`idTest`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`package`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`package` (
@@ -25,10 +56,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`package` (
   `type` VARCHAR(45) NULL DEFAULT NULL,
   `priority` INT(11) NOT NULL,
   `releaseDate` DATE NULL DEFAULT NULL,
-  `optional` TINYINT(1) NULL DEFAULT NULL,
+  `optional` TINYINT(1) NOT NULL,
+  `framework` TINYINT(1) NOT NULL,
+  `location` VARCHAR(120) NULL DEFAULT NULL,
   PRIMARY KEY (`idPackage`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -42,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`installer` (
   `diskLocation` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idInstaller`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -66,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tower` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -96,35 +129,27 @@ CREATE TABLE IF NOT EXISTS `mydb`.`hardware_component` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`test`
+-- Table `mydb`.`installer_has_diagnosecheck`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`test` (
-  `idTest` INT(11) NOT NULL,
-  `purpose` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idTest`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`diagnosecheck`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`diagnosecheck` (
-  `idDiagnoseCheck` INT(11) NOT NULL AUTO_INCREMENT,
-  `endResult` VARCHAR(45) NULL DEFAULT NULL,
-  `startTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `endTime` DATETIME NULL DEFAULT NULL,
-  `Test_idTest` INT(11) NOT NULL,
-  PRIMARY KEY (`idDiagnoseCheck`),
-  INDEX `fk_DiagnoseCheck_Test1_idx` (`Test_idTest` ASC),
-  CONSTRAINT `fk_DiagnoseCheck_Test1`
-    FOREIGN KEY (`Test_idTest`)
-    REFERENCES `mydb`.`test` (`idTest`)
+CREATE TABLE IF NOT EXISTS `mydb`.`installer_has_diagnosecheck` (
+  `installer_idInstaller` INT(11) NOT NULL,
+  `diagnosecheck_idDiagnoseCheck` INT(11) NOT NULL,
+  PRIMARY KEY (`installer_idInstaller`, `diagnosecheck_idDiagnoseCheck`),
+  INDEX `fk_installer_has_diagnosecheck_diagnosecheck1_idx` (`diagnosecheck_idDiagnoseCheck` ASC),
+  INDEX `fk_installer_has_diagnosecheck_installer1_idx` (`installer_idInstaller` ASC),
+  CONSTRAINT `fk_installer_has_diagnosecheck_diagnosecheck1`
+    FOREIGN KEY (`diagnosecheck_idDiagnoseCheck`)
+    REFERENCES `mydb`.`diagnosecheck` (`idDiagnoseCheck`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_installer_has_diagnosecheck_installer1`
+    FOREIGN KEY (`installer_idInstaller`)
+    REFERENCES `mydb`.`installer` (`idInstaller`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -178,29 +203,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`installer_has_diagnosecheck`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`installer_has_diagnosecheck` (
-  `installer_idInstaller` INT(11) NOT NULL,
-  `diagnosecheck_idDiagnoseCheck` INT(11) NOT NULL,
-  PRIMARY KEY (`installer_idInstaller`, `diagnosecheck_idDiagnoseCheck`),
-  INDEX `fk_installer_has_diagnosecheck_diagnosecheck1_idx` (`diagnosecheck_idDiagnoseCheck` ASC),
-  INDEX `fk_installer_has_diagnosecheck_installer1_idx` (`installer_idInstaller` ASC),
-  CONSTRAINT `fk_installer_has_diagnosecheck_installer1`
-    FOREIGN KEY (`installer_idInstaller`)
-    REFERENCES `mydb`.`installer` (`idInstaller`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_installer_has_diagnosecheck_diagnosecheck1`
-    FOREIGN KEY (`diagnosecheck_idDiagnoseCheck`)
-    REFERENCES `mydb`.`diagnosecheck` (`idDiagnoseCheck`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`package_has_diagnosecheck`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`package_has_diagnosecheck` (
@@ -209,14 +211,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`package_has_diagnosecheck` (
   PRIMARY KEY (`package_idPackage`, `diagnosecheck_idDiagnoseCheck`),
   INDEX `fk_package_has_diagnosecheck_diagnosecheck1_idx` (`diagnosecheck_idDiagnoseCheck` ASC),
   INDEX `fk_package_has_diagnosecheck_package1_idx` (`package_idPackage` ASC),
-  CONSTRAINT `fk_package_has_diagnosecheck_package1`
-    FOREIGN KEY (`package_idPackage`)
-    REFERENCES `mydb`.`package` (`idPackage`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_package_has_diagnosecheck_diagnosecheck1`
     FOREIGN KEY (`diagnosecheck_idDiagnoseCheck`)
     REFERENCES `mydb`.`diagnosecheck` (`idDiagnoseCheck`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_package_has_diagnosecheck_package1`
+    FOREIGN KEY (`package_idPackage`)
+    REFERENCES `mydb`.`package` (`idPackage`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

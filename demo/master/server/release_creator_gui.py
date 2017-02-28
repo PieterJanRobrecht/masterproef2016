@@ -17,7 +17,7 @@ import wx.xrc
 class MyFrame1 ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"New Release", pos = wx.DefaultPosition, size = wx.Size( 532,484 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"New Release", pos = wx.DefaultPosition, size = wx.Size( 532,520 ), style = wx.DEFAULT_FRAME_STYLE|wx.MAXIMIZE_BOX|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
@@ -56,6 +56,13 @@ class MyFrame1 ( wx.Frame ):
 		
 		self.package_description = wx.TextCtrl( sbSizer1.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer2.Add( self.package_description, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_staticText91 = wx.StaticText( sbSizer1.GetStaticBox(), wx.ID_ANY, u"Priority", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText91.Wrap( -1 )
+		fgSizer2.Add( self.m_staticText91, 0, wx.ALIGN_RIGHT|wx.ALL, 5 )
+		
+		self.package_priority = wx.SpinCtrl( sbSizer1.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 50 )
+		fgSizer2.Add( self.package_priority, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_staticText14 = wx.StaticText( sbSizer1.GetStaticBox(), wx.ID_ANY, u"Type", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText14.Wrap( -1 )
@@ -221,5 +228,82 @@ class MyFrame1 ( wx.Frame ):
 	
 	def clear_installer( self, event ):
 		event.Skip()
+	
+
+###########################################################################
+## Class MyFrame2
+###########################################################################
+
+class MyFrame2 ( wx.Frame ):
+	
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 598,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer12 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_panel2 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer13 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer14 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer15 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.list_control = wx.ListCtrl( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_REPORT )
+		bSizer15.Add( self.list_control, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		bSizer14.Add( bSizer15, 1, wx.EXPAND, 5 )
+		
+		bSizer16 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_panel3 = wx.Panel( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer16.Add( self.m_panel3, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		self.m_button7 = wx.Button( self.m_panel2, wx.ID_ANY, u"Select", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer16.Add( self.m_button7, 0, wx.ALL, 5 )
+		
+		self.m_button8 = wx.Button( self.m_panel2, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer16.Add( self.m_button8, 0, wx.ALL, 5 )
+		
+		
+		bSizer14.Add( bSizer16, 0, wx.EXPAND, 5 )
+		
+		
+		bSizer13.Add( bSizer14, 1, wx.EXPAND, 5 )
+		
+		
+		self.m_panel2.SetSizer( bSizer13 )
+		self.m_panel2.Layout()
+		bSizer13.Fit( self.m_panel2 )
+		bSizer12.Add( self.m_panel2, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		
+		self.SetSizer( bSizer12 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+		
+		# Connect Events
+		self.Bind( wx.EVT_CLOSE, self.cancel )
+		self.list_control.Bind( wx.EVT_LIST_ITEM_SELECTED, self.set_selected_package )
+		self.m_button7.Bind( wx.EVT_BUTTON, self.select )
+		self.m_button8.Bind( wx.EVT_BUTTON, self.cancel )
+	
+	def __del__( self ):
+		pass
+	
+	
+	# Virtual event handlers, overide them in your derived class
+	def cancel( self, event ):
+		event.Skip()
+	
+	def set_selected_package( self, event ):
+		event.Skip()
+	
+	def select( self, event ):
+		event.Skip()
+	
 	
 

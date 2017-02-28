@@ -1,18 +1,47 @@
 import mysql.connector
 import pymysql as pymysql
+import os
 
+from distutils.dir_util import copy_tree
 from dock import Dock
 from message import Message
 from component import Component
 from tower import Tower
 
 
-# noinspection SqlDialectInspection
+def copy_package_to_release(package, destination):
+    dir_name = package.name + package.version
+    root = os.path.join(destination, dir_name)
+    meta = os.path.join(root, "meta")
+    data = os.path.join(root, "data")
+    if not os.path.exists(meta):
+        os.makedirs(meta)
+    if not os.path.exists(data):
+        os.makedirs(data)
+    copy_tree(package.location, data)
+
+
+def create_folder_structure(release):
+    dir_name = release.name + release.version
+    root = os.path.join(release.disk_location, dir_name)
+    config = os.path.join(root, "config")
+    package_dir = os.path.join(root, "packages")
+    if not os.path.exists(config):
+        os.makedirs(config)
+    if not os.path.exists(package_dir):
+        os.makedirs(package_dir)
+
+    print("RELEASE DOCK -- Folder structure created")
+    return package_dir
+
+
 class ReleaseDock(Dock):
     database_user = 'root'
     database_password = 'root'
     database_host = 'localhost'
     database_name = 'mydb'
+
+    current_release = None
 
     def __init__(self, host, port):
         super(ReleaseDock, self).__init__()
@@ -91,6 +120,7 @@ class ReleaseDock(Dock):
             for row in self.cursor:
                 id_tower = row['idTower']
 
+            print("RELEASE DOCK -- Added new tower to database")
             for component in tower.components:
                 query = "INSERT INTO hardware_component " \
                         "(Tower_idTower, manufacturer, productNumber," \
@@ -98,7 +128,19 @@ class ReleaseDock(Dock):
                         + str(Component.to_tuple(id_tower, component)) + ";"
                 self.cursor.execute(query)
                 self.cnx.commit()
-                print("RELEASE DOCK -- Writing successful")
+                print("RELEASE DOCK -- Added new component to database")
+
+            print("RELEASE DOCK -- Writing complete")
         except mysql.connector.Error as err:
             print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
             self.cnx.rollback()
+
+    @classmethod
+    def notify_release(cls):
+        release = ReleaseDock.current_release
+        # Create folder structure
+        package_dir = create_folder_structure(release)
+        # Place every package in folder
+        for package in release.packages:
+            copy_package_to_release(package, package_dir)
+        # Create message and send
