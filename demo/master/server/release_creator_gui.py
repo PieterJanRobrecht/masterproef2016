@@ -157,7 +157,7 @@ class MyFrame1 ( wx.Frame ):
 		
 		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
 		
-		self.m_button8 = wx.Button( sbSizer2.GetStaticBox(), wx.ID_ANY, u"Release", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button8 = wx.Button( sbSizer2.GetStaticBox(), wx.ID_ANY, u"Submit", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer18.Add( self.m_button8, 0, wx.ALL, 5 )
 		
 		self.m_button9 = wx.Button( sbSizer2.GetStaticBox(), wx.ID_ANY, u"Clear", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -199,11 +199,12 @@ class MyFrame1 ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
+		self.Bind( wx.EVT_CLOSE, self.on_close )
 		self.m_button4.Bind( wx.EVT_BUTTON, self.select_package )
 		self.m_button5.Bind( wx.EVT_BUTTON, self.submit_package )
 		self.m_button6.Bind( wx.EVT_BUTTON, self.clear_package )
 		self.m_button7.Bind( wx.EVT_BUTTON, self.select_installer )
-		self.m_button8.Bind( wx.EVT_BUTTON, self.release_installer )
+		self.m_button8.Bind( wx.EVT_BUTTON, self.submit_installer )
 		self.m_button9.Bind( wx.EVT_BUTTON, self.clear_installer )
 	
 	def __del__( self ):
@@ -211,6 +212,9 @@ class MyFrame1 ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
+	def on_close( self, event ):
+		event.Skip()
+	
 	def select_package( self, event ):
 		event.Skip()
 	
@@ -223,7 +227,7 @@ class MyFrame1 ( wx.Frame ):
 	def select_installer( self, event ):
 		event.Skip()
 	
-	def release_installer( self, event ):
+	def submit_installer( self, event ):
 		event.Skip()
 	
 	def clear_installer( self, event ):
@@ -305,5 +309,80 @@ class MyFrame2 ( wx.Frame ):
 	def select( self, event ):
 		event.Skip()
 	
+	
+
+###########################################################################
+## Class MyFrame3
+###########################################################################
+
+class MyFrame3 ( wx.Frame ):
+	
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Overview", pos = wx.DefaultPosition, size = wx.Size( 653,393 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer17 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_panel4 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer18 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer19 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		bSizer20 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.client_list = wx.ListCtrl( self.m_panel4, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_REPORT )
+		bSizer20.Add( self.client_list, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		bSizer19.Add( bSizer20, 1, wx.EXPAND, 5 )
+		
+		bSizer21 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_button9 = wx.Button( self.m_panel4, wx.ID_ANY, u"New Installer", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer21.Add( self.m_button9, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_button10 = wx.Button( self.m_panel4, wx.ID_ANY, u"Release", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer21.Add( self.m_button10, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_staticText10 = wx.StaticText( self.m_panel4, wx.ID_ANY, u"Current Release", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText10.Wrap( -1 )
+		bSizer21.Add( self.m_staticText10, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+		
+		self.m_treeCtrl3 = wx.TreeCtrl( self.m_panel4, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TR_DEFAULT_STYLE )
+		bSizer21.Add( self.m_treeCtrl3, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		bSizer19.Add( bSizer21, 0, wx.EXPAND, 5 )
+		
+		
+		bSizer18.Add( bSizer19, 1, wx.EXPAND, 5 )
+		
+		
+		self.m_panel4.SetSizer( bSizer18 )
+		self.m_panel4.Layout()
+		bSizer18.Fit( self.m_panel4 )
+		bSizer17.Add( self.m_panel4, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		
+		self.SetSizer( bSizer17 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+		
+		# Connect Events
+		self.m_button9.Bind( wx.EVT_BUTTON, self.create_installer )
+		self.m_button10.Bind( wx.EVT_BUTTON, self.release_current_installer )
+	
+	def __del__( self ):
+		pass
+	
+	
+	# Virtual event handlers, overide them in your derived class
+	def create_installer( self, event ):
+		event.Skip()
+	
+	def release_current_installer( self, event ):
+		event.Skip()
 	
 

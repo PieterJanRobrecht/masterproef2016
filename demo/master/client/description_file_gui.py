@@ -206,3 +206,52 @@ class MyFrame2 ( wx.Frame ):
 		event.Skip()
 	
 
+###########################################################################
+## Class MyFrame3
+###########################################################################
+
+class MyFrame3 ( wx.Frame ):
+	
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer10 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_panel2 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer11 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer12 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticText11 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText11.Wrap( -1 )
+		bSizer12.Add( self.m_staticText11, 0, wx.ALL, 5 )
+		
+		
+		bSizer11.Add( bSizer12, 1, wx.EXPAND, 5 )
+		
+		
+		self.m_panel2.SetSizer( bSizer11 )
+		self.m_panel2.Layout()
+		bSizer11.Fit( self.m_panel2 )
+		bSizer10.Add( self.m_panel2, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		
+		self.SetSizer( bSizer10 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+		
+		# Connect Events
+		self.Bind( wx.EVT_CLOSE, self.close_action )
+	
+	def __del__( self ):
+		pass
+	
+	
+	# Virtual event handlers, overide them in your derived class
+	def close_action( self, event ):
+		event.Skip()
+	
+

@@ -1,11 +1,13 @@
 import mysql.connector
 import pymysql as pymysql
 import os
+import zipfile
 
 from distutils.dir_util import copy_tree
 from dock import Dock
 from message import Message
 from component import Component
+from server.installer import Installer
 from tower import Tower
 
 
@@ -19,6 +21,7 @@ def copy_package_to_release(package, destination):
     if not os.path.exists(data):
         os.makedirs(data)
     copy_tree(package.location, data)
+    return root
 
 
 def create_folder_structure(release):
@@ -35,13 +38,65 @@ def create_folder_structure(release):
     return package_dir
 
 
+def add_files_to_package_folder(package, meta_dir):
+    meta_file = os.path.join(meta_dir, "metadata.json")
+    json = open(meta_file, 'w+')
+    json.write(str(package))
+    meta_file = os.path.join(meta_dir, "install_script.py")
+    open(meta_file, 'w+')
+
+
+def copy_old_meta_folder(package, meta_dir):
+    # Search old meta folder
+    try:
+        cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
+                                      host=ReleaseDock.database_host,
+                                      database=ReleaseDock.database_name)
+        cursor = cnx.cursor(dictionary=True)
+
+        query = "SELECT Installer_idInstaller FROM installer_has_package WHERE Package_idPackage = " \
+                + str(package.id_package) + " ORDER BY Installer_idInstaller ASC LIMIT 1;"
+        cursor.execute(query)
+
+        for row in cursor:
+            id_installer = row['Installer_idInstaller']
+
+        query = "SELECT * FROM installer WHERE idInstaller = " + str(id_installer) + ";"
+        cursor.execute(query)
+
+        for row in cursor:
+            installer = Installer()
+            installer.disk_location = row["diskLocation"]
+            installer.name = row["name"]
+            installer.version = row["installerVersion"]
+
+    except mysql.connector.Error as err:
+        print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
+        cnx.rollback()
+    finally:
+        cnx.close()
+    # Copy tree to new dir
+    installer_name = installer.name + installer.version
+    package_name = package.name + package.version
+    old_meta_folder = os.path.join(installer.disk_location, installer_name, "packages", package_name, "meta")
+    copy_tree(old_meta_folder, meta_dir)
+
+
+def zip_directory(directory, zipf):
+    # zipf is zipfile handle
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            zipf.write(os.path.join(root, file))
+
+
+
+
+
 class ReleaseDock(Dock):
     database_user = 'root'
     database_password = 'root'
     database_host = 'localhost'
     database_name = 'mydb'
-
-    current_release = None
 
     def __init__(self, host, port):
         super(ReleaseDock, self).__init__()
@@ -49,6 +104,7 @@ class ReleaseDock(Dock):
         self.port = port
         self.cursor = None
         self.cnx = None
+        self.current_release = None
         self.actions = {}
         self.initiate_actions()
 
@@ -124,7 +180,7 @@ class ReleaseDock(Dock):
             for component in tower.components:
                 query = "INSERT INTO hardware_component " \
                         "(Tower_idTower, manufacturer, productNumber," \
-                        " calibrationNumber, serialNumber, firmwareVersion) VALUES "\
+                        " calibrationNumber, serialNumber, firmwareVersion) VALUES " \
                         + str(Component.to_tuple(id_tower, component)) + ";"
                 self.cursor.execute(query)
                 self.cnx.commit()
@@ -135,12 +191,30 @@ class ReleaseDock(Dock):
             print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
             self.cnx.rollback()
 
-    @classmethod
-    def notify_release(cls):
-        release = ReleaseDock.current_release
-        # Create folder structure
-        package_dir = create_folder_structure(release)
+    def notify_release(self):
+        # Zip folder
+        self.zip_current_release()
+        # Create release message
+        release_message = Message()
+        release_message.create_message(self.host, "release", str(self.current_release))
+        # Send message
+        self.send_message(release_message)
+
+    def zip_current_release(self):
+        zip_name = self.current_release.disk_location + "release.zip"
+        zipf = zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED)
+        zip_directory(self.current_release.disk_location, zipf)
+        zipf.close()
+
+    def create_folders(self):
+        release = self.current_release
+        # Create folder structure and return "packages" folder
+        packages_dir = create_folder_structure(release)
         # Place every package in folder
         for package in release.packages:
-            copy_package_to_release(package, package_dir)
-        # Create message and send
+            current_dir = copy_package_to_release(package, packages_dir)
+            meta_dir = os.path.join(current_dir, "meta")
+            if package.new:
+                add_files_to_package_folder(package, meta_dir)
+            else:
+                copy_old_meta_folder(package, meta_dir)

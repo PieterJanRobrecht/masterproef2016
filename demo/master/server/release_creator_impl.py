@@ -80,12 +80,14 @@ def get_all_packages():
 class ReleaseCreator(release_creator_gui.MyFrame1):
     queue = Queue()
 
-    def __init__(self, parent):
+    def __init__(self, parent, overview_gui):
         release_creator_gui.MyFrame1.__init__(self, parent)
         self.root = self.m_treeCtrl1.AddRoot("Installer")
         self.installer = Installer()
         # Used to transport the selected package between frames
         self.package_help = None
+        self.frame = None
+        self.overview_gui = overview_gui
 
     def select_installer(self, event):
         # TODO
@@ -93,14 +95,14 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
 
     def select_package(self, event):
         self.Hide()
-        frame = SelectPackageFrame(None, self)
-        frame.Show(True)
+        self.frame = SelectPackageFrame(None, self)
+        self.frame.Show(True)
 
     def add_selected(self):
         self.add_package_to_tree(self.package_help)
         self.installer.packages.append(self.package_help)
 
-    def release_installer(self, event):
+    def submit_installer(self, event):
         # Collect data
         self.installer.name = str(self.installer_name.GetValue())
         self.installer.version = str(self.installer_version.GetValue())
@@ -108,8 +110,9 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         # Write to database
         write_to_database(self.installer)
         # Create file structure
-        ReleaseDock.current_release = self.installer
-        ReleaseDock.notify_release()
+        self.overview_gui.release_dock.current_release = self.installer
+        self.overview_gui.release_dock.create_folders()
+        self.Close()
 
     def submit_package(self, event):
         package = Package()
@@ -122,6 +125,7 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         package.is_framework = int(self.is_framework_check.GetValue() == "True")
         package.release = time.strftime('%Y-%m-%d')
         package.priority = str(self.package_priority.GetValue())
+        package.new = True
         self.installer.packages.append(package)
         self.add_package_to_tree(package)
 
@@ -154,6 +158,12 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         tree.AppendItem(pack, location)
         tree.AppendItem(pack, opt)
         tree.AppendItem(pack, fram)
+
+    def on_close(self, event):
+        if self.frame is not None:
+            self.frame.Destroy()
+        self.Destroy()
+        self.overview_gui.Show()
 
 
 class SelectPackageFrame(release_creator_gui.MyFrame2):

@@ -1,4 +1,5 @@
 import socket
+import threading
 import time
 from Queue import Queue
 from threading import Thread
@@ -57,7 +58,8 @@ class Dock(object):
         print("DOCK -- Listening to port " + str(self.port) + " on interface " + self.host)
         # timeout in sec
         timeout = 3
-        while True:
+        t = threading.currentThread()
+        while getattr(t, "do_run", True):
             conn, address = self.data_socket.accept()
             print("DOCK -- Connected by \n\t\t" + str(address))
             data = conn.recv(1024)
@@ -65,6 +67,7 @@ class Dock(object):
                 print("DOCK -- received data: \n\t\t" + data)
                 self.message_queue.put(data)
             time.sleep(timeout)
+        print("DOCK -- Closing listening thread")
 
     def handle_message(self):
         """Handling all messages in the message_queue

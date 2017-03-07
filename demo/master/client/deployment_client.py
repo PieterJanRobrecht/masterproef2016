@@ -1,6 +1,6 @@
-import gettext
+from wx import wx
 
-from SimpleUI import MyApp
+from client.main_gui_impl import MainGui
 from field_dock import FieldDock
 
 
@@ -10,10 +10,12 @@ def start_field_dock():
     return field_dock, field_dock.start_service()
 
 
-def start_gui():
-    gettext.install("app")  # replace with the appropriate catalog name
-    app = MyApp(0)
+def start_gui(field_dock, field_dock_thread):
+    app = wx.App(False)
+    frame = MainGui(None, field_dock, field_dock_thread)
+    frame.Show(True)
     app.MainLoop()
+    app.Destroy()
 
 
 def main():
@@ -21,10 +23,10 @@ def main():
     # Subscribing to broker
     sub_dict = {"type": ["release", "update"]}
     field_dock.connect_to_broker(sub_dict)
-    start_gui()
+    start_gui(field_dock, field_dock_thread)
 
-    # Waiting until threads are finished
+    field_dock.kill_message_thread()
+    field_dock_thread.do_run = False
     field_dock_thread.join()
-
 if __name__ == "__main__":
     main()

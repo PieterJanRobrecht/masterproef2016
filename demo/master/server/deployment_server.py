@@ -4,7 +4,7 @@ from release_dock import ReleaseDock
 from broker import Broker
 from threading import Thread
 
-from server.release_creator_impl import ReleaseCreator
+from server.overview_impl import OverviewGui
 
 
 def start_release_dock():
@@ -20,18 +20,18 @@ def start_broker():
     return broker.start_service()
 
 
-def listen_to_keypress():
+def listen_to_keypress(release_dock):
     while True:
-        raw_input("Press Enter to create a new Release")
+        raw_input("Press Enter to open the overview screen")
         app = wx.App(False)
-        frame = ReleaseCreator(None)
+        frame = OverviewGui(None, release_dock)
         frame.Show(True)
         app.MainLoop()
         app.Destroy()
 
 
-def start_packager_service():
-    thread = Thread(target=listen_to_keypress, args=())
+def start_packager_service(release_dock):
+    thread = Thread(target=listen_to_keypress, args=(release_dock,))
     thread.daemon = True
     thread.start()
     return thread
@@ -40,7 +40,7 @@ def start_packager_service():
 def main():
     release_dock, release_dock_thread = start_release_dock()
     broker_thread = start_broker()
-    keyboard_listen = start_packager_service()
+    keyboard_listen = start_packager_service(release_dock)
     # Subscribing to broker
     sub_dict = {"type": ["new", "change", "rapport"]}
     release_dock.connect_to_broker(sub_dict)
@@ -49,6 +49,7 @@ def main():
     release_dock_thread.join()
     broker_thread.join()
     keyboard_listen.join()
+
 
 if __name__ == "__main__":
     main()

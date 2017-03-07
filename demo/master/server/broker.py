@@ -90,7 +90,10 @@ class Broker(Dock):
 
     def unsubscribe(self, message):
         print("BROKER -- Unsubscribing Dock " + message.sender)
-        # TODO
+        d = data_to_dict(message.data)
+        list_for_unsubscribing = d["type"]
+        for unsub in list_for_unsubscribing:
+            self.lookup[unsub].remove(message.sender)
 
     def initiate_lookup(self):
         # lists with all the release docks listening for new or changed field docks
