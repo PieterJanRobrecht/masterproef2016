@@ -1,7 +1,12 @@
+import shutil
+
 import mysql.connector
 import pymysql as pymysql
 import os
 import zipfile
+import socket
+import threading
+import time
 
 from distutils.dir_util import copy_tree
 from dock import Dock
@@ -9,6 +14,7 @@ from message import Message
 from component import Component
 from server.installer import Installer
 from tower import Tower
+from threading import Thread
 
 
 def copy_package_to_release(package, destination):
@@ -89,9 +95,6 @@ def zip_directory(directory, zipf):
             zipf.write(os.path.join(root, file))
 
 
-
-
-
 class ReleaseDock(Dock):
     database_user = 'root'
     database_password = 'root'
@@ -102,6 +105,11 @@ class ReleaseDock(Dock):
         super(ReleaseDock, self).__init__()
         self.host = host
         self.port = port
+        # Used for sending data directly to and from field docks
+        self.data_host = None
+        self.data_port = None
+        self.data_socket = None
+        # Used for database connection
         self.cursor = None
         self.cnx = None
         self.current_release = None
@@ -111,9 +119,10 @@ class ReleaseDock(Dock):
     def start_service(self):
         print("RELEASE DOCK -- Starting services")
         self.connect_to_database()
+        release_thread = self.open_release_socket("localhost", 12346)
         thread = super(ReleaseDock, self).start_service()
         print("RELEASE DOCK -- Services started")
-        return thread
+        return thread, release_thread
 
     def connect_to_database(self):
         print("RELEASE DOCK -- Connecting to database")
@@ -201,9 +210,13 @@ class ReleaseDock(Dock):
         self.send_message(release_message)
 
     def zip_current_release(self):
-        zip_name = self.current_release.disk_location + "release.zip"
+        zip_name = self.current_release.disk_location
+        zip_name = os.path.join(zip_name, "release.zip")
+        root = self.current_release.disk_location
+        installer_folder_name = self.current_release.name + self.current_release.version
+        folder_to_zip = os.path.join(root, installer_folder_name)
         zipf = zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED)
-        zip_directory(self.current_release.disk_location, zipf)
+        zip_directory(folder_to_zip, zipf)
         zipf.close()
 
     def create_folders(self):
@@ -218,3 +231,42 @@ class ReleaseDock(Dock):
                 add_files_to_package_folder(package, meta_dir)
             else:
                 copy_old_meta_folder(package, meta_dir)
+
+    def open_release_socket(self, host, port):
+        self.data_host = host
+        self.data_port = port
+        # Queue a maximum connect requests
+        max_connection_request = 1
+        # print("Opening socket")
+        self.data_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.data_socket.bind((self.data_host, self.data_port))
+        self.data_socket.listen(max_connection_request)
+
+        thread = Thread(target=self.transfer_release, args=())
+        thread.daemon = True
+        thread.start()
+        return thread
+
+    def transfer_release(self):
+        print("RELEASE DOCK -- Listening to port " + str(self.data_port) + " on interface " + self.data_host)
+        # timeout in sec
+        timeout = 3
+        t = threading.currentThread()
+        while getattr(t, "do_run", True):
+            conn, address = self.data_socket.accept()
+            print("RELEASE DOCK -- Connected by \n\t\t" + str(address))
+
+            zip_location = os.path.join(self.current_release.disk_location, "release.zip")
+
+            file_size = str(os.stat(zip_location).st_size)
+            conn.send(file_size)
+            work_file = open(zip_location, "rb")
+            file_size = int(file_size)
+            while file_size > 0:
+                data = work_file.read(1024)
+                conn.send(data)
+                file_size -= len(data)
+            time.sleep(timeout)
+            print("RELEASE DOCK -- Done sending release to " + str(address))
+            conn.close()
+        print("RELEASE DOCK -- Closing listening thread")

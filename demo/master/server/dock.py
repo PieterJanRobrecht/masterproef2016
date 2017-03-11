@@ -11,7 +11,7 @@ class Dock(object):
         # Used for opening a socket on the host machine
         self.port = None
         self.host = None
-        self.data_socket = None
+        self.message_socket = None
         # Used for communicating with the broker
         self.broker_host = None
         self.broker_port = None
@@ -45,9 +45,9 @@ class Dock(object):
         # Queue a maximum connect requests
         max_connection_request = 1
         # print("Opening socket")
-        self.data_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.data_socket.bind((self.host, self.port))
-        self.data_socket.listen(max_connection_request)
+        self.message_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.message_socket.bind((self.host, self.port))
+        self.message_socket.listen(max_connection_request)
         # print("Ready for receiving data on port " + str(self.port) + " on interface " + self.host)
 
     def listen_for_data(self):
@@ -60,7 +60,7 @@ class Dock(object):
         timeout = 3
         t = threading.currentThread()
         while getattr(t, "do_run", True):
-            conn, address = self.data_socket.accept()
+            conn, address = self.message_socket.accept()
             print("DOCK -- Connected by \n\t\t" + str(address))
             data = conn.recv(1024)
             if data:
@@ -93,7 +93,7 @@ class Dock(object):
             A dictionary with subscription type is sent
         """
         self.broker_host = 'localhost'
-        self.broker_port = 12346
+        self.broker_port = 12347
         self.subscribe_to_messages(sub_dict)
 
     def subscribe_to_messages(self, sub_dict):

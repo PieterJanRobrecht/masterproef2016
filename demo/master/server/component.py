@@ -1,8 +1,6 @@
 import ast
 import json
 
-from data.decorators import data
-
 
 class Component(object):
     def __init__(self):

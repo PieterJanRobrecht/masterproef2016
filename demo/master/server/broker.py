@@ -66,7 +66,7 @@ class Broker(Dock):
         :param message: received message from elsewhere
         :return:
         """
-        print("BROKER -- Performing other action")
+        print("BROKER -- Performing action: OTHER")
         # Send everyone in the correct list a message
         d = data_to_dict(str(message))
         notification = Message()
@@ -77,7 +77,7 @@ class Broker(Dock):
             for subscriber in call_list:
                 port = determine_port(message_type)
                 send_notification(subscriber, port, notification)
-        print("BROKER -- Done with notifying")
+        print("BROKER -- Done with: OTHER")
         # Save message in queue somewhere
 
     def subscribe(self, message):

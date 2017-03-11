@@ -1,5 +1,5 @@
 import threading
-import urllib
+import socket
 
 import wx
 import os.path
@@ -24,7 +24,7 @@ def start_description_gui():
 
 
 def choose_dir():
-    app = wx.PySimpleApp()
+    app = wx.App(False)
     dialog = wx.DirDialog(None, "Choose a directory:", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
     if dialog.ShowModal() == wx.ID_OK:
         path = dialog.GetPath()
@@ -38,6 +38,7 @@ class FieldDock(Dock):
         self.host = host
         self.port = port
         self.message_thread = None
+        self.current_release = None
         self.actions = {}
         self.initiate_actions()
 
@@ -90,15 +91,27 @@ class FieldDock(Dock):
         self.send_message(unsubscribe_message)
 
     def perform_release(self, message):
-        print("FIELD DOCK -- Performing new release action")
+        print("FIELD DOCK -- Performing action: RELEASE")
         message_data = message.data
-        installer = Installer.convert_to_tower(message_data)
+        installer = Installer.convert_to_installer(message_data)
+        self.current_release = installer
         # Download files
-        testfile = urllib.URLopener()
-        src_url = message.sender + installer.disk_location + "release.zip"
-        dest_url = choose_dir()
-        testfile.retrieve(src_url, dest_url)
+        file_dir = choose_dir()
+        file_dir = os.path.join(file_dir, "release.zip")
+        file = open(file_dir, 'wb+')
+        print("RELEASE DOCK -- Release zip made")
+        s = socket.socket()  # Create a socket object
+        host = "localhost"  # Get local machine name
+        port = 12346
+        s.connect((host, port))
+        file_size = int(s.recv(1024))
+        while file_size > 0:
+            data = s.recv(1024)
+            file.write(data)
+            file_size -= len(data)
+        print("FIELD DOCK -- Received release, ready to install")
         # Download agents
+        s.close()
         # Start correct agent
 
     def perform_update(self, message):

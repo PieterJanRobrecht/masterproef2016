@@ -11,12 +11,13 @@ def start_release_dock():
     print("RELEASE DOCK -- Initialisation")
     # '' = symbolic meaning for all interfaces
     release_dock = ReleaseDock('localhost', 12345)
-    return release_dock, release_dock.start_service()
+    thread, release_thread = release_dock.start_service()
+    return release_dock, thread, release_thread
 
 
 def start_broker():
     print("BROKER -- Initialisation")
-    broker = Broker('localhost', 12346)
+    broker = Broker('localhost', 12347)
     return broker.start_service()
 
 
@@ -38,7 +39,7 @@ def start_packager_service(release_dock):
 
 
 def main():
-    release_dock, release_dock_thread = start_release_dock()
+    release_dock, release_dock_thread, release_thread = start_release_dock()
     broker_thread = start_broker()
     keyboard_listen = start_packager_service(release_dock)
     # Subscribing to broker
@@ -47,6 +48,7 @@ def main():
 
     # Waiting until threads are finished
     release_dock_thread.join()
+    release_thread.join()
     broker_thread.join()
     keyboard_listen.join()
 

@@ -90,8 +90,9 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         self.overview_gui = overview_gui
 
     def select_installer(self, event):
-        # TODO
-        print "installer"
+        self.Hide()
+        self.frame = SelectInstallerFrame(None, self)
+        self.frame.Show(True)
 
     def select_package(self, event):
         self.Hide()
@@ -109,9 +110,13 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         self.installer.disk_location = str(self.installer_directory.GetTextCtrlValue())
         # Write to database
         write_to_database(self.installer)
+        self.last_actions(True)
+
+    def last_actions(self, make_folders):
         # Create file structure
         self.overview_gui.release_dock.current_release = self.installer
-        self.overview_gui.release_dock.create_folders()
+        if make_folders:
+            self.overview_gui.release_dock.create_folders()
         self.Close()
 
     def submit_package(self, event):
@@ -215,3 +220,107 @@ class SelectPackageFrame(release_creator_gui.MyFrame2):
         self.list_control.SetStringItem(i, 4, str(package.priority))
         self.list_control.SetStringItem(i, 5, str(package.optional))
         self.list_control.SetStringItem(i, 6, str(package.is_framework))
+
+
+def get_all_installers():
+    cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
+                                  host=ReleaseDock.database_host,
+                                  database=ReleaseDock.database_name)
+    cursor = cnx.cursor(dictionary=True)
+    installers = []
+    try:
+        query = "SELECT * FROM (SELECT * FROM installer ORDER BY idInstaller DESC LIMIT 50)" \
+                " sub ORDER BY idInstaller ASC"
+        cursor.execute(query)
+        for row in cursor:
+            installer = Installer.convert_to_installer(row)
+            installers.append(installer)
+
+        print("RELEASE DOCK -- Collected all installers")
+    except mysql.connector.Error as err:
+        print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
+        cnx.rollback()
+    cnx.close()
+    return installers
+
+
+def get_package(id_package, cnx, cursor):
+    try:
+        query = "SELECT * FROM package WHERE idPackage = " + str(id_package) + ";"
+        cursor.execute(query)
+        for row in cursor:
+            package = Package.convert_to_package(row)
+
+        print("RELEASE DOCK -- Collected package")
+    except mysql.connector.Error as err:
+        print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
+        cnx.rollback()
+    return package
+
+
+def get_all_packages_with_installer(selected_installer):
+    id = selected_installer.id_installer
+    cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
+                                  host=ReleaseDock.database_host,
+                                  database=ReleaseDock.database_name)
+    cursor = cnx.cursor(dictionary=True)
+    try:
+        query = "SELECT Package_idPackage FROM  installer_has_package WHERE Installer_idInstaller = " + str(id) + ";"
+        cursor.execute(query)
+        for row in cursor:
+            package = get_package(row["Package_idPackage"], cnx, cursor)
+            selected_installer.packages.append(package)
+
+        print("RELEASE DOCK -- Collected packages for installer")
+    except mysql.connector.Error as err:
+        print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
+        cnx.rollback()
+    cnx.close()
+    return selected_installer
+
+
+class SelectInstallerFrame(release_creator_gui.MyFrame2):
+    def __init__(self, parent, release_creator_frame):
+        release_creator_gui.MyFrame2.__init__(self, parent)
+        self.init_table()
+        self.release_creator_frame = release_creator_frame
+        self.selected_installer = None
+        self.row_dict = None
+        self.fill_table_with_installers()
+
+    def cancel(self, event):
+        self.Hide()
+        self.release_creator_frame.Show()
+        self.release_creator_frame.last_actions(False)
+
+    def select(self, event):
+        self.selected_installer = get_all_packages_with_installer(self.selected_installer)
+        self.release_creator_frame.installer = self.selected_installer
+        self.cancel(event)
+
+    def set_selected_package(self, event):
+        current_item_id = event.m_itemIndex
+        self.selected_installer = self.row_dict[current_item_id]
+
+    def fill_table_with_installers(self):
+        installers = get_all_installers()
+        i = 0
+        self.row_dict = {}
+        for installer in installers:
+            self.add_installer_to_list(i, installer)
+            self.row_dict[i] = installer
+            i += 1
+
+    def init_table(self):
+        self.list_control.InsertColumn(0, "Name")
+        self.list_control.InsertColumn(1, "Version")
+        self.list_control.InsertColumn(2, "Description")
+        self.list_control.InsertColumn(3, "Disk Location")
+
+    def add_installer_to_list(self, i, installer):
+        self.list_control.InsertStringItem(i, str(installer.id_installer))
+        self.list_control.SetStringItem(i, 0, str(installer.name))
+        self.list_control.SetStringItem(i, 1, str(installer.version))
+        self.list_control.SetStringItem(i, 2, str(installer.disk_location))
+
+
