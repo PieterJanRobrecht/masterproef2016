@@ -6,6 +6,7 @@ from server.component import Component
 
 class Tower(object):
     def __init__(self):
+        self.id_tower = None
         self.name = None
         self.serial_number = None
         self.id_in_company = None
@@ -14,7 +15,7 @@ class Tower(object):
         self.components = []
 
     def __str__(self):
-        keys = ("name", "serial_number", "id_in_company", "location", "alias", "components")
+        keys = ("idTower", "name", "serialNumber", "idInCompany", "location", "alias", "components")
         strings = []
         for component in self.components:
             strings.append(str(component))
@@ -30,15 +31,17 @@ class Tower(object):
             d = data
 
         tower = Tower()
-        components = d["components"]
-        for component in components:
-            component = Component.convert_to_component(component)
-            tower.components.append(component)
+        if "components" in d:
+            components = d["components"]
+            for component in components:
+                component = Component.convert_to_component(component)
+                tower.components.append(component)
+        tower.name = d["idTower"]
         tower.name = d["name"]
         tower.alias = d["alias"]
-        tower.location = d["location"]
-        tower.serial_number = d["serial_number"]
-        tower.id_in_company = d["id_in_company"]
+        tower.location = d["geolocation"]
+        tower.serial_number = d["serialNumber"]
+        tower.id_in_company = d["idInCompany"]
         return tower
 
     @classmethod

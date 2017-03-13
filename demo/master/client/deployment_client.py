@@ -1,3 +1,5 @@
+from threading import Thread
+
 from wx import wx
 
 from client.main_gui_impl import MainGui
@@ -11,11 +13,18 @@ def start_field_dock():
 
 
 def start_gui(field_dock, field_dock_thread):
-    app = wx.App(False)
-    frame = MainGui(None, field_dock, field_dock_thread)
-    frame.Show(True)
-    app.MainLoop()
-    app.Destroy()
+    thread = Thread(target=field_gui, args=(field_dock, field_dock_thread))
+    thread.daemon = True
+    thread.start()
+
+
+def field_gui(field_dock, field_dock_thread):
+    while True:
+        app = wx.App(False)
+        frame = MainGui(None, field_dock, field_dock_thread)
+        frame.Show(True)
+        app.MainLoop()
+        app.Destroy()
 
 
 def main():

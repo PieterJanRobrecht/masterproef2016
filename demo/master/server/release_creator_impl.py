@@ -117,6 +117,7 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         self.overview_gui.release_dock.current_release = self.installer
         if make_folders:
             self.overview_gui.release_dock.create_folders()
+        self.overview_gui.set_release_field()
         self.Close()
 
     def submit_package(self, event):
@@ -314,8 +315,7 @@ class SelectInstallerFrame(release_creator_gui.MyFrame2):
     def init_table(self):
         self.list_control.InsertColumn(0, "Name")
         self.list_control.InsertColumn(1, "Version")
-        self.list_control.InsertColumn(2, "Description")
-        self.list_control.InsertColumn(3, "Disk Location")
+        self.list_control.InsertColumn(2, "Disk Location")
 
     def add_installer_to_list(self, i, installer):
         self.list_control.InsertStringItem(i, str(installer.id_installer))

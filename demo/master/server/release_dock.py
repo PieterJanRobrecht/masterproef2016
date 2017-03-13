@@ -1,5 +1,4 @@
-import shutil
-
+import cPickle as pickle
 import mysql.connector
 import pymysql as pymysql
 import os
@@ -95,6 +94,19 @@ def zip_directory(directory, zipf):
             zipf.write(os.path.join(root, file))
 
 
+def send_file(conn, location):
+    if type(location) is file:
+        location = str(location.name)
+    file_size = str(os.stat(location).st_size)
+    conn.send(file_size)
+    work_file = open(location, "rb")
+    file_size = int(file_size)
+    while file_size > 0:
+        data = work_file.read(1024)
+        conn.send(data)
+        file_size -= len(data)
+
+
 class ReleaseDock(Dock):
     database_user = 'root'
     database_password = 'root'
@@ -112,7 +124,10 @@ class ReleaseDock(Dock):
         # Used for database connection
         self.cursor = None
         self.cnx = None
+        # Used for the current release
         self.current_release = None
+        self.agents = []
+        # Used for handling messages
         self.actions = {}
         self.initiate_actions()
 
@@ -256,17 +271,21 @@ class ReleaseDock(Dock):
             conn, address = self.data_socket.accept()
             print("RELEASE DOCK -- Connected by \n\t\t" + str(address))
 
+            # Sending zip file to field dock
             zip_location = os.path.join(self.current_release.disk_location, "release.zip")
+            send_file(conn, zip_location)
 
-            file_size = str(os.stat(zip_location).st_size)
-            conn.send(file_size)
-            work_file = open(zip_location, "rb")
-            file_size = int(file_size)
-            while file_size > 0:
-                data = work_file.read(1024)
-                conn.send(data)
-                file_size -= len(data)
-            time.sleep(timeout)
-            print("RELEASE DOCK -- Done sending release to " + str(address))
+            # Sending agents to release dock
+            # pkl = open("agents.txt", "wb+")
+            ready = conn.recv(1024)
+            if str(ready) == "Ready":
+                list_agents = pickle.dumps(self.agents)
+                file_size = len(list_agents)
+                conn.send(str(file_size))
+                okay = conn.recv(1024)
+                if str(okay) == "Received length":
+                    conn.send(list_agents)
+                # send_file(conn, pkl)
+                print("RELEASE DOCK -- Done sending release to " + str(address))
             conn.close()
         print("RELEASE DOCK -- Closing listening thread")

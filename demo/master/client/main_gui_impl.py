@@ -1,3 +1,5 @@
+import sys
+
 from client import description_file_gui
 
 
@@ -14,3 +16,4 @@ class MainGui(description_file_gui.MyFrame3):
         self.field_dock.unsubscribe_to_messages(unsub_dict)
         # Kill GUI
         self.Destroy()
+        sys.exit(0)

@@ -27,6 +27,8 @@ def listen_to_keypress(release_dock):
         app = wx.App(False)
         frame = OverviewGui(None, release_dock)
         frame.Show(True)
+        if release_dock.current_release is not None:
+            frame.set_release_field()
         app.MainLoop()
         app.Destroy()
 

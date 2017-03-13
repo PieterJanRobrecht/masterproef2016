@@ -1,7 +1,6 @@
 class Agent(object):
     def __init__(self):
-        # TODO
-        print("INIT")
+        self.release_zip_location = None
 
     def action(self):
         # TODO

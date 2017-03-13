@@ -1,11 +1,12 @@
 import threading
 import socket
-
+import cPickle as pickle
 import wx
 import os.path
 
 from client.description_file_impl import DescriptionCreator
 from server.dock import Dock
+from server.install_agent import InstallAgent
 from server.installer import Installer
 from server.message import Message
 
@@ -24,12 +25,21 @@ def start_description_gui():
 
 
 def choose_dir():
-    app = wx.App(False)
+    # app = wx.App(False)
     dialog = wx.DirDialog(None, "Choose a directory:", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
     if dialog.ShowModal() == wx.ID_OK:
         path = dialog.GetPath()
     dialog.Destroy()
+    # app.Destroy()
     return path
+
+
+def receive_file(s, file):
+    file_size = int(s.recv(1024))
+    while file_size > 0:
+        data = s.recv(1024)
+        file.write(data)
+        file_size -= len(data)
 
 
 class FieldDock(Dock):
@@ -39,6 +49,7 @@ class FieldDock(Dock):
         self.port = port
         self.message_thread = None
         self.current_release = None
+        self.agents = []
         self.actions = {}
         self.initiate_actions()
 
@@ -52,6 +63,7 @@ class FieldDock(Dock):
         self.message_thread = threading.currentThread()
         while getattr(self.message_thread, "do_run", True):
             data = self.message_queue.get()
+            print("FIELD DOCK -- Handling message")
             if Message.check_format(data):
                 # TODO set counter and stuff
                 # Unpack notification
@@ -95,26 +107,40 @@ class FieldDock(Dock):
         message_data = message.data
         installer = Installer.convert_to_installer(message_data)
         self.current_release = installer
+
         # Download files
         file_dir = choose_dir()
-        file_dir = os.path.join(file_dir, "release.zip")
-        file = open(file_dir, 'wb+')
-        print("RELEASE DOCK -- Release zip made")
+        release_zip = os.path.join(file_dir, "release.zip")
+        file = open(release_zip, 'wb+')
+        print("FIELD DOCK -- Release zip made")
         s = socket.socket()  # Create a socket object
         host = "localhost"  # Get local machine name
         port = 12346
         s.connect((host, port))
-        file_size = int(s.recv(1024))
-        while file_size > 0:
-            data = s.recv(1024)
-            file.write(data)
-            file_size -= len(data)
+        receive_file(s, file)
         print("FIELD DOCK -- Received release, ready to install")
+        file.close()
+
         # Download agents
+        print("FIELD DOCK -- Downloading agents")
+        s.send("Ready")
+        length = s.recv(1024)
+        s.send("Received length")
+        file_size = int(str(length))
+        data = s.recv(file_size)
+        list_agents = pickle.loads(data)
+        self.agents = list_agents
         s.close()
+        print("FIELD DOCK -- Downloaded all the agents")
+
         # Start correct agent
+        for agent in self.agents:
+            if type(agent) is InstallAgent:
+                agent.release_zip_location = file_dir
+                agent.action()
 
     def perform_update(self, message):
+        # TODO
         print("update")
 
     def initiate_actions(self):
