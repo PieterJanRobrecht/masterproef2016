@@ -213,7 +213,7 @@ class MyFrame2 ( wx.Frame ):
 class MyFrame3 ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Overview", pos = wx.DefaultPosition, size = wx.Size( 585,333 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
@@ -222,11 +222,51 @@ class MyFrame3 ( wx.Frame ):
 		self.m_panel2 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer11 = wx.BoxSizer( wx.VERTICAL )
 		
-		bSizer12 = wx.BoxSizer( wx.VERTICAL )
+		bSizer12 = wx.BoxSizer( wx.HORIZONTAL )
 		
-		self.m_staticText11 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText11.Wrap( -1 )
-		bSizer12.Add( self.m_staticText11, 0, wx.ALL, 5 )
+		bSizer13 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticText12 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Currently Installed", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText12.Wrap( -1 )
+		bSizer13.Add( self.m_staticText12, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+		
+		self.m_treeCtrl4 = wx.TreeCtrl( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TR_DEFAULT_STYLE )
+		bSizer13.Add( self.m_treeCtrl4, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		bSizer12.Add( bSizer13, 1, wx.EXPAND, 5 )
+		
+		bSizer14 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticText13 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"New Available", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText13.Wrap( -1 )
+		bSizer14.Add( self.m_staticText13, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+		
+		self.m_treeCtrl5 = wx.TreeCtrl( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TR_DEFAULT_STYLE )
+		bSizer14.Add( self.m_treeCtrl5, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		bSizer12.Add( bSizer14, 1, wx.EXPAND, 5 )
+		
+		bSizer15 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_button5 = wx.Button( self.m_panel2, wx.ID_ANY, u"Messages", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer15.Add( self.m_button5, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_button6 = wx.Button( self.m_panel2, wx.ID_ANY, u"Manage Package", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer15.Add( self.m_button6, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_button7 = wx.Button( self.m_panel2, wx.ID_ANY, u"Get Release", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer15.Add( self.m_button7, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_panel3 = wx.Panel( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer15.Add( self.m_panel3, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		self.m_button8 = wx.Button( self.m_panel2, wx.ID_ANY, u"Install Release", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer15.Add( self.m_button8, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		bSizer12.Add( bSizer15, 0, wx.EXPAND, 5 )
 		
 		
 		bSizer11.Add( bSizer12, 1, wx.EXPAND, 5 )
@@ -245,6 +285,10 @@ class MyFrame3 ( wx.Frame ):
 		
 		# Connect Events
 		self.Bind( wx.EVT_CLOSE, self.close_action )
+		self.m_button5.Bind( wx.EVT_BUTTON, self.handle_message )
+		self.m_button6.Bind( wx.EVT_BUTTON, self.manage_packages )
+		self.m_button7.Bind( wx.EVT_BUTTON, self.get_specific_release )
+		self.m_button8.Bind( wx.EVT_BUTTON, self.install_release )
 	
 	def __del__( self ):
 		pass
@@ -252,6 +296,18 @@ class MyFrame3 ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def close_action( self, event ):
+		event.Skip()
+	
+	def handle_message( self, event ):
+		event.Skip()
+	
+	def manage_packages( self, event ):
+		event.Skip()
+	
+	def get_specific_release( self, event ):
+		event.Skip()
+	
+	def install_release( self, event ):
 		event.Skip()
 	
 
