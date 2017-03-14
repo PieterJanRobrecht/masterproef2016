@@ -4,7 +4,7 @@ import cPickle as pickle
 import wx
 import os.path
 
-from client.description_file_impl import DescriptionCreator
+from description_file_impl import DescriptionCreator
 from server.dock import Dock
 from server.install_agent import InstallAgent
 from server.installer import Installer

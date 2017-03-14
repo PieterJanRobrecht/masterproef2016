@@ -1,7 +1,7 @@
 import ast
 import json
 
-from server.component import Component
+from component import Component
 
 
 class Tower(object):

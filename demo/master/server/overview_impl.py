@@ -1,10 +1,10 @@
 import mysql.connector
 
-from server import release_creator_gui
+import release_creator_gui
 from server.install_agent import InstallAgent
-from server.release_creator_impl import ReleaseCreator
-from server.release_dock import ReleaseDock
-from server.tower import Tower
+from release_creator_impl import ReleaseCreator
+from release_dock import ReleaseDock
+from tower import Tower
 
 
 def get_all_towers():

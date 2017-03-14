@@ -2,7 +2,7 @@ from threading import Thread
 
 from wx import wx
 
-from client.main_gui_impl import MainGui
+from main_gui_impl import MainGui
 from field_dock import FieldDock
 
 

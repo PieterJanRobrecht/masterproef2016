@@ -4,7 +4,7 @@ from release_dock import ReleaseDock
 from broker import Broker
 from threading import Thread
 
-from server.overview_impl import OverviewGui
+from overview_impl import OverviewGui
 
 
 def start_release_dock():

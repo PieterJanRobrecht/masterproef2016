@@ -11,7 +11,7 @@ from distutils.dir_util import copy_tree
 from dock import Dock
 from message import Message
 from component import Component
-from server.installer import Installer
+from installer import Installer
 from tower import Tower
 from threading import Thread
 
@@ -276,7 +276,6 @@ class ReleaseDock(Dock):
             send_file(conn, zip_location)
 
             # Sending agents to release dock
-            # pkl = open("agents.txt", "wb+")
             ready = conn.recv(1024)
             if str(ready) == "Ready":
                 list_agents = pickle.dumps(self.agents)

@@ -2,8 +2,11 @@ import os
 import zipfile
 
 import docker
+from docker import DockerClient
+from subprocess import call
+import subprocess
 
-from server.agent import Agent
+from agent import Agent
 from subprocess import Popen, PIPE
 
 
@@ -11,6 +14,10 @@ def find(name, path):
     for root, dirs, files in os.walk(path):
         if name in files:
             return root
+
+
+def create_zip(release_zip_location):
+    print "hallo"
 
 
 class InstallAgent(Agent):
@@ -22,17 +29,16 @@ class InstallAgent(Agent):
         # Unzip folder
         self.unzip()
         # Make new docker container
-        dockerfile = find("Dockerfile", self.release_zip_location)
-        client = docker.from_env()
-        client.containers.run("ubuntu", "echo hello world")
-        docker_image = client.images.build(path=dockerfile)
-        container = client.containers.create_container("fielddockimage", name="fielddockcontainer")
-        # client.start(container)
-        # Popen(["docker-machine", "env", "--shell", "cmd", "default"])
-        # Popen(["docker", "build", "-t", "fielddock", dockerfile])
-        # Popen(["docker", "run", "--name", "fielddockcontainer", "-it", "fielddock"])
+        dockerfile = str(find("Dockerfile", self.release_zip_location))
+        env = {"DOCKER_TLS_VERIFY": "1", "DOCKER_HOST": "tcp://192.168.99.100:2376",
+               "DOCKER_CERT_PATH": "C:\Users\Pieter-Jan\.docker\machine\machines\default",
+               "DOCKER_MACHINE_NAME": "default", "COMPOSE_CONVERT_WINDOWS_PATHS": "true"}
+        client = docker.from_env(environment=env)
+        docker_image = client.images.build(path=dockerfile, tag="fieldimage")
+        container = client.containers.run(docker_image, detach=True, name="fieldcontainer")
         print("INSTALL AGENT -- Docker container created")
         # Copy files to container
+        tar_zip = create_zip(self.release_zip_location)
         # Locate installer meta file
         # Install all the packages
 

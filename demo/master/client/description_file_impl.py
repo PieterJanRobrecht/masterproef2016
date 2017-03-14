@@ -1,4 +1,4 @@
-from client import description_file_gui
+import description_file_gui
 
 from server.component import Component
 from server.tower import Tower

@@ -3,9 +3,9 @@ import time
 import release_creator_gui
 
 from Queue import Queue
-from server.installer import Installer
-from server.package import Package
-from server.release_dock import ReleaseDock
+from installer import Installer
+from package import Package
+from release_dock import ReleaseDock
 
 
 def write_to_database(installer):

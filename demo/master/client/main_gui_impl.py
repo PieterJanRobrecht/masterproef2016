@@ -1,6 +1,6 @@
 import sys
 
-from client import description_file_gui
+import description_file_gui
 
 
 class MainGui(description_file_gui.MyFrame3):

@@ -1,7 +1,7 @@
 import ast
 import socket
 from dock import Dock
-from server.message import Message
+from message import Message
 from collections import defaultdict
 from threading import Thread
 
