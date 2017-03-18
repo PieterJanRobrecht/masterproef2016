@@ -15,11 +15,11 @@ class Tower(object):
         self.components = []
 
     def __str__(self):
-        keys = ("idTower", "name", "serialNumber", "idInCompany", "location", "alias", "components")
+        keys = ("idTower", "name", "serialNumber", "idInCompany", "geolocation", "alias", "components")
         strings = []
         for component in self.components:
             strings.append(str(component))
-        values = (self.name, self.serial_number, self.id_in_company, self.location, self.alias, strings)
+        values = (self.id_tower, self.name, self.serial_number, self.id_in_company, self.location, self.alias, strings)
         d = dict(zip(keys, values))
         return json.dumps(d)
 

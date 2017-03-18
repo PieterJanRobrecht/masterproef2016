@@ -10,6 +10,7 @@ class Installer(object):
         self.version = None
         self.disk_location = None
         self.packages = []
+        self.new = False
 
     def __str__(self):
         keys = ("idInstaller", "name", "installerVersion", "diskLocation", "packages")

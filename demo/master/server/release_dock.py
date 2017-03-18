@@ -1,11 +1,10 @@
-import cPickle as pickle
+import dill
 import mysql.connector
 import pymysql as pymysql
 import os
 import zipfile
 import socket
 import threading
-import time
 
 from distutils.dir_util import copy_tree
 from dock import Dock
@@ -20,9 +19,12 @@ def copy_package_to_release(package, destination):
     dir_name = package.name + package.version
     root = os.path.join(destination, dir_name)
     meta = os.path.join(root, "meta")
+    incl = os.path.join(root, "incl")
     data = os.path.join(root, "data")
     if not os.path.exists(meta):
         os.makedirs(meta)
+    if not os.path.exists(incl):
+        os.makedirs(incl)
     if not os.path.exists(data):
         os.makedirs(data)
     copy_tree(package.location, data)
@@ -33,9 +35,12 @@ def create_folder_structure(release):
     dir_name = release.name + release.version
     root = os.path.join(release.disk_location, dir_name)
     config = os.path.join(root, "config")
+    incl = os.path.join(root, "incl")
     package_dir = os.path.join(root, "packages")
     if not os.path.exists(config):
         os.makedirs(config)
+    if not os.path.join(incl):
+        os.makedirs(incl)
     if not os.path.exists(package_dir):
         os.makedirs(package_dir)
 
@@ -105,6 +110,16 @@ def send_file(conn, location):
         data = work_file.read(1024)
         conn.send(data)
         file_size -= len(data)
+
+
+def add_files_to_release(release, config):
+    # Create Dockerfile
+    docker_file_location = os.path.join(config, "Dockerfile")
+    open(docker_file_location, "w+")
+    # Create metadata.json
+    meta_file_location = os.path.join(config, "metadata_installer.json")
+    meta_file = open(meta_file_location, "w+")
+    meta_file.write(str(release))
 
 
 class ReleaseDock(Dock):
@@ -238,6 +253,10 @@ class ReleaseDock(Dock):
         release = self.current_release
         # Create folder structure and return "packages" folder
         packages_dir = create_folder_structure(release)
+        installer_dir = release.name + release.version
+        config = os.path.join(release.disk_location, installer_dir, "config")
+        if release.new:
+            add_files_to_release(release, config)
         # Place every package in folder
         for package in release.packages:
             current_dir = copy_package_to_release(package, packages_dir)
@@ -278,7 +297,7 @@ class ReleaseDock(Dock):
             # Sending agents to release dock
             ready = conn.recv(1024)
             if str(ready) == "Ready":
-                list_agents = pickle.dumps(self.agents)
+                list_agents = dill.dumps(self.agents)
                 file_size = len(list_agents)
                 conn.send(str(file_size))
                 okay = conn.recv(1024)

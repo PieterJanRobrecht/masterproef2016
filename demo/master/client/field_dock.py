@@ -1,6 +1,6 @@
 import threading
 import socket
-import cPickle as pickle
+import dill
 import wx
 import os.path
 
@@ -128,7 +128,7 @@ class FieldDock(Dock):
         s.send("Received length")
         file_size = int(str(length))
         data = s.recv(file_size)
-        list_agents = pickle.loads(data)
+        list_agents = dill.loads(data)
         self.agents = list_agents
         s.close()
         print("FIELD DOCK -- Downloaded all the agents")

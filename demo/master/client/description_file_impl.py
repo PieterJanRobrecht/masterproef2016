@@ -36,7 +36,7 @@ class DescriptionCreator(description_file_gui.MyFrame2):
         self.tower.id_in_company = str(self.id_tower_text.GetValue())
         self.tower.location = str(self.location_text.GetValue())
         self.tower.serial_number = str(self.serial_number_tower_text.GetValue())
-
+        self.tower.id_tower = 0
         self.write_to_file()
         event.Skip()
         self.Close()

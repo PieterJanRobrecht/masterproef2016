@@ -108,6 +108,8 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         self.installer.name = str(self.installer_name.GetValue())
         self.installer.version = str(self.installer_version.GetValue())
         self.installer.disk_location = str(self.installer_directory.GetTextCtrlValue())
+        self.installer.new = True
+        self.installer.id_installer = 0
         # Write to database
         write_to_database(self.installer)
         self.last_actions(True)
@@ -296,6 +298,7 @@ class SelectInstallerFrame(release_creator_gui.MyFrame2):
 
     def select(self, event):
         self.selected_installer = get_all_packages_with_installer(self.selected_installer)
+        self.selected_installer.new = False
         self.release_creator_frame.installer = self.selected_installer
         self.cancel(event)
 
