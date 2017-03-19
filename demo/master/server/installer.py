@@ -1,4 +1,5 @@
 import ast
+import json
 
 from package import Package
 
@@ -19,7 +20,7 @@ class Installer(object):
             strings.append(str(package))
         values = (self.id_installer, self.name, self.version, self.disk_location, strings)
         d = dict(zip(keys, values))
-        return str(d)
+        return json.dumps(d)
 
     @classmethod
     def to_tuple(cls, installer):

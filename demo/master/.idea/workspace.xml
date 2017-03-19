@@ -10,12 +10,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/master$deployment_server.coverage" NAME="deployment_server Coverage Results" MODIFIED="1489837014572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
+    <SUITE FILE_PATH="coverage/master$deployment_server.coverage" NAME="deployment_server Coverage Results" MODIFIED="1489932625145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
     <SUITE FILE_PATH="coverage/master$testClass.coverage" NAME="testClass Coverage Results" MODIFIED="1487585752893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
     <SUITE FILE_PATH="coverage/master$field_dock.coverage" NAME="field_dock Coverage Results" MODIFIED="1487707748509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client" />
     <SUITE FILE_PATH="coverage/master$blinker_test.coverage" NAME="blinker_test Coverage Results" MODIFIED="1487755024678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TestSite" />
-    <SUITE FILE_PATH="coverage/master$deployment_client.coverage" NAME="deployment_client Coverage Results" MODIFIED="1489837015700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client" />
-    <SUITE FILE_PATH="coverage/master$test.coverage" NAME="test Coverage Results" MODIFIED="1488878151119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TestSite" />
+    <SUITE FILE_PATH="coverage/master$deployment_client.coverage" NAME="deployment_client Coverage Results" MODIFIED="1489934043661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client" />
+    <SUITE FILE_PATH="coverage/master$test.coverage" NAME="test Coverage Results" MODIFIED="1489916542552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TestSite" />
     <SUITE FILE_PATH="coverage/master$testClient.coverage" NAME="testClient Coverage Results" MODIFIED="1487584441711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client" />
     <SUITE FILE_PATH="coverage/master$SimpleUI.coverage" NAME="SimpleUI Coverage Results" MODIFIED="1487700037331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/master$testServer.coverage" NAME="testServer Coverage Results" MODIFIED="1487584390673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
@@ -50,16 +50,6 @@
     <splitter split-orientation="horizontal" split-proportion="0.5295008">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="dock.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/server/dock.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="35" column="21" lean-forward="false" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="main_gui_impl.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/main_gui_impl.py">
               <provider selected="true" editor-type-id="text-editor">
@@ -75,8 +65,8 @@
           <file leaf-file-name="overview_impl.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/server/overview_impl.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="62" column="38" lean-forward="false" selection-start-line="61" selection-start-column="42" selection-end-line="62" selection-end-column="38" />
+                <state relative-caret-position="17">
+                  <caret line="61" column="19" lean-forward="false" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#22#0" expanded="true" />
                     <marker date="1489829958426" expanded="true" signature="555:574" ph="SELECT * FRO... tower" />
@@ -88,8 +78,8 @@
           <file leaf-file-name="package.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/server/package.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+                <state relative-caret-position="188">
+                  <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -98,8 +88,8 @@
           <file leaf-file-name="install_agent.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/server/install_agent.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="181">
-                  <caret line="40" column="85" lean-forward="false" selection-start-line="40" selection-start-column="85" selection-end-line="40" selection-end-column="85" />
+                <state relative-caret-position="201">
+                  <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -107,11 +97,21 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/TestSite/test.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="tower.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/server/tower.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="232">
-                  <caret line="19" column="41" lean-forward="false" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+                <state relative-caret-position="385">
+                  <caret line="28" column="38" lean-forward="false" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -122,33 +122,13 @@
           <file leaf-file-name="field_dock.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/field_dock.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="403">
-                  <caret line="130" column="35" lean-forward="true" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="35" />
+                <state relative-caret-position="425">
+                  <caret line="102" column="10" lean-forward="false" selection-start-line="102" selection-start-column="10" selection-end-line="102" selection-end-column="10" />
                   <folding>
                     <element signature="e#0#16#0" expanded="true" />
                     <element signature="e#2445#2880#0" expanded="false" />
                     <element signature="e#2925#2994#0" expanded="false" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="message.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/server/message.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="installer.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/server/installer.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="284">
-                  <caret line="36" column="43" lean-forward="false" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -160,12 +140,12 @@
           <file leaf-file-name="release_dock.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/server/release_dock.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-680">
-                  <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+                <state relative-caret-position="367">
+                  <caret line="98" column="19" lean-forward="false" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="19" />
                   <folding>
+                    <element signature="e#0#11#0" expanded="true" />
                     <element signature="e#2471#2649#0" expanded="false" />
                     <element signature="e#2700#2788#0" expanded="false" />
-                    <element signature="e#3148#3297#0" expanded="false" />
                     <element signature="e#4760#5053#0" expanded="false" />
                     <element signature="e#5098#5524#0" expanded="false" />
                     <element signature="e#5575#5984#0" expanded="false" />
@@ -177,7 +157,6 @@
                     <element signature="e#7675#8105#0" expanded="false" />
                     <element signature="e#7683#7876#0" expanded="false" />
                     <element signature="e#8218#8315#0" expanded="false" />
-                    <element signature="e#8670#9109#0" expanded="false" />
                     <marker date="1489837003210" expanded="false" signature="2020:2102" ph="SELECT Insta... installer_has_package" />
                     <marker date="1489837003210" expanded="false" signature="2020:2194" ph="SELECT Insta... installer_has_package" />
                     <marker date="1489837003210" expanded="false" signature="2329:2373" ph="SELECT * FRO... installer" />
@@ -195,7 +174,7 @@
           <file leaf-file-name="description_file_impl.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/description_file_impl.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="365">
+                <state relative-caret-position="510">
                   <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#27#0" expanded="true" />
@@ -204,24 +183,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="release_creator_impl.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/server/release_creator_impl.py">
+          <file leaf-file-name="installer.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/server/installer.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="178">
-                  <caret line="243" column="36" lean-forward="false" selection-start-line="243" selection-start-column="36" selection-end-line="243" selection-end-column="36" />
-                  <folding>
-                    <element signature="e#0#22#0" expanded="true" />
-                    <marker date="1489829707048" expanded="true" signature="529:597" ph="INSERT INTO installer... " />
-                    <marker date="1489829707048" expanded="true" signature="729:796" ph="SELECT idIns... installer" />
-                    <marker date="1489829707048" expanded="true" signature="1080:1254" ph="INSERT INTO package... " />
-                    <marker date="1489829707048" expanded="true" signature="1414:1475" ph="SELECT idPac... package" />
-                    <marker date="1489829707048" expanded="true" signature="2546:2643" ph="SELECT * FRO... *" />
-                    <marker date="1489829707048" expanded="true" signature="2561:2615" ph="SELECT * FRO... package" />
-                    <marker date="1489829707048" expanded="true" signature="9063:9187" ph="SELECT * FRO... *" />
-                    <marker date="1489829707048" expanded="true" signature="9078:9136" ph="SELECT * FRO... installer" />
-                    <marker date="1489829707048" expanded="true" signature="9652:9692" ph="SELECT * FRO... package" />
-                    <marker date="1489829707048" expanded="true" signature="10447:10530" ph="SELECT Packa... installer_has_package" />
-                  </folding>
+                <state relative-caret-position="476">
+                  <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -267,6 +234,7 @@
       <find>actions</find>
       <find>metadata</find>
       <find>pickl</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -291,7 +259,6 @@
         <option value="$PROJECT_DIR$/server/release_creator_gui.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/a5035f10-9034-4a6d-87dc-c61e79e56c98/console.sql" />
         <option value="$PROJECT_DIR$/client/description_file_gui.py" />
-        <option value="$PROJECT_DIR$/TestSite/test.py" />
         <option value="$PROJECT_DIR$/server/package.py" />
         <option value="$PROJECT_DIR$/server/component.py" />
         <option value="$PROJECT_DIR$/server/dock.py" />
@@ -306,12 +273,14 @@
         <option value="$PROJECT_DIR$/client/install_agent.py" />
         <option value="$PROJECT_DIR$/server/tower.py" />
         <option value="$PROJECT_DIR$/client/description_file_impl.py" />
-        <option value="$PROJECT_DIR$/server/installer.py" />
         <option value="$PROJECT_DIR$/server/overview_impl.py" />
         <option value="$PROJECT_DIR$/server/release_creator_impl.py" />
-        <option value="$PROJECT_DIR$/server/install_agent.py" />
         <option value="$PROJECT_DIR$/server/release_dock.py" />
         <option value="$PROJECT_DIR$/client/field_dock.py" />
+        <option value="$PROJECT_DIR$/server/installer.py" />
+        <option value="$PROJECT_DIR$/TestSite/metadata_installer.json" />
+        <option value="$PROJECT_DIR$/TestSite/test.py" />
+        <option value="$PROJECT_DIR$/server/install_agent.py" />
       </list>
     </option>
   </component>
@@ -343,7 +312,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -384,8 +352,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestSite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -393,7 +376,7 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Client/testClient.py" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
-    <property name="settings.editor.selected.configurable" value="RemoteServers" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="SearchEverywhereHistoryKey" value="tower.&#9;FILE&#9;file://C:/Users/Pieter-Jan/Documents/school/GIT/masterproef2016/demo/master/server/tower.py&#10;tower&#9;FILE&#9;dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.tower" />
   </component>
   <component name="RecentsManager">
@@ -437,6 +420,24 @@
       <module name="master" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client/deployment_client.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TestSite" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="master" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestSite/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -658,14 +659,16 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Python.deployment_server" />
       <item index="1" class="java.lang.String" itemvalue="Python.deployment_client" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test" />
     </list>
     <recent_temporary>
-      <list size="2">
+      <list size="3">
         <item index="0" class="java.lang.String" itemvalue="Python.deployment_client" />
         <item index="1" class="java.lang.String" itemvalue="Python.deployment_server" />
+        <item index="2" class="java.lang.String" itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -699,18 +702,18 @@
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39219934" sideWeight="0.5117271" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3365801" sideWeight="0.5234541" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29252437" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33044422" sideWeight="0.48987207" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3365801" sideWeight="0.47014925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1444563" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40520042" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14765458" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3365801" sideWeight="0.5298507" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15245202" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39219934" sideWeight="0.48827294" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3917749" sideWeight="0.6220682" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -739,39 +742,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestSite/test.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestSite/test.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestSite/test.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="111" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestSite/test.py</url>
-          <line>17</line>
-          <option name="timeStamp" value="112" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestSite/test.py</url>
-          <line>7</line>
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestSite/test.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="114" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://C:/Python27/Lib/site-packages/docker/transport/npipesocket.py</url>
           <line>49</line>
           <option name="timeStamp" value="262" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/install_agent.py</url>
+          <line>94</line>
+          <option name="timeStamp" value="320" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/install_agent.py</url>
+          <line>93</line>
+          <option name="timeStamp" value="324" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -784,13 +767,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="289" />
+      <option name="time" value="325" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/dtemp-c5cff998616423375-20.dop/install_script.py" />
-    <entry file="file://$PROJECT_DIR$/server/agents.pl" />
     <entry file="file://$PROJECT_DIR$/client/agents.pl" />
     <entry file="file://$PROJECT_DIR$/client/agents.txt" />
     <entry file="file://$PROJECT_DIR$/server/agents.txt" />
@@ -856,7 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -871,7 +851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -879,7 +858,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="870">
           <caret line="339" column="19" lean-forward="true" selection-start-line="339" selection-start-column="19" selection-end-line="339" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -887,7 +865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="9" lean-forward="false" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,20 +924,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="102" column="4" lean-forward="false" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.installer_has_diagnosecheck">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -973,7 +948,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -986,42 +960,113 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.test">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/package.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding />
+    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.tower">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.hardware_component">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.package">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.installer">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.installer_has_package">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/description_file.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
+          <caret line="0" column="59" lean-forward="false" selection-start-line="0" selection-start-column="59" selection-end-line="0" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestSite/metadata_installer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="47" lean-forward="false" selection-start-line="0" selection-start-column="47" selection-end-line="0" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/installer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/release_creator_impl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="283" column="0" lean-forward="true" selection-start-line="283" selection-start-column="0" selection-end-line="283" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/description_file_impl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
+        <state relative-caret-position="510">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
@@ -1029,96 +1074,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.tower">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.hardware_component">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.package">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.installer">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/674098c4/a5035f10-9034-4a6d-87dc-c61e79e56c98/mydb.installer_has_package">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/installer.py">
+    <entry file="file://$PROJECT_DIR$/server/release_dock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="36" column="43" lean-forward="false" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/overview_impl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="62" column="38" lean-forward="false" selection-start-line="61" selection-start-column="42" selection-end-line="62" selection-end-column="38" />
+        <state relative-caret-position="367">
+          <caret line="98" column="19" lean-forward="false" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="19" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <marker date="1489829958426" expanded="true" signature="555:574" ph="SELECT * FRO... tower" />
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#2471#2649#0" expanded="false" />
+            <element signature="e#2700#2788#0" expanded="false" />
+            <element signature="e#4760#5053#0" expanded="false" />
+            <element signature="e#5098#5524#0" expanded="false" />
+            <element signature="e#5575#5984#0" expanded="false" />
+            <element signature="e#5691#5984#0" expanded="false" />
+            <element signature="e#5727#5867#0" expanded="false" />
+            <element signature="e#5902#5984#0" expanded="false" />
+            <element signature="e#6037#6197#0" expanded="false" />
+            <element signature="e#6842#6875#0" expanded="false" />
+            <element signature="e#7675#8105#0" expanded="false" />
+            <element signature="e#7683#7876#0" expanded="false" />
+            <element signature="e#8218#8315#0" expanded="false" />
+            <marker date="1489837003210" expanded="false" signature="2020:2102" ph="SELECT Insta... installer_has_package" />
+            <marker date="1489837003210" expanded="false" signature="2020:2194" ph="SELECT Insta... installer_has_package" />
+            <marker date="1489837003210" expanded="false" signature="2329:2373" ph="SELECT * FRO... installer" />
+            <marker date="1489837003210" expanded="false" signature="7142:7221" ph="INSERT INTO *... " />
+            <marker date="1489837003210" expanded="false" signature="7213:7221" ph="SELECT * FRO... installer" />
+            <marker date="1489837003210" expanded="false" signature="7371:7426" ph="SELECT idTow... tower" />
+            <marker date="1489837003210" expanded="false" signature="7684:7696" ph="INSERT INTO component... " />
+            <marker date="1489837003210" expanded="false" signature="7684:7874" ph="INSERT INTO Component... " />
+            <marker date="1489837003210" expanded="false" signature="7684:7875" ph="INSERT INTO Component... " />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/tower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="19" column="41" lean-forward="false" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="385">
+          <caret line="28" column="38" lean-forward="false" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/package.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestSite/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/overview_impl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="61" column="19" lean-forward="false" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <marker date="1489829958426" expanded="true" signature="555:574" ph="SELECT * FRO... tower" />
           </folding>
         </state>
       </provider>
@@ -1133,63 +1153,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/release_creator_impl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="243" column="36" lean-forward="false" selection-start-line="243" selection-start-column="36" selection-end-line="243" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <marker date="1489829707048" expanded="true" signature="529:597" ph="INSERT INTO installer... " />
-            <marker date="1489829707048" expanded="true" signature="729:796" ph="SELECT idIns... installer" />
-            <marker date="1489829707048" expanded="true" signature="1080:1254" ph="INSERT INTO package... " />
-            <marker date="1489829707048" expanded="true" signature="1414:1475" ph="SELECT idPac... package" />
-            <marker date="1489829707048" expanded="true" signature="2546:2643" ph="SELECT * FRO... *" />
-            <marker date="1489829707048" expanded="true" signature="2561:2615" ph="SELECT * FRO... package" />
-            <marker date="1489829707048" expanded="true" signature="9063:9187" ph="SELECT * FRO... *" />
-            <marker date="1489829707048" expanded="true" signature="9078:9136" ph="SELECT * FRO... installer" />
-            <marker date="1489829707048" expanded="true" signature="9652:9692" ph="SELECT * FRO... package" />
-            <marker date="1489829707048" expanded="true" signature="10447:10530" ph="SELECT Packa... installer_has_package" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/release_dock.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-680">
-          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-          <folding>
-            <element signature="e#2471#2649#0" expanded="false" />
-            <element signature="e#2700#2788#0" expanded="false" />
-            <element signature="e#3148#3297#0" expanded="false" />
-            <element signature="e#4760#5053#0" expanded="false" />
-            <element signature="e#5098#5524#0" expanded="false" />
-            <element signature="e#5575#5984#0" expanded="false" />
-            <element signature="e#5691#5984#0" expanded="false" />
-            <element signature="e#5727#5867#0" expanded="false" />
-            <element signature="e#5902#5984#0" expanded="false" />
-            <element signature="e#6037#6197#0" expanded="false" />
-            <element signature="e#6842#6875#0" expanded="false" />
-            <element signature="e#7675#8105#0" expanded="false" />
-            <element signature="e#7683#7876#0" expanded="false" />
-            <element signature="e#8218#8315#0" expanded="false" />
-            <element signature="e#8670#9109#0" expanded="false" />
-            <marker date="1489837003210" expanded="false" signature="2020:2102" ph="SELECT Insta... installer_has_package" />
-            <marker date="1489837003210" expanded="false" signature="2020:2194" ph="SELECT Insta... installer_has_package" />
-            <marker date="1489837003210" expanded="false" signature="2329:2373" ph="SELECT * FRO... installer" />
-            <marker date="1489837003210" expanded="false" signature="7142:7221" ph="INSERT INTO *... " />
-            <marker date="1489837003210" expanded="false" signature="7213:7221" ph="SELECT * FRO... installer" />
-            <marker date="1489837003210" expanded="false" signature="7371:7426" ph="SELECT idTow... tower" />
-            <marker date="1489837003210" expanded="false" signature="7684:7696" ph="INSERT INTO component... " />
-            <marker date="1489837003210" expanded="false" signature="7684:7874" ph="INSERT INTO Component... " />
-            <marker date="1489837003210" expanded="false" signature="7684:7875" ph="INSERT INTO Component... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/field_dock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="130" column="35" lean-forward="true" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="35" />
+        <state relative-caret-position="425">
+          <caret line="102" column="10" lean-forward="false" selection-start-line="102" selection-start-column="10" selection-end-line="102" selection-end-column="10" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
             <element signature="e#2445#2880#0" expanded="false" />
@@ -1200,8 +1167,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/install_agent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="40" column="85" lean-forward="false" selection-start-line="40" selection-start-column="85" selection-end-line="40" selection-end-column="85" />
+        <state relative-caret-position="201">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

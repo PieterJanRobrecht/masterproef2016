@@ -3,20 +3,23 @@ import tarfile
 import zipfile
 
 import docker
+
 from agent import Agent
 from server.installer import Installer
 
 
 def find(name, path):
     for root, dirs, files in os.walk(path):
-        if name in files:
+        if name in files or name in dirs:
             return root
 
 
 def create_zip(package_location):
-    with tarfile.open(package_location, "w:gz") as tar:
+    new_tar = os.path.join(package_location, "package_tar.tar")
+    with tarfile.open(new_tar, "w") as tar:
         tar.add(package_location, arcname=os.path.basename(package_location))
-        return tar
+    tar_file = open(new_tar, "rb")
+    return tar_file
 
 
 class InstallAgent(Agent):
@@ -40,30 +43,61 @@ class InstallAgent(Agent):
                "DOCKER_CERT_PATH": "C:\Users\Pieter-Jan\.docker\machine\machines\default",
                "DOCKER_MACHINE_NAME": "default", "COMPOSE_CONVERT_WINDOWS_PATHS": "true"}
         client = docker.from_env(environment=env)
-        docker_image = client.images.build(path=dockerfile, tag="fieldimage")
-        self.container = client.containers.run(docker_image, detach=True, name="fieldcontainer")
+        docker_image = client.images.build(path=dockerfile, tag="fieldimage", rm=True)
+        # Check if container exists if so rename it
+        # try:
+        #     old_container = client.containers.get("fieldcontainer")
+        #     old_container.rename("old_container")
+        # except:
+        #     print("INSTALL AGENT -- Fieldcontainer does not exist")
+        # finally:
+        # self.container = client.containers.run(docker_image, detach=True, name="fieldcontainer")
+        client.containers.create(docker_image, name="fieldcontainer")
+        print client.containers.list(all=True)
+        for container in client.containers.list(all=True):
+            if container.name == "fieldcontainer":
+                self.container = container
+
         print("INSTALL AGENT -- Docker container created")
         # Locate installer meta file
         meta_folder = str(find("metadata_installer.json", self.release_zip_location))
         meta_file = os.path.join(meta_folder, "metadata_installer.json")
-        self.installer = Installer.convert_to_installer(open(meta_file, "r"))
+        self.installer = Installer.convert_to_installer(open(meta_file, "r").read())
         # For every package
-        for package in self.installer:
+        for package in self.installer.packages:
             # Copy package to container
             package_name = package.name + package.version
-            tar = create_zip(find(package_name, self.release_zip_location))
+            package_location = find(package_name, self.release_zip_location)
+            tar = create_zip(str(os.path.join(package_location, package_name)))
             # This path has been added by the Dockerfile
             self.container.put_archive("/usr/test/", tar)
             tar.close()
             # Perform the installation
-            self.types[package.type](package_name)
+            self.types[package.type](client, package_name)
             # TODO: Perform test
+        # If all test are successful
+        success = True
+        if success:
+            print("INSTALL AGENT -- Finished")
+        #     old_container.stop()
+        #     old_container.remove()
+        # else:
+        #     self.container.stop()
+        #     self.container.remove()
+        #     old_container.rename("fieldcontainer")
+        #     self.container = old_container
 
-    def perform_execute(self):
-        # TODO
-        print "gello"
+    def perform_execute(self, client, package_name):
+        print("INSTALL AGENT -- Performing action: EXECUTE")
+        script_location = "/usr/test/" + package_name + "/meta/install_script.py"
+        command = "python " + script_location
+        self.container.start()
+        exe_start = self.container.exec_run(command, stream=True)
+        for val in exe_start:
+            print (val)
+        print("INSTALL AGENT -- Done with: EXECUTE")
 
-    def perform_unzip(self):
+    def perform_unzip(self, client, package_name):
         # TODO
         print "hello"
 
