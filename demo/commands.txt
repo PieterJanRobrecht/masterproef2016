@@ -11,3 +11,4 @@ docker exec -it containernaam bash
 # bestanden van pc naar docker kopieren
 docker cp foo.txt mycontainer:/foo.txt
 docker cp mycontainer:/foo.txt foo.txt
+docker create -t -i imagenaam bash

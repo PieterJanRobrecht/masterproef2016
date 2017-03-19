@@ -52,8 +52,7 @@ class InstallAgent(Agent):
         #     print("INSTALL AGENT -- Fieldcontainer does not exist")
         # finally:
         # self.container = client.containers.run(docker_image, detach=True, name="fieldcontainer")
-        client.containers.create(docker_image, name="fieldcontainer")
-        print client.containers.list(all=True)
+        client.containers.create(docker_image, entrypoint="/bin/bash", tty=True, name="fieldcontainer")
         for container in client.containers.list(all=True):
             if container.name == "fieldcontainer":
                 self.container = container
