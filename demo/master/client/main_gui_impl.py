@@ -17,3 +17,19 @@ class MainGui(description_file_gui.MyFrame3):
         # Kill GUI
         self.Destroy()
         sys.exit(0)
+
+    def start_framework(self, event):
+        # TODO
+        print("Start framework")
+
+    def manage_packages(self, event):
+        # TODO
+        print("Manage installed packages")
+
+    def handle_message(self, event):
+        # TODO
+        print("Handle messages")
+
+    def install_release(self, event):
+        # TODO
+        print("Install release")

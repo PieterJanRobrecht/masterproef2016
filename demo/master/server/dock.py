@@ -62,8 +62,13 @@ class Dock(object):
         while getattr(t, "do_run", True):
             conn, address = self.message_socket.accept()
             print("DOCK -- Connected by \n\t\t" + str(address))
+            conn.send("Ready")
+            # Receive length
             data = conn.recv(1024)
             if data:
+                file_size = int(data)
+                conn.send("Received length")
+                data = conn.recv(file_size)
                 print("DOCK -- received data: \n\t\t" + data)
                 self.message_queue.put(data)
             time.sleep(timeout)
@@ -83,7 +88,12 @@ class Dock(object):
         print("DOCK -- sending new message \n\t\t" + str(message))
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((self.broker_host, self.broker_port))
-        s.sendall(str(message))
+        data = s.recv(1024)
+        if str(data) == "Ready":
+            s.send(str(len(message)))
+            oke = s.recv(1024)
+            if str(oke) == "Received length":
+                s.send(str(message))
         s.close()
 
     def connect_to_broker(self, sub_dict):

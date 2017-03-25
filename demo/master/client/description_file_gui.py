@@ -256,13 +256,13 @@ class MyFrame3 ( wx.Frame ):
 		self.m_button6 = wx.Button( self.m_panel2, wx.ID_ANY, u"Manage Package", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer15.Add( self.m_button6, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.m_button7 = wx.Button( self.m_panel2, wx.ID_ANY, u"Get Release", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button7 = wx.Button( self.m_panel2, wx.ID_ANY, u"Install Release", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer15.Add( self.m_button7, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_panel3 = wx.Panel( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer15.Add( self.m_panel3, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_button8 = wx.Button( self.m_panel2, wx.ID_ANY, u"Install Release", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button8 = wx.Button( self.m_panel2, wx.ID_ANY, u"Start Framework", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer15.Add( self.m_button8, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		
@@ -287,8 +287,8 @@ class MyFrame3 ( wx.Frame ):
 		self.Bind( wx.EVT_CLOSE, self.close_action )
 		self.m_button5.Bind( wx.EVT_BUTTON, self.handle_message )
 		self.m_button6.Bind( wx.EVT_BUTTON, self.manage_packages )
-		self.m_button7.Bind( wx.EVT_BUTTON, self.get_specific_release )
-		self.m_button8.Bind( wx.EVT_BUTTON, self.install_release )
+		self.m_button7.Bind( wx.EVT_BUTTON, self.install_release )
+		self.m_button8.Bind( wx.EVT_BUTTON, self.start_framework )
 	
 	def __del__( self ):
 		pass
@@ -304,10 +304,10 @@ class MyFrame3 ( wx.Frame ):
 	def manage_packages( self, event ):
 		event.Skip()
 	
-	def get_specific_release( self, event ):
+	def install_release( self, event ):
 		event.Skip()
 	
-	def install_release( self, event ):
+	def start_framework( self, event ):
 		event.Skip()
 	
 

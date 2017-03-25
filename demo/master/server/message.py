@@ -27,6 +27,9 @@ class Message(object):
         d = dict(zip(keys, values))
         return str(d)
 
+    def __len__(self):
+        return len(str(self))
+
     @classmethod
     def check_format(cls, data):
         # TODO

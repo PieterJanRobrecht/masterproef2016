@@ -2,8 +2,6 @@ import ast
 import socket
 from dock import Dock
 from message import Message
-from collections import defaultdict
-from threading import Thread
 
 
 def determine_port(message_type):
@@ -16,7 +14,12 @@ def determine_port(message_type):
 def send_notification(subscriber, port, notification):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((subscriber, port))
-    s.sendall(str(notification))
+    data = s.recv(1024)
+    if str(data) == "Ready":
+        s.send(str(len(notification)))
+        oke = s.recv(1024)
+        if str(oke) == "Received length":
+            s.send(str(notification))
     s.close()
 
 

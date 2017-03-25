@@ -12,7 +12,7 @@ def write_to_database(installer):
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
-    cursor = cnx.cursor(dictionary=True)
+    cursor = cnx.cursor(buffered=True, dictionary=True)
     try:
         query = "INSERT INTO installer (name, installerVersion, diskLocation) VALUES " \
                 + str(Installer.to_tuple(installer)) + ";"
@@ -27,7 +27,7 @@ def write_to_database(installer):
         print("RELEASE DOCK -- Added new installer to database")
 
         for package in installer.packages:
-            if package.id_package is None:
+            if package.id_package is -1:
                 query = "INSERT INTO package " \
                         "(name, version," \
                         " description, location, type, priority, releaseDate, optional, framework) VALUES " \
@@ -60,7 +60,7 @@ def get_all_packages():
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
-    cursor = cnx.cursor(dictionary=True)
+    cursor = cnx.cursor(buffered=True, dictionary=True)
     packages = []
     try:
         query = "SELECT * FROM (SELECT * FROM package ORDER BY idPackage DESC LIMIT 50) sub ORDER BY idPackage ASC"
@@ -129,10 +129,11 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         package.type = str(self.package_type.GetValue())
         package.version = str(self.package_version.GetValue())
         package.location = str(self.package_directory.GetTextCtrlValue())
-        package.optional = int(self.is_optional_check.GetValue() == "True")
-        package.is_framework = int(self.is_framework_check.GetValue() == "True")
+        package.optional = int(self.is_optional_check.GetValue() is True)
+        package.is_framework = int(self.is_framework_check.GetValue() is True)
         package.release = time.strftime('%Y-%m-%d')
         package.priority = str(self.package_priority.GetValue())
+        package.id_package = -1
         package.new = True
         self.installer.packages.append(package)
         self.add_package_to_tree(package)
@@ -143,11 +144,11 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
 
     def clear_package(self, event):
         self.package_name.SetValue("")
-        self.package_directory.SetTextCtrlValue("")
+        self.package_directory.SetPath("")
         self.package_description.SetValue("")
         self.package_type.SetValue("")
         self.package_version.SetValue("")
-        self.package_priority.SetValue("50")
+        self.package_priority.SetValue(50)
 
     def add_package_to_tree(self, package):
         tree = self.m_treeCtrl1
@@ -229,7 +230,7 @@ def get_all_installers():
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
-    cursor = cnx.cursor(dictionary=True)
+    cursor = cnx.cursor(buffered=True, dictionary=True)
     installers = []
     try:
         query = "SELECT * FROM (SELECT * FROM installer ORDER BY idInstaller DESC LIMIT 50)" \
@@ -247,7 +248,8 @@ def get_all_installers():
     return installers
 
 
-def get_package(id_package, cnx, cursor):
+def get_package(id_package, cnx):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
     try:
         query = "SELECT * FROM package WHERE idPackage = " + str(id_package) + ";"
         cursor.execute(query)
@@ -266,12 +268,12 @@ def get_all_packages_with_installer(selected_installer):
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
-    cursor = cnx.cursor(dictionary=True)
+    cursor = cnx.cursor(buffered=True, dictionary=True)
     try:
         query = "SELECT Package_idPackage FROM  installer_has_package WHERE Installer_idInstaller = " + str(id) + ";"
         cursor.execute(query)
         for row in cursor:
-            package = get_package(row["Package_idPackage"], cnx, cursor)
+            package = get_package(row["Package_idPackage"], cnx)
             selected_installer.packages.append(package)
 
         print("RELEASE DOCK -- Collected packages for installer")
@@ -325,5 +327,3 @@ class SelectInstallerFrame(release_creator_gui.MyFrame2):
         self.list_control.SetStringItem(i, 0, str(installer.name))
         self.list_control.SetStringItem(i, 1, str(installer.version))
         self.list_control.SetStringItem(i, 2, str(installer.disk_location))
-
-
