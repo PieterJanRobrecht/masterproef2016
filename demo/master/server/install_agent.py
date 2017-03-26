@@ -71,10 +71,10 @@ class InstallAgent(Agent):
         success = True
         if success:
             print("INSTALL AGENT -- Finished")
-            # TODO send message to update server
+            self.send_update()
         else:
-            # TODO rollback
             print("INSTALL AGENT -- Not all tests finished correctly, rolling back to previous state")
+            self.rollback()
 
     def perform_execute(self, client, package_name, has_include_folder):
         print("INSTALL AGENT -- Performing action: EXECUTE")
@@ -110,3 +110,10 @@ class InstallAgent(Agent):
         tar.close()
         # Perform the installation
         self.types[package.type](client, package_name, has_include_folder)
+
+    def rollback(self):
+        self.remove_broken_container("fieldcontainer")
+        self.rename_container("old_container", "fieldcontainer")
+
+    def send_update(self):
+        self.field_dock.update_info_installer(self.installer)

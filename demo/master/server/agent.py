@@ -5,6 +5,7 @@ import os
 
 class Agent(object):
     def __init__(self):
+        self.field_dock = None
         # Information about installer
         self.installer = None
         self.release_zip_location = None
@@ -31,6 +32,14 @@ class Agent(object):
             container.stop()
             container.remove()
             old_container.rename(new_name)
+
+    def remove_broken_container(self, broken_name):
+        try:
+            broken = self.client.containers.get(broken_name)
+            broken.stop()
+            broken.remove()
+        except docker.errors.NotFound:
+            print("AGENT -- No container with name " + broken_name + " found")
 
     def action(self):
         print("AGENT -- Performing random action")

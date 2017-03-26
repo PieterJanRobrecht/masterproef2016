@@ -12,14 +12,17 @@ class Tower(object):
         self.id_in_company = None
         self.location = None
         self.alias = None
+        self.id_installer = None
         self.components = []
 
     def __str__(self):
-        keys = ("idTower", "name", "serialNumber", "idInCompany", "geolocation", "alias", "components")
+        keys = ("idTower", "name", "serialNumber", "idInCompany",
+                "geolocation", "alias", "components", "Installer_idInstaller")
         strings = []
         for component in self.components:
             strings.append(str(component))
-        values = (self.id_tower, self.name, self.serial_number, self.id_in_company, self.location, self.alias, strings)
+        values = (self.id_tower, self.name, self.serial_number, self.id_in_company,
+                  self.location, self.alias, strings, self.id_installer)
         d = dict(zip(keys, values))
         return json.dumps(d)
 
@@ -42,6 +45,7 @@ class Tower(object):
         tower.location = d["geolocation"]
         tower.serial_number = d["serialNumber"]
         tower.id_in_company = d["idInCompany"]
+        tower.id_installer = d["Installer_idInstaller"]
         return tower
 
     @classmethod

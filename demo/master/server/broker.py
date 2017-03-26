@@ -99,20 +99,23 @@ class Broker(Dock):
             self.lookup[unsub].remove(message.sender)
 
     def initiate_lookup(self):
-        # lists with all the release docks listening for new or changed field docks
+        # Lists with all the release docks listening for new or changed field docks
         self.lookup["new"] = []
         self.lookup["change"] = []
         self.lookup["rapport"] = []
 
-        # lists with field docks listening for new releases or updates
+        # Lists with field docks listening for new releases or updates
         self.lookup["release"] = []
         self.lookup["update"] = []
 
     def initiate_actions(self):
+        # From field dock to release dock
         self.actions["new"] = self.other_action
         self.actions["change"] = self.other_action
         self.actions["rapport"] = self.other_action
+        # From release dock to field dock
         self.actions["update"] = self.other_action
         self.actions["release"] = self.other_action
+        # Used by release and field dock
         self.actions["subscribe"] = self.subscribe
         self.actions["unsubscribe"] = self.unsubscribe

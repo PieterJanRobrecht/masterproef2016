@@ -42,6 +42,16 @@ def receive_file(s, file):
         file_size -= len(data)
 
 
+def save_installer_info(installer):
+    file = open("installer_file.json", "w+")
+    file.write(str(installer))
+
+
+def read_installer_info(field_dock):
+    file = open("installer_file.json", "r+")
+    field_dock.current_release = Installer.convert_to_installer(file.read())
+
+
 class FieldDock(Dock):
     def __init__(self, host, port):
         super(FieldDock, self).__init__()
@@ -56,6 +66,9 @@ class FieldDock(Dock):
     def start_service(self):
         print("FIELD DOCK -- Starting services")
         thread = super(FieldDock, self).start_service()
+        # Read installer info from file
+        if os.path.exists("installer_file.json"):
+            read_installer_info(self)
         print("FIELD DOCK -- Services started")
         return thread
 
@@ -65,7 +78,7 @@ class FieldDock(Dock):
             data = self.message_queue.get()
             print("FIELD DOCK -- Handling message")
             if Message.check_format(data):
-                # TODO set counter and stuff
+                # TODO: retrieving messages that were send during downtime
                 # Unpack notification
                 message = Message.convert_to_message(data)
                 relayed_message = message.data
@@ -135,6 +148,7 @@ class FieldDock(Dock):
 
         # Start correct agent
         for agent in self.agents:
+            agent.field_dock = self
             if type(agent) is InstallAgent:
                 agent.release_zip_location = file_dir
                 agent.action()
@@ -146,3 +160,11 @@ class FieldDock(Dock):
     def initiate_actions(self):
         self.actions["release"] = self.perform_release
         self.actions["update"] = self.perform_update
+
+    def update_info_installer(self, installer):
+        print("FIELD DOCK -- Sending change message")
+        save_installer_info(installer)
+        data = {"idInstaller": installer.id_installer, "name": installer.name, "version": installer.version}
+        message = Message()
+        message.create_message(self.host, "change", str(data))
+        self.send_message(message)

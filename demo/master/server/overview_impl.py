@@ -28,6 +28,24 @@ def get_all_towers():
     return towers
 
 
+def get_installer_name(id_installer):
+    cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
+                                  host=ReleaseDock.database_host,
+                                  database=ReleaseDock.database_name)
+    cursor = cnx.cursor(dictionary=True)
+    try:
+        query = "SELECT name, installerVersion FROM installer WHERE idInstaller = " + str(id_installer) + ";"
+        cursor.execute(query)
+        for row in cursor:
+            name = row["name"] + row["installerVersion"]
+
+    except mysql.connector.Error as err:
+        print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
+        cnx.rollback()
+    cnx.close()
+    return name
+
+
 class OverviewGui(release_creator_gui.MyFrame3):
     def __init__(self, parent, release_dock):
         release_creator_gui.MyFrame3.__init__(self, parent)
@@ -98,4 +116,8 @@ class OverviewGui(release_creator_gui.MyFrame3):
         self.client_list.SetStringItem(i, 2, str(tower.id_in_company))
         self.client_list.SetStringItem(i, 3, str(tower.name))
         self.client_list.SetStringItem(i, 4, str(tower.serial_number))
-        self.client_list.SetStringItem(i, 5, str("INVULLEN"))
+        if tower.id_installer is None:
+            self.client_list.SetStringItem(i, 5, str("Non installed"))
+        else:
+            name_installer = get_installer_name(tower.id_installer)
+            self.client_list.SetStringItem(i, 5, name_installer)

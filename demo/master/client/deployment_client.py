@@ -37,5 +37,6 @@ def main():
     field_dock.kill_message_thread()
     field_dock_thread.do_run = False
     field_dock_thread.join()
+    
 if __name__ == "__main__":
     main()

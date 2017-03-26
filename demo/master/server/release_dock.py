@@ -1,3 +1,5 @@
+import ast
+
 import dill
 import mysql.connector
 import pymysql as pymysql
@@ -122,6 +124,29 @@ def add_files_to_release(release, config):
     meta_file.write(str(release))
 
 
+def get_tower_of_sender(cnx, sender):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""SELECT idTower FROM tower WHERE tower.hostname = %s""", (sender,))
+    for row in cursor:
+        id_tower = row['idTower']
+    return id_tower
+
+
+def change_tower_installer(cnx, id_tower, id_installer):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""UPDATE tower SET Installer_idInstaller = %s WHERE idTower = %s""", (id_installer, id_tower))
+    cnx.commit()
+    print("RELEASE DOCK -- Updated information of tower " + str(id_tower))
+
+
+def get_installer_of_sender(cnx, name, version):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""SELECT idInstaller FROM installer WHERE name = %s AND installerVersion = %s""", (name, version))
+    for row in cursor:
+        id_installer = row['idInstaller']
+    return id_installer
+
+
 class ReleaseDock(Dock):
     database_user = 'root'
     database_password = 'root'
@@ -192,17 +217,27 @@ class ReleaseDock(Dock):
 
     def save_new_tower(self, message):
         tower = Tower.convert_to_tower(message.data)
-        self.write_tower(tower)
+        self.write_tower(tower, message.sender)
 
     def change_tower(self, message):
-        # TODO
-        print message.data
+        # Convert to dictionary
+        if type(message.data) is not dict:
+            d = ast.literal_eval(message.data)
+        else:
+            d = message.data
+        sender = message.sender
+        # Check if it is an installer change or a component change
+        if "idInstaller" in d:
+            self.update_installer_info(d, sender)
+        else:
+            self.update_component_info(d, sender)
+        self.update_gui()
 
     def initiate_actions(self):
         self.actions["new"] = self.save_new_tower
         self.actions["change"] = self.change_tower
 
-    def write_tower(self, tower):
+    def write_tower(self, tower, sender):
         print("RELEASE DOCK -- Writing new tower to database")
         try:
             query = "INSERT INTO Tower (name, alias, geolocation, idInCompany, serialNumber) VALUES " \
@@ -214,6 +249,10 @@ class ReleaseDock(Dock):
             self.cursor.execute(query)
             for row in self.cursor:
                 id_tower = row['idTower']
+
+            self.cursor.execute("""UPDATE tower SET hostname = %s WHERE idTower = %s""",
+                                (sender, id_tower))
+            self.cnx.commit()
 
             print("RELEASE DOCK -- Added new tower to database")
             for component in tower.components:
@@ -307,3 +346,16 @@ class ReleaseDock(Dock):
                 print("RELEASE DOCK -- Done sending release to " + str(address))
             conn.close()
         print("RELEASE DOCK -- Closing listening thread")
+
+    def update_installer_info(self, d, sender):
+        id_tower = get_tower_of_sender(self.cnx, sender)
+        id_installer = get_installer_of_sender(self.cnx, d["name"], d["version"])
+        change_tower_installer(self.cnx, id_tower, id_installer)
+
+    def update_component_info(self, d, sender):
+        # TODO
+        print("Still to do boys")
+
+    def update_gui(self):
+        # TODO
+        pass
