@@ -56,6 +56,9 @@ def add_files_to_package_folder(package, meta_dir):
     json.write(str(package))
     meta_file = os.path.join(meta_dir, "install_script.py")
     open(meta_file, 'w+')
+    if package.is_framework == 1:
+        start_script = os.path.join(meta_dir, "start_script.py")
+        open(start_script, 'w+')
 
 
 def copy_old_meta_folder(package, meta_dir):
