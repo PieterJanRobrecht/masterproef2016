@@ -5,10 +5,10 @@ import wx
 import os.path
 
 from description_file_impl import DescriptionCreator
-from server.dock import Dock
-from server.install_agent import InstallAgent
-from server.installer import Installer
-from server.message import Message
+from dock import Dock
+from install_agent import InstallAgent
+from installer import Installer
+from message import Message
 
 
 def create_file(file_name):

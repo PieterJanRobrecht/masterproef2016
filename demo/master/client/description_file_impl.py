@@ -1,7 +1,7 @@
 import description_file_gui
 
-from server.component import Component
-from server.tower import Tower
+from component import Component
+from tower import Tower
 
 
 class DescriptionCreator(description_file_gui.MyFrame2):
