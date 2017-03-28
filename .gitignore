@@ -80,7 +80,7 @@ code/Prototype/.idea/mongoSettings.xml
 *.iws
 
 ## Plugin-specific files:
-
+/.idea/
 # IntelliJ
 /out/
 
