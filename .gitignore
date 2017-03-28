@@ -83,7 +83,7 @@ code/Prototype/.idea/mongoSettings.xml
 
 # IntelliJ
 /out/
-
+/.idea/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
