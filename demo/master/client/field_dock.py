@@ -127,7 +127,7 @@ class FieldDock(Dock):
         file = open(release_zip, 'wb+')
         print("FIELD DOCK -- Release zip made")
         s = socket.socket()  # Create a socket object
-        host = "localhost"  # Get local machine name
+        host = "10.2.0.57"  # Get local machine name
         port = 12346
         s.connect((host, port))
         receive_file(s, file)

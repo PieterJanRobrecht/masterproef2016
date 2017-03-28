@@ -102,7 +102,7 @@ class Dock(object):
             All necessary socket parameters are set
             A dictionary with subscription type is sent
         """
-        self.broker_host = 'localhost'
+        self.broker_host = '10.2.0.57'
         self.broker_port = 12347
         self.subscribe_to_messages(sub_dict)
 
