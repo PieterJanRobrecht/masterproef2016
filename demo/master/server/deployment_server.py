@@ -10,14 +10,14 @@ from overview_impl import OverviewGui
 def start_release_dock():
     print("RELEASE DOCK -- Initialisation")
     # '' = symbolic meaning for all interfaces
-    release_dock = ReleaseDock('', 12345)
+    release_dock = ReleaseDock('localhost', 12345)
     thread, release_thread = release_dock.start_service()
     return release_dock, thread, release_thread
 
 
 def start_broker():
     print("BROKER -- Initialisation")
-    broker = Broker('', 12347)
+    broker = Broker('localhost', 12347)
     return broker.start_service()
 
 

@@ -8,7 +8,7 @@ from field_dock import FieldDock
 
 def start_field_dock():
     print("FIELD DOCK -- initialisation")
-    field_dock = FieldDock('', 54321)
+    field_dock = FieldDock('localhost', 54321)
     return field_dock, field_dock.start_service()
 
 
