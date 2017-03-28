@@ -70,7 +70,8 @@ class OverviewGui(release_creator_gui.MyFrame3):
 
     def set_release_field(self):
         self.m_treeCtrl3.DeleteAllItems()
-        self.root = self.m_treeCtrl3.AddRoot("Installer")
+        text = "Installer: " + self.release_dock.current_release.name + self.release_dock.current_release.version
+        self.root = self.m_treeCtrl3.AddRoot(text)
         for package in self.release_dock.current_release.packages:
             self.add_package_to_tree(package)
 

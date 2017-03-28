@@ -353,7 +353,7 @@ class MyFrame3 ( wx.Frame ):
 		bSizer21.Add( self.m_treeCtrl3, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		
-		bSizer19.Add( bSizer21, 0, wx.EXPAND, 5 )
+		bSizer19.Add( bSizer21, 1, wx.EXPAND, 5 )
 		
 		
 		bSizer18.Add( bSizer19, 1, wx.EXPAND, 5 )
