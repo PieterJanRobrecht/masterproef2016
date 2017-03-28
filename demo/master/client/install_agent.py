@@ -3,7 +3,7 @@ import tarfile
 import zipfile
 
 from agent import Agent
-from server.installer import Installer
+from installer import Installer
 
 
 def create_zip(package_location):
