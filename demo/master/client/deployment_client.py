@@ -7,18 +7,34 @@ from field_dock import FieldDock
 
 
 def start_field_dock():
+    """
+        Initialisation of the field dock
+        Will start field dock services
+    :return field_dock: returns a FieldDock object
+    :return service_thread: returns thread that handles the services
+    """
     print("FIELD DOCK -- initialisation")
     field_dock = FieldDock('localhost', 54321)
     return field_dock, field_dock.start_service()
 
 
 def start_gui(field_dock, field_dock_thread):
+    """
+        Start thread which will handle the GUI
+    :param field_dock: FieldDock object
+    :param field_dock_thread: thread which handles the services
+    """
     thread = Thread(target=field_gui, args=(field_dock, field_dock_thread))
     thread.daemon = True
     thread.start()
 
 
 def field_gui(field_dock, field_dock_thread):
+    """
+        Start wxPython GUI
+    :param field_dock: FieldDock object
+    :param field_dock_thread: thread which handles the services
+    """
     while True:
         app = wx.App(False)
         frame = MainGui(None, field_dock, field_dock_thread)
@@ -28,6 +44,12 @@ def field_gui(field_dock, field_dock_thread):
 
 
 def main():
+    """
+        Create FieldDock object and service thread,
+        Connect to broker,
+        Start GUI,
+        Wait until all threads are closed
+    """
     field_dock, field_dock_thread = start_field_dock()
     # Subscribing to broker
     sub_dict = {"type": ["release", "update"]}
