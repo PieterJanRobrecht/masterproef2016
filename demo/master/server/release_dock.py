@@ -7,6 +7,7 @@ import os
 import zipfile
 import socket
 import threading
+import datetime
 
 from distutils.dir_util import copy_tree
 from dock import Dock
@@ -56,6 +57,8 @@ def add_files_to_package_folder(package, meta_dir):
     json.write(str(package))
     meta_file = os.path.join(meta_dir, "install_script.py")
     open(meta_file, 'w+')
+    meta_file = os.path.join(meta_dir, "test_script.py")
+    open(meta_file, 'w+')
     if package.is_framework == 1:
         start_script = os.path.join(meta_dir, "start_script.py")
         open(start_script, 'w+')
@@ -87,7 +90,7 @@ def copy_old_meta_folder(package, meta_dir):
 
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.rollback()
+        cnx.quarantine()
     finally:
         cnx.close()
     # Copy tree to new dir
@@ -148,6 +151,55 @@ def get_installer_of_sender(cnx, name, version):
     for row in cursor:
         id_installer = row['idInstaller']
     return id_installer
+
+
+def find_installer_of_sender(cnx, sender):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""SELECT Installer_idInstaller FROM tower WHERE hostname = %s""", (sender,))
+    for row in cursor:
+        id_installer = row['Installer_idInstaller']
+    return id_installer
+
+
+def find_package(cnx, id_installer, name, version):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""SELECT idPackage FROM package,
+                      (SELECT * FROM installer_has_package WHERE Installer_idInstaller = %s) AS T
+                      WHERE name = %s AND version = %s """, (id_installer, name, version))
+    for row in cursor:
+        id_package = row['idPackage']
+    return id_package
+
+
+def add_diagnostics(cnx, start, end, result):
+    start = datetime.datetime.fromtimestamp(start).strftime('%Y-%m-%d %H:%M:%S')
+    end = datetime.datetime.fromtimestamp(end).strftime('%Y-%m-%d %H:%M:%S')
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""INSERT INTO diagnosecheck (startTime, endTime, endResult) VALUES (%s, %s, %s);""",
+                   (start, end, result))
+    cnx.commit()
+
+    query = "SELECT idDiagnosecheck FROM diagnosecheck ORDER BY idDiagnosecheck DESC LIMIT 1;"
+    cursor.execute(query)
+    for row in cursor:
+        id_diagnose = row['idDiagnosecheck']
+    return id_diagnose
+
+
+def link_diagnose_with_installer(cnx, id_installer, id_diagnose):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    query = "INSERT INTO installer_has_diagnosecheck (installer_idInstaller, diagnosecheck_idDiagnosecheck) VALUES (" \
+            + str(id_installer) + ", " + str(id_diagnose) + ");"
+    cursor.execute(query)
+    cnx.commit()
+
+
+def link_diagnose_with_package(cnx, id_package, id_diagnose):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    query = "INSERT INTO package_has_diagnosecheck (package_idPackage, diagnosecheck_idDiagnosecheck) VALUES (" \
+            + str(id_package) + ", " + str(id_diagnose) + ");"
+    cursor.execute(query)
+    cnx.commit()
 
 
 class ReleaseDock(Dock):
@@ -236,9 +288,23 @@ class ReleaseDock(Dock):
             self.update_component_info(d, sender)
         self.update_gui()
 
+    def handle_rapport(self, message):
+        # TODO
+        if type(message.data) is not dict:
+            d = ast.literal_eval(message.data)
+        else:
+            d = message.data
+        sender = message.sender
+        id_installer = find_installer_of_sender(self.cnx, sender)
+        id_package = find_package(self.cnx, id_installer, d["name"], d["version"])
+        id_diagnose = add_diagnostics(self.cnx, d["start_time"], d["end_time"], d["result"])
+        link_diagnose_with_installer(self.cnx, id_installer, id_diagnose)
+        link_diagnose_with_package(self.cnx, id_package, id_diagnose)
+
     def initiate_actions(self):
         self.actions["new"] = self.save_new_tower
         self.actions["change"] = self.change_tower
+        self.actions["rapport"] = self.handle_rapport
 
     def write_tower(self, tower, sender):
         print("RELEASE DOCK -- Writing new tower to database")
@@ -270,7 +336,7 @@ class ReleaseDock(Dock):
             print("RELEASE DOCK -- Writing complete")
         except mysql.connector.Error as err:
             print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-            self.cnx.rollback()
+            self.cnx.quarantine()
 
     def notify_release(self):
         # Zip folder

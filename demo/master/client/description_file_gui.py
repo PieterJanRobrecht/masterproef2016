@@ -250,10 +250,10 @@ class MyFrame3 ( wx.Frame ):
 		
 		bSizer15 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.m_button5 = wx.Button( self.m_panel2, wx.ID_ANY, u"Messages", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button5 = wx.Button( self.m_panel2, wx.ID_ANY, u"Handle Messages", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer15.Add( self.m_button5, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.m_button6 = wx.Button( self.m_panel2, wx.ID_ANY, u"Manage Package", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button6 = wx.Button( self.m_panel2, wx.ID_ANY, u"Manage Components", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer15.Add( self.m_button6, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_button7 = wx.Button( self.m_panel2, wx.ID_ANY, u"Install Release", wx.DefaultPosition, wx.DefaultSize, 0 )

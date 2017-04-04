@@ -22,6 +22,7 @@ class Agent(object):
         try:
             old_container = self.client.containers.get(old_name)
             old_container.rename(new_name)
+            old_container.stop()
         except docker.errors.NotFound:
             print("AGENT -- Container " + old_name + " does not exist yet")
         except docker.errors.APIError:
@@ -41,15 +42,11 @@ class Agent(object):
         except docker.errors.NotFound:
             print("AGENT -- No container with name " + broken_name + " found")
 
-    def action(self):
+    def action(self, client):
         print("AGENT -- Performing random action")
 
-    def init_client(self):
-        # Make new docker container
-        env = {"DOCKER_TLS_VERIFY": "1", "DOCKER_HOST": "tcp://192.168.99.100:2376",
-               "DOCKER_CERT_PATH": "C:\Users\Pieter-Jan\.docker\machine\machines\default",
-               "DOCKER_MACHINE_NAME": "default", "COMPOSE_CONVERT_WINDOWS_PATHS": "true"}
-        self.client = docker.from_env(environment=env)
+    def init_client(self, client):
+        self.client = client
 
     def find(self, name, path):
         for root, dirs, files in os.walk(path):

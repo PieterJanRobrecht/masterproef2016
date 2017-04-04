@@ -3,6 +3,8 @@ import socket
 import dill
 import wx
 import os.path
+import docker
+import requests.exceptions
 
 from description_file_impl import DescriptionCreator
 from server.dock import Dock
@@ -60,17 +62,26 @@ class FieldDock(Dock):
         self.message_thread = None
         self.current_release = None
         self.agents = []
+        self.client = None
         self.actions = {}
         self.initiate_actions()
 
     def start_service(self):
         print("FIELD DOCK -- Starting services")
         thread = super(FieldDock, self).start_service()
+        self.init_client()
         # Read installer info from file
         if os.path.exists("installer_file.json"):
             read_installer_info(self)
         print("FIELD DOCK -- Services started")
         return thread
+
+    def init_client(self):
+        # Make new docker container
+        env = {"DOCKER_TLS_VERIFY": "1", "DOCKER_HOST": "tcp://192.168.99.100:2376",
+               "DOCKER_CERT_PATH": "C:\Users\Pieter-Jan\.docker\machine\machines\default",
+               "DOCKER_MACHINE_NAME": "default", "COMPOSE_CONVERT_WINDOWS_PATHS": "true"}
+        self.client = docker.from_env(environment=env)
 
     def handle_message(self):
         self.message_thread = threading.currentThread()
@@ -151,7 +162,7 @@ class FieldDock(Dock):
             agent.field_dock = self
             if type(agent) is InstallAgent:
                 agent.release_zip_location = file_dir
-                agent.action()
+                agent.action(self.client)
 
     def perform_update(self, message):
         # TODO
@@ -168,3 +179,9 @@ class FieldDock(Dock):
         message = Message()
         message.create_message(self.host, "change", str(data))
         self.send_message(message)
+
+    def kill_containers(self):
+        try:
+            self.client.containers.get("fieldcontainer").stop()
+        except requests.exceptions.Timeout:
+            print("FIELD DOCK -- Timeout error while trying to stop the containers")
