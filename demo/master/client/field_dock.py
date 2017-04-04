@@ -5,6 +5,7 @@ import wx
 import os.path
 import docker
 import requests.exceptions
+import docker.errors
 
 from description_file_impl import DescriptionCreator
 from server.dock import Dock
@@ -183,5 +184,9 @@ class FieldDock(Dock):
     def kill_containers(self):
         try:
             self.client.containers.get("fieldcontainer").stop()
+            self.client.containers.get("old_container").stop()
+            self.client.containers.get("quarantined").stop()
+        except docker.errors.NotFound:
+            print("FIELD DOCK -- Could not find one of the containers")
         except requests.exceptions.Timeout:
             print("FIELD DOCK -- Timeout error while trying to stop the containers")

@@ -1,6 +1,7 @@
 import docker
 import docker.errors
 import os
+import requests.exceptions
 
 
 class Agent(object):
@@ -23,6 +24,8 @@ class Agent(object):
             old_container = self.client.containers.get(old_name)
             old_container.rename(new_name)
             old_container.stop()
+        except requests.exceptions.Timeout:
+            print("AGENT -- Timeout error")
         except docker.errors.NotFound:
             print("AGENT -- Container " + old_name + " does not exist yet")
         except docker.errors.APIError:

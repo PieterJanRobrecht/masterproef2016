@@ -85,7 +85,7 @@ class Dock(object):
             print("You should really do something with this " + data)
 
     def send_message(self, message):
-        print("DOCK -- sending new message \n\t\t" + str(message))
+        print("DOCK -- Sending new message \n\t\t" + str(message))
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((self.broker_host, self.broker_port))
         data = s.recv(1024)

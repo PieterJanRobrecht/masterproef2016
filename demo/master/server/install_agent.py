@@ -73,7 +73,6 @@ class InstallAgent(Agent):
             self.install_package(self.client, package)
             if not self.check_installation(self.client, package):
                 success = False
-            # TODO: Perform test
 
         # If all test are successful
         if success:
@@ -143,7 +142,6 @@ class InstallAgent(Agent):
         end_time = time.time()
         data = {"start_time": start_time, "end_time": end_time,
                 "result": val, "name": package.name, "version": package.version}
-        # TODO: Send rapport to server for update
         message = Message()
         message.create_message(self.field_dock.host, "rapport", data)
         self.field_dock.send_message(message)
