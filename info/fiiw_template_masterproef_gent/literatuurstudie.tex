@@ -4,6 +4,7 @@ In wat volgt, wordt een bespreking gegeven over het deployment proces maar ook v
 Hiernaast zullen enkele case studies besproken worden en gaat er onderzocht worden hoe de verscheidene cases zijn omgegaan met de problemen die horen bij het deployment proces. 
 
 \section{Software levenscyclus}\label{sec:softwareLevenscyclus}
+%%% TODO aanvullen met info van andere bronnen
 De levenscyclus van software deployment kan volgens \citet{softwareDeployment,hall1999cooperative} beschreven worden in verschillend stappen, namelijk:
 \begin{itemize}
 \item \emph{Release}: de software is volledig samengesteld uit pakketten die voldoende metadata bevatten om de verschillende bronnen te beschrijven waarvan het pakket afhangt.
@@ -23,7 +24,6 @@ De rest van de fases spelen zich af op de verschillende client systemen.
 \label{fig:softwareLevenscyclus}
 \end{figure}
 
-%%% TODO schrijven over de problemen die komen bij het deployen
 In theorie zou het deployen van software een eenvoudige klus moeten zijn.
 Aangezien software bestaat uit een set van bestanden, zou het deployen van software naar een doelcomputer slechts bestaan uit het kopiëren van de nodige bestanden.
 Maar dit is vaak niet het geval.
@@ -65,22 +65,6 @@ Een DLL-hell wordt best ten alle tijden vermeden.
 \item Na het upgraden/updaten van een component, is het soms aangewezen om een roll back uit te voeren.
 Zo'n actie kan overwogen worden als de upgrade belangrijke functionaliteiten van de software kapot maakt.
 \end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Om een correct werkende applicatie te hebben, heeft het Python raamwerk verschillende drivers en bibliotheken nodig.
-\citet{Obreshkov2008244} bespreekt hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
-Het ATLAS project gebruikt CMT als configuratie manager.
-Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen \citep{Obreshkov2008244}.
-Een gelijkaardige structuur is wenselijk voor het probleem.
-Net zoals \citet{Obreshkov2008244} zou er voor ieder bibliotheek en driver een pakket voorzien worden.
-Hierdoor wordt de herbruikbaarheid bevordert en kan voor ieder pakket apart behandelt worden.
-%%% SAUCE gebruiken om statement te ondersteunen
-\citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
-Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
-Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandelt moet worden.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \section{Deployment strategieën}\label{sec:deployment}
 De eerste stap in de softwarelevenscyclus bestaat uit het uitbrengen van de software.
@@ -157,19 +141,55 @@ Op basis van deze informatie wordt een context opgebouwd waarin de releases van 
 De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het verbruikers systeem ondervragen.
 Aangezien kritische client-side informatie op een gestandaardiseerde wijze aangeboden wordt, met behulp van een geneste collectie van pair-values die een hiërarchie vormen, kan de installatie van de software gepersonaliseerd worden \citep{hall1999cooperative}.
 
-\section{Event Based services}
-%https://ix.cs.uoregon.edu/~jsventek/papers/03bPietzuch2002.pdf
-%@inproceedings{pietzuch2002hermes,
-%  title={Hermes: A distributed event-based middleware architecture},
-%  author={Pietzuch, Peter R and Bacon, Jean M},
-%  booktitle={Distributed Computing Systems Workshops, 2002. Proceedings. 22nd International Conference on},
-%  pages={611--618},
-%  year={2002},
-%  organization={IEEE}
-%}
+\section{Event based services}
+%%% TODO
+Een belangrijk onderdeel van de software dock architectuur is de event service.
+Deze handelt de communicatie af tussen de verschillende docks en is een spilfiguur in de architectuur.
+Aan de hand van \citet{pietzuch2002hermes} en \citet{carzaniga2001design} is het mogelijk om een bespreking te geven over hoe de event service geïmplementeerd kan worden.
 
-%ftp://ftp.cs.toronto.edu/cs/ftp/dist/hfliu/papers/siena_tocs01.pdf
+Meeste middleware systemen zijn invocation-based systemen waarbij het request/response paradigma gebruikt wordt om de communicatie tussen client en server te onderhouden.
+Een client verzoekt een service van de server, waar de server vervolgens op antwoord.
+Het toepassen van deze strategie is doenbaar in een omgeving met een beperkt aantal clients en servers.
+Om een grootschalig netwerk op te bouwen en om te kunnen gaan met een dynamische omgeving moet een andere manier van communiceren gebruikt worden.
+Publish/subscribe systemen bieden een oplossing voor deze problemen.
+Clients, event subscribers, tonen hun interesse voor een bepaald onderwerp en servers, event publishers, produceren een event die naar alle geïnteresseerden wordt doorgestuurd.
+Een algemeen voorbeeld is terug te vinden in Figuur~\vref{fig:pubsubArchi}.
+Door deze manier van communiceren te hanteren, ontstaat een natuurlijke ondersteuning voor many-to-many relaties tussen de clients en servers.
+De twee worden ook van elkaar ontkoppeld.
+Voor de client maakt het niet uit welke publisher de producent is van een event.
+Hiernaast moet de server niet weten wie allemaal de events ontvangt die hij produceert \citep{pietzuch2002hermes}.
 
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/pubsubArchi.png}}
+\caption{Publish/Subscribe voorbeeld \citep{pietzuch2002hermes}}
+\label{fig:pubsubArchi}
+\end{figure}
+
+Een naïeve aanpak, volgens \citet{carzaniga2001design}, is het gebruiken van één centrale server waar alle subscripties worden bijgehouden, waar alle events toekomen, waar de bestemming van het event beslist wordt en waar het event wordt doorgestuurd naar de gepaste subscribers.
+Deze strategie is eenvoudig te implementeren maar deze werkt de schaalbaarheid tegen.
+Dit was ook al duidelijk in Figuur~\vref{fig:pubsubArchi} waar verschillende ``Brokers'' aanwezig zijn.
+Het is belangrijk om stil te staan bij enkele ontwerp beslissingen zodanig dat de service die in Figuur~\vref{fig:pubsubService} zichtbaar is, implementeerbaar is.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/pubsub.png}}
+\caption{Publish/Subscribe service \citep{carzaniga2001design}}
+\label{fig:pubsubService}
+\end{figure}
+
+Naast de architectuur is het belangrijk om te weten wat wordt verzonden en op welke manier.
+\citet{carzaniga2001design} haalt een structuur aan waarin een event beschreven wordt als een set van attributen.
+Ieder attribuut bestaat uit een type, naam en waarde.
+De naam van een attribuut is een string en het type komt uit een set van primitieven die terug gevonden worden bij de meeste hedendaagse programmeertalen.
+Een voorbeeld van zo'n event is terug te vinden in Figuur~\vref{fig:pubsubNot}
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/pubsubNot.png}}
+\caption{Publish/Subscribe Event \citep{carzaniga2001design}}
+\label{fig:pubsubNot}
+\end{figure}
 
 \section{Case studies}\label{sec:caseStudies}
 Door de jaren heen zijn er verschillende technologieën ontwikkeld die het probleem van software deployment aanpakken.
@@ -253,6 +273,13 @@ De acties tijdens het installatieproces worden uitgevoerd door softwaremanagemen
 Op het einde van het proces, haalt het systeem de job output en exit code op.
 De laatste wordt opgeslagen in de Installation database.
 
+\citet{Obreshkov2008244} bespreekt hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
+Het ATLAS project gebruikt CMT als configuratie manager.
+Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen.
+\citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
+Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
+Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandelt moet worden.
+
 \subsection{ORYA}\label{sec:ORYA}
 \citet{lestideau2003providing} legt uit hoe met ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
 Aan de hand van een deployment PSEE \citep{belkhatir2007adele} wordt het mogelijk om het installatieproces te automatiseren.
@@ -314,7 +341,22 @@ Via de website van de verdeler kan een link gebruikt worden om het nodige pakket
 \end{itemize}
 
 \subsection{Ansible}
-%https://cdn2.hubspot.net/hub/330046/file-480366556-pdf/pdf_content/Ansible_in_Depth.pdf?t=1487567092458
+Als laatste case studie wordt Ansible besproken.
+Ansible is een open source IT configuratie management, deployment en organisatie tool.
+de architectuur van Ansible bestaat uit een agentless push model.
+Dit wil zeggen dat er geen additionele software nodig is op de client toestellen.
+Dit wordt behaald door gebruik te maken van the remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en UNIX en WinRM voor Windows.
+Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang de Ansible het systeem niet aan het gebruiken is \citep{ansible}.
+
+\citet{ansible} beschrijft verder dat Ansible gebruik maakt van \emph{Playbooks} voor de organisatie van de IT omgevingen.
+Playbooks zijn YAML\footnote{Een human-readable data serialisatie taal (Een superset van JSON)} definities van taken die beschrijven hoe een taak moet geautomatiseerd worden.
+Een Playbook bestaat uit een aantal ``plays'' die uitgevoerd kunnen worden op een set van hosts, ook wel een ``inventory'' genoemd.
+Iedere play bestaat uit een set van taken die op een subset van de inventory uitgevoerd kan worden.
+Een task zelf voert een Ansible module uit\footnote{Een klein stuk code met een specifieke taak}.
+
+Hiernaast is het mogelijk om de mogelijkheden van Ansible uit te breiden.
+Modules kunnen zelf geschreven worden in eender welke taal met als enige beperking dat een JSON bestand als input moet gegeven worden en dat een JSON bestand gegenereerd moet worden.
+De inventory van een Playbook kan dynamisch ontdekt worden at runtime.
 
 \section{Rollback}\label{sec:rollback}
 Het deployen van software op een doelsysteem brengt verscheidene problemen met zich mee.
@@ -323,13 +365,38 @@ Zoals reeds besproken in Sectie~\vref{sec:softwareLevenscyclus}, zijn er verschi
 In de volgende secties gaan verschillende mechanismen besproken worden waarmee de verscheidene problemen aangepakt kunnen worden.
 
 \subsection{Rollback strategieën}
-%%% TODO
-Stuk schrijven over rollback strategieën? Kan dan eenvoud vm aanhalen?
-\citet{srinivasan2004flashback} bespreekt 3 mogelijke manieren van rollback
-\citet{elnozahy2002survey} $->$ is vooral voor gedistribueerde systemen (is dit wel van toepassing hier?)
-\citet{machado2008enabling} $->$ rollback maar dan atomisch
+\citet{srinivasan2004flashback} spreekt over drie manieren waarop rollback strategieën geïmplementeerd worden in hedendaagse systemen.
+Checkpointing, main-memory transactions en software rejuvination zijn strategieën die vaak gebruikt zijn.
 
-%%% VRAAG wat doen als configuratie file compromised is?
+\paragraph{Checkpointing}
+Checkpointing is een eenvoudige recovery strategie.
+De staat van een programma wordt periodiek opgeslagen in een bestand op een extern opslagmedium.
+Deze kan, na het falen van het programma, gebruikt worden om te herstellen van fouten \citep{plank1994libckpt}.
+Bij een checkpointing systeem wordt de volledige staat van het programma opgeslagen.
+Dit zorgt voor een verhoogde overhead waardoor het niet mogelijk is om frequent een checkpoint uit te voeren \citep{srinivasan2004flashback}.
+
+Door gebruik te maken van incrementele checkpoints is het evenwel mogelijk om dit probleem aan te pakken.
+Enkel de veranderingen van de laatste checkpoint worden opgeslagen in een nieuwe checkpoint.
+Het deel dat niet is aangepast, kan hersteld worden aan de hand van de vorige checkpoint.
+Dankzij deze strategie is het mogelijk om de hoeveelheid data die moet worden opgeslagen te verkleinen.
+Hierdoor zullen wel verschillende recovery bestanden nodig zijn.
+Het is aangewezen om op regelmatige tijdstippen de verschillende recovery bestanden samen te voegen tot één bestand \citep{plank1994libckpt, elnozahy2002survey}.
+
+\paragraph{Main-memory transactions}
+Een andere rollback strategie zijn de main-memory transactions.
+Systemen die deze transacties ondersteunen bezitten vaak de mogelijk om terug te keren naar een vorig executie punt.
+Om deze strategie te kunnen implementeren, moeten applicaties gebruik maken van het transactie programmeermodel.
+Waardoor de keuzevrijheden van de programmeur beperkt worden \citep{srinivasan2004flashback}.
+
+\paragraph{Software rejuvenation}
+\citet{huang1995software} definieert software rejuvination als volgt:
+\begin{displayquote}
+``Software rejuvenation is the concept of gracefully terminating an application and immediately restarting it at a clean internal state.''
+\end{displayquote}
+Tijdens het langdurig uitvoeren van een programma treedt \emph{process aging} op.
+Door geheugenlekken, niet vrijgegeven bestandlocks, data corruptie, \ldots zal de performantie van het uitvoerende programma aangetast worden waardoor het programma uiteindelijk faalt.
+Door het heropstarten van de applicatie worden eventuele fouten uit het systeem gehaald en wordt de software verjongd.
+Meeste studies over software rejuvenation focussen vooral op het herstarten van de volledige applicatie en werken dus niet op een fijnkorrelige schaal \citep{srinivasan2004flashback}.
 
 \subsection{Virtualisatie}\label{sec:virtualisatie}
 \citet{softwareDeployment} brengt virtualisatie ter sprake.
@@ -339,12 +406,10 @@ Er zijn verschillende voordelen gekoppeld aan het gebruiken van een virtuele mac
 Bijvoorbeeld, besturingssystemen op verschillende hardware platformen eisen verschillende drivers en deze drivers hebben misschien afhankelijkheden op een bepaalde firmware en BIOS.
 Een guest OS draaiende op een virtuele machine heeft deze eisen niet \citep{shumate2004implications}.
 
+%%% TODO? \citep{shumate2004implications} gebruiken om image deployement uit te leggen... Is dit wel nodig aangezien het niet echt de scope is waarin een image gebruikt zou worden.
 
-%%% TODO
-De structuur die \citet{shumate2004implications} voorstelt voor het deployen van VM images lijkt handig
-
-
-Maar virtualisatie is niet de enige techniek die gebruikt zou kunnen worden om rollbacks te vermijden.
+\subsection{Docker}
+Virtualisatie is niet de enige techniek die gebruikt kan worden om rollbacks te vermijden.
 Docker containers is een technologie waarmee een stuk software wordt ingepakt in een volledig filesysteem dat alle benodigdheden bevat om correct te functioneren.
 Hierdoor zal de software overal op eenzelfde manier draaien, ongeacht de omgeving \citep{dockerMain}.
 Docker containers is niet hetzelfde als virtuele machines.
@@ -425,7 +490,6 @@ Hiernaast wordt het ook mogelijk om de technologieën te vergelijken aangezien z
 \label{tab:voorNadelen}
 \end{table}
 
-%%% TODO schrijven van voor- en nadelen van de verschillende techs
 \subsubsection{WiX Toolset}
 Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt worden van XML broncode.
 De toolset is geschreven in C\# en heeft het .Net framework nodig om te kunnen functioneren.
