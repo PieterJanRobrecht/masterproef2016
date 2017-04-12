@@ -172,22 +172,84 @@ Op de manier wordt achterhaalt welke installer geïnstalleerd werd op een field 
 Nevens de verschillende docks beschrijft de software dock architectuur een Event Service.
 Deze staat in voor het afhandelen van de communicatie tussen de verschillende docks.
 Om dit te implementeren, wordt er beroep gedaan op Sectie~\vref{sec:event}.
-Er worden evenwel enkele kleine aanpassingen gemaakt aan de verschillende structuren die worden aangehaald.
+Er worden evenwel enkele kleine aanpassingen gemaakt.
+%%% TODO schrijven over lijsten die worden bijgehouden
+De broker worden verschillende lijsten bijgehouden voor ieder type van bericht dat mogelijk is.
+Bij het toekomen van een subscribe/unsubscribe bericht, zal de broker de nodige lijsten aanpassen zodat de zender van het bericht wordt toegevoegd of verwijderd.
+Berichten in het netwerk zullen bestaan uit een set van attributen en waarden in een JSON formaat.
+Het uiterlijk van zo'n bericht is gelijkaardig als het uiterlijk van een bericht in Figuur~\vref{fig:pubsubNot}.
+In Listing~\vref{list:bericht} wordt een voorbeeld van een bericht weergegeven.
+Ieder bericht heeft dezelfde set aan attributen die elk een eigen functie hebben:
+\begin{itemize}
+\item \emph{Timestamp}: ieder bericht zal op het moment van de creatie een timestamp krijgen.
+De timestamp wordt uitgedrukt in seconden sinds epoch.
+Op deze wijze wordt eenzelfde referentie punt gebruikt en is het mogelijk om de creatie van berichten in de tijd te ordenen.
+\item \emph{Type}: ieder bericht hoort toe aan een bepaald type.
+De verschillende types van berichten zijn: subscribe, unsubscribe, new, change, rapport, update, release.
+Afhankelijk van het type bericht dat toekomt, bij zowel de broker als een dock, zal een andere actie ondernomen worden.
+De eerste twee types zijn uitsluitend bedoelt voor de broker.
+De volgende drie voor een release dock en de laatste twee voor de field docks.
+\item \emph{ID}: naast een timestamp wordt aan ieder bericht een id meegegeven. 
+Dit attribuut wordt meegegeven zodanig dat de field docks kunnen achterhalen of zij achterlopen op berichten.
+\item \emph{Data}: Dit is het meest flexibele attribuut. 
+Hier wordt de data meegegeven die hoort bij het bericht.
+Als het type van een bericht ``subscribe'' is, dan zit in het data veld een lijst met alle types waarvoor de gebruiker zich voor wilt inschrijven.
+\item \emph{Sender}: Het laatste attribuut dat wordt meegegeven is de zender van het bericht.
+De broker moet bij een subscribe bericht kunnen achterhalen wie de zender is.
+Op die manier weet de broker wie moet worden toegevoegd aan de nodige lijsten.
+\end{itemize}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\begin{lstlisting}[caption={Format voor een bericht},label={list:bericht}, xleftmargin=.3\textwidth]
+{
+ 'timestamp': 1491982212.555,
+ 'type': 'subscribe',
+ 'id': 0,
+ 'data': {
+   'type': [
+     'new',
+     'change',
+     'rapport'
+   ]
+ },
+ 'sender': 'localhost'
+}
+\end{lstlisting}
+\end{center}
+\end{minipage}
 
 \paragraph{Agenten}
 %%schrijven over hoe de agenten werken en hoe ze gaan werken volgens de handelingen van ORYA
-Naast de docks bevat de software dock architectuur ook agenten.
+Naast de docks beschrijft de software dock architectuur ook agenten.
 Deze staan in voor het uitvoeren van allerlei deployment gerelateerde handelingen.
 Iedere agent is gekoppeld aan één stap uit de software levenscyclus die besproken werd in Sectie~\vref{sec:softwareLevenscyclus}.
-Hiernaast zal aan iedere release van het release dock een subset van alle agenten toegevoegd en verscheept worden naar het field dock.
-Zo wordt bijvoorbeeld een agent voorzien die instaat voor het installatieproces.
-De agent wordt samen met de release verscheept naar het field dock waarna de agent in actie schiet.
-De agent begint met het creëren van een nieuwe Docker container waarin de installer losgelaten kan worden.
-Vervolgens zal de agent de installatie aanvangen en zullen de scripts horende bij de pakketten uitgevoerd worden in de container.
+Hiernaast zal aan iedere installer afkomstig van het release dock een subset van alle agenten toegevoegd en verscheept worden naar het field dock.
+Op deze manier is het mogelijk om iedere stap in de levenscyclus van de installer te personaliseren.
 Ieder agent zal een bepaalde set van handelingen uitvoeren die overeenkomt met een deployment proces die besproken werd in de ORYA case studie in Sectie~\vref{sec:ORYA}.
 Net zoals bij ORYA wordt ieder deployment proces beschreven aan de hand van andere deployment processen en basis activiteiten.
-Het creëren van een nieuwe container in de installatie agent wordt gezien als zo'n basis activiteit.
-In Figuur~\vref{fig:fieldDock} wordt de algemene structuur van een field dock weergegeven.
+Een voorbeeld:
+Tijdens de creatie van een installer wordt een agent voorzien die instaat voor het installatieproces.
+De agent wordt samen met de installer verscheept naar het field dock waarna de agent op het gepaste moment in actie schiet.
+De agent begint met het hernoemen van de oude Docker container met daarin de vorige versie van een installer.
+Hierna wordt een nieuwe container aangemaakt waarin de nieuwe installer wordt losgelaten.
+Vervolgens zal de agent de installatie aanvangen en zullen de scripts horende bij de pakketten uitgevoerd worden in de container.
+Zoals reeds werd aangegeven, zijn de handelingen van een agent gebaseerd op het model van ORYA.
+Zo wordt het creëren van een nieuwe container in de installatie agent wordt gezien als zo'n basis activiteit.
+In Bijlage~\vref{sec:flowcharts} zijn verschillende flowcharts terug te vinden die horen bij enkele types van agenten.
+Door agenten te gebruiken, een strategie die ook gezien werd in de Atlas case studie in Sectie~\vref{sec:ATLAS}, wordt het mogelijk om alle stappen in de software levenscyclus uniek te behandelen.
+Hiernaast kan bij iedere installer een andere set van agenten geassocieerd worden waardoor iedere installer verder gepersonaliseerd kan worden.
+
+\subsection{Deployment environment}
+De deployment environment komt overeen met de field dock in de software dock architectuur.
+In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodanig dat het test framework geïnstalleerd wordt.
+Aan dit proces zijn de verschillende problemen verbonden die besproken werden in Sectie~\vref{sec:softwareLevenscyclus}.
+Om de verschillende deployment problemen te vermijden en om ervoor te zorgen dat geen uitgebreide rollback strategieën nodig zijn, wordt een geïsoleerde omgeving voorzien waarin de software geïnstalleerd wordt. 
+Dit wordt gerealiseerd aan de hand van virtualisatie technieken, meer bepaald aan de hand van Docker.
+Docker wordt verkozen boven een gewone virtuele machine omdat het uitvoeren van handelingen (zoals opstarten, stoppen, \ldots) op een container minder resources en tijd vraagt in vergelijking met een virtuele machine.
+Doordat een virtualisatie techniek wordt gebruikt, wordt het zeer eenvoudig om problemen tijdens de verschillende processen op te vangen.
+In Figuur~\vref{fig:flow:install} en Figuur~\vref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollback proces zeer eenvoudig is.
+Figuur~\vref{fig:fieldDock} geeft weer op welke manier de agenten met de containers gaan communiceren en geeft ook weer hoe Docker wordt geïntegreerd in het geheel.
 
 \begin{figure}[!ht]
 \centering
@@ -196,10 +258,9 @@ In Figuur~\vref{fig:fieldDock} wordt de algemene structuur van een field dock we
 \label{fig:fieldDock}
 \end{figure}
 
-Door agenten te gebruiken, een strategie die ook gezien werd in de Atlas case studie in Sectie~\vref{sec:ATLAS}, wordt het mogelijk om alle stappen in de software levenscyclus uniek te behandelen.
-Hiernaast kan bij iedere release een andere set van agenten geassocieerd worden waardoor iedere release verder kan gepersonaliseerd worden.
-De volledige architectuur is terug te vinden in Figuur~\vref{fig:architectuur}.
-In de figuur zijn zowel de packager als de deployment environment toegevoegd.
+De volledige architectuur wordt weergegeven in Figuur~\vref{fig:architectuur}.
+In de figuur worden de verschillende docks afgebeeld samen met zowel Docker als de packager.
+Met deze architectuur is het mogelijk om aan de slag te gaan en een goede oplossing te vinden voor het probleem van Televic.
 
 \begin{figure}[!ht]
 \centering
@@ -207,14 +268,3 @@ In de figuur zijn zowel de packager als de deployment environment toegevoegd.
 \caption{Architectuur van het prototype}
 \label{fig:architectuur}
 \end{figure}
-
-\subsection{Deployment environment}
-De deployment environment komt overeen met de field dock in de software dock architectuur.
-In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodanig dat het test framework geïnstalleerd wordt.
-Aan dit proces zijn de verschillende problemen verbonden die besproken zijn in Sectie~\vref{sec:softwareLevenscyclus}.
-Om de verschillende deployment problemen te vermijden en om ervoor te zorgen dat geen uitgebreide rollback strategieën nodig zijn, wordt een geïsoleerde omgeving voorzien waarin de software gedeployed kan worden. 
-Dit wordt gerealiseerd aan de hand van virtualisatie technieken, meer bepaald aan de hand van Docker.
-Docker wordt verkozen boven een gewone virtuele machine omdat het uitvoeren van handelingen (zoals opstarten, stoppen, \ldots) op een container minder resources en tijd vraagt in vergelijking met een virtuele machine.
-De container wordt vervolgens gebruikt om het testraamwerk in te installeren.
-Doordat een virtualisatie techniek wordt gebruikt, wordt het zeer eenvoudig om problemen tijdens het deployment en installatieproces op te vangen.
-In Figuur~\vref{fig:flow:install} en Figuur~\vref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollback proces zeer eenvoudig is.
