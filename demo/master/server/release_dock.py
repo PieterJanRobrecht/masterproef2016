@@ -90,7 +90,6 @@ def copy_old_meta_folder(package, meta_dir):
 
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     finally:
         cnx.close()
     # Copy tree to new dir
@@ -336,7 +335,6 @@ class ReleaseDock(Dock):
             print("RELEASE DOCK -- Writing complete")
         except mysql.connector.Error as err:
             print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-            self.cnx.quarantine()
 
     def notify_release(self):
         # Zip folder

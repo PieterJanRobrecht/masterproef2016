@@ -23,7 +23,6 @@ def get_all_towers():
         print("RELEASE DOCK -- Collected all towers")
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     cnx.close()
     return towers
 
@@ -41,7 +40,6 @@ def get_installer_name(id_installer):
 
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     cnx.close()
     return name
 

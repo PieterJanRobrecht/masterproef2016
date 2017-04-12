@@ -1,4 +1,4 @@
-\chapter{Analyse en ontwerp}
+\chapter{Analyse en ontwerp}\label{sec:anaEnOntwerp}
 Uit de probleemstelling werd het snel duidelijk dat het probleem omtrent het Python testraamwerk complexer is dan op het eerste zicht lijkt.
 In dit hoofdstuk zal het probleem verder geanalyseerd worden.
 Aan de hand van deze bevindingen gaat een architectuur en structuur ontworpen worden.
@@ -168,12 +168,10 @@ Hier wordt vooral gebruik gemaakt van de verschillende resultaten van de test di
 Op de manier wordt achterhaalt welke installer geïnstalleerd werd op een field dock en welke fouten eventueel optraden tijdens het installatieproces.
 
 \paragraph{Event Service}
-%%% TODO
 Nevens de verschillende docks beschrijft de software dock architectuur een Event Service.
 Deze staat in voor het afhandelen van de communicatie tussen de verschillende docks.
 Om dit te implementeren, wordt er beroep gedaan op Sectie~\vref{sec:event}.
 Er worden evenwel enkele kleine aanpassingen gemaakt.
-%%% TODO schrijven over lijsten die worden bijgehouden
 De broker worden verschillende lijsten bijgehouden voor ieder type van bericht dat mogelijk is.
 Bij het toekomen van een subscribe/unsubscribe bericht, zal de broker de nodige lijsten aanpassen zodat de zender van het bericht wordt toegevoegd of verwijderd.
 Berichten in het netwerk zullen bestaan uit een set van attributen en waarden in een JSON formaat.

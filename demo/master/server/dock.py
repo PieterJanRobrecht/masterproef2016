@@ -20,8 +20,8 @@ class Dock(object):
         self.message_queue = Queue()
 
     def start_service(self):
-        """Start all the necessary services for a Dock
-
+        """
+            Start all the necessary services for a Dock
             First open a socket
             Second start listening for data in a separate thread
             Return listening thread
@@ -37,8 +37,8 @@ class Dock(object):
         return thread
 
     def open_socket(self):
-        """Open a socket on defined port and interface
-
+        """
+            Open a socket on defined port and interface
             Opens a socket on interface and port defined in object creation
         """
         print("DOCK -- Opening port " + str(self.port) + " on interface " + self.host)
@@ -51,8 +51,8 @@ class Dock(object):
         # print("Ready for receiving data on port " + str(self.port) + " on interface " + self.host)
 
     def listen_for_data(self):
-        """Listen for data on the defined socket
-
+        """
+            Listen for data on the defined socket
             Listen every x second for data on the socket
         """
         print("DOCK -- Listening to port " + str(self.port) + " on interface " + self.host)
@@ -75,8 +75,8 @@ class Dock(object):
         print("DOCK -- Closing listening thread")
 
     def handle_message(self):
-        """Handling all messages in the message_queue
-
+        """
+            Handling all messages in the message_queue
             All messages in the message_queue will be handled
             If there are no messages the thread will be stopped until a new message arrives
         """
@@ -97,8 +97,8 @@ class Dock(object):
         s.close()
 
     def connect_to_broker(self, sub_dict):
-        """Set parameters and subscribe with broker
-
+        """
+            Set parameters and subscribe with broker
             All necessary socket parameters are set
             A dictionary with subscription type is sent
         """
@@ -107,7 +107,8 @@ class Dock(object):
         self.subscribe_to_messages(sub_dict)
 
     def subscribe_to_messages(self, sub_dict):
-        """"Create subscribe message and send it to the broker
+        """"
+            Create subscribe message and send it to the broker
         """
         subscribe_message = Message()
         subscribe_message.create_message(self.host, "subscribe", sub_dict)

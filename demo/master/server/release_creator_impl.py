@@ -27,6 +27,7 @@ def write_to_database(installer):
         print("RELEASE DOCK -- Added new installer to database")
 
         for package in installer.packages:
+            # Check if package is new or not
             if package.id_package is -1:
                 query = "INSERT INTO package " \
                         "(name, version," \
@@ -52,7 +53,6 @@ def write_to_database(installer):
             print("RELEASE DOCK -- Writing complete")
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     cnx.close()
 
 
@@ -72,7 +72,6 @@ def get_all_packages():
         print("RELEASE DOCK -- Collected all packages")
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     cnx.close()
     return packages
 
@@ -243,7 +242,6 @@ def get_all_installers():
         print("RELEASE DOCK -- Collected all installers")
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     cnx.close()
     return installers
 
@@ -259,7 +257,6 @@ def get_package(id_package, cnx):
         print("RELEASE DOCK -- Collected package")
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     return package
 
 
@@ -279,7 +276,6 @@ def get_all_packages_with_installer(selected_installer):
         print("RELEASE DOCK -- Collected packages for installer")
     except mysql.connector.Error as err:
         print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
-        cnx.quarantine()
     cnx.close()
     return selected_installer
 
