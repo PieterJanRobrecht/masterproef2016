@@ -33,7 +33,7 @@ class Agent(object):
             # Time to remove it
             print("AGENT -- API error: removing container with name " + new_name)
             container = self.client.containers.get(new_name)
-            container.stop()
+            # container.stop()
             container.remove()
             old_container.rename(new_name)
 

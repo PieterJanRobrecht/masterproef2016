@@ -53,10 +53,11 @@ class MainGui(description_file_gui.MyFrame3):
         sys.exit(0)
 
     def start_framework(self, event):
+        print("MAINGUI -- Starting application")
         client = self.field_dock.client
 
         framework_package = locate_framework(self.field_dock.current_release.packages)
-        framework_thread = Thread(target=start_framework_container, args=(client,framework_package))
+        framework_thread = Thread(target=start_framework_container, args=(client, framework_package))
         framework_thread.daemon = True
         framework_thread.start()
         # framework_thread.join()

@@ -28,6 +28,7 @@ def has_include(package_name, release_zip_location):
 class InstallAgent(Agent):
     def __init__(self):
         super(InstallAgent, self).__init__()
+        self.old_installer = None
         self.types = {
             "Executable": self.perform_execute,
             "Zip": self.perform_unzip
@@ -42,9 +43,9 @@ class InstallAgent(Agent):
         self.create_image()
         # Check if container exists if so rename it
         self.rename_container("fieldcontainer", "old_container")
-
+        # Parameters to pass on the X11 display
         self.client.containers.create(self.docker_image, entrypoint="/bin/bash", tty=True, name="fieldcontainer",
-                                      environment=["DISPLAY=10.2.0.73:0.0"])
+                                      environment=["DISPLAY=192.168.1.4:0.0"])
         for container in self.client.containers.list(all=True):
             if container.name == "fieldcontainer":
                 self.container = container
@@ -53,7 +54,10 @@ class InstallAgent(Agent):
         # Locate installer meta file
         meta_folder = str(self.find("metadata_installer.json", self.release_zip_location))
         meta_file = os.path.join(meta_folder, "metadata_installer.json")
+        self.old_installer = self.installer
         self.installer = Installer.convert_to_installer(open(meta_file, "r").read())
+
+        self.send_update()
 
         # For every package
         self.installer.packages.sort(key=lambda x: x.priority, reverse=True)
@@ -77,9 +81,10 @@ class InstallAgent(Agent):
         # If all test are successful
         if success:
             print("INSTALL AGENT -- Finished with installation")
-            self.send_update()
         else:
             print("INSTALL AGENT -- Not all tests finished correctly, rolling back to previous state")
+            self.installer = self.old_installer
+            self.send_update()
             self.quarantine()
 
     def perform_execute(self, client, package_name, has_include_folder):

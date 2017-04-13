@@ -152,6 +152,14 @@ def get_installer_of_sender(cnx, name, version):
     return id_installer
 
 
+def find_tower_of_sender(cnx, sender):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""SELECT idTower FROM tower WHERE hostname = %s""", (sender,))
+    for row in cursor:
+        id_installer = row['idTower']
+    return id_installer
+
+
 def find_installer_of_sender(cnx, sender):
     cursor = cnx.cursor(buffered=True, dictionary=True)
     cursor.execute("""SELECT Installer_idInstaller FROM tower WHERE hostname = %s""", (sender,))
@@ -170,34 +178,13 @@ def find_package(cnx, id_installer, name, version):
     return id_package
 
 
-def add_diagnostics(cnx, start, end, result):
+def add_diagnostics(cnx, start, end, result, id_sender, id_installer, id_package):
     start = datetime.datetime.fromtimestamp(start).strftime('%Y-%m-%d %H:%M:%S')
     end = datetime.datetime.fromtimestamp(end).strftime('%Y-%m-%d %H:%M:%S')
     cursor = cnx.cursor(buffered=True, dictionary=True)
-    cursor.execute("""INSERT INTO diagnosecheck (startTime, endTime, endResult) VALUES (%s, %s, %s);""",
-                   (start, end, result))
-    cnx.commit()
-
-    query = "SELECT idDiagnosecheck FROM diagnosecheck ORDER BY idDiagnosecheck DESC LIMIT 1;"
-    cursor.execute(query)
-    for row in cursor:
-        id_diagnose = row['idDiagnosecheck']
-    return id_diagnose
-
-
-def link_diagnose_with_installer(cnx, id_installer, id_diagnose):
-    cursor = cnx.cursor(buffered=True, dictionary=True)
-    query = "INSERT INTO installer_has_diagnosecheck (installer_idInstaller, diagnosecheck_idDiagnosecheck) VALUES (" \
-            + str(id_installer) + ", " + str(id_diagnose) + ");"
-    cursor.execute(query)
-    cnx.commit()
-
-
-def link_diagnose_with_package(cnx, id_package, id_diagnose):
-    cursor = cnx.cursor(buffered=True, dictionary=True)
-    query = "INSERT INTO package_has_diagnosecheck (package_idPackage, diagnosecheck_idDiagnosecheck) VALUES (" \
-            + str(id_package) + ", " + str(id_diagnose) + ");"
-    cursor.execute(query)
+    cursor.execute("""INSERT INTO diagnosticsCheck (startTime, endTime, endResult, tower_idTower,
+                    installer_idInstaller, package_idPackage) VALUES (%s, %s, %s, %s, %s, %s);""",
+                   (start, end, result, id_sender, id_installer, id_package))
     cnx.commit()
 
 
@@ -288,17 +275,17 @@ class ReleaseDock(Dock):
         self.update_gui()
 
     def handle_rapport(self, message):
-        # TODO
+        print("RELEASE DOCK -- Handling rapport \n\t Rapport: " + str(message.data))
+        # TODO only works for the rapport of a package
         if type(message.data) is not dict:
             d = ast.literal_eval(message.data)
         else:
             d = message.data
         sender = message.sender
+        id_sender = find_tower_of_sender(self.cnx, sender)
         id_installer = find_installer_of_sender(self.cnx, sender)
         id_package = find_package(self.cnx, id_installer, d["name"], d["version"])
-        id_diagnose = add_diagnostics(self.cnx, d["start_time"], d["end_time"], d["result"])
-        link_diagnose_with_installer(self.cnx, id_installer, id_diagnose)
-        link_diagnose_with_package(self.cnx, id_package, id_diagnose)
+        add_diagnostics(self.cnx, d["start_time"], d["end_time"], d["result"], id_sender, id_installer, id_package)
 
     def initiate_actions(self):
         self.actions["new"] = self.save_new_tower
