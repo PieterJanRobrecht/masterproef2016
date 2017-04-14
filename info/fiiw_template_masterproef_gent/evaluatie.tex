@@ -12,7 +12,20 @@ Het doel van deze test is het uittesten hoeverre de geschreven applicatie uitvoe
 De applicatie zelf is volledig geschreven in Python met modules die cross-platform moeten zijn.
 
 \paragraph{Scenario}
+Om uit te testen of de applicatie cross-platform is, wordt een virtuele machine aangemaakt met de nodige programma's.
+Als guest-besturingssysteem werd Linux Mint gekozen. 
+Docker, Mysql workbench en wxPython werden geïnstalleerd.
+Met hulp van pip werden de docker-py en dill modules aan python toegevoegd waardoor het systeem klaar was om uitgetest te worden.
+De databank werd aangemaakt en de code werd overgebracht naar de virtuele machine.
 
+Tijdens de test is het de bedoeling om het de bedoeling om alle functionaliteiten van de applicatie uit te testen.
+De verschillende docks moeten correct subscriben bij de broker en de nieuwe field dock moet zonder fouten worden toegevoegd aan de databank.
+Vervolgens wordt getest of een installer kan aangemaakt worden, verscheept worden naar de field dock en geïnstalleerd kan worden.
+Er wordt een installer aangemaakt die bestaat uit 3 verschillende pakketten: één framework pakket, één optioneel pakket en één niet-optioneel pakket.
+De twee niet-framework pakketten bevatten een eenvoudig script die output genereert.
+Het framework pakket bevat een Grafische User Interface gemaakt met wxPython.
+
+De test is geslaagd als alle verschillende handelingen in de goede volgorde overlopen, ondertussen geen fouten optreden en op het einde het framework opgestart kan worden.
 
 \paragraph{Uitvoering}
 
@@ -20,17 +33,52 @@ De applicatie zelf is volledig geschreven in Python met modules die cross-platfo
 \subsection{Meerdere clients}
 \paragraph{Doel}
 Voor deze test is het de bedoeling om te achterhalen of de applicatie meerdere clients kan ondersteunen.
-Het doel is dan ook 
+Het doel is dan ook een omgeving op te zetten waarin verschillende clients aanwezig zijn.
 
 \paragraph{Scenario}
+Met deze test is het de bedoeling om te achterhalen of het mogelijk is om meerdere clients draaiende te hebben.
+Voor de test wordt er gebruik gemaakt van een Windows 10 virtuele machine om meerder clients te maken.
+Op de virtuele machine is Docker, Python, wxPython, docker-py en dill aanwezig.
 
+Tijdens de test wordt op één release dock een installer aangemaakt en klaargemaakt voor release.
+De installer bestaat uit 2 verschillende pakketten: één framework pakket en één optioneel pakket.
+Beide pakketten zullen bestaan uit enkele scripts die output zullen generen wanneer deze worden uitgevoerd.
+Naast de release dock zullen 3 field docks toegevoegd worden aan het netwerk.
+
+Om een geslaagde test te verkrijgen, moet de installer bij alle field docks toekomen en correct geïnstalleerd worden.
+Dit moet op het einde van het proces zichtbaar zijn in zowel het overzicht op de release dock als in de databank.
 
 \paragraph{Uitvoering}
 
 
 \subsection{Meerdere servers}
 \paragraph{Doel}
+Een volgende test bestaat uit het testen van de functionaliteiten als meerdere servers aanwezig zijn.
+Het doel van de test is te achterhalen wat er gebeurd als meerdere servers aanwezig zijn.
 
+\paragraph{Scenario}
+Na het testen of het mogelijk is om meerdere clients te ondersteunen, wordt nu getest of meerdere servers ondersteunt wordt.
+Dit gebeurt wederom aan de hand van een virtuele machine met Windows 10.
+Iedere virtuele machine bevat de server code samen met een databank om alle gegevens in op te slaan.
+
+Gedurende de test worden 3 release docks aangemaakt en één field dock.
+In het eerste deel van de test zal iedere release dock apart een installer creëren en deployen.
+De installer zullen bestaan uit één pakket, namelijk een framework pakket.
+Het pakket bevat een simpel script dat uitgevoerd wordt.
+Voor ieder release dock zal dit script lichtjes verschillen.
+Het tweede deel van de test bestaat uit het releasen van 3 verschillende installers op eenzelfde moment.
+%%% TODO hier nog iets kleins bijschrijven?
+
+Om de test te doen slagen is het nodig dat: iedere installer moet goed toekomen bij het field dock, de installers moeten in de correcte volgorde geïnstalleerd worden, alle databanken moeten geüpdatet worden en in de verschillende aanpassingen moeten in volgorde toegevoegd worden aan de databank.
+
+\paragraph{Uitvoering}
+
+
+\subsection{Slecht werkend pakket}
+\paragraph{Doel}
+De geschreven applicatie bevat enkele methodes om te controleren of het installatieproces foutloos is verlopen.
+Mocht dit niet het geval zijn, dan wordt de foutieve container in quarantaine geplaatst.
+Het doel van deze test is het uittesten of dit wel degelijk gebeurt.
 
 \paragraph{Scenario}
 
@@ -38,13 +86,15 @@ Het doel is dan ook
 \paragraph{Uitvoering}
 
 
-
 \subsection{Netwerk monitoring}
 \paragraph{Doel}
-
+Als laatste test wordt nagegaan hoe het netwerkverkeer eruit ziet tijdens het releasen van een nieuwe installer.
 
 \paragraph{Scenario}
-
+Deze test wordt gebruikt om te achterhalen hoeveel en wat voor netwerkverkeer gecreëerd wordt door de applicatie.
+Als testomgeving worden twee release docks en twee field docks aangemaakt.
+Beide release docks zullen elk om beurt een installer produceren en releasen.
+De volledige communicatie tussen de verschillende docks wordt opgenomen met Wireshark voor later een analyse op uit te voeren.
 
 \paragraph{Uitvoering}
 
