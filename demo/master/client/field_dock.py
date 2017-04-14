@@ -56,10 +56,12 @@ def read_installer_info(field_dock):
 
 
 class FieldDock(Dock):
-    def __init__(self, host, port):
+    def __init__(self, host, port, release_interface, release_port):
         super(FieldDock, self).__init__()
         self.host = host
         self.port = port
+        self.release_interface = release_interface
+        self.release_port = release_port
         self.message_thread = None
         self.current_release = None
         self.agents = []
@@ -139,8 +141,8 @@ class FieldDock(Dock):
         file = open(release_zip, 'wb+')
         print("FIELD DOCK -- Release zip made")
         s = socket.socket()  # Create a socket object
-        host = "localhost"  # Get local machine name
-        port = 12346
+        host = self.release_interface  # Get local machine name
+        port = self.release_port
         s.connect((host, port))
         receive_file(s, file)
         print("FIELD DOCK -- Received release, ready to install")

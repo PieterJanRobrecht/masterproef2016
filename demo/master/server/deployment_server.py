@@ -7,17 +7,17 @@ from threading import Thread
 from overview_impl import OverviewGui
 
 
-def start_release_dock():
+def start_release_dock(interface, port, release_interface, release_port):
     print("RELEASE DOCK -- Initialisation")
     # '' = symbolic meaning for all interfaces
-    release_dock = ReleaseDock('localhost', 12345)
-    thread, release_thread = release_dock.start_service()
+    release_dock = ReleaseDock(interface, port)
+    thread, release_thread = release_dock.start_release_service(release_interface, release_port)
     return release_dock, thread, release_thread
 
 
-def start_broker():
+def start_broker(interface, port):
     print("BROKER -- Initialisation")
-    broker = Broker('localhost', 12347)
+    broker = Broker(interface, port)
     return broker.start_service()
 
 
@@ -41,8 +41,15 @@ def start_packager_service(release_dock):
 
 
 def main():
-    release_dock, release_dock_thread, release_thread = start_release_dock()
-    broker_thread = start_broker()
+    broker_interface = "localhost"
+    broker_port = 12347
+    release_dock_interface = "localhost"
+    release_dock_port = 12345
+    release_interface = "localhost"
+    release_port = 12346
+    release_dock, release_dock_thread, release_thread = start_release_dock(release_dock_interface, release_dock_port,
+                                                                           release_interface, release_port)
+    broker_thread = start_broker(broker_interface, broker_port)
     keyboard_listen = start_packager_service(release_dock)
     # Subscribing to broker
     sub_dict = {"type": ["new", "change", "rapport"]}

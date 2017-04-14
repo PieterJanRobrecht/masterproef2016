@@ -19,6 +19,8 @@ Nadat de nodige services zijn opgestart, is het release dock klaar voor het afha
 Zowel het release dock als de broker erven eigenschappen van de klasse Dock.
 Dit is zichtbaar in Figuur~\vref{fig:classDock}.
 Aangezien alle docks en de broker dezelfde functionaliteiten moeten hebben (openen van een socket, luisteren voor data op de socket, versturen van berichten en afhandelen van berichten), is het eenvoudig om deze functionaliteiten in de superklasse te steken.
+Voor de verschillende threads die gebruikt worden voor het luisteren naar nieuwe informatie maar ook voor het afhandelen Om de verscheidene threads te implementeren, werd altijd gebruik gemaakt van methodes die blocking zijn.
+Op deze manier wordt ervoor gezorgd dat threads geen onnodige resources gebruiken.
 Een soortgelijke strategie wordt toegepast voor de agenten aangezien elk type van agent een actie moet kunnen uitvoeren.
 De nodige methodes worden vervolgens ingevuld in de subklasse. 
 

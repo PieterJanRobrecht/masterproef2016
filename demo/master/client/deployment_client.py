@@ -6,7 +6,7 @@ from main_gui_impl import MainGui
 from field_dock import FieldDock
 
 
-def start_field_dock():
+def start_field_dock(interface, port, release_interface, release_port):
     """
         Initialisation of the field dock
         Will start field dock services
@@ -14,7 +14,7 @@ def start_field_dock():
     :return service_thread: returns thread that handles the services
     """
     print("FIELD DOCK -- initialisation")
-    field_dock = FieldDock('localhost', 54321)
+    field_dock = FieldDock(interface, port, release_interface, release_port)
     return field_dock, field_dock.start_service()
 
 
@@ -50,7 +50,12 @@ def main():
         Start GUI,
         Wait until all threads are closed
     """
-    field_dock, field_dock_thread = start_field_dock()
+    field_dock_interface = "localhost"
+    field_dock_port = 54321
+    release_interface = "localhost"
+    release_port = 12346
+    field_dock, field_dock_thread = start_field_dock(field_dock_interface, field_dock_port,
+                                                     release_interface, release_port)
     # Subscribing to broker
     sub_dict = {"type": ["release", "update"]}
     field_dock.connect_to_broker(sub_dict)

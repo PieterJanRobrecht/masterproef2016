@@ -212,10 +212,10 @@ class ReleaseDock(Dock):
         self.actions = {}
         self.initiate_actions()
 
-    def start_service(self):
+    def start_release_service(self, interface, port):
         print("RELEASE DOCK -- Starting services")
         self.connect_to_database()
-        release_thread = self.open_release_socket("localhost", 12346)
+        release_thread = self.open_release_socket(interface, port)
         thread = super(ReleaseDock, self).start_service()
         print("RELEASE DOCK -- Services started")
         return thread, release_thread
