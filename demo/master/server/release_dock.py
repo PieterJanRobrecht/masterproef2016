@@ -240,9 +240,9 @@ class ReleaseDock(Dock):
                 print ("RELEASE DOCK -- No connection with database")
                 return False
 
-    def connect_to_broker(self, sub_dict):
+    def connect_to_broker(self, sub_dict, broker_interface, broker_port):
         print("RELEASE DOCK -- Connecting to Broker")
-        super(ReleaseDock, self).connect_to_broker(sub_dict)
+        super(ReleaseDock, self).connect_to_broker(sub_dict, broker_interface, broker_port)
         print("RELEASE DOCK -- Subscribed and ready")
 
     def handle_message(self):

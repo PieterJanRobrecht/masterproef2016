@@ -54,11 +54,13 @@ def main():
     field_dock_port = 54321
     release_interface = "localhost"
     release_port = 12346
+    broker_interface = "localhost"
+    broker_port = 12347
     field_dock, field_dock_thread = start_field_dock(field_dock_interface, field_dock_port,
                                                      release_interface, release_port)
     # Subscribing to broker
     sub_dict = {"type": ["release", "update"]}
-    field_dock.connect_to_broker(sub_dict)
+    field_dock.connect_to_broker(sub_dict, broker_interface, broker_port)
     start_gui(field_dock, field_dock_thread)
 
     field_dock.kill_message_thread()

@@ -41,9 +41,9 @@ def start_packager_service(release_dock):
 
 
 def main():
-    broker_interface = "localhost"
+    broker_interface = "192.168.1.8"
     broker_port = 12347
-    release_dock_interface = "localhost"
+    release_dock_interface = "192.168.1.8"
     release_dock_port = 12345
     release_interface = "localhost"
     release_port = 12346
@@ -53,7 +53,7 @@ def main():
     keyboard_listen = start_packager_service(release_dock)
     # Subscribing to broker
     sub_dict = {"type": ["new", "change", "rapport"]}
-    release_dock.connect_to_broker(sub_dict)
+    release_dock.connect_to_broker(sub_dict, broker_interface, broker_port)
 
     # Waiting until threads are finished
     release_dock_thread.join()

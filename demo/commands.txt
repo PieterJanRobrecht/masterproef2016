@@ -12,3 +12,11 @@ docker exec -it containernaam bash
 docker cp foo.txt mycontainer:/foo.txt
 docker cp mycontainer:/foo.txt foo.txt
 docker create -t -i imagenaam bash
+
+opzetten xserver
+in cygwin terminal
+export DISPLAY=localhost:0.0
+startxwin -- -listen tcp &
+xhost +*eigen ip in netwerk* vb. xhost +10.2.0.72
+xhost +localhost
+eval "$(docker-machine env default)"

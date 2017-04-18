@@ -7,6 +7,11 @@ import requests.exceptions
 
 
 def locate_framework(packages):
+    """
+        Locate framework package in list of packages
+    :param packages:
+    :return:
+    """
     for package in packages:
         if package.is_framework == 1:
             help_package = package
@@ -14,8 +19,14 @@ def locate_framework(packages):
 
 
 def start_framework_container(client, framework_package):
+    """
+        Start fielcontainer
+        Send exec command to use start_script in the container
+    :param client:
+    :param framework_package:
+    :return:
+    """
     package_folder = framework_package.name + framework_package.version
-
     try:
         container = client.containers.get("fieldcontainer")
         container.start()
@@ -43,6 +54,12 @@ class MainGui(description_file_gui.MyFrame3):
         self.field_dock_thread = field_dock_thread
 
     def close_action(self, event):
+        """
+            Send unsubscribe message
+            Kill the necessary containers
+        :param event:
+        :return:
+        """
         print("FIELD DOCK -- Shutting down")
         # Send unsubcribe message
         unsub_dict = {"type": ["release", "update"]}
@@ -53,6 +70,12 @@ class MainGui(description_file_gui.MyFrame3):
         sys.exit(0)
 
     def start_framework(self, event):
+        """
+            Locate framework package
+            Start thread that handles the container actions
+        :param event:
+        :return:
+        """
         print("MAINGUI -- Starting application")
         client = self.field_dock.client
 

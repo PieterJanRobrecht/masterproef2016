@@ -15,11 +15,21 @@ from server.message import Message
 
 
 def create_file(file_name):
+    """
+        Create a file with specified file name
+    :param file_name:
+    :return: file
+    """
     description_file = open(file_name, 'w+')
     return description_file
 
 
 def start_description_gui():
+    """
+        Start the wxPython GUI
+        This GUI is used to describe the tower
+    :return:
+    """
     app = wx.App(False)
     frame = DescriptionCreator(None)
     frame.Show(True)
@@ -28,6 +38,10 @@ def start_description_gui():
 
 
 def choose_dir():
+    """
+        Open a directory chooser in wxPython
+    :return:
+    """
     # app = wx.App(False)
     dialog = wx.DirDialog(None, "Choose a directory:", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
     if dialog.ShowModal() == wx.ID_OK:
@@ -38,6 +52,12 @@ def choose_dir():
 
 
 def receive_file(s, file):
+    """
+        Receive a file from a socket
+    :param s: socket
+    :param file:
+    :return:
+    """
     file_size = int(s.recv(1024))
     while file_size > 0:
         data = s.recv(1024)
@@ -46,11 +66,21 @@ def receive_file(s, file):
 
 
 def save_installer_info(installer):
+    """
+        Save an installer to installer_file.json
+    :param installer:
+    :return:
+    """
     file = open("installer_file.json", "w+")
     file.write(str(installer))
 
 
 def read_installer_info(field_dock):
+    """
+        Create installer object from installer_file.json
+    :param field_dock:
+    :return:
+    """
     file = open("installer_file.json", "r+")
     field_dock.current_release = Installer.convert_to_installer(file.read())
 
@@ -58,18 +88,27 @@ def read_installer_info(field_dock):
 class FieldDock(Dock):
     def __init__(self, host, port, release_interface, release_port):
         super(FieldDock, self).__init__()
+        # Own parameters for socket
         self.host = host
         self.port = port
+        # Parameters for direct communication with release dock
         self.release_interface = release_interface
         self.release_port = release_port
         self.message_thread = None
         self.current_release = None
         self.agents = []
         self.client = None
+        # List of actions used to respond to each type of message
         self.actions = {}
         self.initiate_actions()
 
     def start_service(self):
+        """
+            Start dock service
+            Create a docker client
+            Read current installer info if file exists
+        :return:
+        """
         print("FIELD DOCK -- Starting services")
         thread = super(FieldDock, self).start_service()
         self.init_client()
@@ -80,15 +119,23 @@ class FieldDock(Dock):
         return thread
 
     def init_client(self):
-        # Make new docker container
+        """
+            Create docker client object
+        :return:
+        """
         env = {"DOCKER_TLS_VERIFY": "1", "DOCKER_HOST": "tcp://192.168.99.100:2376",
                "DOCKER_CERT_PATH": "C:\Users\Pieter-Jan\.docker\machine\machines\default",
                "DOCKER_MACHINE_NAME": "default", "COMPOSE_CONVERT_WINDOWS_PATHS": "true"}
         self.client = docker.from_env(environment=env)
 
     def handle_message(self):
+        """
+            Handle all messages in the message queue
+            Action performed depend on the actions list
+        :return:
+        """
         self.message_thread = threading.currentThread()
-        while getattr(self.message_thread, "do_run", True):
+        while True:
             data = self.message_queue.get()
             print("FIELD DOCK -- Handling message")
             if Message.check_format(data):
@@ -100,13 +147,23 @@ class FieldDock(Dock):
                 relayed_message = Message.convert_to_message(relayed_message)
                 self.actions[relayed_message.message_type](relayed_message)
 
-    def connect_to_broker(self, sub_dict):
+    def connect_to_broker(self, sub_dict, broker_interface, broker_port):
+        """
+            Connect to broker and subscribe
+        :param sub_dict: dictionary with types of messages to subscribe
+        :return:
+        """
         print("FIELD DOCK -- Connecting to Broker")
-        super(FieldDock, self).connect_to_broker(sub_dict)
+        super(FieldDock, self).connect_to_broker(sub_dict, broker_interface, broker_port)
         self.check_description_file()
         print("FIELD DOCK -- Subscribed and ready")
 
     def check_description_file(self):
+        """
+            Check if description file of the tower exists
+            If not start description GUI
+        :return:
+        """
         file_name = "description_file.json"
         if not os.path.isfile(file_name):
             # Creating new description file
@@ -121,15 +178,33 @@ class FieldDock(Dock):
             self.send_message(message)
 
     def kill_message_thread(self):
+        """
+            Deprecated
+            Test for ending the message threads, not used
+        :return:
+        """
         self.message_thread.do_run = False
         self.message_thread.join()
 
     def unsubscribe_to_messages(self, unsub_dict):
+        """
+            Unsubscribe to different type of messages
+        :param unsub_dict:
+        :return:
+        """
         unsubscribe_message = Message()
         unsubscribe_message.create_message(self.host, "unsubscribe", unsub_dict)
         self.send_message(unsubscribe_message)
 
     def perform_release(self, message):
+        """
+            Convert message data to installer
+            Download files directly from release dock
+            Download agents from release dock
+            Start the install agent
+        :param message:
+        :return:
+        """
         print("FIELD DOCK -- Performing action: RELEASE")
         message_data = message.data
         installer = Installer.convert_to_installer(message_data)
@@ -176,6 +251,11 @@ class FieldDock(Dock):
         self.actions["update"] = self.perform_update
 
     def update_info_installer(self, installer):
+        """
+            Send change message to release dock
+        :param installer:
+        :return:
+        """
         print("FIELD DOCK -- Sending change message")
         save_installer_info(installer)
         data = {"idInstaller": installer.id_installer, "name": installer.name, "version": installer.version}
@@ -184,6 +264,10 @@ class FieldDock(Dock):
         self.send_message(message)
 
     def kill_containers(self):
+        """
+            Stop the field, old and quarantine container
+        :return:
+        """
         try:
             self.client.containers.get("fieldcontainer").stop()
             self.client.containers.get("old_container").stop()

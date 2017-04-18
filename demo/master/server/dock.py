@@ -4,6 +4,7 @@ import time
 from Queue import Queue
 from threading import Thread
 from message import Message
+from server import broker
 
 
 class Dock(object):
@@ -59,7 +60,7 @@ class Dock(object):
         # timeout in sec
         timeout = 3
         t = threading.currentThread()
-        while getattr(t, "do_run", True):
+        while True:
             conn, address = self.message_socket.accept()
             print("DOCK -- Connected by \n\t\t" + str(address))
             conn.send("Ready")
@@ -96,14 +97,14 @@ class Dock(object):
                 s.send(str(message))
         s.close()
 
-    def connect_to_broker(self, sub_dict):
+    def connect_to_broker(self, sub_dict, broker_interface, broker_port):
         """
             Set parameters and subscribe with broker
             All necessary socket parameters are set
             A dictionary with subscription type is sent
         """
-        self.broker_host = 'localhost'
-        self.broker_port = 12347
+        self.broker_host = broker_interface
+        self.broker_port = broker_port
         self.subscribe_to_messages(sub_dict)
 
     def subscribe_to_messages(self, sub_dict):
