@@ -4,7 +4,6 @@ import time
 from Queue import Queue
 from threading import Thread
 from message import Message
-from server import broker
 
 
 class Dock(object):
