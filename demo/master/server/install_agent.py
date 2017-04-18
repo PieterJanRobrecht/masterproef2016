@@ -87,6 +87,7 @@ class InstallAgent(Agent):
             self.installer = self.old_installer
             self.send_update()
             self.quarantine()
+        self.field_dock.kill_containers()
 
     def perform_execute(self, client, package_name, has_include_folder):
         print("INSTALL AGENT -- Performing action: EXECUTE")
