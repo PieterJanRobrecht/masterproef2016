@@ -11,6 +11,7 @@ def start_release_dock(interface, port, release_interface, release_port):
     print("RELEASE DOCK -- Initialisation")
     # '' = symbolic meaning for all interfaces
     release_dock = ReleaseDock(interface, port)
+    # Starting broker
     thread, release_thread = release_dock.start_release_service(release_interface, release_port)
     return release_dock, thread, release_thread
 
@@ -45,11 +46,13 @@ def main():
     broker_port = 12347
     release_dock_interface = "192.168.1.8"
     release_dock_port = 12345
-    release_interface = "localhost"
+    release_interface = "192.168.1.8"
     release_port = 12346
+    start_broker_boolean = True
     release_dock, release_dock_thread, release_thread = start_release_dock(release_dock_interface, release_dock_port,
                                                                            release_interface, release_port)
-    broker_thread = start_broker(broker_interface, broker_port)
+    if start_broker_boolean:
+        broker_thread = start_broker(broker_interface, broker_port)
     keyboard_listen = start_packager_service(release_dock)
     # Subscribing to broker
     sub_dict = {"type": ["new", "change", "rapport"]}
@@ -58,7 +61,8 @@ def main():
     # Waiting until threads are finished
     release_dock_thread.join()
     release_thread.join()
-    broker_thread.join()
+    if start_broker_boolean:
+        broker_thread.join()
     keyboard_listen.join()
 
 

@@ -216,7 +216,7 @@ class FieldDock(Dock):
         file = open(release_zip, 'wb+')
         print("FIELD DOCK -- Release zip made")
         s = socket.socket()  # Create a socket object
-        host = self.release_interface  # Get local machine name
+        host = message.sender  # Get local machine name
         port = self.release_port
         s.connect((host, port))
         receive_file(s, file)
