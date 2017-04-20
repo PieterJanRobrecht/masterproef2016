@@ -262,6 +262,7 @@ class ReleaseDock(Dock):
 
     def change_tower(self, message):
         # Convert to dictionary
+        print("RELEASE DOCK -- Changing tower")
         if type(message.data) is not dict:
             d = ast.literal_eval(message.data)
         else:
@@ -402,6 +403,7 @@ class ReleaseDock(Dock):
         print("RELEASE DOCK -- Closing listening thread")
 
     def update_installer_info(self, d, sender):
+        print("RELEASE DOCK -- Changing installer information")
         id_tower = get_tower_of_sender(self.cnx, sender)
         id_installer = get_installer_of_sender(self.cnx, d["name"], d["version"])
         change_tower_installer(self.cnx, id_tower, id_installer)

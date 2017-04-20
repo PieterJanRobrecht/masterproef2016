@@ -76,7 +76,7 @@ Er zullen verschillende image servers aanwezig zijn die elk een service aanbiede
 Het voordeel van deze strategie is dat, zolang de hardware en software vereisten voldaan zijn, de deployment bestaat uit een simpele read-write operatie.
 Maar, zoals \citet{deploymentMethods} al aangeeft, deze methode is niet flexibel.
 Voor de applicatie is flexibiliteit een must.
-Iedere node bevat verschillende hardware en is verschillende geconfigureerd.
+Iedere node bevat verschillende hardware en is verschillend geconfigureerd.
 Een disk image-based deployment zal hierdoor niet gebruikt worden.
 Het basis idee achter behavior-based deployment is het opnemen van de schijf operaties tijdens het deployen.
 Als geweten is welke bestanden aangepast zijn, gecreëerd zijn, ... dan kan het proces nagebootst worden op andere nodes \citep{deploymentMethods}.
@@ -110,10 +110,10 @@ Een hybride oplossing is hier dus aangewezen.
 
 \section{Software Dock Architectuur}\label{sec:softwareDock}
 \citet{hall1999cooperative} bespreekt een interessante architectuur.
-Het Software Dock research project creëerde een framework om de samenwerking tussen software producenten en verbruikers te verbeteren.
+Het Software Dock research project creëerde een framework om de samenwerking tussen software producenten en gebruikers te verbeteren.
 In Figuur~\vref{fig:softwareDock} wordt de ontworpen architectuur voorgesteld.
-Er worden twee verschillende componenten gedefinieerd waarmee de producenten en verbruikers voorgesteld worden.
-In de architectuur worden de verschillende producenten voorgesteld aan de hand van een release dock en worden de verbruikers voorgesteld als een field dock.
+Er worden twee verschillende componenten gedefinieerd waarmee de producenten en gebruikers voorgesteld worden.
+In de architectuur worden de verschillende producenten voorgesteld aan de hand van een release dock en worden de gebruikers voorgesteld als een field dock.
 Aan deze docks worden verschillende agents gekoppeld.
 Elke agent hoort typisch bij één stap uit de software levenscyclus die besproken wordt in Sectie~\vref{sec:softwareLevenscyclus}.
 Naast de verschillende docks wordt ook een wide-area event systeem gedefinieerd.
@@ -128,17 +128,17 @@ Met dit systeem wordt de communicatie tussen de docks aangeboden.
 \end{figure}
 
 De release dock is een server die zich bevindt bij de software producent.
-Dit dock biedt een release repository aan waar de verbruikers de nodige software selecteren voor deployment.
+Dit dock biedt een release repository aan waar de gebruikers de nodige software selecteren voor deployment.
 In de release dock wordt ieder release semantisch beschreven aan de hand van een Deployable Software Description file.
 Elke release wordt vergezeld door enkele agents die de semantische betekenis lezen en zo de deployment kunnen uitvoeren.
 Aan de hand van interfaces kunnen de agents aan de services en inhoud van de release dock.
 Bij het wijzigen van een software release zal de release dock verschillende events afvuren.
 Agents kunnen zich subscriben bij deze events en weten zo wanneer bepaalde handelingen uitgevoerd moeten worden \citep{hall1999cooperative}.
 
-De field dock dient als een interface naar de verbruiker kant toe.
-Deze interface biedt informatie over de resources en configuratie van het verbruiker systeem.
+De field dock dient als een interface naar de gebruiker kant toe.
+Deze interface biedt informatie over de resources en configuratie van het gebruiker systeem.
 Op basis van deze informatie wordt een context opgebouwd waarin de releases van de resource dock worden gedeployed.
-De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het verbruikers systeem ondervragen.
+De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het gebruikers systeem ondervragen.
 Aangezien kritische client-side informatie op een gestandaardiseerde wijze aangeboden wordt, met behulp van een geneste collectie van pair-values die een hiërarchie vormen, kan de installatie van de software gepersonaliseerd worden \citep{hall1999cooperative}.
 
 \section{Event based services}\label{sec:event}
@@ -274,14 +274,14 @@ Op het einde van het proces, haalt het systeem de job output en exit code op.
 De laatste wordt opgeslagen in de Installation database.
 
 \citet{Obreshkov2008244} bespreekt hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
-Het ATLAS project gebruikt CMT als configuratie manager.
+Het ATLAS project gebruikt CMT \citep{cmt} als configuratie manager.
 Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen.
 \citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
 Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
 Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandelt moet worden.
 
 \subsection{ORYA}\label{sec:ORYA}
-\citet{lestideau2003providing} legt uit hoe met ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
+\citet{lestideau2003providing} legt uit hoe ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
 Aan de hand van een deployment PSEE \citep{belkhatir2007adele} wordt het mogelijk om het installatieproces te automatiseren.
 
 In het ontwerp van ORYA worden er drie verschillende entiteiten besproken die nodig zijn om het automatische installatieproces mogelijk te maken.
@@ -345,7 +345,7 @@ Als laatste case studie wordt Ansible besproken.
 Ansible is een open source IT configuratie management, deployment en organisatie tool.
 de architectuur van Ansible bestaat uit een agentless push model.
 Dit wil zeggen dat er geen additionele software nodig is op de client toestellen.
-Dit wordt behaald door gebruik te maken van the remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en UNIX en WinRM voor Windows.
+Dit wordt behaald door gebruik te maken van de remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en UNIX en WinRM voor Windows.
 Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang de Ansible het systeem niet aan het gebruiken is \citep{ansible}.
 
 \citet{ansible} beschrijft verder dat Ansible gebruik maakt van \emph{Playbooks} voor de organisatie van de IT omgevingen.
@@ -384,7 +384,7 @@ Het is aangewezen om op regelmatige tijdstippen de verschillende recovery bestan
 
 \paragraph{Main-memory transactions}
 Een andere rollback strategie zijn de main-memory transactions.
-Systemen die deze transacties ondersteunen bezitten vaak de mogelijk om terug te keren naar een vorig executie punt.
+Systemen die deze transacties ondersteunen bezitten vaak de mogelijkheid om terug te keren naar een vorig executie punt.
 Om deze strategie te kunnen implementeren, moeten applicaties gebruik maken van het transactie programmeermodel.
 Waardoor de keuzevrijheden van de programmeur beperkt worden \citep{srinivasan2004flashback}.
 
