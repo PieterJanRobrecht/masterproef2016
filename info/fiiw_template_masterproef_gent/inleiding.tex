@@ -7,16 +7,15 @@
 %%% TODO meer schrijven over wat televic rail doet en wat zij maken -> uitleggen dat framework daarbij te pas komt
 %http://www.railway-technology.com/contractors/operation/televic-rail/
 Met meer dan 30 jaar ervaring in het ontwerpen en onderhouden van on-board communicatiesystemen is Televic Rail een toonaangevende producent van Passenger Information Systems, Entertainment Systems and Infotainment Systems.
-Dit internationale bedrijf, met vestingen in zowel Europa als de Verenigde Staten, combineert kennis en ervaring met een constante drang naar innovatie en is zo in staat om projectgerichte, cutting-edge oplossingen af te leveren die betrouwbare communicatie in treinen voorzien.
+LiveCom is Televic Rail nieuwste generatie van informatie management systemen.
+Het integreert van alle aspecten van de on- en off-board reizigersinformatie, infotainment en entertainment. 
+Het stelt operatoren in staan om hun volledige verkeersschema's, dienstregelingen, routes, stations en alles met betrekking tot informatie en infotainment omtrent passagiers te beheren, met behulp van off-board software tools.
 
-LiveCom is Televic Rail nieuwste generatie van informatie management systemen, de integratie van alle aspecten van de on- en off-board reizigersinformatie, infotainment en entertainment. 
-Het stelt operatoren in staan om hun volledige verkeer schema's, dienstregelingen, routes, stations en alles met betrekking tot informatie en infotainment omtrent passagiers te beheren, met behulp van off-board software tools.
+iCoM, de geïntegreerde oplossing van Televic Rail voor passagiersgegevens en communicatiemanagement, biedt het openbaar vervoer en spoorwegondernemingen een centraal systeem voor het creëren, het beheren, het distribueren en het uitvoeren van real-time on en off-board generieke en commerciële passagiersinformatie op de vloot, in stations en bij haltes.
 
-iCoM, de geïntegreerde oplossing van Televic Rail voor passagiersgegevens en communicatie management, biedt het openbaar vervoer en spoorwegondernemingen een centraal systeem voor het creëren, beheren, distribueren en uitvoeren van real-time on en off-board generieke en commerciële passagiersinformatie op de vloot, in stations en bij haltes.
-
-Naast deze systemen heeft Televic verschillende mechatronica sensoren en veiligheid controlesystemen ontworpen.
-Alle systemen en apparaten zijn ontworpen in overeenstemming met de betreffende spoorwegsector normen en aan de eisen voor passagiersruimte, draaistel en as montage. 
-On-board controllers verwerken sensordata informatie en sturen deze naar de betreffende actuators en treinbeheersingssystemen.
+Naast deze systemen heeft Televic verschillende mechatronica-sensoren en veiligheidcontrolesystemen ontworpen.
+Alle systemen en apparaten zijn ontworpen in overeenstemming met de betreffende spoorwegsectornormen en voldoen aan de eisen voor passagiersruimte, draaistel en asmontage. 
+On-board controllers verwerken sensordata-informatie en sturen deze naar de betreffende actuators en treinbeheersingssystemen.
 Fysische parameters die momenteel worden ondersteund zijn onder andere versnelling, druk, rotatie, temperatuur, geluid en de verplaatsing.
 
 Om te voldoen aan de strenge veiligheidsnormen heeft Televic Rail een Python test framework ontworpen waarmee Televic in staat is om verschillende producten te onderwerpen aan verschillende testscenario's.
@@ -26,19 +25,36 @@ Dit framework wordt intensief gebruikt tijdens het productieproces en is cruciaa
 %%% TODO schetsen van structuur van het framework
 
 \section{Probleemstelling}\label{sec:probleem}
-Om een goede werking te verkrijgen, steunt het Python testraamwerk op een verschillende drivers en bibliotheken.
-Hiernaast moet het raamwerk correct functioneren met de grote hoeveelheid aan producten die Televic fabriceert.
-Om ook deze te ondersteunen zijn er wederom verschillende drivers en bibliotheken nodig.
-Het gevolg hiervan is dat het installatieproces tijdrovend is en foutgevoelig.
-Bij het uitbrengen van een nieuwe versie van de applicatie, bijvoorbeeld bij het uitbrengen van een nieuwe driver, bibliotheek of om nieuwe producten te ondersteunen, moet de applicatie geüpdatet worden.
-Dit proces lijdt aan dezelfde gebreken als het installatieproces.
-Het installatie- en updateproces vraagt om een vereenvoudiging zodanig dat het testraamwerk gebruiksvriendelijker wordt.
+Het Python testraamwerk moet correct functioneren met een grote hoeveelheid aan producten die Televic fabriceert.
+Hierdoor gebruikt het Python testraamwerk verschillende drivers en bibliotheken.
+Een direct gevolg hiervan is dat het installatieproces tijdrovend en foutgevoelig is.
+Verder dient elk nieuw toestel op het raamwerk ondersteunt te worden waardoor er jaarlijks ettelijke releases van het raamwerk verspreid moeten worden.
+Het installatieproces en updateproces vragen om een vereenvoudiging zodat het testraamwerk gebruiksvriendelijker wordt.
 
-Naast het installatie- en updateproces moet ook met de toekomst rekening gehouden worden.
-Hierbij is het belangrijk dat een oplossing gevonden wordt die een groeiend aantal gebruikers ondersteunt.
-Naarmate het aantal gebruikers stijgt, stijgt ook de vraag naar een algemene administratie interface.
+Doordat het installatieproces en updateproces foutgevoelig zijn, moet een rampenplan voorzien worden.
+Door de aanwezigheid van een rampenplan, worden mogelijke fouten vermeden en indien nodig opgevangen en verholpen.
+Zo wordt vermeden dat de productielijn moet worden stilgelegd door bijvoorbeeld een fout tijdens het updaten van het testraamwerk.
+Het is dus belangrijk dat het testraamwerk op een eenvoudige manier geïnstalleerd en geüpdatet kan worden op verschillende testtorens.
+Om dit te laten slagen moet het testraamwerk eerst bij de verschillende testtorens geraken.
+Er zullen dus servers nodig zijn die de verschillende testraamwerken verspreiden maar ook clients die deze zullen ontvangen.
+Dit proces wordt ook wel deployment genoemd.
+Een kleine schets van dit idee is zichtbaar in Figuur~\vref{}.%%%TODO
+
+%%% TODO figuur toevoegen
+
+Tijdens het zoeken naar een oplossing voor het installatieproces en updateproces van het Python testraamwerk, moet gezocht worden naar een oplossing die ook antwoorden biedt op toekomstige problemen.
+Tot op heden werd ervan uitgegaan dat de enige applicatie die verspreid, geïnstalleerd en geüpdatet moet worden het Python testraamwerk is.
+In de toekomst moet het evenwel mogelijk zijn om verschillende applicaties van Televic te ondersteunen.
+Het is dan ook belangrijk dat een oplossing gevonden wordt die een groeiend aantal gebruikers ondersteunt.
+Naargelang het aantal applicaties die ondersteunt worden stijgt, zullen meer doelsystemen toegevoegd worden bij de gebruikers.
+Naarmate het aantal gebruikers stijgt, stijgt ook de vraag naar een algemene administratieve interface.
 Met een administratie interface wordt het mogelijk om bij te houden hoe het uitrollen van een nieuwe versie van het testraamwerk verloopt maar naar de toekomst toe zou het mogelijk moeten zijn om verschillende gebruikers bij te staan.
-Deze informatie kan gebruikt worden om het verspreidingsproces bij te sturen zodanig dat een volgende keer het proces vlotter verloopt.
+Deze informatie kan gebruikt worden om het verspreidingsproces bij te sturen zodat een volgende keer het proces vlotter verloopt.
+Naast het ondersteunen van verschillende applicatie moet tijdens het ontwerpen rekening gehouden worden met verscheidene besturingssystemen.
+Huidige systemen draaien op Windows maar eventuele plannen in %%% TODO
+
+Het doel van deze thesis is dan ook een oplossing te vinden voor de bovengenoemde problemen.
+
 
 \section{Overzicht}
 Het doel van deze thesis is dan ook een oplossing te vinden voor het bovengenoemde probleem.
