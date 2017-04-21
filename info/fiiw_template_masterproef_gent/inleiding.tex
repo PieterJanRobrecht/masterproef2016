@@ -28,7 +28,7 @@ Dit framework wordt intensief gebruikt tijdens het productieproces en is cruciaa
 Het Python testraamwerk moet correct functioneren met een grote hoeveelheid aan producten die Televic fabriceert.
 Hierdoor gebruikt het Python testraamwerk verschillende drivers en bibliotheken.
 Een direct gevolg hiervan is dat het installatieproces tijdrovend en foutgevoelig is.
-Verder dient elk nieuw toestel op het raamwerk ondersteunt te worden waardoor er jaarlijks ettelijke releases van het raamwerk verspreid moeten worden.
+Verder dient elk nieuw toestel op het raamwerk ondersteunt te worden waardoor er jaarlijks ettelijke releases van het raamwerk verspreid worden.
 Het installatieproces en updateproces vragen om een vereenvoudiging zodat het testraamwerk gebruiksvriendelijker wordt.
 
 Doordat het installatieproces en updateproces foutgevoelig zijn, moet een rampenplan voorzien worden.
@@ -36,25 +36,31 @@ Door de aanwezigheid van een rampenplan, worden mogelijke fouten vermeden en ind
 Zo wordt vermeden dat de productielijn moet worden stilgelegd door bijvoorbeeld een fout tijdens het updaten van het testraamwerk.
 Het is dus belangrijk dat het testraamwerk op een eenvoudige manier geïnstalleerd en geüpdatet kan worden op verschillende testtorens.
 Om dit te laten slagen moet het testraamwerk eerst bij de verschillende testtorens geraken.
-Er zullen dus servers nodig zijn die de verschillende testraamwerken verspreiden maar ook clients die deze zullen ontvangen.
-Dit proces wordt ook wel deployment genoemd.
-Een kleine schets van dit idee is zichtbaar in Figuur~\vref{}.%%%TODO
+Er zullen dus producenten van software zijn die de verschillende testraamwerken produceren en willen verspreiden maar ook gebruikers die deze willen ontvangen.
+Het proces waar bij software van een producent naar alle toepasbare gebruikers wordt verspreid en vervolgens geïnstalleerd wordt, wordt ook wel het deployment proces genoemd.
+Een kleine schets van dit idee is zichtbaar in Figuur~\vref{fig:simpleServerClient}.
 
-%%% TODO figuur toevoegen
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/simpelServerClient.png}}
+\caption{Voorstelling van software verspreiding}
+\label{fig:simpleServerClient}
+\end{figure}
 
 Tijdens het zoeken naar een oplossing voor het installatieproces en updateproces van het Python testraamwerk, moet gezocht worden naar een oplossing die ook antwoorden biedt op toekomstige problemen.
 Tot op heden werd ervan uitgegaan dat de enige applicatie die verspreid, geïnstalleerd en geüpdatet moet worden het Python testraamwerk is.
 In de toekomst moet het evenwel mogelijk zijn om verschillende applicaties van Televic te ondersteunen.
 Het is dan ook belangrijk dat een oplossing gevonden wordt die een groeiend aantal gebruikers ondersteunt.
-Naargelang het aantal applicaties die ondersteunt worden stijgt, zullen meer doelsystemen toegevoegd worden bij de gebruikers.
+Naargelang het aantal applicaties die ondersteunt worden stijgt, zullen meer systemen gebruik maken van de applicatie.
 Naarmate het aantal gebruikers stijgt, stijgt ook de vraag naar een algemene administratieve interface.
+Verschillende versies van de applicaties zullen in omloop zijn waardoor de nood aan een administratieve interface stijgt. 
 Met een administratie interface wordt het mogelijk om bij te houden hoe het uitrollen van een nieuwe versie van het testraamwerk verloopt maar naar de toekomst toe zou het mogelijk moeten zijn om verschillende gebruikers bij te staan.
 Deze informatie kan gebruikt worden om het verspreidingsproces bij te sturen zodat een volgende keer het proces vlotter verloopt.
 Naast het ondersteunen van verschillende applicatie moet tijdens het ontwerpen rekening gehouden worden met verscheidene besturingssystemen.
-Huidige systemen draaien op Windows maar eventuele plannen in %%% TODO
+Huidige systemen draaien op Windows maar het gebruik van Linux is in de toekomst niet uit te sluiten.
 
-Het doel van deze thesis is dan ook een oplossing te vinden voor de bovengenoemde problemen.
-
+Het doel van deze thesis is dan ook een oplossing te vinden voor het complexe installatieproces en updateproces.
+Daarbij moet de software eerst van de producent bij de gebruikers geraken en moeten deze processen rekening houden met een rampenplan om fouten tijdens een installatie of update op te vangen.
+Verder wordt tijdens de ontwerpfase van de applicatie rekening gehouden met een groeiend aantal applicaties die verspreid en geïnstalleerd moeten worden, een groeiend aantal gebruikers die deze applicaties willen ontvangen en de diversiteit van besturingssystemen van deze gebruikers.
 
 \section{Overzicht}
-Het doel van deze thesis is dan ook een oplossing te vinden voor het bovengenoemde probleem.

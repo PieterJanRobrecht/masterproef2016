@@ -1,26 +1,32 @@
 \chapter{Literatuurstudie}
+\section{Inleiding}
 %%% Leuke insmijter waarbij vertelt wordt dat software deployment oud is
-In wat volgt, wordt een bespreking gegeven over het deployment proces maar ook van de verschillende problemen die horen bij dit proces.
-Hiernaast zullen enkele case studies besproken worden en gaat er onderzocht worden hoe de verscheidene cases zijn omgegaan met de problemen die horen bij het deployment proces. 
+In dit hoofdstuk, wordt een bespreking gegeven over alle mogelijke technieken, technologieën, architecturen, \ldots die een oplossing kunnen bieden op het probleem dat in het vorige hoofdstuk besproken werd.
+Eerst wordt het deployment proces besproken en wordt nagegaan welke problemen hiermee geassocieerd worden.
+Vervolgens worden enkele case studies besproken om een beeld te krijgen van alle verschillende tools die aanwezig zijn en die gebruikt kunnen worden om het probleem omtrent het verspreiden van de software van de producent naar de gebruiker op te lossen.
+Na de cases studies worden ook enkele architecturen besproken die gebruikt kunnen worden om een applicatie te ontwerpen die om kan gaan met een groeiend aantal gebruikers.
+Hierna wordt nagegaan op welke manier een rampenplan geïmplementeerd kan worden zodanig dat problemen die ontstaan tijdens het deployment proces opgelost kunnen worden.
+Uit de probleembespreking is ook gebleken dat er nood is aan een applicatie die overweg kan met verschillende programma's die Televic gemaakt heeft of nog zal maken, één van deze programma's is dan het Python testraamwerk.
+Om te achterhalen wat mogelijk is om dit te realiseren, worden verscheidene technologieën besproken die hiervoor een oplossing kunnen bieden.
 
-\section{Software levenscyclus}\label{sec:softwareLevenscyclus}
+\section{Software deployment}\label{sec:softwareLevenscyclus}
 %%% TODO aanvullen met info van andere bronnen
 De levenscyclus van software deployment kan volgens \citet{softwareDeployment,hall1999cooperative} beschreven worden in verschillend stappen, namelijk:
 \begin{itemize}
 \item \emph{Release}: de software is volledig samengesteld uit pakketten die voldoende metadata bevatten om de verschillende bronnen te beschrijven waarvan het pakket afhangt.
 \item \emph{Installatie}: de software moet overgebracht worden naar de client en geconfigureerd worden in voorbereiding op de activatie.
-\item \emph{Activeren}: tijdens de activatie wordt de software uitvoering opgestart of worden de nodige triggers geplaatst om de executie op het gepaste tijdstip op te starten.
-\item \emph{Deactiveren}: dit is tegengesteld aan activeren. Deze stap is voor nodig voordat een aanpassing of herconfiguratie kan uitgevoerd worden.
+\item \emph{Activeren}: tijdens de activatie wordt de software-uitvoering opgestart of worden de nodige triggers geplaatst om de executie op het gepaste tijdstip op te starten.
+\item \emph{Deactiveren}: dit is het tegengestelde van activeren. Deze stap is nodig zodat een aanpassing of herconfiguratie uitgevoerd kan worden.
 \item \emph{Updaten}: dit is het proces waarin de software wordt aangepast. Deze stap wordt vaak geactiveerd door het uitbrengen van een nieuwe versie van de software.
-\item \emph{Deïnstallatie}: tijdens deze stap zal de geïnstalleerd software van het client systeem gehaald worden.
+\item \emph{Deïnstallatie}: tijdens deze stap zal de geïnstalleerd software van het clientsysteem gehaald worden.
 \end{itemize}
 De enige fase van de levenscyclus die zich uitsluitend op de server afgespeeld is de release fase.
-De rest van de fases spelen zich af op de verschillende client systemen.
+De rest van de fases spelen zich af op de verschillende clientsystemen.
 
 \begin{figure}[!ht]
 \centering
 \makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/softwareLevenscyclus.png}}
-\caption{Levenscyclus van software \citep{carzaniga1998characterization}}
+\caption{De levenscyclus van software \citep{carzaniga1998characterization}}
 \label{fig:softwareLevenscyclus}
 \end{figure}
 
@@ -28,28 +34,28 @@ In theorie zou het deployen van software een eenvoudige klus moeten zijn.
 Aangezien software bestaat uit een set van bestanden, zou het deployen van software naar een doelcomputer slechts bestaan uit het kopiëren van de nodige bestanden.
 Maar dit is vaak niet het geval.
 Volgens \citet{dolstra2006purely} zijn er in de praktijk verschillende oorzaken die aan de basis liggen van een ingewikkeld deployment proces.
-Deze oorzaken kunnen in twee grote categorieën ingedeeld worden, namelijk de omgevings- en onderhoudsproblemen.
+Deze oorzaken kunnen in twee grote categorieën ingedeeld worden, namelijk de omgevings- en de onderhoudsproblemen.
 
 \paragraph{Omgevingsproblemen}
 In de eerste categorie ligt de nadruk vooral op correctheid.
-Voordat de software geïnstalleerd wordt op een doelsysteem, wordt de doelomgeving ondervraagt naar alle eigenschappen: zijn de nodige programma's aanwezig, bestaan alle configuratie bestanden, \ldots .
+Voordat de software geïnstalleerd wordt op een doelsysteem, wordt de doelomgeving ondervraagt naar alle eigenschappen: zijn de nodige programma's aanwezig, bestaan alle configuratiebestanden, \ldots .
 Als deze eisen niet voldaan zijn, dan zal de software niet werken zoals gewenst.
 \citet{dolstra2006purely} haalt enkele concrete voorbeelden aan van omgevingsproblemen:
 \begin{itemize}
-\item De deployment van software kan een gedistribueerd probleem zijn.
-Software kan afhankelijk zijn van componenten draaiende op verwijderde systemen of van andere processen draaiende op het doelsysteem.  
+\item De deployment van software kan een gedistribueerd probleem opleveren.
+Software kan afhankelijk zijn van componenten draaiende op externe systemen of van andere processen draaiende op het doelsysteem.  
 \item Software is vaak afhankelijk van verschillende andere software componenten. 
-Deze afhankelijkheden, of ook wel dependencies genoemd, moeten voor de deployment bepaald worden.
+Deze afhankelijkheden (dependencies) moeten voor de deployment bepaald worden.
 Dit proces is moeilijk en een fout kan pas laat ontdekt worden.
-\item De dependencies moeten compatibel zijn met wat er verwacht wordt van de software.
-Niet elke versie zal werken.
-Sommige depencies vertonen build-time variaties.
-De component kan dan gebouwd zijn met enkele optionele eigenschappen of eigenschappen die gekozen worden at build-time.
-\item Sommige software componenten zijn afhankelijk van specifieke hardware.
+\item De afhankelijkheden moeten compatibel zijn met wat de software verwacht.
+Bepaalde versies van een afhankelijkheid zijn compatibel met de software terwijl andere versies dit niet zijn.
+Dit komt doordat sommige depencies build-time variaties vertonen.
+At build-time worden bepaalde eigenschappen geselecteerd met als gevolg dat de dependency meer of minder functionaliteiten bevat ten opzichte van een vorige build.
+\item Sommige software-componenten zijn afhankelijk van specifieke hardware.
 Dit kan enkel verholpen worden door op voorhand te controleren welke hardware aanwezig is.
 \end{itemize}
 
-Uit deze concrete voorbeelden wordt al snel duidelijk dat er twee problemen zijn: de verschillende eisen van de software moeten geïdentificeerd worden en vervolgens moeten deze gerealiseerd worden in het doelsysteem.
+Uit deze concrete voorbeelden wordt al snel duidelijk dat er twee problemen zijn: de verschillende eisen van de software moeten geïdentificeerd worden en vervolgens moeten deze eisen voldaan worden in het doelsysteem.
 
 \paragraph{Onderhoudsproblemen}
 Naast de verschillende omgevingsproblemen, beschrijft \citet{dolstra2006purely} ook enkele onderhoudsproblemen.
@@ -57,13 +63,13 @@ Deze hebben te maken met het feit dat software moet kunnen ``evolueren''.
 Om dit te ondersteunen, moeten allerlei actie zoals upgraden en updaten uitgevoerd wordens.
 Enkele voorbeelden van zulke acties zijn:
 \begin{itemize}
-\item Tijdens het verwijderen van software, moeten alle componenten verwijderd worden.
-Ondertussen mogen geen componenten verwijderd worden die nog in gebruik zijn door andere software.
+\item Tijdens het verwijderen van software moeten alle componenten verwijderd worden.
+Er mogen echter geen componenten verwijderd worden die nog in gebruik zijn door andere software.
 \item Ook tijdens het updaten van software moet rekening gehouden worden met andere software.
 Het updaten van een component kan voor problemen en failure zorgen in een andere component.
 Een DLL-hell wordt best ten alle tijden vermeden.
-\item Na het upgraden/updaten van een component, is het soms aangewezen om een roll back uit te voeren.
-Zo'n actie kan overwogen worden als de upgrade belangrijke functionaliteiten van de software kapot maakt.
+\item Na het upgraden/updaten van een component, is het soms aangewezen om een rollback uit te voeren.
+Zo'n actie kan overwogen worden als na de upgrade belangrijke functionaliteiten van de software niet meer functioneren.
 \end{itemize}
 
 \section{Deployment strategieën}\label{sec:deployment}
