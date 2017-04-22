@@ -72,27 +72,396 @@ Een DLL-hell wordt best ten alle tijden vermeden.
 Zo'n actie kan overwogen worden als na de upgrade belangrijke functionaliteiten van de software niet meer functioneren.
 \end{itemize}
 
-\section{Deployment strategieën}\label{sec:deployment}
-De eerste stap in de softwarelevenscyclus bestaat uit het uitbrengen van de software.
-De software moet bij de gebruiker terecht komen voordat hij/zij deze kan gebruiken.
+\section{Case studies}\label{sec:caseStudies}
+Uit de vorige sectie blijkt dat het software deployment proces een uitgebreid en ingewikkeld proces is.
+Er moet rekening gehouden worden met verscheidene stappen die elk een eigen doel en functie hebben.
+Maar ook met verschillende problemen die kunnen optreden voor, na en tijdens deze stappen.
+Door de jaren heen zijn er verschillende technologieën ontwikkeld die het probleem van software deployment aanpakken.
+In wat volgt, worden dan ook enkele van deze technologieën besproken en wordt nagegaan op welke manier zij software deployment aanpakken.
+Op deze manier wordt een beeld gecreëerd van de mogelijke technologieën die gebruikt kunnen worden om de software van Televic van de producenten naar de gebruikers te krijgen.
 
-\citet{deploymentMethods} haalt drie methodes aan om software te deployen: disk image-based deployment, behavior-based deployment en package-based deployments.
+%\subsection{Java Beans}
+%Enterprise JavaBeans (EJB) zijn een standaard voor het bouwen van server-side componenten.
+%De EJB's zijn speciaal ontworpen voor het vereenvoudigen van de deployment.
+%\citet{softwareDeployment} beschrijft JavaBeans als eenheden van business logic in een component die uitgevoerd wordt in een container.
+%De verschillende containers zorgen voor een abstractie van de hosting omgeving en bieden verscheidene services aan.
+%Een JavaBean moet ingepakt worden volgens de specificaties die Sun Microsystems oplegt.
+%Met deze standaard is het mogelijk om verschillende management en deployment tools te schrijven die de EJB's kunnen beïnvloeden.
+%Enterprise JavaBeans worden ingepakt in de standaard Java JAR file, samen met een XML deployement descriptor.
+%De descriptor beschrijft de verschillende eigenschappen van de bijhorende EJB.
+%
+%De Enterprise JavaBeans zijn volgens \citet{softwareDeployment} fijnkorrelige en taalafhankelijke oplossing voor het deployment probleem.
+%Door het isoleren van de Beans door middel van een gestandaardiseerde container interface zullen Enterprise JavaBeans zo een oplossing vinden voor het deployment probleem.
+%Hierdoor moeten de EJB's zodanig ontworpen worden dat ze voldoen aan de eisen van de interface.
+%Enterprise JavaBeans hebben geen idee van het op afstand installeren van componenten.
+%Een groot probleem bij EJB's is dat referenties naar afhankelijke beans gebeurd via niet unieke namen.
+%Twee verschillende beans met eenzelfde naam moeten hierdoor manueel herladen worden zodanig dat de bindings up-to-date zijn \citep{rutherford2002reconfiguration}.
+\subsection{Electric cloud}
+%%% TODO
+%http://electric-cloud.com/wp-content/uploads/Ovum-Decision-Matrix-Selecting-DevOps-Release-Management-Solution-2016-2017-print.pdf
+%https://www.gartner.com/doc/reprints?id=1-3DSWYP2&ct=160801&st=sb
+Electric cloud is een bedrijf opgericht in 2002 met een focus op application release automation (ARA).
+Hun product, ElectricFlow, is ontworpen om gebruikers in staat te stellen om het beschikbaar stellen, het bouwen en het verspreiden van mutlitiered applicaties te vereenvoudigen.
+Dit allemaal aan de hand van de model-driven architectuur \citep{gartner}.
+\citet{electricflow} beschrijft ElectricFlow als een enterprise-grade DevOps Release Automation platform.
+Met behulp van de model-driven aanpak is het mogelijk voor gebruikers om meerde pipelines en releases over verschillende infrastructuren te coördineren op een eenvoudige manier.
+
+De kern van ElectricFlow bestaat uit een web-based systeem dat gebruikt wordt voor de automatie en het onderhouden van het bouw-, test-, deployment en releaseproces.
+Het automatieplatform bestaat uit een drie-lagen architectuur, een web interface en mogelijkheden om build en release analyses uit te voeren.
+De drie-lagen architectuur van ElectricFlow bestaat uit:
+\begin{itemize}
+\item \textbf{ElectricFlow Server}: een server die instaat voor het managen van resources, commando's en het generen van rapporten.
+\item \textbf{Databank}: een databank die instaat voor het opslaan van commando's, meta-data en logfiles.
+\item \textbf{Agents}: verschillende agenten die instaan voor het uitvoeren van commando's, het monitoren van statussen en het verzamelen van resultaten.
+\end{itemize}
+Figuur~\vref{fig:electricflowArchitecture} geeft een architecturaal overzicht weer van ElectricFlow.
+In de figuur zijn de verschillende lagen zichtbaar samen verschillende andere tools die vervat zitten in het automatisatie platform \citep{electricflow}.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.9]{afbeelding/electricflowArchitecture.png}}
+\caption{ElectricFlow Architectuur \citep{electricflow}}
+\label{fig:electricflowArchitecture}
+\end{figure}
+
+Om ElectricFlow te gebruiken voor bouw en test automatie, is het nodig om de volgende objecten te creëren, te configureren en bij te houden.
+\begin{itemize}
+\item \textbf{Project}: een project in ElectricFlow dient als container waarin procedures, stappen, workflows, \ldots zitten.
+Op deze manier is het mogelijk om een scheiding te creëren tussen projecten die bijvoorbeeld een ander doel hebben.
+\item \textbf{Resource}: een resource wordt gedefinieerd als een agent machine waar stappen in uitgevoerd kunnen worden.
+\item \textbf{Procedures}: procedure en stappen worden gebruikt om taken in ElectricFlow te definiëren.
+Een procedure bestaat uit één of meerdere stappen waarbij in ieder stap een commando of script wordt uitgevoerd.
+\item \textbf{Workflow}: een workflow stelt de gebruiker in staat om build-test-deploy levenscycli te definiëren.
+Zo wordt het managen van verschillende procedures en stappen in een project eenvoudiger.
+\end{itemize}
+
+Met ElectricFlow is het mogelijk om verscheiden applicaties op een autonome wijze te verschepen naar de gebruikers.
+Hierbij kan door middel van een procedure een gepersonaliseerde afhandeling plaatsvinden.
+Door gebruik te maken van de verscheidene projecten is het mogelijk om de release van verschillende applicaties op een geordende manier aan te pakken. 
+Verder wordt niks vermeld over hoe omgegaan wordt met installaties en updates die slecht zijn afgelopen.
+
+\subsection{Redhat package manager}
+In Linux wordt de Redhat package manager (RPM) het vaakst gebruikt voor de deployment van software.
+Met hulp van de RPM is het mogelijk om enkele operaties uit te voeren zoals onder andere installatie, updaten, \ldots .
+De operaties worden ondersteund door een databank die alle informatie en details van de geïnstalleerde pakketten bevat.
+Een RPM pakket bestaat uit executables gecombineerd met configuratie bestanden en documentatie.
+Doordat een pakket executables bevat, zal een pakket gekoppeld zijn aan het besturingssysteem van de host \citep{bailey1997maximum}.
+Naast de RPM files bevat een pakket verschillende scripts geschreven in de standaard Unix scripting taal.
+De verscheidene scripts zijn ingedeeld in sets horende bij een specifieke taak.
+Bij een error moet een roll back uitgevoerd worden.
+Dit is de taak van de script schrijver \citep{softwareDeployment}.
+
+De Redhat Package Manager is een grofkorrelige, taal onafhankelijke maar besturingssysteem afhankelijke oplossing.
+Het grootste probleem van RPM schuilt in de afhankelijkheden tussen de pakketten.
+Niet alle afhankelijkheden zijn explicite gemodelleerd en de afhankelijkheden die wel gemodelleerd zijn, zijn gevormd met de nadruk op de inhoud en niet op de pakketten zelf \citep{softwareDeployment}.  
+
+\subsection{ATLAS}\label{sec:ATLAS}
+ATLAS is één van de vier grote experimenten bij de Large Hadron Collider (LHC) in CERN (de Europese organisatie voor nucleair onderzoek).
+Het is een algemeen deeltjesfysica experiment onderhouden door een internationale samenwerking met als doel het exploiteren van de mogelijkheden van de Large Hadron Collider.
+Fysici testen de voorspellingen van het Standaard Model \cite{standardModel} wat kan leiden tot grote ontdekkingen zoals het Higgs  boson \cite{atlas}.
+
+Om in de ATLAS samenwerking om te gaan met de grote hoeveelheid bronnen, is er een volledig automatisch installatie systeem ontworpen voor het LCG/EGEE project, LHC Computing Grid/Enabling Grids for E-sciencE \citep{bird2005lhc}. 
+\citet{salvo2008atlas} beschrijft de architectuur van het ontworpen systeem.
+Het ontwerp van het installatie systeem werd gebaseerd op het Light Job Submission Framework for installation, ook wel LJSFi.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/ljsfiArchitectuur.png}}
+\caption{LJSFi Architectuur \citep{salvo2008atlas}}
+\label{fig:ljsfiArchi}
+\end{figure}
+
+De architectuur van het framework is zichtbaar in Figuur~\ref{fig:ljsfiArchi}.
+Het framework vormt een dunne laag over de middleware van Grid.
+De kern van het systeem bestaat uit de installatie database en de command line interface (CLI).
+De laatste zorgt voor de interacties met de Grid middleware.
+Met hulp van de installatie database kan de CLI verschillende taken en job informatie opslaan.
+Aan de hand van deze informatie kunnen installaties uitgevoerd worden.
+De installatie databank staat in contact met alle componenten van het framework.
+Zo kan de status van verscheidene acties en configuraties van verschillende taken opgeslagen worden.
+
+Naast deze twee grote componenten bevat LJSFi service modules en extensies waarmee installatie aanvragen afgehandeld worden.
+Het systeem bevat drie verschillende componenten die horen bij de LJSFi service modules:
+\begin{itemize}
+\item \textbf{RAI module} De Request An Installation module dient als web interface voor het ontvangen van user-driven installatie aanvragen.
+\item \textbf{AIR module} De Automatic Installation Requester schiet in actie als de software release aangeduid staan als productie of veroudert en als de release aangeduid staat met de parameter auto-installatie.
+De module zal respectievelijk de software installeren of verwijderen op alle sites waar de software tag nog niet aanwezig is.
+Door de AIR module periodiek te gebruiken, zullen de nodige aanvragen snel afgehandeld worden.
+\item \textbf{InAgent module} Met de InAgent module wordt het mogelijk om volledig geautomatiseerde installatieprocessen te voorzien.
+Iedere 10 minuten wordt de Installation database gelezen en via de CLI interface worden de nodige installatieprocessen opgestart.
+Elk installatieproces wordt bijgestaan door een installation agent.
+De agent zal instaan voor het updaten van de Installatie database met real-time informatie die zichtbaar is online.
+\end{itemize}
+
+Naast de verscheidene automatische services biedt LJSFi enkele gebruiker services aan.
+Een gebruiker kan zich subscriben voor bepaalde acties op een doel systeem.
+Als deze actie wordt uitgevoerd dan krijgt de gebruiker een mail.
+Hiernaast kan een gebruiker een software release vastpinnen zodat deze niet verwijderd kan worden door het systeem.
+
+Het installatieproces wordt uitgevoerd in drie verschillende stappen.
+In een eerste stap wordt een site check uitgevoerd door een pilot job naar de site te sturen.
+Als de check succesvol uitgevoerd wordt, kan het installatieproces beginnen.
+De acties tijdens het installatieproces worden uitgevoerd door softwaremanagement scripts.
+Op het einde van het proces, haalt het systeem de job output en exit code op.
+De laatste wordt opgeslagen in de Installation database.
+
+\citet{Obreshkov2008244} bespreekt hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
+Het ATLAS project gebruikt CMT \citep{cmt} als configuratie manager.
+Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen.
+\citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
+Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
+Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandelt moet worden.
+
+De LJSFi architectuur is een architectuur die om kan gaan met een grote hoeveelheid pakketten.
+Door gebruik te maken van de modules is het mogelijk om de verschillende pakketten te installeren en te verwijderen op een grote schaal zonder dat menselijke interactie nodig is.
+Hierbij zorgt CMT voor de nodige meta-data waardoor installatietools niet afhankelijk zijn van de mens.
+Een nadeel aan deze architectuur is dat het gebruik van Grid nodig is om de LJSFi architectuur in te bouwen.
+Verder wordt in de lectuur niet ingegaan op welke wijze er wordt omgegaan met een fout tijdens het installatieproces of het verwijderproces.
+Het enige dat hierover vermeld wordt is dat de exit code van de job wordt opgeslagen in de databank.
+
+\subsection{ORYA}\label{sec:ORYA}
+\citet{lestideau2003providing} legt uit hoe ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
+Aan de hand van een deployment PSEE \citep{belkhatir2007adele} wordt het mogelijk om het installatieproces te automatiseren.
+
+In het ontwerp van ORYA worden er drie verschillende entiteiten besproken die nodig zijn om het automatische installatieproces mogelijk te maken.
+\begin{itemize}
+\item \textbf{Applicatie Server} De applicatie server bevat de informatie nodig voor de installatie.
+Hieronder bevindt zich onder andere een pakket met de nodige resources en een manifest waarin de afhankelijkheden, beperkingen en kenmerken staan.
+\item \textbf{Target} De target is het doel waarop de deployment uitgevoerd wordt.
+Iedere target wordt beschreven door de verschillende applicaties die al aanwezig zijn en de fysische beschrijving.
+\item \textbf{Deployment Server} De deployment server vormt de kern van de deployment omgeving en staat in voor het uitvoeren van de deployments. 
+De deployment server zoekt de nodige pakketten, voert een transfer van de pakketten uit en installeert de applicatie.
+Op het einde moet de deployment server garanderen dat vorige programma's correct blijven functioneren.
+\end{itemize}
+
+\citet{lestideau2003providing} beschrijft verder de verschillende modellen die gehanteerd worden om een succesvolle deployment uit te voeren.
+In Figuur~\vref{fig:deploymentModel} is het deployment proces model terug te vinden.
+Een deployment proces zal bestaan uit verschillende basis activiteiten en deployment processen.
+Iedere activiteit wordt uitgevoerd door een agent.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.9]{afbeelding/deploymentModelORYA.png}}
+\caption{Deployment proces model \citep{lestideau2003providing}}
+\label{fig:deploymentModel}
+\end{figure}
+
+Een toegepast voorbeeld van een deployment aan de hand van dit model is terug te vinden in Figuur~\vref{fig:deploymentVoorbeeld}.
+Een basis activiteit wordt voorgesteld aan de hand van een grijze rechthoek en een deployment proces aan de hand van een witte rechthoek.
+In het voorbeeld zijn dus vier deployment processen aanwezig en 3 basis activiteiten.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/deploymentVoorbeeld.png}}
+\caption{Voorbeeld van een deployment \citep{lestideau2003providing}}
+\label{fig:deploymentVoorbeeld}
+\end{figure}
+
+Aan de hand van deze structuur wordt het mogelijk om het volledige deployment proces voor te stellen.
+
+%\subsection{Unix}
+%\citet{dolstra2006purely} bespreekt Nix deployment systeem omgaan met het deployment probleem.
+%Nix houdt verschillende componenten bij in de component store waarbij iedere component een set van bestanden is.
+%De componenten worden van elkaar gescheiden door een unieke naam.
+%Dit wordt bekomen door een cryptografische hash op te nemen in de naam.
+%Unix biedt geen software deployment aan.
+%Het biedt verscheidene mechanismen aan waarmee verschillende deployment beleid beschikbaar worden.
+%Met de volgende deployment models is het mogelijk om in Unix de Unix expressies (de bouwstenen van de Unix componenten) te verspreiden:
+%\begin{itemize}
+%\item \textbf{Handmatige download} Een gebruiker kan zelf pakketten downloaden in de vorm van tar archieven, deze zelf uitpakken en vervolgens installeren.
+%Deze strategie is arbeidsintensief en maakt het moeilijk om alles up-to-date te houden. 
+%\item \textbf{Updaten aan de hand van een versie management systeem} Een andere strategie is het gebruik van een versie management systeem.
+%Hiermee is het up-to-date houden van de pakketten zeer eenvoudig.
+%\item \textbf{Kanalen} Een verdere uitbreiding zijn de kanalen.
+%Een kanaal is een URL naar een tar archief die de nodige Unix expressies bevat.
+%Met deze strategie is het even eenvoudig om pakketten te installeren en up-to-date te houden.
+%\item \textbf{One-click installatie} Als er enkel één pakket geïnstalleerd moet worden, dan is de one-click installatie de eenvoudigste optie.
+%Via de website van de verdeler kan een link gebruikt worden om het nodige pakket te installeren.
+%\end{itemize}
+
+\subsection{Ansible}
+Als laatste case studie wordt Ansible besproken.
+Ansible is een open source IT configuratie management, deployment en organisatie tool.
+De architectuur van Ansible bestaat uit een agentless push model.
+Dit wil zeggen dat er geen additionele software nodig is op de client toestellen.
+Dit wordt behaald door gebruik te maken van de remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en Unix en WinRM voor Windows.
+Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang de Ansible het systeem niet aan het gebruiken is \citep{ansible}.
+
+\citep{ansible} beschrijft verder dat Ansible gebruik maakt van \emph{Playbooks} voor de organisatie van de IT omgevingen.
+Playbooks zijn YAML\footnote{Een human-readable data serialisatie taal (Een superset van JSON)} definities van taken die beschrijven hoe een taak moet geautomatiseerd worden.
+Een Playbook bestaat uit een aantal ``plays'' die uitgevoerd kunnen worden op een set van hosts, ook wel een ``inventory'' genoemd.
+Iedere play bestaat uit een set van taken die op een subset van de inventory uitgevoerd kan worden.
+Een task zelf voert een Ansible module uit\footnote{Een klein stuk code met een specifieke taak}.
+
+Hiernaast is het mogelijk om de mogelijkheden van Ansible uit te breiden.
+Modules kunnen zelf geschreven worden in eender welke taal met als enige beperking dat een JSON bestand als input moet gegeven worden en dat een JSON bestand gegenereerd moet worden.
+De inventory van een Playbook kan dynamisch ontdekt worden at runtime.
+
+In tegenstelling tot ATLAS en Electric Cloud bevat Ansible geen agenten die gebruikt worden om het deployment proces in goede banen te leiden.
+Het is wel mogelijk om het proces te beïnvloeden door gebruik te maken van de Playbooks.
+Door gebruik te maken van modules is het in Ansible mogelijk om de functionaliteiten uit te breiden.
+Wederom is het niet duidelijk wat er gebeurt mochten er fouten optreden tijdens het installatieproces of updateproces.
+
+\section{Rollback}\label{sec:rollback}
+Tijdens de bespreking van het probleem in Sectie~\vref{sec:probleem} werd al aangehaald dat een soort van rampenplan voorzien moet worden.
+Zowel omgevingsproblemen als onderhoudsproblemen (zie Sectie~\vref{sec:softwareLevenscyclus}) kunnen tijdens één van de toestanden in de deployment levenscyclus optreden.
+Voor Televic is het niet wenselijk dat een probleem tijdens één van deze toestanden ervoor zorgt dat hun software niet meer correct functioneert aangezien dit kan leiden tot het stilleggen van de productie.
+Daarom wordt in de volgende secties verschillende mechanismen besproken waarmee de verscheidene problemen aangepakt kunnen worden.
+In wat volgt, wordt vooral rekening gehouden met mechanismen die gebruikt kunnen worden als het probleem zich al voor heeft gedaan.
+Deze strategieën zullen typisch proberen terug te keren naar een vorige correct werkende toestand van de software.
+De actie waarbij wordt teruggekeerd naar een vorige toestand wordt ook wel rollback genoemd.
+
+\subsection{Rollback strategieën}
+\citet{srinivasan2004flashback} spreekt over drie manieren waarop rollback strategieën geïmplementeerd worden in hedendaagse systemen.
+Checkpointing, main-memory transactions en software rejuvination zijn strategieën die vaak gebruikt zijn.
+
+\paragraph{Checkpointing}
+Checkpointing is een eenvoudige recovery strategie.
+De toestand van een programma wordt periodiek opgeslagen in een bestand op een extern opslagmedium.
+Deze kan, na het falen van het programma, gebruikt worden om te herstellen van fouten \citep{plank1994libckpt}.
+Bij een checkpointing systeem wordt de volledige toestand van het programma opgeslagen.
+Dit zorgt voor een verhoogde overhead waardoor het niet mogelijk is om frequent een checkpoint uit te voeren \citep{srinivasan2004flashback}.
+
+Door gebruik te maken van incrementele checkpoints is het evenwel mogelijk om dit probleem aan te pakken.
+Enkel de veranderingen van de laatste checkpoint worden opgeslagen in een nieuwe checkpoint.
+Het deel dat niet is aangepast, kan hersteld worden aan de hand van de vorige checkpoint.
+Dankzij deze strategie is het mogelijk om de hoeveelheid data die moet worden opgeslagen te verkleinen.
+Hierdoor zullen wel verschillende recovery bestanden nodig zijn.
+Het is aangewezen om op regelmatige tijdstippen de verschillende recovery bestanden samen te voegen tot één bestand \citep{plank1994libckpt, elnozahy2002survey}.
+
+\paragraph{Main-memory transactions}
+Een andere rollback strategie zijn de main-memory transactions.
+Systemen die deze transacties ondersteunen bezitten vaak de mogelijkheid om terug te keren naar een vorig executie punt.
+Om deze strategie te kunnen implementeren, moeten applicaties gebruik maken van het transactieprogrammeermodel, waardoor de keuzevrijheden van de programmeur beperkt worden \citep{srinivasan2004flashback}.
+
+\paragraph{Software rejuvenation}
+\citet{huang1995software} definieert software rejuvination als volgt:
+\begin{displayquote}
+``Software rejuvenation is the concept of gracefully terminating an application and immediately restarting it at a clean internal state.''
+\end{displayquote}
+Tijdens het langdurig uitvoeren van een programma treedt \emph{process aging} op.
+Door geheugenlekken, niet vrijgegeven bestandlocks, data corruptie, \ldots zal de performantie van het uitvoerende programma aangetast worden waardoor het programma uiteindelijk faalt.
+Door het heropstarten van de applicatie worden eventuele fouten uit het systeem gehaald en wordt de software verjongd.
+De meeste studies over software rejuvenation focussen vooral op het herstarten van de volledige applicatie en werken dus niet op een fijnkorrelige schaal \citep{srinivasan2004flashback}.
+
+\subsection{Virtualisatie}\label{sec:virtualisatie}
+Door middel van virtualisatie wordt de complexiteit die ontstaat door de interactie tussen het programma, de installatieomgeving en de uitvoeringsbeperkingen gelimiteerd.
+Door het creëren van een perfecte omgeving komen deze problemen niet voor.
+Er zijn verschillende voordelen gekoppeld aan het gebruiken van een virtuele machine (VM).
+Bijvoorbeeld, besturingssystemen op verschillende hardware platformen eisen verschillende drivers en deze drivers hebben misschien afhankelijkheden op een bepaalde firmware en BIOS.
+Een guest OS draaiende op een virtuele machine heeft deze eisen niet \citep{shumate2004implications}.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.4]{afbeelding/hypervisors.png}}
+\caption{Typer 1 hypervisor in vergelijking met een type 2 hypervisor \citep{hypervisors}}
+\label{fig:hypervisors}
+\end{figure}
+
+Met virtualisatie is het mogelijk om van één computer meerder computers te maken.
+Dit kan bereikt worden door gebruik te maken van een speciaal programma (een hypervisor).
+Volgens \citet{fenn2008evaluation} bestaan er twee types hypervisors:
+\begin{itemize}
+\item \textbf{Type 1} hypervisors zorgen voor een directe interface naar de host hardware.
+Er is typisch één virtuele machine met speciale privileges die de andere virtuele machines onderhoudt.
+\item \textbf{Type 2} hypervisors draaien als een normaal programma in het host besturingssysteem.
+Iedere virtuele machine draait dan als proces in het host besturingssysteem.
+\end{itemize}
+Deze twee types zijn zichtbaar in Figuur~\vref{fig:hypervisors}.
+
+Een virtuele machine bevat een volledig besturingssysteem.
+Een gevolg hiervan is dat het uitvoeren van handelingen (zoals opstarten, afsluiten, kopiëren, \ldots) lang duren.
+Hiernaast moet tijdens het instellen van een virtuele machine een volledig besturingssysteem geïnstalleerd worden.
+De tijd die nodig is om een VM in te stellen neemt hierdoor drastisch toe.
+Aangezien een virtuele machine een volledig besturingssysteem omvat, heeft deze ook de resources nodig om correct te kunnen functioneren.
+Om verschillende virtuele machines naast elkaar te kunnen laten draaien, moet de host voldoende RAM, CPU en harde schijf ruimte hebben.
+Door gebruik te maken van een virtuele machine wordt een veilige omgeving gecreëerd maar dit neemt kostbare tijd en resources in beslag.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/dockerVsVM.png}}
+\caption{Architectuur van Virtuele Machine ten opzichte van Docker \citep{dockerMain}}
+\label{fig:VMvsDocker}
+\end{figure}
+
+\subsection{Docker}\label{sec:docker}
+Virtualisatie is niet de enige techniek die gebruikt kan worden om rollbacks te vermijden.
+Docker containers is een technologie waarmee een stuk software wordt ingepakt in een volledig filesysteem dat alle benodigdheden bevat om correct te functioneren.
+Hierdoor zal de software overal op eenzelfde manier draaien, ongeacht de omgeving \citep{dockerMain}.
+Docker containers zijn niet hetzelfde als virtuele machines.
+In de vergelijking \citep{dockerEbook} worden virtuele machines voorgesteld als huizen terwijl Docker containers worden voorgesteld als appartementen.
+
+De huizen staan volledig op zichzelf en bieden bescherming tegen ongewenste gasten.
+Ze hebben een eigen infrastructuur met hun eigen water, verwarming, \ldots .
+Hiernaast zal ieder huis op zijn minste een badkamer, living, slaapkamer en keuken hebben.
+Het vinden van een klein huis is een ganse klus en vaak zal een huis meer bevatten dan nodig is want dat komt door de manier waarop huizen gebouwd worden.
+
+Appartementen bieden ook bescherming tegen ongewenste gasten, maar zij zijn gebouwd rond een gemeenschappelijke infrastructuur.
+Het appartementsgebouw biedt gemeenschappelijk water, verwarming, \ldots  aan, aan elk appartement.
+Elk appartement verschilt ook nog van grootte.
+Er bestaan kleine appartementen maar ook grote met meerder slaapkamers.
+Men huurt enkel hetgeen dat nodig is.
+
+In Figuur~\vref{fig:VMvsDocker} zijn de architecturen van virtuele machines en Docker terug te vinden.
+Het verschil tussen beiden wordt al snel duidelijk.
+Een virtuele machine zal typisch de applicatie, de nodige binaries en bibliotheken en een volledig besturingssysteem bevatten.
+Een container bevat de applicatie en de verschillende dependencies maar de kernel wordt gedeeld met alle andere containers en gedragen zich als een geïsoleerd proces in de user space van het host besturingssysteem.
+
+\citet{chamberlain2014using} bespreekt kort hoe Docker werkt.
+Docker is een platform dat gebruik maakt van de Linux Containers (LXC de user-space control package voor Linux Containers) om software te encapsuleren.
+LXC is een virtualisatie techniek waarmee virtuele omgevingen in Linux opgebouwd kunnen worden.
+De containers zullen processen van elkaar sandboxen zodanig dat een proces een ander niet kan beïnvloeden \citep{merkel2014docker}.
+Docker zal de LXC software uitbreiden waardoor deployment, distributie en versioning mogelijk wordt.
+Naast LXC gebruikt Docker AuFS (Advanced Multi-Layered Unification Filesystem) als het filesysteem voor de containers.
+Doordat het filesysteem gelaagd is, is het mogelijk om verschillende filesystemen over elkaar te leggen.
+
+\citet{merkel2014docker} vergelijkt de twee virtualisatie technieken en bespreekt de verschillende tussen de twee.
+Bij virtuele machines moet voor iedere virtuele machine een besturingssysteem geïnstalleerd worden.
+Al deze besturingssystemen verbruiken RAM, CPU en bandbreedte.
+Containers zullen piggybacken op het bestaande host besturingssysteem.
+Hierdoor zal het resource gebruik efficiënter zijn.
+Een container is goedkoop waardoor het creëren en verwijderen van containers een snelle operatie.
+Dit komt omdat er enkel een proces moet afgesloten worden in tegenstelling tot het afsluiten van een volledig besturingssysteem.
+Een voordeel van de VMs ten opzichte van Docker is hun maturiteit.
+VMs bestaan langer en hebben zichzelf kunnen bewijzen in verschillende situaties.
+
+\section{Deployment strategieën}\label{sec:deployment}
+%%% TODO herschrijven
+Voordat software bij een gebruiker geïnstalleerd of geüpdatet kan worden, moet de software eerst bij de gebruiker geraken.
+Er kan op twee manieren naar dit proces gekeken worden:
+\begin{itemize}
+\item Wat wordt er precies verzonden naar de gebruiker?
+\item Wie krijgt de software als eerste?
+\end{itemize}
+In de volgende secties worden deze twee verschillende focussen verder besproken.
+
+\subsection{Data focus}
+\citet{deploymentMethods} haalt drie methodes aan om software te deployen:
+\begin{itemize}
+\item disk image-based deployment
+\item behavior-based deployment
+\item package-based deployments
+\end{itemize}
 Bij disk image-based deployment worden de software en het besturingssysteem op eenzelfde moment naar de target node verzonden.
-Er zullen verschillende image servers aanwezig zijn die elk een service aanbieden.
+Er zullen verschillende image-servers aanwezig zijn die elk een service aanbieden.
+Zo zal de image-server van software A een andere image-server zijn dan de image-server die software B gebruikt.
 Het voordeel van deze strategie is dat, zolang de hardware en software vereisten voldaan zijn, de deployment bestaat uit een simpele read-write operatie.
-Maar, zoals \citet{deploymentMethods} al aangeeft, deze methode is niet flexibel.
-Voor de applicatie is flexibiliteit een must.
+Maar, zoals \citet{deploymentMethods} al aangeeft, is deze methode niet flexibel.
+Enkel software die op voorhand werd geconfigureerd op de image-server kan worden gedeployed.
+Gebruikers met speciale noden kunnen moeilijk worden geholpen.
+Voor Televic is flexibiliteit een hoofddoelstelling.
 Iedere node bevat verschillende hardware en is verschillend geconfigureerd.
-Een disk image-based deployment zal hierdoor niet gebruikt worden.
-Het basis idee achter behavior-based deployment is het opnemen van de schijf operaties tijdens het deployen.
-Als geweten is welke bestanden aangepast zijn, gecreëerd zijn, ... dan kan het proces nagebootst worden op andere nodes \citep{deploymentMethods}.
+Een disk image-based deployment zal hierdoor niet gebruikt kunnen worden.
+Het basisidee achter behavior-based deployment is het opnemen van de schijfoperaties tijdens het deployen.
+Als geweten is welke bestanden aangepast, gecreëerd zijn, ... dan kan het proces nagebootst worden op andere nodes \citep{deploymentMethods}.
 Zo een proces nabootsen is moeilijk.
-Kernel operaties moeten getraceerd worden.
+Kerneloperaties moeten getraceerd worden.
 Deze methode biedt een verhoogde flexibiliteit aan ten opzichte van de disk image-based deployment maar dit is nog niet voldoende om deployments uit te voeren die uniek zijn per node.
 De laatste techniek die \citet{deploymentMethods} aan haalt is package-based deployment.
 Met behulp van een batch file, waarin alle nodige commando's aanwezig zijn, kan een installatie pakket gedeployed worden naar een target node.
 Door het gebruik van een batch file wordt de flexibiliteit van de deployment verhoogd.
 
+\subsection{User focus}
 De geproduceerde software moet bij verschillende gebruikers terecht komen.
 Een eenvoudige oplossing zou zijn dat slechts één gebruiker per keer geholpen wordt en dat iedere gebruiker zijn beurt afwacht.
 Zo'n oplossing is misschien doenbaar mochten slechts een handvol gebruikers de applicatie nodig hebben maar dit is vaak niet het geval.
@@ -114,7 +483,10 @@ Het voordeel van de big-bang strategie is dat alle doelsystemen op een korte per
 Het gebruik van de gefaseerde strategie kan het probleem met de tijdszones omzeilen maar deze strategie is ook niet ideaal aangezien het omschakelen van de software naar de nieuwe versie lang kan duren.
 Een hybride oplossing is hier dus aangewezen.
 
-\section{Software Dock Architectuur}\label{sec:softwareDock}
+\section{Architecturen}
+%%% TODO schrijven
+
+\subsection{Software Dock Architectuur}\label{sec:softwareDock}
 \citet{hall1999cooperative} bespreekt een interessante architectuur.
 Het Software Dock research project creëerde een framework om de samenwerking tussen software producenten en gebruikers te verbeteren.
 In Figuur~\vref{fig:softwareDock} wordt de ontworpen architectuur voorgesteld.
@@ -147,7 +519,7 @@ Op basis van deze informatie wordt een context opgebouwd waarin de releases van 
 De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het gebruikers systeem ondervragen.
 Aangezien kritische client-side informatie op een gestandaardiseerde wijze aangeboden wordt, met behulp van een geneste collectie van pair-values die een hiërarchie vormen, kan de installatie van de software gepersonaliseerd worden \citep{hall1999cooperative}.
 
-\section{Event based services}\label{sec:event}
+\subsubsection{Event based services}\label{sec:event}
 %%% TODO
 Een belangrijk onderdeel van de software dock architectuur is de event service.
 Deze handelt de communicatie af tussen de verschillende docks en is een spilfiguur in de architectuur.
@@ -159,7 +531,7 @@ Het toepassen van deze strategie is doenbaar in een omgeving met een beperkt aan
 Om een grootschalig netwerk op te bouwen en om te kunnen gaan met een dynamische omgeving moet een andere manier van communiceren gebruikt worden.
 Publish/subscribe systemen bieden een oplossing voor deze problemen.
 Clients, event subscribers, tonen hun interesse voor een bepaald onderwerp en servers, event publishers, produceren een event die naar alle geïnteresseerden wordt doorgestuurd.
-Een algemeen voorbeeld is terug te vinden in Figuur~\vref{fig:pubsubArchi}.
+Een algemeen voorbeeld is terug te vinden in Figuur~\ref{fig:pubsubArchi}.
 Door deze manier van communiceren te hanteren, ontstaat een natuurlijke ondersteuning voor many-to-many relaties tussen de clients en servers.
 De twee worden ook van elkaar ontkoppeld.
 Voor de client maakt het niet uit welke publisher de producent is van een event.
@@ -175,7 +547,7 @@ Hiernaast moet de server niet weten wie allemaal de events ontvangt die hij prod
 Een naïeve aanpak, volgens \citet{carzaniga2001design}, is het gebruiken van één centrale server waar alle subscripties worden bijgehouden, waar alle events toekomen, waar de bestemming van het event beslist wordt en waar het event wordt doorgestuurd naar de gepaste subscribers.
 Deze strategie is eenvoudig te implementeren maar deze werkt de schaalbaarheid tegen.
 Dit was ook al duidelijk in Figuur~\vref{fig:pubsubArchi} waar verschillende ``Brokers'' aanwezig zijn.
-Het is belangrijk om stil te staan bij enkele ontwerp beslissingen zodanig dat de service die in Figuur~\vref{fig:pubsubService} zichtbaar is, implementeerbaar is.
+Het is belangrijk om stil te staan bij enkele ontwerp beslissingen zodanig dat de service die in Figuur~\ref{fig:pubsubService} zichtbaar is, implementeerbaar is.
 
 \begin{figure}[!ht]
 \centering
@@ -197,273 +569,7 @@ Een voorbeeld van zo'n event is terug te vinden in Figuur~\vref{fig:pubsubNot}
 \label{fig:pubsubNot}
 \end{figure}
 
-\section{Case studies}\label{sec:caseStudies}
-Door de jaren heen zijn er verschillende technologieën ontwikkeld die het probleem van software deployment aanpakken.
-In wat volgt, worden enkele van deze technologieën besproken gebaseerd op enkele case studies die \citet{softwareDeployment} aanreikt.
-
-\subsection{Java Beans}
-Enterprise JavaBeans (EJB) zijn een standaard voor het bouwen van server-side componenten.
-De EJB's zijn speciaal ontworpen voor het vereenvoudigen van de deployment.
-\citet{softwareDeployment} beschrijft JavaBeans als eenheden van business logic in een component die uitgevoerd wordt in een container.
-De verschillende containers zorgen voor een abstractie van de hosting omgeving en bieden verscheidene services aan.
-Een JavaBean moet ingepakt worden volgens de specificaties die Sun Microsystems oplegt.
-Met deze standaard is het mogelijk om verschillende management en deployment tools te schrijven die de EJB's kunnen beïnvloeden.
-Enterprise JavaBeans worden ingepakt in de standaard Java JAR file, samen met een XML deployement descriptor.
-De descriptor beschrijft de verschillende eigenschappen van de bijhorende EJB.
-
-De Enterprise JavaBeans zijn volgens \citet{softwareDeployment} fijnkorrelige en taalafhankelijke oplossing voor het deployment probleem.
-Door het isoleren van de Beans door middel van een gestandaardiseerde container interface zullen Enterprise JavaBeans zo een oplossing vinden voor het deployment probleem.
-Hierdoor moeten de EJB's zodanig ontworpen worden dat ze voldoen aan de eisen van de interface.
-Enterprise JavaBeans hebben geen idee van het op afstand installeren van componenten.
-Een groot probleem bij EJB's is dat referenties naar afhankelijke beans gebeurd via niet unieke namen.
-Twee verschillende beans met eenzelfde naam moeten hierdoor manueel herladen worden zodanig dat de bindings up-to-date zijn \citep{rutherford2002reconfiguration}.
-
-\subsection{Redhat package manager}
-In Linux wordt de Redhat package manager (RPM) het vaakst gebruikt voor de deployment van software.
-Met hulp van de RPM is het mogelijk om enkele operaties uit te voeren zoals onder andere installatie, updaten, \ldots .
-De operaties worden ondersteund door een databank die alle informatie en details van de geïnstalleerde pakketten bevat.
-Een RPM pakket bestaat uit executables gecombineerd met configuratie bestanden en documentatie.
-Doordat een pakket executables bevat, zal een pakket gekoppeld zijn aan het besturingssysteem van de host \citep{bailey1997maximum}.
-Naast de RPM files bevat een pakket verschillende scripts geschreven in de standaard Unix scripting taal.
-De verscheidene scripts zijn ingedeeld in sets horende bij een specifieke taak.
-Bij een error moet een roll back uitgevoerd worden.
-Dit is de taak van de script schrijver \citep{softwareDeployment}.
-
-De Redhat Package Manager is in tegenstelling met de EJB's een grofkorrelige, taal onafhankelijke maar besturingssysteem afhankelijke oplossing.
-Het grootste probleem van RPM schuilt in de afhankelijkheden tussen de pakketten.
-Niet alle afhankelijkheden zijn explicite gemodelleerd en de afhankelijkheden die wel gemodelleerd zijn, zijn gevormd met de nadruk op de inhoud en niet op de pakketten zelf \citep{softwareDeployment}.  
-
-\subsection{ATLAS}\label{sec:ATLAS}
-Om in de ATLAS samenwerking om te gaan met de grote hoeveelheid bronnen, is er een volledig automatisch installatie systeem ontworpen voor het LCG/EGEE project, LHC Computing Grid/Enabling Grids for E-sciencE \citep{bird2005lhc}. 
-\citet{salvo2008atlas} beschrijft de architectuur van het ontworpen systeem.
-Het ontwerp van het installatie systeem werd gebaseerd op het Light Job Submission Framework for installation, ook wel LJSFi.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/ljsfiArchitectuur.png}}
-\caption{LJSFi Architectuur \citep{salvo2008atlas}}
-\label{fig:ljsfiArchi}
-\end{figure}
-
-De architectuur van het framework is zichtbaar in Figuur~\vref{fig:ljsfiArchi}.
-Het framework vormt een dunne laag over de middleware van Grid.
-De kern van het systeem bestaat uit de installatie database en de command line interface (CLI).
-De laatste zorgt voor de interacties met de Grid middleware.
-Met hulp van de installatie database kan de CLI verschillende taken en job informatie opslaan.
-Aan de hand van deze informatie kunnen installaties uitgevoerd worden.
-De installatie databank staat in contact met alle componenten van het framework.
-Zo kan de status van verscheidene acties en configuraties van verschillende taken opgeslagen worden.
-
-Naast deze twee grote componenten bevat LJSFi modules en extensies waarmee installatie aanvragen afgehandeld worden.
-Het systeem bevat drie verschillende componenten:
-\begin{itemize}
-\item \textbf{RAI module} De Request An Installation module dient als web interface voor het ontvangen van user-driven installatie aanvragen.
-\item \textbf{AIR module} De Automatic Installation Requester schiet in actie als software release aangeduid staan als productie of auto-installatie.
-De module verwijdert of installeert de software op alle sites waar de software nog niet gepubliceerd is.
-Door de AIR module periodiek te gebruiken, zullen de nodige aanvragen snel afgehandeld worden.
-\item \textbf{InAgent module} Met de InAgent module wordt het mogelijk om volledig geautomatiseerde installatieprocessen te voorzien.
-Iedere 10 minuten wordt de Installation database gelezen en via de CLI interface worden de nodige installatieprocessen opgestart.
-Elk installatieproces wordt bijgestaan door een installation agent.
-De agent zal instaan voor het updaten van de Installatie database met real-time informatie die zichtbaar is online.
-\end{itemize}
-
-Naast de verscheidene automatische services biedt LJSFi enkele gebruiker services aan.
-Een gebruiker kan zich subscriben voor bepaalde acties op een doel systeem.
-Als deze actie wordt uitgevoerd dan krijgt de gebruiker een mail.
-Hiernaast kan een gebruiker een software release vastpinnen zodat deze niet verwijderd kan worden door het systeem.
-
-Het installatieproces wordt uitgevoerd in drie verschillende stappen.
-In een eerste stap wordt een site check uitgevoerd door een pilot job naar de site te sturen.
-Als de check succesvol uitgevoerd wordt, kan het installatieproces beginnen.
-De acties tijdens het installatieproces worden uitgevoerd door softwaremanagement scripts.
-Op het einde van het proces, haalt het systeem de job output en exit code op.
-De laatste wordt opgeslagen in de Installation database.
-
-\citet{Obreshkov2008244} bespreekt hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
-Het ATLAS project gebruikt CMT \citep{cmt} als configuratie manager.
-Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen.
-\citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
-Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
-Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandelt moet worden.
-
-\subsection{ORYA}\label{sec:ORYA}
-\citet{lestideau2003providing} legt uit hoe ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
-Aan de hand van een deployment PSEE \citep{belkhatir2007adele} wordt het mogelijk om het installatieproces te automatiseren.
-
-In het ontwerp van ORYA worden er drie verschillende entiteiten besproken die nodig zijn om het automatische installatieproces mogelijk te maken.
-\begin{itemize}
-\item \textbf{Applicatie Server} De applicatie server bevat nodige informatie nodig voor de installatie.
-Hieronder bevindt zich onder andere een pakket met de nodige resources en een manifest waarin de afhankelijkheden, beperkingen en features staan.
-\item \textbf{Target} De target is het doel waarop de deployment uitgevoerd wordt.
-Iedere target wordt beschreven door de verschillende applicaties die al aanwezig zijn en de fysische beschrijving.
-\item \textbf{Deployment Server} De deployment server vormt de kern van de deployment omgeving en staat in voor het uitvoeren van de deployments. 
-De deployment server zoekt de nodige pakketten, voert een transfer van de pakketten uit en installeert de applicatie.
-Op het einde moet de deployment server garanderen dat vorige programma's correct blijven functioneren.
-\end{itemize}
-
-\citet{lestideau2003providing} beschrijft verder de verschillende modellen die gehanteerd worden om een succesvolle deployment uit te voeren.
-In Figuur~\vref{fig:deploymentModel} is het deployment proces model terug te vinden.
-Een deployment proces zal bestaan uit verschillende basis activiteiten en deployment processen.
-Iedere activiteit wordt uitgevoerd door een agent.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/deploymentModelORYA.png}}
-\caption{Deployment proces model \citep{lestideau2003providing}}
-\label{fig:deploymentModel}
-\end{figure}
-
-Een toegepast voorbeeld van een deployment aan de hand van dit model is terug te vinden in Figuur~\vref{fig:deploymentVoorbeeld}.
-Een basis activiteit wordt voorgesteld aan de hand van een grijze rechthoek en een deployment proces aan de hand van een witte rechthoek.
-In het voorbeeld zijn dus vier deployment processen aanwezig en 3 basis activiteiten.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/deploymentVoorbeeld.png}}
-\caption{Voorbeeld van een deployment \citep{lestideau2003providing}}
-\label{fig:deploymentVoorbeeld}
-\end{figure}
-
-Aan de hand van deze structuur wordt het mogelijk om het volledige deployment proces voor te stellen.
-
-\subsection{Nix}
-\citet{dolstra2006purely} bespreekt hoe Nix systemen omgaan met het deployment probleem.
-Nix houdt verschillende componenten bij in de component store waarbij iedere component een set van bestanden is.
-De componenten worden van elkaar gescheiden door een unieke naam.
-Dit wordt bekomen door een cryptografische hash op te nemen in de naam.
-Nix biedt geen software deployment aan.
-Het biedt verscheidene mechanismen aan waarmee verschillende deployment beleid beschikbaar worden.
-Met de volgende deployment models is het mogelijk om in Nix de Nix expressies (de bouwstenen van de Nix componenten) te verspreiden:
-\begin{itemize}
-\item \textbf{Handmatige download} Een gebruiker kan zelf pakketten downloaden in de vorm van tar archieven, deze zelf uitpakken en vervolgens installeren.
-Deze strategie is arbeidsintensief en maakt het moeilijk om alles up-to-date te houden. 
-\item \textbf{Updaten aan de hand van een versie management systeem} Een andere strategie is het gebruik van een versie management systeem.
-Hiermee is het up-to-date houden van de pakketten zeer eenvoudig.
-\item \textbf{Kanalen} Een verdere uitbreiding zijn de kanalen.
-Een kanaal is een URL naar een tar archief die de nodige Nix expressies bevat.
-Met deze strategie is het even eenvoudig om pakketten te installeren en up-to-date te houden.
-\item \textbf{One-click installatie} Als er enkel één pakket geïnstalleerd moet worden, dan is de one-click installatie de eenvoudigste optie.
-Via de website van de verdeler kan een link gebruikt worden om het nodige pakket te installeren.
-\end{itemize}
-
-\subsection{Ansible}
-Als laatste case studie wordt Ansible besproken.
-Ansible is een open source IT configuratie management, deployment en organisatie tool.
-de architectuur van Ansible bestaat uit een agentless push model.
-Dit wil zeggen dat er geen additionele software nodig is op de client toestellen.
-Dit wordt behaald door gebruik te maken van de remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en UNIX en WinRM voor Windows.
-Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang de Ansible het systeem niet aan het gebruiken is \citep{ansible}.
-
-\citet{ansible} beschrijft verder dat Ansible gebruik maakt van \emph{Playbooks} voor de organisatie van de IT omgevingen.
-Playbooks zijn YAML\footnote{Een human-readable data serialisatie taal (Een superset van JSON)} definities van taken die beschrijven hoe een taak moet geautomatiseerd worden.
-Een Playbook bestaat uit een aantal ``plays'' die uitgevoerd kunnen worden op een set van hosts, ook wel een ``inventory'' genoemd.
-Iedere play bestaat uit een set van taken die op een subset van de inventory uitgevoerd kan worden.
-Een task zelf voert een Ansible module uit\footnote{Een klein stuk code met een specifieke taak}.
-
-Hiernaast is het mogelijk om de mogelijkheden van Ansible uit te breiden.
-Modules kunnen zelf geschreven worden in eender welke taal met als enige beperking dat een JSON bestand als input moet gegeven worden en dat een JSON bestand gegenereerd moet worden.
-De inventory van een Playbook kan dynamisch ontdekt worden at runtime.
-
-\section{Rollback}\label{sec:rollback}
-Het deployen van software op een doelsysteem brengt verscheidene problemen met zich mee.
-In de levenscyclus van software zijn er verschillende staten waarin de software moet aangepast worden.
-Zoals reeds besproken in Sectie~\vref{sec:softwareLevenscyclus}, zijn er verschillende problemen die kunnen optreden tijdens één van deze staten.
-In de volgende secties gaan verschillende mechanismen besproken worden waarmee de verscheidene problemen aangepakt kunnen worden.
-
-\subsection{Rollback strategieën}
-\citet{srinivasan2004flashback} spreekt over drie manieren waarop rollback strategieën geïmplementeerd worden in hedendaagse systemen.
-Checkpointing, main-memory transactions en software rejuvination zijn strategieën die vaak gebruikt zijn.
-
-\paragraph{Checkpointing}
-Checkpointing is een eenvoudige recovery strategie.
-De staat van een programma wordt periodiek opgeslagen in een bestand op een extern opslagmedium.
-Deze kan, na het falen van het programma, gebruikt worden om te herstellen van fouten \citep{plank1994libckpt}.
-Bij een checkpointing systeem wordt de volledige staat van het programma opgeslagen.
-Dit zorgt voor een verhoogde overhead waardoor het niet mogelijk is om frequent een checkpoint uit te voeren \citep{srinivasan2004flashback}.
-
-Door gebruik te maken van incrementele checkpoints is het evenwel mogelijk om dit probleem aan te pakken.
-Enkel de veranderingen van de laatste checkpoint worden opgeslagen in een nieuwe checkpoint.
-Het deel dat niet is aangepast, kan hersteld worden aan de hand van de vorige checkpoint.
-Dankzij deze strategie is het mogelijk om de hoeveelheid data die moet worden opgeslagen te verkleinen.
-Hierdoor zullen wel verschillende recovery bestanden nodig zijn.
-Het is aangewezen om op regelmatige tijdstippen de verschillende recovery bestanden samen te voegen tot één bestand \citep{plank1994libckpt, elnozahy2002survey}.
-
-\paragraph{Main-memory transactions}
-Een andere rollback strategie zijn de main-memory transactions.
-Systemen die deze transacties ondersteunen bezitten vaak de mogelijkheid om terug te keren naar een vorig executie punt.
-Om deze strategie te kunnen implementeren, moeten applicaties gebruik maken van het transactie programmeermodel.
-Waardoor de keuzevrijheden van de programmeur beperkt worden \citep{srinivasan2004flashback}.
-
-\paragraph{Software rejuvenation}
-\citet{huang1995software} definieert software rejuvination als volgt:
-\begin{displayquote}
-``Software rejuvenation is the concept of gracefully terminating an application and immediately restarting it at a clean internal state.''
-\end{displayquote}
-Tijdens het langdurig uitvoeren van een programma treedt \emph{process aging} op.
-Door geheugenlekken, niet vrijgegeven bestandlocks, data corruptie, \ldots zal de performantie van het uitvoerende programma aangetast worden waardoor het programma uiteindelijk faalt.
-Door het heropstarten van de applicatie worden eventuele fouten uit het systeem gehaald en wordt de software verjongd.
-Meeste studies over software rejuvenation focussen vooral op het herstarten van de volledige applicatie en werken dus niet op een fijnkorrelige schaal \citep{srinivasan2004flashback}.
-
-\subsection{Virtualisatie}\label{sec:virtualisatie}
-\citet{softwareDeployment} brengt virtualisatie ter sprake.
-Door middel van virtualisatie wordt de complexiteit die ontstaat door de interactie tussen het programma, de installatieomgeving en de uitvoeringsbeperkingen gelimiteerd.
-Door het creëren van een perfecte omgeving komen deze problemen niet voor.
-Er zijn verschillende voordelen gekoppeld aan het gebruiken van een virtuele machine.
-Bijvoorbeeld, besturingssystemen op verschillende hardware platformen eisen verschillende drivers en deze drivers hebben misschien afhankelijkheden op een bepaalde firmware en BIOS.
-Een guest OS draaiende op een virtuele machine heeft deze eisen niet \citep{shumate2004implications}.
-
-%%% TODO? \citep{shumate2004implications} gebruiken om image deployement uit te leggen... Is dit wel nodig aangezien het niet echt de scope is waarin een image gebruikt zou worden.
-
-\subsection{Docker}\label{sec:docker}
-Virtualisatie is niet de enige techniek die gebruikt kan worden om rollbacks te vermijden.
-Docker containers is een technologie waarmee een stuk software wordt ingepakt in een volledig filesysteem dat alle benodigdheden bevat om correct te functioneren.
-Hierdoor zal de software overal op eenzelfde manier draaien, ongeacht de omgeving \citep{dockerMain}.
-Docker containers is niet hetzelfde als virtuele machines.
-\citet{dockerEbook} bespreekt de twee aan de hand van een vergelijking.
-In de vergelijking worden virtuele machines voorgesteld als huizen terwijl Docker containers worden voorgesteld als appartementen.
-
-De huizen staan volledig op zichzelf en bieden bescherming tegen ongewenste gasten.
-Ze hebben een eigen infrastructuur met hun eigen water, verwarming, \ldots .
-Hiernaast zal ieder huis op zijn minste een badkamer, living, slaapkamer en keuken hebben.
-Het vinden van een klein huis is een ganse klus en vaak zal een huis meer bevatten dan nodig is want dat komt door de manier waarop huizen gebouwd worden.
-
-Appartementen bieden ook bescherming tegen ongewenste gasten, maar zij zijn gebouwd rond een gemeenschappelijke infrastructuur.
-Het appartementsgebouw biedt gemeenschappelijk water, verwarming, \ldots  aan, aan elk appartement.
-Elk appartement verschilt ook nog van grootte.
-Er bestaan kleine appartementen maar ook grote met meerder slaapkamers.
-Men huurt enkel hetgeen dat nodig is.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/dockerVsVM.png}}
-\caption{Architectuur van Virtuele Machine ten opzichte van Docker \citep{dockerMain}}
-\label{fig:VMvsDocker}
-\end{figure}
-
-In Figuur~\vref{fig:VMvsDocker} zijn de architecturen van virtuele machines en Docker terug te vinden.
-Het verschil tussen beiden wordt al snel duidelijk.
-Een virtuele machine zal typisch de applicatie, de nodige binaries en bibliotheken en een volledig besturingssysteem bevatten.
-Een container bevat de applicatie en de verschillende dependencies maar de kernel wordt gedeeld met alle andere containers en gedragen zich als een geïsoleerd proces in de user space van het host besturingssysteem.
-
-\citet{chamberlain2014using} bespreekt kort hoe Docker werkt.
-Docker is een platform dat gebruik maakt van de Linux Containers (LXC de user-space control package voor Linux Containers) om software te encapsuleren.
-LXC is een virtualisatie techniek waarmee virtuele omgevingen in Linux opgebouwd kunnen worden.
-De containers zullen processen van elkaar sandboxen zodanig dat een proces een ander niet kan beïnvloeden \citep{merkel2014docker}.
-Docker zal de LXC software uitbreiden waardoor deployment, distributie en versioning mogelijk wordt.
-Naast LXC gebruikt Docker AuFS (Advanced Multi-Layered Unification Filesystem) als het filesysteem voor de containers.
-Doordat het filesysteem gelaagd is, is het mogelijk om verschillende filesystemen over elkaar te leggen.
-
-\citet{merkel2014docker} vergelijkt de twee virtualisatie technieken en bespreekt de verschillende tussen de twee.
-Bij virtuele machines moet voor iedere virtuele machine een besturingssysteem geïnstalleerd worden.
-Al deze besturingssystemen verbruiken RAM, CPU en bandbreedte.
-Containers zullen piggybacken op het bestaande host besturingssysteem.
-Hierdoor zal het resource gebruik efficiënter zijn.
-Een container is goedkoop waardoor het creëren en verwijderen van containers een snelle operatie.
-Dit komt omdat er enkel een proces moet afgesloten worden in tegenstelling tot het afsluiten van een volledig besturingssysteem.
-Een voordeel van de VMs ten opzichte van Docker is hun maturiteit.
-VMs bestaan langer en hebben zichzelf kunnen bewijzen in verschillende situaties.
-
-\subsection{Technologieën}\label{sec:technologieen}
+\section{Technologieën}\label{sec:technologieen}
 Implementaties in verschillende programmeertalen, verschillende data representatie formats of incompatibele runtime environments kunnen aan de basis liggen voor een lastige integratie van computerprogramma's.
 Door gebruik te maken van additionele software, wordt het mogelijk om het gat tussen de verschillen te overbruggen  \citep{callahan1998software}.
 Het Python testraamwerk is een verzameling van verschillende drivers en bibliotheken elk met een eigen implementatie.
