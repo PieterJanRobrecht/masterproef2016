@@ -1,7 +1,8 @@
 \chapter{Analyse en ontwerp}\label{sec:anaEnOntwerp}
-Uit de probleemstelling werd het snel duidelijk dat het probleem omtrent het Python testraamwerk complexer is dan op het eerste zicht lijkt.
+\section{Inleiding}
+Uit de probleemstelling werd het snel duidelijk dat het probleem omtrent het installeren en updaten van programma's complexer is dan op het eerste zicht lijkt.
 In dit hoofdstuk zal het probleem verder geanalyseerd worden.
-Aan de hand van deze bevindingen gaat een architectuur en structuur ontworpen worden.
+Aan de hand van deze bevindingen gaat een architectuur ontworpen of geselecteerd worden.
 Deze vormen de basis voor de implementatie van de demo.
 
 \section{Analyse}
@@ -9,26 +10,32 @@ Het probleem van Televic was het volgende:
 Televic fabriceert producten die moeten voldoen aan strenge veiligheidsnormen.
 Om hun producten hierop te kunnen testen heeft Televic een Python testraamwerk ontworpen waarmee het mogelijk wordt om de producten aan verschillende testscenario's te onderwerpen.
 Dit testraamwerk maakt gebruik van een grote set aan drivers en bibliotheken om een correcte werking te garanderen.
-Een direct gevolg hiervan is dat het installatieproces op een nieuwe testtoren een uitgebreide klus is.
-Hiernaast groeit het aantal gebruikers van het testraamwerk continu samen met het aantal drivers en bibliotheken.
-Het doel is om een systeem te ontwikkelen dat Televic kan bijstaan bij het installatie en verspreidingsproces.
-Een verdere analyse is wel nodig.
-Zo is het mogelijk om een applicatie te ontwikkelen die voldoet aan de initiële probleemstelling maar ook uitbreidbaar is naar de toekomst toe.
+Een direct gevolg hiervan is dat het installatieproces op een nieuwe testtoren veel tijd in beslag neemt en foutgevoelig is.
+Het is belangrijk om rekening te houden met deze fouten en een rampenplan te voorzien.
+Hiernaast groeit het aantal gebruikers van het testraamwerk continu samen met het aantal drivers, bibliotheken en programma's die verspreid moeten worden.
+Verder dient elk nieuw toestel op het raamwerk ondersteund te worden waardoor er jaarlijks ettelijke releases van het raamwerk verspreid moeten worden.
+Er moet dus een antwoord gegeven worden op de volgende vragen:
+\begin{itemize}
+\item Wat moet verzonden worden naar de gebruikers?
+\item Hoe raakt de software van de producent bij de gebruiker?
+\end{itemize}
+Het doel is om een systeem te ontwikkelen dat Televic kan bijstaan bij het installatieproces en verspreidingsproces maar ook om een systeem te ontwikkelen dat kan blijven gebruikt worden in de toekomst.
+Schaalbaarheid en flexibiliteit zijn hierbij zeer belangrijk.
 
 %Packager
-De probleemanalyse onthulde al snel dat dit probleem onder te verdelen is in verschillende deelproblemen.
+De probleemanalyse onthulde dus dat het probleem onder te verdelen is in verschillende deelproblemen (Wat wordt verzonden en hoe wordt dit aangepakt).
 Het testraamwerk bestaat uit verschillende componenten, hieronder vallen de drivers en bibliotheken.
-Elke component heeft een aparte installatiewijze en moeten sommige componenten voor andere geïnstalleerd worden.
+Elke component heeft een aparte installatiewijze en sommige componenten moeten voor andere geïnstalleerd worden.
 Zo zal Python één van de eerste componenten zijn die geïnstalleerd moet worden.
 Hiernaast moeten verscheidene componenten geconfigureerd tijdens het installatieproces aan de hand van een configuratiebestand.
-Dit configuratiebestand hoort samen met de testtoren waarop het testraamwerk op geïnstalleerd word.
+Dit configuratiebestand is afhankelijk van testtoren waarop het testraamwerk op geïnstalleerd word.
 Door gebruik te maken van additionele software worden verschillen in implementaties, door bijvoorbeeld verschillende programmeertalen, opgevangen.
-Een stuk van de applicatie zal dus bestaan uit deze additionele software die instaat voor het inpakken van de componenten.
-In de rest van de thesis zal naar dit onderdeel de \emph{packager} heten.
-Hiervoor kan beroep gedaan worden op verscheidene technologieën, structuren en architecturen die besproken werden in Sectie~\vref{sec:technologieen}.
+Een deel van de applicatie zal dus bestaan uit deze additionele software die instaat voor het inpakken van de componenten: de \emph{packager}.
+Hiervoor kan beroep gedaan worden op verscheidene technologieën, structuren en architecturen die besproken werden in Sectie~\ref{sec:technologieen}.
+Door gebruik te maken van één van deze technologieën is geweten wat er wordt verzonden.
 
 %Server
-De probleemanalyse onthulde ook dat de verschillende executables verspreidt moeten worden.
+Naast de wat moet er ook geweten zijn hoe de software bij de gebruikers moet geraken.
 Door dit proces te automatiseren, is het mogelijk om waardevolle informatie te verzamelen.
 Met deze informatie kunnen rapporten gegeneerd worden over het deployment proces.
 In Secties~\ref{sec:deployment} - \ref{sec:caseStudies} werden verschillende problemen maar ook oplossingen besproken die aan de basis liggen voor het ontwerp van dit onderdeel van de applicatie. 
@@ -57,12 +64,14 @@ Met behulp van deze basis is het mogelijk om een demo te produceren voor de fina
   \label{fig:overzichtsDiagram}
 \end{figure}
 
-\section{Databank ontwerp}\label{sec:databank}
-In de voorgaande Sectie werd aangehaald met welke problemen Televic kampt.
-Eén van de problemen is de continue groei van pakketten waar het framework gebruikt van maakt en het aantal gebruikers die het framework gebruiken.
-Om dit probleem aan te pakken wordt een databank ontworpen voor het opslaan van alle cruciale data over zowel het installatieproces en alle gebruikers.
+
+\section{Architectuur}
+
+\subsection{Databank ontwerp}\label{sec:databank}
+Eén van de problemen is de continue toename aan pakketten waar het framework gebruikt van maakt en het aantal gebruikers die het framework gebruiken.
+Om dit probleem aan te pakken wordt een databank ontworpen voor het opslaan van alle cruciale data over zowel het installatieproces en als de gebruikers.
 In overleg met Televic werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
-Het ontwerp van de databank is terug te vinden in Figuur~\vref{fig:databank}.
+Het ontwerp van de databank is terug te vinden in Figuur~\ref{fig:databank}.
 
 \begin{figure}[!ht]
 \centering
@@ -75,16 +84,16 @@ De tabellen tower en hardware\_component dienen om iedere gebruiker, typisch een
 Iedere toren heeft een ID, naam en serienummer.
 De combinatie van deze drie waarden is uniek binnen het bedrijf en de combinatie kan gebruikt worden als identificatie binnen het systeem maar deze combinatie draagt geen betekenis voor een gebruiker.
 Om dit op te vangen wordt aan iedere toren een alias gekoppeld waardoor de identificatie voor mensen vlotter kan verlopen.
-Elke toren bestaat typisch uit verschillende hardware componenten, zoals voedingen of netwerkkaarten, die nodig zijn om testen uit te voeren.
+Elke toren bestaat typisch uit verschillende hardwarecomponenten, zoals voedingen of netwerkkaarten, die nodig zijn om testen uit te voeren.
 Iedere component is gemaakt door een bepaalde fabrikant en krijgt van de fabrikant een serienummer.
 Vanuit het bedrijf wordt losstaand hiervan een nummer toegekend aan iedere component die gebruikt wordt om de calibratie instellingen te achterhalen.
-Iedere hardware component gebruikt firmware om correct te functioneren.
+Iedere hardwarecomponent gebruikt firmware om correct te functioneren.
 Naast alle bovengenoemde informatie wordt ook de versie van de firmware opgeslagen.
 Door het opslaan van al deze informatie wordt het mogelijk om:
 \begin{enumerate}
 \item Torens van elkaar te onderscheiden
-\item Achterhalen welke hardware componenten aanwezig zijn op welke toren
-\item Welke firmware versie draait op welke hardware component
+\item Hardware componenten te koppelen aan torens
+\item Firmware versies te koppelen aan hardware componenten
 \end{enumerate}
 
 Naast informatie over de gebruikers wordt ook informatie over de verschillende installers en pakketten bijgehouden.
@@ -99,10 +108,10 @@ Zo kan een driver voor een voeding gekoppeld worden aan de entry van de voeding 
 Op deze wijze worden de hardware-software afhankelijkheden bijgehouden.
 Van ieder pakket wordt bijgehouden welk type pakket het is (een executabel, zip bestand, \ldots), de prioriteit voor de installatievolgorde, een korte beschrijving en de release datum.
 Naast al deze informatie wordt er ook bijgehouden welke pakketten afhankelijk zijn van elkaar.
-Een voorbeeld is hiervan is een testraamwerk pakket en een pakket waarmee Python geïnstalleerd wordt.
+Een voorbeeld is hiervan is een testraamwerkpakket en een pakket waarmee Python geïnstalleerd wordt.
 Het testraamwerk is afhankelijk van Python om correct te functioneren.
 Zo worden de verschillende software-software afhankelijkheden bijgehouden.
-Voordat een installer gemaakt wordt, die een testraamwerk pakket bevat, kan gecontroleerd worden dat ook het Python installatie pakket aanwezig is.
+Voordat een installer gemaakt wordt, die een testraamwerkpakket bevat, kan gecontroleerd worden dat ook het Python-installatiepakket aanwezig is.
 
 \begin{figure}[!ht]
 \centering
@@ -117,8 +126,6 @@ Dankzij deze testen is het duidelijk of een bepaald pakket correct functioneert 
 Doordat er een link wordt bijgehouden tussen een hardware component en een pakket, is het mogelijk om hieruit waardevolle informatie te halen.
 Zo kan bijvoorbeeld een verband gelegd worden tussen een bepaalde versie van een driver en de firmware die aanwezig is in een hardware component.
 Deze informatie kan gebruikt worden om problemen in testtorens te vermijden.
-
-\section{Architectuur}
 
 \subsection{Packager}
 De architectuur van de packager wordt gebaseerd op de architectuur en structuur van het Qt installer framework.

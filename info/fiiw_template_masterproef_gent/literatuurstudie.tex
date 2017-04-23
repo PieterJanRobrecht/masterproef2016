@@ -241,7 +241,7 @@ Iedere activiteit wordt uitgevoerd door een agent.
 
 \begin{figure}[!ht]
 \centering
-\makebox[0pt]{\includegraphics[scale=0.9]{afbeelding/deploymentModelORYA.png}}
+\makebox[0pt]{\includegraphics[scale=1]{afbeelding/deploymentModelORYA.png}}
 \caption{Deployment proces model \citep{lestideau2003providing}}
 \label{fig:deploymentModel}
 \end{figure}
@@ -484,19 +484,26 @@ Het gebruik van de gefaseerde strategie kan het probleem met de tijdszones omzei
 Een hybride oplossing is hier dus aangewezen.
 
 \section{Architecturen}
-%%% TODO schrijven
+Tot op heden werd vooral gekeken naar mogelijke technologieën en tools die gebruikt kunnen worden voor het verspreiden van software.
+In de komende secties worden enkele architecturen aangehaald die ook een oplossing bieden voor het verspreiden van software.
+Met een architectuur is het mogelijk om zelf verscheidene ontwerp- en implementatiebeslissingen te nemen.
+Zo ligt de programmeertaal niet vast en kan een taal gekozen worden die besturingssysteem onafhankelijk is.
+In de volgende secties wordt vooral gekeken of de architecturen een schaalbare oplossing bieden voor het deployment proces.
 
-\subsection{Software Dock Architectuur}\label{sec:softwareDock}
-\citet{hall1999cooperative} bespreekt een interessante architectuur.
-Het Software Dock research project creëerde een framework om de samenwerking tussen software producenten en gebruikers te verbeteren.
+\subsection{Client/Server architectuur}
+%https://books.google.be/books?hl=nl&lr=&id=Y9q-i_HGtAAC&oi=fnd&pg=PA3&dq=client+server+architecture+AND+deployment&ots=4CvLhsWpY_&sig=2THdl5nIpIDScXYlNCvg1P7L2h0#v=onepage&q=client%20server%20architecture%20AND%20deployment&f=false
+
+\subsection{Software dock architectuur}\label{sec:softwareDock}
+\citet{hall1999cooperative} bespreekt een interessante architectuur die gebruikt kan worden voor het verspreiden van software.
+Het Software Dock research project creëerde een raamwerk om de samenwerking tussen software producenten en gebruikers te verbeteren.
 In Figuur~\vref{fig:softwareDock} wordt de ontworpen architectuur voorgesteld.
 Er worden twee verschillende componenten gedefinieerd waarmee de producenten en gebruikers voorgesteld worden.
 In de architectuur worden de verschillende producenten voorgesteld aan de hand van een release dock en worden de gebruikers voorgesteld als een field dock.
-Aan deze docks worden verschillende agents gekoppeld.
-Elke agent hoort typisch bij één stap uit de software levenscyclus die besproken wordt in Sectie~\vref{sec:softwareLevenscyclus}.
-Naast de verschillende docks wordt ook een wide-area event systeem gedefinieerd.
+Aan deze docks worden verschillende agenten gekoppeld.
+Elke agent hoort typisch bij één stap uit de software levenscyclus die besproken werd in Sectie~\ref{sec:softwareLevenscyclus}.
+Naast de verschillende docks wordt ook een wide-area eventsysteem gedefinieerd.
 Met dit systeem wordt de communicatie tussen de docks aangeboden.
-\citet{hall1997architecture} legt alle stappen van de Software Dock architectuur uit.
+\citet{hall1997architecture} bespreekt in detail hoe de Software Dock architectuur gebruikt kan worden voor het verspreiden van software.
 
 \begin{figure}[!ht]
 \centering
@@ -505,9 +512,19 @@ Met dit systeem wordt de communicatie tussen de docks aangeboden.
 \label{fig:softwareDock}
 \end{figure}
 
-De release dock is een server die zich bevindt bij de software producent.
-Dit dock biedt een release repository aan waar de gebruikers de nodige software selecteren voor deployment.
+De release dock is een server die zich bevindt bij de softwareproducent.
+De release dock biedt een release-repository aan waaruit de gebruikers de applicaties selecteren voor deployment.
 In de release dock wordt ieder release semantisch beschreven aan de hand van een Deployable Software Description file.
+Dit bestand bevat onder andere:
+\begin{itemize}
+\item \textbf{Assertion}: deze worden gebruikt om beperkingen die aan de gebruikerskant waar moeten te beschrijven.
+Als niet aan deze beperkingen voldaan wordt, zal het deployment proces falen.
+\item \textbf{Afhankelijkheden}: deze worden gebruikt om beperkingen van de release te beschrijven.
+Als deze niet voldaan zijn aan de gebruikerskant dan kunnen nog oplossingen gevonden worden.
+Bijvoorbeeld door additionele software te installeren kan de beperking voldaan worden.
+\item \textbf{Configuratie}: deze zorgt voor een beschrijving van de software die wordt uitgegeven.
+Hierbij horen bijvoorbeeld varianten en aangepaste versies.
+\end{itemize}
 Elke release wordt vergezeld door enkele agents die de semantische betekenis lezen en zo de deployment kunnen uitvoeren.
 Aan de hand van interfaces kunnen de agents aan de services en inhoud van de release dock.
 Bij het wijzigen van een software release zal de release dock verschillende events afvuren.
@@ -519,7 +536,7 @@ Op basis van deze informatie wordt een context opgebouwd waarin de releases van 
 De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het gebruikers systeem ondervragen.
 Aangezien kritische client-side informatie op een gestandaardiseerde wijze aangeboden wordt, met behulp van een geneste collectie van pair-values die een hiërarchie vormen, kan de installatie van de software gepersonaliseerd worden \citep{hall1999cooperative}.
 
-\subsubsection{Event based services}\label{sec:event}
+\subsubsection{Event based service}\label{sec:event}
 %%% TODO
 Een belangrijk onderdeel van de software dock architectuur is de event service.
 Deze handelt de communicatie af tussen de verschillende docks en is een spilfiguur in de architectuur.
@@ -540,13 +557,13 @@ Hiernaast moet de server niet weten wie allemaal de events ontvangt die hij prod
 \begin{figure}[!ht]
 \centering
 \makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/pubsubArchi.png}}
-\caption{Publish/Subscribe voorbeeld \citep{pietzuch2002hermes}}
+\caption{Broker netwerk \citep{pietzuch2002hermes}}
 \label{fig:pubsubArchi}
 \end{figure}
 
 Een naïeve aanpak, volgens \citet{carzaniga2001design}, is het gebruiken van één centrale server waar alle subscripties worden bijgehouden, waar alle events toekomen, waar de bestemming van het event beslist wordt en waar het event wordt doorgestuurd naar de gepaste subscribers.
 Deze strategie is eenvoudig te implementeren maar deze werkt de schaalbaarheid tegen.
-Dit was ook al duidelijk in Figuur~\vref{fig:pubsubArchi} waar verschillende ``Brokers'' aanwezig zijn.
+Dit was ook al duidelijk in Figuur~\ref{fig:pubsubArchi} waar verschillende ``Brokers'' aanwezig zijn.
 Het is belangrijk om stil te staan bij enkele ontwerp beslissingen zodanig dat de service die in Figuur~\ref{fig:pubsubService} zichtbaar is, implementeerbaar is.
 
 \begin{figure}[!ht]
@@ -570,13 +587,21 @@ Een voorbeeld van zo'n event is terug te vinden in Figuur~\vref{fig:pubsubNot}
 \end{figure}
 
 \section{Technologieën}\label{sec:technologieen}
+In de vorige secties werden oplossingen gezocht voor het verspreiden van software naar verschillende gebruikers.
+Hierbij werd vooral rekening gehouden met op welke wijze de software verzonden word.
+Er werd nagegaan of een oplossing zorgde voor een schaalbare architectuur die mogelijkheden biedt naar de toekomst toe.
+Er werd zelfs gezocht naar een rampenplan dat gebruikt kan worden als er fouten optreden tijdens het installatieproces (Sectie~\vref{sec:rollback}.
+In wat volgt wordt niet meer gekeken naar hoe de software bij de gebruiker raakt maar wat er bij de gebruiker raakt.
+
 Implementaties in verschillende programmeertalen, verschillende data representatie formats of incompatibele runtime environments kunnen aan de basis liggen voor een lastige integratie van computerprogramma's.
 Door gebruik te maken van additionele software, wordt het mogelijk om het gat tussen de verschillen te overbruggen  \citep{callahan1998software}.
 Het Python testraamwerk is een verzameling van verschillende drivers en bibliotheken elk met een eigen implementatie.
-In de volgende Sectie wordt er gekeken naar verschillende software oplossingen waarmee dit probleem opgelost kan worden.
+Door additionele software toe te voegen is het mogelijk dat verschillende software ``pakketten'' op een gelijkaardige manier behandelt worden.
+In wat volgt zullen verschillende technologieën en tools besproken worden die ervoor zorgen dat verschillende software ``pakketten'' een geheel vormen.
+Dit geheel kan vervolgens verzonden worden naar de gebruikers waar de software geïnstalleerd moet worden.
 
 Om de verschillende technologieën te vergelijken werd een algemeen testscenario uitgedacht.
-Het scenario ziet er als volgt uit: er moet een installer gemaakt worden waarmee twee verschillende pakketten (die drivers en bibliotheken moeten voorstellen) geïnstalleerd moeten worden.
+Het scenario ziet er als volgt uit: er moet een geheel gemaakt worden waarmee twee verschillende pakketten (die drivers en bibliotheken moeten voorstellen) geïnstalleerd moeten worden.
 Hierna werd er onderzocht hoe één van de twee pakketten geüpdatet kon worden.
 Door de technologieën te onderwerpen aan een test, wordt het mogelijk om de voor- en nadelen van iedere technologie te achterhalen.
 Hiernaast wordt het ook mogelijk om de technologieën te vergelijken aangezien zij eenzelfde functionaliteit moeten voorzien.
