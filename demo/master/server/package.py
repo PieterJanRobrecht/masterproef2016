@@ -32,6 +32,11 @@ class Package(object):
 
     @classmethod
     def convert_to_package(cls, row):
+        """
+            Map the row variables with the database
+        :param row:
+        :return:
+        """
         p = Package()
         p.id_package = row["idPackage"]
         p.name = row["name"]

@@ -9,6 +9,11 @@ from message import Message
 
 
 def create_zip(package_location):
+    """
+        Create a zip file on the given location
+    :param package_location:
+    :return:
+    """
     new_tar = os.path.join(package_location, "package_tar.tar")
     with tarfile.open(new_tar, "w") as tar:
         tar.add(package_location, arcname=os.path.basename(package_location))
@@ -17,6 +22,12 @@ def create_zip(package_location):
 
 
 def has_include(package_name, release_zip_location):
+    """
+        Check if package has include folder
+    :param package_name:
+    :param release_zip_location:
+    :return:
+    """
     name = package_name + "/incl"
     for root, dirs, files in os.walk(release_zip_location):
         if name in files or name in dirs:
@@ -35,6 +46,16 @@ class InstallAgent(Agent):
         }
 
     def action(self, client):
+        """
+            Rename the fieldcontainer
+            Create new container
+            Send update to broker
+            Get meta_data file
+            For every package install
+            If fail quarantine container and send new update
+        :param client:
+        :return:
+        """
         print("INSTALL AGENT -- Starting")
         # Unzip folder
         self.unzip()
@@ -90,6 +111,14 @@ class InstallAgent(Agent):
         self.field_dock.kill_containers()
 
     def perform_execute(self, client, package_name, has_include_folder):
+        """
+            Locate install script in container
+            Execute command in container
+        :param client:
+        :param package_name:
+        :param has_include_folder:
+        :return:
+        """
         print("INSTALL AGENT -- Performing action: EXECUTE")
         script_location = "/usr/test/" + package_name + "/meta/install_script.py"
         command = "python " + script_location
@@ -107,12 +136,23 @@ class InstallAgent(Agent):
         print "hello"
 
     def unzip(self):
+        """
+            Unzip release zip
+        :return:
+        """
         release_zip = os.path.join(self.release_zip_location, "release.zip")
         zip_ref = zipfile.ZipFile(release_zip, 'r')
         zip_ref.extractall(self.release_zip_location)
         zip_ref.close()
 
     def install_package(self, client, package):
+        """
+            Copy package to container
+            Perform installation of package
+        :param client:
+        :param package:
+        :return:
+        """
         # Copy package to container
         package_name = package.name + package.version
         package_location = self.find(package_name, self.release_zip_location)
@@ -125,13 +165,30 @@ class InstallAgent(Agent):
         self.types[package.type](client, package_name, has_include_folder)
 
     def quarantine(self):
+        """
+            Rename fieldcontainer to quarantine
+            Rename oldcontainer to fieldcontainer
+        :return:
+        """
         self.rename_container("fieldcontainer", "quarantined")
         self.rename_container("old_container", "fieldcontainer")
 
     def send_update(self):
+        """
+            Send update to broker
+        :return:
+        """
         self.field_dock.update_info_installer(self.installer)
 
     def check_installation(self, client, package):
+        """
+            Locate test script in container
+            Perform execute in container
+            Send rapport to broker
+        :param client:
+        :param package:
+        :return:
+        """
         start_time = time.time()
         package_name = package.name + package.version
         script_location = "/usr/test/" + package_name + "/meta/test_script.py"

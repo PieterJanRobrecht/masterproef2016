@@ -28,6 +28,11 @@ class Tower(object):
 
     @classmethod
     def convert_to_tower(cls, data):
+        """
+            Map the data variables with the database
+        :param data:
+        :return:
+        """
         if type(data) is not dict:
             d = ast.literal_eval(data)
         else:

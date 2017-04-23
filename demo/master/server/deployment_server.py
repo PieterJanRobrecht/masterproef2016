@@ -1,3 +1,4 @@
+import sys
 import wx
 
 from release_dock import ReleaseDock
@@ -8,30 +9,51 @@ from overview_impl import OverviewGui
 
 
 def start_release_dock(interface, port, release_interface, release_port):
+    """
+        Create ReleaseDock object and start the services
+    :param interface:
+    :param port:
+    :param release_interface:
+    :param release_port:
+    :return:
+    """
     print("RELEASE DOCK -- Initialisation")
-    # '' = symbolic meaning for all interfaces
     release_dock = ReleaseDock(interface, port)
-    # Starting broker
     thread, release_thread = release_dock.start_release_service(release_interface, release_port)
     return release_dock, thread, release_thread
 
 
 def start_broker(interface, port):
+    """
+        Create Broker and start the services
+    :param interface:
+    :param port:
+    :return:
+    """
     print("BROKER -- Initialisation")
     broker = Broker(interface, port)
     return broker.start_service()
 
 
 def listen_to_keypress(release_dock):
+    """
+        Listen to keyboard
+        When enter is pressed start GUI
+    :param release_dock:
+    :return:
+    """
     while True:
-        raw_input("Press Enter to open the overview screen")
-        app = wx.App(False)
-        frame = OverviewGui(None, release_dock)
-        frame.Show(True)
-        if release_dock.current_release is not None:
-            frame.set_release_field()
-        app.MainLoop()
-        app.Destroy()
+        try:
+            raw_input("Press Enter to open the overview screen")
+            app = wx.App(False)
+            frame = OverviewGui(None, release_dock)
+            frame.Show(True)
+            if release_dock.current_release is not None:
+                frame.set_release_field()
+            app.MainLoop()
+            app.Destroy()
+        except KeyboardInterrupt:
+            sys.exit()
 
 
 def start_packager_service(release_dock):
@@ -42,11 +64,17 @@ def start_packager_service(release_dock):
 
 
 def main():
-    broker_interface = "192.168.1.8"
+    """
+        Start release dock
+        Start broker
+        Subscribe to broker
+    :return:
+    """
+    broker_interface = "localhost"
     broker_port = 12347
-    release_dock_interface = "192.168.1.8"
+    release_dock_interface = "localhost"
     release_dock_port = 12345
-    release_interface = "192.168.1.8"
+    release_interface = "localhost"
     release_port = 12346
     start_broker_boolean = True
     release_dock, release_dock_thread, release_thread = start_release_dock(release_dock_interface, release_dock_port,

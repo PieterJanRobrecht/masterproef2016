@@ -9,6 +9,13 @@ from release_dock import ReleaseDock
 
 
 def write_to_database(installer):
+    """
+        Add installer to database
+        Get the id of the last added installer
+        For every package add to database, get id out the database and link package with installer
+    :param installer:
+    :return:
+    """
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
@@ -57,6 +64,10 @@ def write_to_database(installer):
 
 
 def get_all_packages():
+    """
+        Get the 50 last added packages
+    :return:
+    """
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
@@ -114,6 +125,12 @@ class ReleaseCreator(release_creator_gui.MyFrame1):
         self.last_actions(True)
 
     def last_actions(self, make_folders):
+        """
+            Set the current release of the release dock
+            Create file structure
+        :param make_folders:
+        :return:
+        """
         # Create file structure
         self.overview_gui.release_dock.current_release = self.installer
         if make_folders:
@@ -226,6 +243,10 @@ class SelectPackageFrame(release_creator_gui.MyFrame2):
 
 
 def get_all_installers():
+    """
+        Get the 50 last added installers
+    :return:
+    """
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
@@ -247,6 +268,12 @@ def get_all_installers():
 
 
 def get_package(id_package, cnx):
+    """
+        Get the package with the right id
+    :param id_package:
+    :param cnx:
+    :return:
+    """
     cursor = cnx.cursor(buffered=True, dictionary=True)
     try:
         query = "SELECT * FROM package WHERE idPackage = " + str(id_package) + ";"
@@ -261,6 +288,11 @@ def get_package(id_package, cnx):
 
 
 def get_all_packages_with_installer(selected_installer):
+    """
+        Get all the id of the packages that belong with an installer
+    :param selected_installer:
+    :return:
+    """
     id = selected_installer.id_installer
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,

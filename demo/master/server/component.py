@@ -19,6 +19,11 @@ class Component(object):
 
     @classmethod
     def convert_to_component(cls, component):
+        """
+            Map the component variables with the database
+        :param component:
+        :return:
+        """
         if type(component) is not dict:
             d = ast.literal_eval(component)
         else:

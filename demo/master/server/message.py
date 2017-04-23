@@ -13,6 +13,14 @@ class Message(object):
         self.data = None
 
     def create_message(self, sender, message_type, data):
+        """
+            Take message id
+            Add parameters to message
+        :param sender:
+        :param message_type:
+        :param data:
+        :return:
+        """
         self.id = Message.message_counter
         Message.message_counter += 1
         self.sender = sender

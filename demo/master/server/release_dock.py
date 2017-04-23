@@ -19,6 +19,13 @@ from threading import Thread
 
 
 def copy_package_to_release(package, destination):
+    """
+        Create folders meta, incl and data
+        Copy tree from old location
+    :param package:
+    :param destination:
+    :return:
+    """
     dir_name = package.name + package.version
     root = os.path.join(destination, dir_name)
     meta = os.path.join(root, "meta")
@@ -35,6 +42,11 @@ def copy_package_to_release(package, destination):
 
 
 def create_folder_structure(release):
+    """
+        Create folders config, incl, packages
+    :param release:
+    :return:
+    """
     dir_name = release.name + release.version
     root = os.path.join(release.disk_location, dir_name)
     config = os.path.join(root, "config")
@@ -52,6 +64,13 @@ def create_folder_structure(release):
 
 
 def add_files_to_package_folder(package, meta_dir):
+    """
+        Add metadata, install and test script
+        If framework package add start script
+    :param package:
+    :param meta_dir:
+    :return:
+    """
     meta_file = os.path.join(meta_dir, "metadata.json")
     json = open(meta_file, 'w+')
     json.write(str(package))
@@ -65,6 +84,13 @@ def add_files_to_package_folder(package, meta_dir):
 
 
 def copy_old_meta_folder(package, meta_dir):
+    """
+        Search old meta folder
+        Copy tree
+    :param package:
+    :param meta_dir:
+    :return:
+    """
     # Search old meta folder
     try:
         cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
@@ -100,6 +126,12 @@ def copy_old_meta_folder(package, meta_dir):
 
 
 def zip_directory(directory, zipf):
+    """
+        Zip release directory
+    :param directory:
+    :param zipf:
+    :return:
+    """
     # zipf is zipfile handle
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -107,6 +139,12 @@ def zip_directory(directory, zipf):
 
 
 def send_file(conn, location):
+    """
+        Send file to connected dock
+    :param conn:
+    :param location:
+    :return:
+    """
     if type(location) is file:
         location = str(location.name)
     file_size = str(os.stat(location).st_size)
@@ -120,6 +158,12 @@ def send_file(conn, location):
 
 
 def add_files_to_release(release, config):
+    """
+        Add dockerfile and meta data file from installer
+    :param release:
+    :param config:
+    :return:
+    """
     # Create Dockerfile
     docker_file_location = os.path.join(config, "Dockerfile")
     open(docker_file_location, "w+")
@@ -130,6 +174,12 @@ def add_files_to_release(release, config):
 
 
 def get_tower_of_sender(cnx, sender):
+    """
+        Find the installer id of the sender
+    :param cnx:
+    :param sender:
+    :return:
+    """
     cursor = cnx.cursor(buffered=True, dictionary=True)
     cursor.execute("""SELECT idTower FROM tower WHERE tower.hostname = %s""", (sender,))
     for row in cursor:
@@ -138,6 +188,13 @@ def get_tower_of_sender(cnx, sender):
 
 
 def change_tower_installer(cnx, id_tower, id_installer):
+    """
+        Change installer id of the tower
+    :param cnx:
+    :param id_tower:
+    :param id_installer:
+    :return:
+    """
     cursor = cnx.cursor(buffered=True, dictionary=True)
     cursor.execute("""UPDATE tower SET Installer_idInstaller = %s WHERE idTower = %s""", (id_installer, id_tower))
     cnx.commit()
@@ -145,6 +202,13 @@ def change_tower_installer(cnx, id_tower, id_installer):
 
 
 def get_installer_of_sender(cnx, name, version):
+    """
+        Get installer from database using name and version
+    :param cnx:
+    :param name:
+    :param version:
+    :return:
+    """
     cursor = cnx.cursor(buffered=True, dictionary=True)
     cursor.execute("""SELECT idInstaller FROM installer WHERE name = %s AND installerVersion = %s""", (name, version))
     for row in cursor:
@@ -153,6 +217,12 @@ def get_installer_of_sender(cnx, name, version):
 
 
 def find_tower_of_sender(cnx, sender):
+    """
+        Get tower id from the sender
+    :param cnx:
+    :param sender:
+    :return:
+    """
     cursor = cnx.cursor(buffered=True, dictionary=True)
     cursor.execute("""SELECT idTower FROM tower WHERE hostname = %s""", (sender,))
     for row in cursor:
@@ -161,6 +231,12 @@ def find_tower_of_sender(cnx, sender):
 
 
 def find_installer_of_sender(cnx, sender):
+    """
+        Get installer id using sender
+    :param cnx:
+    :param sender:
+    :return:
+    """
     cursor = cnx.cursor(buffered=True, dictionary=True)
     cursor.execute("""SELECT Installer_idInstaller FROM tower WHERE hostname = %s""", (sender,))
     for row in cursor:
@@ -169,6 +245,14 @@ def find_installer_of_sender(cnx, sender):
 
 
 def find_package(cnx, id_installer, name, version):
+    """
+        Find package id using name and version
+    :param cnx:
+    :param id_installer:
+    :param name:
+    :param version:
+    :return:
+    """
     cursor = cnx.cursor(buffered=True, dictionary=True)
     cursor.execute("""SELECT idPackage FROM package,
                       (SELECT * FROM installer_has_package WHERE Installer_idInstaller = %s) AS T
@@ -179,6 +263,17 @@ def find_package(cnx, id_installer, name, version):
 
 
 def add_diagnostics(cnx, start, end, result, id_sender, id_installer, id_package):
+    """
+        Add rapport to database
+    :param cnx:
+    :param start:
+    :param end:
+    :param result:
+    :param id_sender:
+    :param id_installer:
+    :param id_package:
+    :return:
+    """
     start = datetime.datetime.fromtimestamp(start).strftime('%Y-%m-%d %H:%M:%S')
     end = datetime.datetime.fromtimestamp(end).strftime('%Y-%m-%d %H:%M:%S')
     cursor = cnx.cursor(buffered=True, dictionary=True)
@@ -213,6 +308,13 @@ class ReleaseDock(Dock):
         self.initiate_actions()
 
     def start_release_service(self, interface, port):
+        """
+            Open socket
+            Start dock service
+        :param interface:
+        :param port:
+        :return:
+        """
         print("RELEASE DOCK -- Starting services")
         self.connect_to_database()
         release_thread = self.open_release_socket(interface, port)
@@ -221,6 +323,10 @@ class ReleaseDock(Dock):
         return thread, release_thread
 
     def connect_to_database(self):
+        """
+            Connect to database
+        :return:
+        """
         print("RELEASE DOCK -- Connecting to database")
         self.cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                            host=ReleaseDock.database_host,
@@ -229,6 +335,10 @@ class ReleaseDock(Dock):
         print("RELEASE DOCK -- Connected to database")
 
     def check_database_connection(self):
+        """
+            Check if still connected with database
+        :return:
+        """
         sq = "SELECT NOW()"
         try:
             self.cursor.execute(sq)
@@ -241,11 +351,22 @@ class ReleaseDock(Dock):
                 return False
 
     def connect_to_broker(self, sub_dict, broker_interface, broker_port):
+        """
+            Connect to broker
+        :param sub_dict:
+        :param broker_interface:
+        :param broker_port:
+        :return:
+        """
         print("RELEASE DOCK -- Connecting to Broker")
         super(ReleaseDock, self).connect_to_broker(sub_dict, broker_interface, broker_port)
         print("RELEASE DOCK -- Subscribed and ready")
 
     def handle_message(self):
+        """
+            Perform the appropriate action based on message type
+        :return:
+        """
         while True:
             data = self.message_queue.get()
             if Message.check_format(data):
@@ -257,10 +378,20 @@ class ReleaseDock(Dock):
                 self.actions[relayed_message.message_type](relayed_message)
 
     def save_new_tower(self, message):
+        """
+            Add tower to database
+        :param message:
+        :return:
+        """
         tower = Tower.convert_to_tower(message.data)
         self.write_tower(tower, message.sender)
 
     def change_tower(self, message):
+        """
+            Change installer info of tower or component info
+        :param message:
+        :return:
+        """
         # Convert to dictionary
         print("RELEASE DOCK -- Changing tower")
         if type(message.data) is not dict:
@@ -276,6 +407,11 @@ class ReleaseDock(Dock):
         self.update_gui()
 
     def handle_rapport(self, message):
+        """
+            Add rapport to database
+        :param message:
+        :return:
+        """
         print("RELEASE DOCK -- Handling rapport \n\t Rapport: " + str(message.data))
         # TODO only works for the rapport of a package
         if type(message.data) is not dict:
@@ -325,6 +461,11 @@ class ReleaseDock(Dock):
             print("RELEASE DOCK -- Something went wrong: \n\t\t " + str(err))
 
     def notify_release(self):
+        """
+            Create zip
+            Send release message to broker
+        :return:
+        """
         # Zip folder
         self.zip_current_release()
         # Create release message
@@ -344,6 +485,10 @@ class ReleaseDock(Dock):
         zipf.close()
 
     def create_folders(self):
+        """
+            Create complete folder structure for release
+        :return:
+        """
         release = self.current_release
         # Create folder structure and return "packages" folder
         packages_dir = create_folder_structure(release)
@@ -376,6 +521,11 @@ class ReleaseDock(Dock):
         return thread
 
     def transfer_release(self):
+        """
+            Send zip file from local to connected dock
+            Send agents to connected dock
+        :return:
+        """
         print("RELEASE DOCK -- Listening to port " + str(self.data_port) + " on interface " + self.data_host)
         # timeout in sec
         timeout = 3

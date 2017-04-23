@@ -29,6 +29,11 @@ class Installer(object):
 
     @classmethod
     def convert_to_installer(cls, message_data):
+        """
+            Map the component variables with the database
+        :param message_data:
+        :return:
+        """
         if type(message_data) is not dict:
             d = ast.literal_eval(message_data)
         else:

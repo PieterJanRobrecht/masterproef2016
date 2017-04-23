@@ -8,6 +8,10 @@ from tower import Tower
 
 
 def get_all_towers():
+    """
+        Collect all the tower information
+    :return:
+    """
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
@@ -28,6 +32,11 @@ def get_all_towers():
 
 
 def get_installer_name(id_installer):
+    """
+        Collect name and installerversion using installerid
+    :param id_installer:
+    :return:
+    """
     cnx = mysql.connector.connect(user=ReleaseDock.database_user, password=ReleaseDock.database_password,
                                   host=ReleaseDock.database_host,
                                   database=ReleaseDock.database_name)
@@ -55,6 +64,12 @@ class OverviewGui(release_creator_gui.MyFrame3):
         self.fill_table_with_towers()
 
     def release_current_installer(self, event):
+        """
+            Create install agent
+            Notify broker of release
+        :param event:
+        :return:
+        """
         # Create agents
         install_agent = InstallAgent()
         self.release_dock.agents.append(install_agent)
@@ -62,6 +77,11 @@ class OverviewGui(release_creator_gui.MyFrame3):
         self.release_dock.notify_release()
 
     def create_installer(self, event):
+        """
+            Open release creator GUI
+        :param event:
+        :return:
+        """
         self.Hide()
         self.frame = ReleaseCreator(None, self)
         self.frame.Show(True)

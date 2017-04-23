@@ -5,6 +5,11 @@ from message import Message
 
 
 def determine_port(message_type):
+    """
+        Determine which port to use based on the message type
+    :param message_type:
+    :return:
+    """
     if message_type == "release" or message_type == "update":
         return 54321
     else:
@@ -12,6 +17,13 @@ def determine_port(message_type):
 
 
 def send_notification(subscriber, port, notification):
+    """
+        Send message to socket
+    :param subscriber:
+    :param port:
+    :param notification:
+    :return:
+    """
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((subscriber, port))
     data = s.recv(1024)
@@ -24,6 +36,11 @@ def send_notification(subscriber, port, notification):
 
 
 def data_to_dict(message):
+    """
+        Convert data field from message to dictionary
+    :param message:
+    :return:
+    """
     if type(message) is dict:
         d = message
     else:
@@ -42,12 +59,20 @@ class Broker(Dock):
         self.initiate_actions()
 
     def start_service(self):
+        """
+            Start the dock services
+        :return:
+        """
         print("BROKER -- Starting services")
         thread = super(Broker, self).start_service()
         print("BROKER -- Services started")
         return thread
 
     def handle_message(self):
+        """
+            Perform the appropriate action based on the message type
+        :return:
+        """
         while True:
             data = self.message_queue.get()
             if Message.check_format(data):
@@ -55,6 +80,11 @@ class Broker(Dock):
                 self.perform_action(message)
 
     def perform_action(self, message):
+        """
+            Perform the action
+        :param message:
+        :return:
+        """
         print("BROKER -- Notifying action: " + message.message_type)
         self.actions[message.message_type](message)
         print("BROKER -- Action " + message.message_type + " notification send")
@@ -84,6 +114,11 @@ class Broker(Dock):
         # Save message in queue somewhere
 
     def subscribe(self, message):
+        """
+            Add the send of the message to the correct list
+        :param message:
+        :return:
+        """
         print("BROKER -- Subscribing new Dock " + message.sender + " for \n\t\t" + str(message.data))
         d = data_to_dict(message.data)
         list_for_subscribing = d["type"]
@@ -92,6 +127,11 @@ class Broker(Dock):
         # TODO send back message with counter
 
     def unsubscribe(self, message):
+        """
+            Remove the send of the message from the appropriate list
+        :param message:
+        :return:
+        """
         print("BROKER -- Unsubscribing Dock " + message.sender)
         d = data_to_dict(message.data)
         list_for_unsubscribing = d["type"]
@@ -99,6 +139,10 @@ class Broker(Dock):
             self.lookup[unsub].remove(message.sender)
 
     def initiate_lookup(self):
+        """
+            Create the lists for the subscribers
+        :return:
+        """
         # Lists with all the release docks listening for new or changed field docks
         self.lookup["new"] = []
         self.lookup["change"] = []
@@ -109,6 +153,10 @@ class Broker(Dock):
         self.lookup["update"] = []
 
     def initiate_actions(self):
+        """
+            Link the message types with the appropriate methods
+        :return:
+        """
         # From field dock to release dock
         self.actions["new"] = self.other_action
         self.actions["change"] = self.other_action
