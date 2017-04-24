@@ -70,11 +70,11 @@ def main():
         Subscribe to broker
     :return:
     """
-    broker_interface = "localhost"
+    broker_interface = "10.129.58.139"
     broker_port = 12347
-    release_dock_interface = "localhost"
+    release_dock_interface = "10.129.58.139"
     release_dock_port = 12345
-    release_interface = "localhost"
+    release_interface = "10.129.58.139"
     release_port = 12346
     start_broker_boolean = True
     release_dock, release_dock_thread, release_thread = start_release_dock(release_dock_interface, release_dock_port,

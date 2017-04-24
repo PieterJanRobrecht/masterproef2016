@@ -50,11 +50,11 @@ def main():
         Start GUI,
         Wait until all threads are closed
     """
-    field_dock_interface = "localhost"
+    field_dock_interface = "10.129.58.139"
     field_dock_port = 54321
     release_interface = None
     release_port = 12346
-    broker_interface = "localhost"
+    broker_interface = "10.129.58.139"
     broker_port = 12347
     field_dock, field_dock_thread = start_field_dock(field_dock_interface, field_dock_port,
                                                      release_interface, release_port)

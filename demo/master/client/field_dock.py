@@ -85,6 +85,16 @@ def read_installer_info(field_dock):
     field_dock.current_release = Installer.convert_to_installer(file.read())
 
 
+def receive_agents(s):
+    s.send("Ready")
+    length = s.recv(1024)
+    s.send("Received length")
+    file_size = int(str(length))
+    data = s.recv(file_size)
+    list_agents = dill.loads(data)
+    return list_agents
+
+
 class FieldDock(Dock):
     def __init__(self, host, port, release_interface, release_port):
         super(FieldDock, self).__init__()
@@ -124,7 +134,7 @@ class FieldDock(Dock):
         :return:
         """
         env = {"DOCKER_TLS_VERIFY": "1", "DOCKER_HOST": "tcp://192.168.99.100:2376",
-               "DOCKER_CERT_PATH": "C:\Users\Pieter-Jan\.docker\machine\machines\default",
+               "DOCKER_CERT_PATH": "C:/Users/Pieter-Jan/.docker/machine/machines/default",
                "DOCKER_MACHINE_NAME": "default", "COMPOSE_CONVERT_WINDOWS_PATHS": "true"}
         self.client = docker.from_env(environment=env)
 
@@ -225,13 +235,7 @@ class FieldDock(Dock):
 
         # Download agents
         print("FIELD DOCK -- Downloading agents")
-        s.send("Ready")
-        length = s.recv(1024)
-        s.send("Received length")
-        file_size = int(str(length))
-        data = s.recv(file_size)
-        list_agents = dill.loads(data)
-        self.agents = list_agents
+        self.agents = receive_agents(s)
         s.close()
         print("FIELD DOCK -- Downloaded all the agents")
 

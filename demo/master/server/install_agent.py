@@ -93,6 +93,13 @@ class InstallAgent(Agent):
                 success = False
                 print("INSTALL AGENT -- Test failed, container will be quarantined in the end")
 
+        # Install framework
+        framework_packages = (package for package in self.installer.packages if package.is_framework)
+        for package in framework_packages:
+            self.install_package(self.client, package)
+            if not self.check_installation(self.client, package):
+                success = False
+
         # Install all the other packages
         optional_packages = (package for package in self.installer.packages if package.optional)
         for package in optional_packages:
