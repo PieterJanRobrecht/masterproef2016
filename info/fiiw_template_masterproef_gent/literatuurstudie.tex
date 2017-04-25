@@ -14,14 +14,14 @@ Om te achterhalen wat mogelijk is om dit te realiseren, worden verscheidene tech
 De levenscyclus van software deployment kan volgens \citet{softwareDeployment,hall1999cooperative} beschreven worden in verschillend stappen, namelijk:
 \begin{itemize}
 \item \emph{Release}: de software is volledig samengesteld uit pakketten die voldoende metadata bevatten om de verschillende bronnen te beschrijven waarvan het pakket afhangt.
-\item \emph{Installatie}: de software moet overgebracht worden naar de client en geconfigureerd worden in voorbereiding op de activatie.
+\item \emph{Installatie}: de software moet overgebracht worden naar de gebruiker en geconfigureerd worden in voorbereiding op de activatie.
 \item \emph{Activeren}: tijdens de activatie wordt de software-uitvoering opgestart of worden de nodige triggers geplaatst om de executie op het gepaste tijdstip op te starten.
 \item \emph{Deactiveren}: dit is het tegengestelde van activeren. Deze stap is nodig zodat een aanpassing of herconfiguratie uitgevoerd kan worden.
 \item \emph{Updaten}: dit is het proces waarin de software wordt aangepast. Deze stap wordt vaak geactiveerd door het uitbrengen van een nieuwe versie van de software.
-\item \emph{Deïnstallatie}: tijdens deze stap zal de geïnstalleerd software van het clientsysteem gehaald worden.
+\item \emph{Deïnstallatie}: tijdens deze stap zal de geïnstalleerd software van het gebruikerssysteem gehaald worden.
 \end{itemize}
 De enige fase van de levenscyclus die zich uitsluitend op de server afgespeeld is de release fase.
-De rest van de fases spelen zich af op de verschillende clientsystemen.
+De rest van de fases spelen zich af op de verschillende gebruikerssystemen.
 
 \begin{figure}[!ht]
 \centering
@@ -302,7 +302,7 @@ Het is wel mogelijk om het proces te beïnvloeden door gebruik te maken van de P
 Door gebruik te maken van modules is het in Ansible mogelijk om de functionaliteiten uit te breiden.
 Wederom is het niet duidelijk wat er gebeurt mochten er fouten optreden tijdens het installatieproces of updateproces.
 
-\section{Rollback}\label{sec:rollback}
+\section{Recovery na fouten}\label{sec:rollback}
 Tijdens de bespreking van het probleem in Sectie~\vref{sec:probleem} werd al aangehaald dat een soort van rampenplan voorzien moet worden.
 Zowel omgevingsproblemen als onderhoudsproblemen (zie Sectie~\vref{sec:softwareLevenscyclus}) kunnen tijdens één van de toestanden in de deployment levenscyclus optreden.
 Voor Televic is het niet wenselijk dat een probleem tijdens één van deze toestanden ervoor zorgt dat hun software niet meer correct functioneert aangezien dit kan leiden tot het stilleggen van de productie.
@@ -490,8 +490,41 @@ Met een architectuur is het mogelijk om zelf verscheidene ontwerp- en implementa
 Zo ligt de programmeertaal niet vast en kan een taal gekozen worden die besturingssysteem onafhankelijk is.
 In de volgende secties wordt vooral gekeken of de architecturen een schaalbare oplossing bieden voor het deployment proces.
 
-\subsection{Client/Server architectuur}
-%https://books.google.be/books?hl=nl&lr=&id=Y9q-i_HGtAAC&oi=fnd&pg=PA3&dq=client+server+architecture+AND+deployment&ots=4CvLhsWpY_&sig=2THdl5nIpIDScXYlNCvg1P7L2h0#v=onepage&q=client%20server%20architecture%20AND%20deployment&f=false
+\subsection{Drie lagen architectuur}
+Volgens \citet{micro} is het mogelijk om een applicatie in te delen in drie logische groepen of ook wel lagen.
+Het gebruik van een laag stelt de ontwerper in staat om verscheidene taken van elkaar te onderscheiden waardoor het eenvoudiger is om een laag te ontwerpen die herbruikbaar is.
+Figuur~\vref{fig:threeLayer} toont welke drie basis lagen gebruikt worden om de architectuur op te bouwen.
+Hierbij wordt de presentatie laag gebruikt om alle functionaliteiten die instaan voor het onderhouden van de gebruikersinteracties met het systeem te groeperen.
+De bussiness laag encapsuleert alle relevante bussiness logica die de kern van het systeem bevat.
+De laatste laag, de data laag, voorziet toegang tot verschillende databronnen binnen in het netwerk maar ook daarbuiten.
+ 
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/threeLayer.png}}
+\caption{Drie lagen architectuur \citep{micro}}
+\label{fig:threeLayer}
+\end{figure}
+
+Het gebruik van deze architectuur gaat gepaard met enkele voordelen.
+Zo zorgt het gebruik van lagen ervoor dat het aanpassen van één laag amper of geen invloed heeft op de andere lagen.
+Verder zorgt het opdelen van de applicatie en database functionaliteiten ervoor dat beter load balancing kan worden toegepast.
+In de verschillende lagen is het mogelijk om voldoende veiligheidsmaatregelen toe te passen zonder de gebruikers te hinderen.
+Figuur~\vref{fig:threeLayerExample} geeft weer op welke wijze de architectuur gebruikt kan worden om een applicatie hosten.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=1]{afbeelding/threeLayerExample.png}}
+\caption{Voorbeeld van een drie lagen architectuur \citep{hanson2000client}}
+\label{fig:threeLayerExample}
+\end{figure}
+
+Het verspreiden van software kan met deze architectuur op een eenvoudige manier gerealiseerd worden.
+Clients kunnen verbinding maken met een web server.
+Vanuit een browser is het vervolgens mogelijk om verschillende software componenten te combineren tot één geheel die naar de gebruiker verscheept wordt voor installatie.
+De web server zorgt voor de nodige flexibiliteit waarbij het voor een gebruiker mogelijk is om vanuit een browser de te installeren software zelf te selecteren.
+Hiernaast laat de architectuur ook een groeiend aantal gebruikers toe.
+Iedere laag kan redundant gemaakt worden waarbij meerdere server van eenzelfde laag parallel naast elkaar kunnen draaien.
+De drie lagen architectuur voorziet voldoende flexibiliteit en schaalbaarheid maar logica voor het opvangen van fouten tijdens het installatieproces en updateproces is niet aanwezig.
 
 \subsection{Software dock architectuur}\label{sec:softwareDock}
 \citet{hall1999cooperative} bespreekt een interessante architectuur die gebruikt kan worden voor het verspreiden van software.
@@ -536,7 +569,7 @@ Op basis van deze informatie wordt een context opgebouwd waarin de releases van 
 De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het gebruikers systeem ondervragen.
 Aangezien kritische client-side informatie op een gestandaardiseerde wijze aangeboden wordt, met behulp van een geneste collectie van pair-values die een hiërarchie vormen, kan de installatie van de software gepersonaliseerd worden \citep{hall1999cooperative}.
 
-\subsubsection{Event based service}\label{sec:event}
+\subsubsection{Communicatie}\label{sec:event}
 %%% TODO
 Een belangrijk onderdeel van de software dock architectuur is de event service.
 Deze handelt de communicatie af tussen de verschillende docks en is een spilfiguur in de architectuur.
@@ -586,7 +619,7 @@ Een voorbeeld van zo'n event is terug te vinden in Figuur~\vref{fig:pubsubNot}
 \label{fig:pubsubNot}
 \end{figure}
 
-\section{Technologieën}\label{sec:technologieen}
+\section{Technologieën voor software packaging}\label{sec:technologieen}
 In de vorige secties werden oplossingen gezocht voor het verspreiden van software naar verschillende gebruikers.
 Hierbij werd vooral rekening gehouden met op welke wijze de software verzonden word.
 Er werd nagegaan of een oplossing zorgde voor een schaalbare architectuur die mogelijkheden biedt naar de toekomst toe.
@@ -661,7 +694,7 @@ NSIS beidt ook geen mogelijkheden aan om geïnstalleerde software up te daten.
 Om die eigenschappen toe te voegen moet er beroep gedaan worden op andere software.
 
 \subsubsection{Chocolatey}
-Volgens \citet{chocoAbout} is Chocolatey een package mangager voor Windows net zoals apt-get voor Linux is.
+Volgens \citep{chocoAbout} is Chocolatey een package mangager voor Windows net zoals apt-get voor Linux is.
 Het is ontworpen als een gedecentraliseerd framework met als doel het snel installeren van applicaties en tools.
 Chocolatey werd gebouwd boven op de NuGet infrastructuur gecombineerd voor het verspreiden van de packages en gebruikt PowerShell voor een gepersonaliseerde installatie.
 

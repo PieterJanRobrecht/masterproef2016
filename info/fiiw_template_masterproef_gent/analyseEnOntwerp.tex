@@ -1,9 +1,9 @@
 \chapter{Analyse en ontwerp}\label{sec:anaEnOntwerp}
 \section{Inleiding}
-Uit de probleemstelling werd het snel duidelijk dat het probleem omtrent het installeren en updaten van programma's complexer is dan op het eerste zicht lijkt.
+Uit de probleemstelling werd al snel duidelijk dat het probleem omtrent het installeren en updaten van programma's complexer is dan op het eerste zicht lijkt.
+Bestaande systemen bieden geen geheel oplossing op de verscheidene problemen van Televic.
 In dit hoofdstuk zal het probleem verder geanalyseerd worden.
-Aan de hand van deze bevindingen gaat een architectuur ontworpen of geselecteerd worden.
-Deze vormen de basis voor de implementatie van de demo.
+Aan de hand van deze bevindingen gaat een architectuur ontworpen of geselecteerd worden die aan de basis gaat liggen voor de demo.
 
 \section{Analyse}
 Het probleem van Televic was het volgende:
@@ -17,7 +17,7 @@ Verder dient elk nieuw toestel op het raamwerk ondersteund te worden waardoor er
 Er moet dus een antwoord gegeven worden op de volgende vragen:
 \begin{itemize}
 \item Wat moet verzonden worden naar de gebruikers?
-\item Hoe raakt de software van de producent bij de gebruiker?
+\item Hoe raakt de software van de producent bij de gebruikers?
 \end{itemize}
 Het doel is om een systeem te ontwikkelen dat Televic kan bijstaan bij het installatieproces en verspreidingsproces maar ook om een systeem te ontwikkelen dat kan blijven gebruikt worden in de toekomst.
 Schaalbaarheid en flexibiliteit zijn hierbij zeer belangrijk.
@@ -64,8 +64,11 @@ Met behulp van deze basis is het mogelijk om een demo te produceren voor de fina
   \label{fig:overzichtsDiagram}
 \end{figure}
 
-
 \section{Architectuur}
+Huidige architecturen en technologieën voldoen niet aan de verwachtingen en bieden geen sluitende oplossing voor alle problemen van Televic.
+Om toch een oplossing te bieden voor de problemen wordt zelf een architectuur ontworpen die bestaat uit een combinatie van hiervoor besproken technologieën en architecturen.
+De basis van de architectuur is overgenomen van de software dock architectuur.
+
 
 \subsection{Databank ontwerp}\label{sec:databank}
 Eén van de problemen is de continue toename aan pakketten waar het framework gebruikt van maakt en het aantal gebruikers die het framework gebruiken.
@@ -267,9 +270,9 @@ De volledige architectuur wordt weergegeven in Figuur~\vref{fig:architectuur}.
 In de figuur worden de verschillende docks afgebeeld samen met zowel Docker als de packager.
 Met deze architectuur is het mogelijk om aan de slag te gaan en een goede oplossing te vinden voor het probleem van Televic.
 
-\begin{figure}[!ht]
+\begin{sidewaysfigure}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/architectuur.png}
 \centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/architectuur.png}}
 \caption{Architectuur van het prototype}
 \label{fig:architectuur}
-\end{figure}
+\end{sidewaysfigure}
