@@ -42,6 +42,7 @@ data/
 *.dll
 appdata/
 *.ignore
+*.bak*
 
 /install_folder/
 /code/Prototype/Client/target
