@@ -83,6 +83,13 @@ Zoals in de analyse al werd aangehaald, zal de architectuur bestaan uit de volge
 \end{itemize}
 Figuur~\vref{fig:architectuur} geeft de volledig ontworpen architectuur weer.
 
+\begin{sidewaysfigure}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/architectuur.png}
+\centering
+\caption{Architectuur van het prototype}
+\label{fig:architectuur}
+\end{sidewaysfigure}
+
 De basis van de architectuur is overgenomen van de software dock architectuur uit Sectie~\ref{sec:softwareDock}.
 Door gebruik te maken deze architectuur is het mogelijk om de deployment server samen met de packager te combineren tot een release dock en de deployment client te implementeren als een field dock. 
 Het gebruik van software dock zorgt voor een schaalbare architectuur waarbij het aantal gebruikers en producenten mag toenemen.
@@ -91,15 +98,39 @@ Verder zorgen de agenten voor een verhoogde flexibiliteit in alle stappen van de
 Technologieën zoals ElectricFlow en ATLAS gebruiken ook agenten voor het installeren van software.
 Bij deze technologieën zijn de agenten afgestemd op de software die moet geïnstalleerd worden en niet op een stap uit de deployment levenscyclus.
 
-Als packager wordt een systeem ontworpen dat gebaseerd is op het Qt installer framework.
- 
+Om de functionaliteiten van de packager te implementeren wordt een systeem ontworpen dat gebaseerd is op het Qt installer framework.
+Andere software packaging oplossingen (zoals NSIS en WiX Toolset) bieden ook een oplossing voor het combineren van software pakketten.
+Er wordt toch voor het Qt installer framework gekozen omdat software pakketten beter van elkaar gescheiden worden.
+Dit geeft een beter overzicht van wat aanwezig is in een installer en welke installatiescripts uit de meta folder invloed heeft op de data.
+Door gebruik te maken van een gelijkaardige structuur wordt een packager ontworpen die kan omgaan met verschillende types van software pakketten.
+Het Qt installer framework zelf volstaat niet aangezien het niet mogelijk is om op één besturingssysteem een installer te creëren die werkt op zowel Linux als Windows.
+Aangezien de packager zelf ontworpen wordt, is het mogelijk om eender welke programmeertaal te kiezen.
+Er wordt dus best een taal gekozen die volledig besturingssysteem-onafhankelijk is.
+Door deze packager te combineren met de software dock architectuur is het mogelijk om naast het personaliseren van iedere stap in het deployment proces ook de behandeling van ieder software pakket apart te personaliseren.
+De packager wordt opgenomen in de code van het release dock en wordt door gebruikt om installers te produceren.
 
-\begin{sidewaysfigure}
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/architectuur.png}
+Een laatste element uit de architectuur is de deployment omgeving die zal bestaan uit het field dock van de software dock architectuur.
+Het doel van de deployment omgeving is het creëren van een veilige omgeving waarin de installer van het release dock in geïnstalleerd en geüpdatet kan worden.
+Zoals reeds werd aangegeven is het installatieproces en updateproces foutgevoelig en moet hiervoor een oplossing gevonden worden.
+Dit wordt dan ook opgelost door Docker containers te gebruiken.
+Er wordt niet gekozen voor één van de rollback strategieën aangezien deze ofwel een beperking opleggen (zoals het gebruik moeten maken van het transactieprogrammeermodel) of veroorzaken extra overhead (zoals bij het gebruiken van checkpoints).
+Virtuele machines kunnen eventueel ook gebruikt worden als oplossing.
+Bij het optreden van een fout kan de VM verwijdert worden zodanig dat er geen software achterblijft die later voor problemen kan zorgen.
+Het nadeel van virtuele machines is dat acties die uitgevoerd worden op VMs lang duren.
+Docker containers hebben dit probleem niet.
+Er wordt een veilige omgeving gecreëerd die snel opgestart en afgebroken kan worden.
+
+Na het ontwerpen van de algemene architectuur wordt een klassendiagram en deployment diagram ontworpen die gebruikt worden voor de implementatie.
+Figuur~\vref{fig:classDiagram} geeft het klassendiagram weer en Figuur~\vref{fig:deploymentDiagram} het deployment diagram.
+Uit het deployment diagram wordt het snel duidelijk dat de server de meeste componenten bevat.
+In wat volgt, wordt dieper ingegaan op de vier componenten waaruit de architectuur bestaat aan de hand van het klassendiagram en het deployment diagram.
+
+\begin{figure}[!ht]
 \centering
-\caption{Architectuur van het prototype}
-\label{fig:architectuur}
-\end{sidewaysfigure}
+\makebox[0pt]{\includegraphics[scale=0.9]{afbeelding/classDiagram.png}}
+\caption{Klassendiagram van de applicatie}
+\label{fig:classDiagram}
+\end{figure}
 
 \begin{figure}[!ht]
 \centering
