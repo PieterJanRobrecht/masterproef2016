@@ -522,6 +522,8 @@ Het verspreiden van software kan met deze architectuur op een eenvoudige manier 
 Clients kunnen verbinding maken met een web server.
 Vanuit een browser is het vervolgens mogelijk om verschillende software componenten te combineren tot één geheel die naar de gebruiker verscheept wordt voor installatie.
 De web server zorgt voor de nodige flexibiliteit waarbij het voor een gebruiker mogelijk is om vanuit een browser de te installeren software zelf te selecteren.
+De software kan bij de gebruiker geraken maar de architectuur biedt geen mogelijkheden aan die toestaan om de software te installeren.
+Hiervoor is echter ondersteuning nodig die niet is opgenomen in de architectuur.
 Hiernaast laat de architectuur ook een groeiend aantal gebruikers toe.
 Iedere laag kan redundant gemaakt worden waarbij meerdere server van eenzelfde laag parallel naast elkaar kunnen draaien.
 De drie lagen architectuur voorziet voldoende flexibiliteit en schaalbaarheid maar logica voor het opvangen van fouten tijdens het installatieproces en updateproces is niet aanwezig.
@@ -710,6 +712,20 @@ Het grootste nadeel aan deze technologie is, net zoals de vorige opties, het nie
 Het Qt Installer Framework biedt een set van tools aan voor het creëren van installers op verschillende platformen.
 Aan de hand van een set van pagina's wordt de gebruiker door het installatie-, update- en verwijderproces.
 Hierbij kunnen scripts gebruikt worden om het proces te vereenvoudigen \citep{qtDoc}.
+Door een folder structuur op te bouwen zoals zichtbaar is in Figuur~\vref{fig:folder} kan het Qt installer framework een installer creëren die vervolgens op het doelsysteem uitgevoerd kan worden.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.9]{afbeelding/folder.png}}
+\caption{Folder structuur voor installer}
+\label{fig:folder}
+\end{figure}
+
+De data folder van een pakket bevat alle nodige databestanden die moeten uitgevoerd worden (zoals een executable of een zip archief).
+De meta folder bevat een beschrijving van het pakket (zie voorbeeld in Listing~\vref{list:qtpakket}).
+Hiernaast is ook een installatiescript aanwezig dat uitgevoerd wordt tijdens de installatie van het pakket zelf (zie Listing~\vref{list:qtscript}).
+Met de installer informatie uit de config folder weet het Qt installer framework voldoende om een executable te produceren die alle pakketten installeert aan de hand van de opgegeven installatiescripts.
+Op deze wijze is het mogelijk om verschillende pakketten te combineren tot één geheel en ondertussen toch ieder pakket apart te behandelen.
 
 Aan deze technologie zijn verschillende plus- en minpunten verbonden.
 Een vergelijking van de verschillende voor- en nadelen is terug te vinden in Tabel~\ref{tab:voorNadelen}.

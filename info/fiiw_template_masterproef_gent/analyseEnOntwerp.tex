@@ -48,10 +48,12 @@ Om dit op te vangen, kan er gebruik gemaakt worden van één (of meerdere) strat
 Dit onderdeel van de applicatie vooral aanwezig aan de client-side aangezien dat de plaats is waar het testraamwerk aanwezig zal zijn.
 In de loop van de thesis zal naar dit onderdeel verwezen worden als de \emph{deployment environment}.
 
-Na de probleemanalyse is het nu duidelijk dat het werk op te delen valt in drie grote componenten.
-Deze drie onderdelen zullen de basis vormen voor de architectuur en zullen gebruikt worden als leidraad.
+%%% TODO Schrijven over databank
+
+Na de probleemanalyse is het nu duidelijk dat het werk op te delen valt in vier grote componenten.
+Deze vier onderdelen zullen de basis vormen voor de architectuur en zullen gebruikt worden als leidraad.
 Het eerste onderdeel zal bestaan uit de packager met als doel het inpakken van de nodige drivers, bibliotheken, \ldots .
-Naast de packager is er de deployment server instaat voor het verspreiden van de installers die de packager aflevert.
+Naast de packager bestaat de deployment server die instaat is om de installers die de packager aflevert te verspreiden naar de verschillende gebruikers.
 Aan de client-side zal de deployment environment aanwezig zijn waardoor installatie-complicaties vermindert worden door de installatie te isoleren.
 Mocht een rollback nodig zijn, dan kan deze op een eenvoudige manier gebeuren.
 In Figuur~\vref{fig:overzichtsDiagram} wordt de algemene structuur van de applicatie weergegeven.
@@ -66,102 +68,45 @@ Met behulp van deze basis is het mogelijk om een demo te produceren voor de fina
 
 \section{Architectuur}
 Huidige architecturen en technologieën voldoen niet aan de verwachtingen en bieden geen sluitende oplossing voor alle problemen van Televic.
-Om toch een oplossing te bieden voor de problemen wordt zelf een architectuur ontworpen die bestaat uit een combinatie van hiervoor besproken technologieën en architecturen.
-De basis van de architectuur is overgenomen van de software dock architectuur.
+Meeste technologieën bieden een deeloplossing aan.
+Zo biedt de LJSFi architectuur van ATLAS een mooie oplossing aan voor het verspreiden van verschillende software pakketten naar een groot aantal computers maar bij deze architectuur moet gebruik gemaakt worden van de Grid middleware.
+De Redhat package manager biedt een volledig beschikbare infrastructuur aan maar afhankelijkheden tussen pakketten zijn dan weer minder goed gedefinieerd.
+De drie lagen architectuur is een goede architectuur voor het verspreiden van de software maar biedt geen mogelijkheden aan voor de installatie van software pakketten.
+Om toch een oplossing te bieden voor de problemen wordt zelf een architectuur ontworpen die bestaat uit een combinatie van besproken technologieën en architecturen.
+
+Zoals in de analyse al werd aangehaald, zal de architectuur bestaan uit de volgende componenten: 
+\begin{itemize}
+\item De deployment server
+\item De packager
+\item De database
+\item De deployment client
+\end{itemize}
+Figuur~\vref{fig:architectuur} geeft de volledig ontworpen architectuur weer.
+
+De basis van de architectuur is overgenomen van de software dock architectuur uit Sectie~\ref{sec:softwareDock}.
+Door gebruik te maken deze architectuur is het mogelijk om de deployment server samen met de packager te combineren tot een release dock en de deployment client te implementeren als een field dock. 
+Het gebruik van software dock zorgt voor een schaalbare architectuur waarbij het aantal gebruikers en producenten mag toenemen.
+Zowel het release dock als het field dock moet niet bijhouden welke docks aanwezig zijn in het netwerk aangezien dit de taak is van de broker.
+Verder zorgen de agenten voor een verhoogde flexibiliteit in alle stappen van de deployment levenscyclus.
+Technologieën zoals ElectricFlow en ATLAS gebruiken ook agenten voor het installeren van software.
+Bij deze technologieën zijn de agenten afgestemd op de software die moet geïnstalleerd worden en niet op een stap uit de deployment levenscyclus.
+
+Als packager wordt een systeem ontworpen dat gebaseerd is op het Qt installer framework.
+ 
+
+\begin{sidewaysfigure}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/architectuur.png}
+\centering
+\caption{Architectuur van het prototype}
+\label{fig:architectuur}
+\end{sidewaysfigure}
 
 \begin{figure}[!ht]
 \centering
 \makebox[0pt]{\includegraphics[scale=0.9]{afbeelding/deploymentDiagram.png}}
-\caption{Deployment diagram}
+\caption{Deployment diagram van de applicatie}
 \label{fig:deploymentDiagram}
 \end{figure}
-
-\subsection{Databank ontwerp}\label{sec:databank}
-Eén van de problemen is de continue toename aan pakketten waar het framework gebruikt van maakt en het aantal gebruikers die het framework gebruiken.
-Om dit probleem aan te pakken wordt een databank ontworpen voor het opslaan van alle cruciale data over zowel het installatieproces en als de gebruikers.
-In overleg met Televic werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
-Het ontwerp van de databank is terug te vinden in Figuur~\ref{fig:databank}.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/databankOntwerp.png}}
-\caption{Ontwerp van de databank}
-\label{fig:databank}
-\end{figure}
-
-De tabellen tower en hardware\_component dienen om iedere gebruiker, typisch een testtoren of een laptop, te beschrijven.
-Iedere toren heeft een ID, naam en serienummer.
-De combinatie van deze drie waarden is uniek binnen het bedrijf en de combinatie kan gebruikt worden als identificatie binnen het systeem maar deze combinatie draagt geen betekenis voor een gebruiker.
-Om dit op te vangen wordt aan iedere toren een alias gekoppeld waardoor de identificatie voor mensen vlotter kan verlopen.
-Elke toren bestaat typisch uit verschillende hardwarecomponenten, zoals voedingen of netwerkkaarten, die nodig zijn om testen uit te voeren.
-Iedere component is gemaakt door een bepaalde fabrikant en krijgt van de fabrikant een serienummer.
-Vanuit het bedrijf wordt losstaand hiervan een nummer toegekend aan iedere component die gebruikt wordt om de calibratie instellingen te achterhalen.
-Iedere hardwarecomponent gebruikt firmware om correct te functioneren.
-Naast alle bovengenoemde informatie wordt ook de versie van de firmware opgeslagen.
-Door het opslaan van al deze informatie wordt het mogelijk om:
-\begin{enumerate}
-\item Torens van elkaar te onderscheiden
-\item Hardware componenten te koppelen aan torens
-\item Firmware versies te koppelen aan hardware componenten
-\end{enumerate}
-
-Naast informatie over de gebruikers wordt ook informatie over de verschillende installers en pakketten bijgehouden.
-Een installer bestaat uit een combinatie van verschillende software pakketten.
-Bij deze pakketten moet één pakket aanwezig zijn dat het Python testraamwerk bevat.
-Hiernaast zijn verschillende andere pakketten aanwezig voor drivers.
-In Figuur~\vref{fig:installerStructuur} is een voorbeeld zichtbaar van een installer die bestaat uit drie verschillende pakketten.
-Eén pakket wordt gebruikt door het testraamwerk en de twee anderen voor drivers die nodig zijn om het testraamwerk correct te laten functioneren.
-Iedere toren wordt gekoppeld aan één installer en zo aan één testraamwerk.
-Hiernaast is het mogelijk om pakketten te koppelen aan hardware componenten.
-Zo kan een driver voor een voeding gekoppeld worden aan de entry van de voeding die aanwezig is in de hardware\_component tabel.
-Op deze wijze worden de hardware-software afhankelijkheden bijgehouden.
-Van ieder pakket wordt bijgehouden welk type pakket het is (een executabel, zip bestand, \ldots), de prioriteit voor de installatievolgorde, een korte beschrijving en de release datum.
-Naast al deze informatie wordt er ook bijgehouden welke pakketten afhankelijk zijn van elkaar.
-Een voorbeeld is hiervan is een testraamwerkpakket en een pakket waarmee Python geïnstalleerd wordt.
-Het testraamwerk is afhankelijk van Python om correct te functioneren.
-Zo worden de verschillende software-software afhankelijkheden bijgehouden.
-Voordat een installer gemaakt wordt, die een testraamwerkpakket bevat, kan gecontroleerd worden dat ook het Python-installatiepakket aanwezig is.
-
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.4]{afbeelding/installerStructuur.png}}
-\caption{Structuur van een installer bestaande uit drie pakketten}
-\label{fig:installerStructuur}
-\end{figure}
-
-Verder zijn er enkele tabellen aanwezig voor het ondersteunen van testen.
-Tijdens en na het installatieproces moet het mogelijk zijn om testen uit te voeren.
-Dankzij deze testen is het duidelijk of een bepaald pakket correct functioneert en op het einde van het installatieproces kan gecontroleerd worden of het volledige testraamwerk in zijn geheel functioneert.
-Doordat er een link wordt bijgehouden tussen een hardware component en een pakket, is het mogelijk om hieruit waardevolle informatie te halen.
-Zo kan bijvoorbeeld een verband gelegd worden tussen een bepaalde versie van een driver en de firmware die aanwezig is in een hardware component.
-Deze informatie kan gebruikt worden om problemen in testtorens te vermijden.
-
-\subsection{Packager}
-De architectuur van de packager wordt gebaseerd op de architectuur en structuur van het Qt installer framework.
-Er wordt een installer geproduceerd die bestaat uit verschillende pakketten die elk instaan voor het installeren van een software component.
-Voor iedere installer wordt een aparte folder structuur aangemaakt die zichtbaar is in Figuur~\vref{fig:installerStructuur}.
-In de config folder van de installer worden alle globale scripts en beschrijvingsbestanden bijgehouden.
-Verder bevat de installer subtrees voor ieder pakket.
-Een pakket bestaat vervolgens uit een data, include en meta folder.
-De data folder wordt gebruikt om de effectieve driver/bibliotheek in op te slaan.
-Hiernaast is een include folder aanwezig waarin verschillende afzonderlijke scripts toegevoegd kunnen worden.
-Op deze manier kunnen willekeurige scripts (bijvoorbeeld een script die de firewall instellingen aanpast) rap toegevoegd worden aan een pakket.
-Als laatste bevat de meta folder alle meta-data horende het pakket.
-Dit omvat onder andere een script die gebruikt wordt om te testen of het pakket wel correct functioneert maar ook een beschrijving van het pakket zelf.
-
-%het zorgt voor een beter bereik van de verschillende packages -> kunnen test tussendoor uitvoeren
-Door zelf een packager te produceren, is het mogelijk om iedere stap in het deployment proces te personaliseren.
-Op deze manier kan na het installeren van een pakket een zo optimaal mogelijke afhandeling plaats vinden.
-Zo kunnen testen op ieder moment in het installatieproces toegevoegd worden, een handeling die met het Qt installer framework ook mogelijk is maar dit is moeilijker te realiseren.
-%geen gedoe met docker
-Doordat een gepersonaliseerde packager wordt ontworpen, worden problemen met Docker vermeden.
-Verder wordt besproken hoe Docker gebruikt wordt in de deployment environment om verscheidene problemen die gerelateerd zijn aan het installatieproces op te vangen.
-De Docker omgeving, zoals reeds vermeld in Sectie~\vref{sec:docker}, maakt gebruikt van LXC.
-Het besturingssysteem van de containers is hierdoor Linux.
-Windows gebruiken als besturingssysteem voor de containers is mogelijk in Docker is mogelijk maar deze optie staat nog altijd in beta schoenen.
-Mocht het Qt installer framework gebruikt worden als packager, dan moet het besturingssysteem van de server ook Linux zijn.
-Door ervoor te kiezen om zelf een packager te produceren, kan voor een cross-platform oplossing gezocht worden en kan de integratie van Docker vlotter verlopen.
-Op deze manier wordt er een abstractie gemaakt van het besturingssysteem van zowel de server als client.
 
 \subsection{Deployment server}
 Het centrale systeem in de architectuur is de deployment server.
@@ -254,6 +199,93 @@ In Bijlage~\vref{sec:flowcharts} zijn verschillende flowcharts terug te vinden d
 Door agenten te gebruiken, een strategie die ook gezien werd in de Atlas case studie in Sectie~\vref{sec:ATLAS}, wordt het mogelijk om alle stappen in de software levenscyclus uniek te behandelen.
 Hiernaast kan bij iedere installer een andere set van agenten geassocieerd worden waardoor iedere installer verder gepersonaliseerd kan worden.
 
+\subsection{Packager}
+De architectuur van de packager wordt gebaseerd op de architectuur en structuur van het Qt installer framework.
+Er wordt een installer geproduceerd die bestaat uit verschillende pakketten die elk instaan voor het installeren van een software component.
+Voor iedere installer wordt een aparte folder structuur aangemaakt die zichtbaar is in Figuur~\vref{fig:installerStructuur}.
+In de config folder van de installer worden alle globale scripts en beschrijvingsbestanden bijgehouden.
+Verder bevat de installer subtrees voor ieder pakket.
+Een pakket bestaat vervolgens uit een data, include en meta folder.
+De data folder wordt gebruikt om de effectieve driver/bibliotheek in op te slaan.
+Hiernaast is een include folder aanwezig waarin verschillende afzonderlijke scripts toegevoegd kunnen worden.
+Op deze manier kunnen willekeurige scripts (bijvoorbeeld een script die de firewall instellingen aanpast) rap toegevoegd worden aan een pakket.
+Als laatste bevat de meta folder alle meta-data horende het pakket.
+Dit omvat onder andere een script die gebruikt wordt om te testen of het pakket wel correct functioneert maar ook een beschrijving van het pakket zelf.
+
+%het zorgt voor een beter bereik van de verschillende packages -> kunnen test tussendoor uitvoeren
+Door zelf een packager te produceren, is het mogelijk om iedere stap in het deployment proces te personaliseren.
+Op deze manier kan na het installeren van een pakket een zo optimaal mogelijke afhandeling plaats vinden.
+Zo kunnen testen op ieder moment in het installatieproces toegevoegd worden, een handeling die met het Qt installer framework ook mogelijk is maar dit is moeilijker te realiseren.
+%geen gedoe met docker
+Doordat een gepersonaliseerde packager wordt ontworpen, worden problemen met Docker vermeden.
+Verder wordt besproken hoe Docker gebruikt wordt in de deployment environment om verscheidene problemen die gerelateerd zijn aan het installatieproces op te vangen.
+De Docker omgeving, zoals reeds vermeld in Sectie~\vref{sec:docker}, maakt gebruikt van LXC.
+Het besturingssysteem van de containers is hierdoor Linux.
+Windows gebruiken als besturingssysteem voor de containers is mogelijk in Docker is mogelijk maar deze optie staat nog altijd in beta schoenen.
+Mocht het Qt installer framework gebruikt worden als packager, dan moet het besturingssysteem van de server ook Linux zijn.
+Door ervoor te kiezen om zelf een packager te produceren, kan voor een cross-platform oplossing gezocht worden en kan de integratie van Docker vlotter verlopen.
+Op deze manier wordt er een abstractie gemaakt van het besturingssysteem van zowel de server als client.
+
+\subsection{Databank ontwerp}\label{sec:databank}
+Eén van de problemen is de continue toename aan pakketten waar het framework gebruikt van maakt en het aantal gebruikers die het framework gebruiken.
+Om dit probleem aan te pakken wordt een databank ontworpen voor het opslaan van alle cruciale data over zowel het installatieproces en als de gebruikers.
+In overleg met Televic werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
+Het ontwerp van de databank is terug te vinden in Figuur~\ref{fig:databank}.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/databankOntwerp.png}}
+\caption{Ontwerp van de databank}
+\label{fig:databank}
+\end{figure}
+
+De tabellen tower en hardware\_component dienen om iedere gebruiker, typisch een testtoren of een laptop, te beschrijven.
+Iedere toren heeft een ID, naam en serienummer.
+De combinatie van deze drie waarden is uniek binnen het bedrijf en de combinatie kan gebruikt worden als identificatie binnen het systeem maar deze combinatie draagt geen betekenis voor een gebruiker.
+Om dit op te vangen wordt aan iedere toren een alias gekoppeld waardoor de identificatie voor mensen vlotter kan verlopen.
+Elke toren bestaat typisch uit verschillende hardwarecomponenten, zoals voedingen of netwerkkaarten, die nodig zijn om testen uit te voeren.
+Iedere component is gemaakt door een bepaalde fabrikant en krijgt van de fabrikant een serienummer.
+Vanuit het bedrijf wordt losstaand hiervan een nummer toegekend aan iedere component die gebruikt wordt om de calibratie instellingen te achterhalen.
+Iedere hardwarecomponent gebruikt firmware om correct te functioneren.
+Naast alle bovengenoemde informatie wordt ook de versie van de firmware opgeslagen.
+Door het opslaan van al deze informatie wordt het mogelijk om:
+\begin{enumerate}
+\item Torens van elkaar te onderscheiden
+\item Hardware componenten te koppelen aan torens
+\item Firmware versies te koppelen aan hardware componenten
+\end{enumerate}
+
+Naast informatie over de gebruikers wordt ook informatie over de verschillende installers en pakketten bijgehouden.
+Een installer bestaat uit een combinatie van verschillende software pakketten.
+Bij deze pakketten moet één pakket aanwezig zijn dat het Python testraamwerk bevat.
+Hiernaast zijn verschillende andere pakketten aanwezig voor drivers.
+In Figuur~\vref{fig:installerStructuur} is een voorbeeld zichtbaar van een installer die bestaat uit drie verschillende pakketten.
+Eén pakket wordt gebruikt door het testraamwerk en de twee anderen voor drivers die nodig zijn om het testraamwerk correct te laten functioneren.
+Iedere toren wordt gekoppeld aan één installer en zo aan één testraamwerk.
+Hiernaast is het mogelijk om pakketten te koppelen aan hardware componenten.
+Zo kan een driver voor een voeding gekoppeld worden aan de entry van de voeding die aanwezig is in de hardware\_component tabel.
+Op deze wijze worden de hardware-software afhankelijkheden bijgehouden.
+Van ieder pakket wordt bijgehouden welk type pakket het is (een executabel, zip bestand, \ldots), de prioriteit voor de installatievolgorde, een korte beschrijving en de release datum.
+Naast al deze informatie wordt er ook bijgehouden welke pakketten afhankelijk zijn van elkaar.
+Een voorbeeld is hiervan is een testraamwerkpakket en een pakket waarmee Python geïnstalleerd wordt.
+Het testraamwerk is afhankelijk van Python om correct te functioneren.
+Zo worden de verschillende software-software afhankelijkheden bijgehouden.
+Voordat een installer gemaakt wordt, die een testraamwerkpakket bevat, kan gecontroleerd worden dat ook het Python-installatiepakket aanwezig is.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.4]{afbeelding/installerStructuur.png}}
+\caption{Structuur van een installer bestaande uit drie pakketten}
+\label{fig:installerStructuur}
+\end{figure}
+
+Verder zijn er enkele tabellen aanwezig voor het ondersteunen van testen.
+Tijdens en na het installatieproces moet het mogelijk zijn om testen uit te voeren.
+Dankzij deze testen is het duidelijk of een bepaald pakket correct functioneert en op het einde van het installatieproces kan gecontroleerd worden of het volledige testraamwerk in zijn geheel functioneert.
+Doordat er een link wordt bijgehouden tussen een hardware component en een pakket, is het mogelijk om hieruit waardevolle informatie te halen.
+Zo kan bijvoorbeeld een verband gelegd worden tussen een bepaalde versie van een driver en de firmware die aanwezig is in een hardware component.
+Deze informatie kan gebruikt worden om problemen in testtorens te vermijden.
+
 \subsection{Deployment environment}
 De deployment environment komt overeen met de field dock in de software dock architectuur.
 In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodanig dat het test framework geïnstalleerd wordt.
@@ -276,9 +308,3 @@ De volledige architectuur wordt weergegeven in Figuur~\vref{fig:architectuur}.
 In de figuur worden de verschillende docks afgebeeld samen met zowel Docker als de packager.
 Met deze architectuur is het mogelijk om aan de slag te gaan en een goede oplossing te vinden voor het probleem van Televic.
 
-\begin{sidewaysfigure}
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/architectuur.png}
-\centering
-\caption{Architectuur van het prototype}
-\label{fig:architectuur}
-\end{sidewaysfigure}
