@@ -96,11 +96,8 @@ Het bericht wordt uitgepakt, omgevormd naar een Tower object en vervolgens toege
 
 \paragraph{Installatieproces}
 Van zodra een ``release'' bericht binnen komt bij het field dock schiet deze in gang om het installatieproces op poten te zetten.
-Met de informatie uit het bericht is het field dock in staat om een Installer object te maken.
-Het field dock achterhaalt wie de zender van het bericht en contacteert dan direct de zender\footnote{Dit is het enige moment dat directe communicatie tussen de field en release docks mogelijk is}.
-Nadat een connectie tussen de twee werd opgestart, wordt de gezipte installer samen met de nodige agenten verzonden naar het field.
+
 Dill\footnote{\url{https://pypi.python.org/pypi/dill}} wordt gebruikt om de agent objecten te serialiseren voor ze verzonden worden naar het field dock.
-De lijst van agenten wordt overlopen en het install agent object zal zijn functie uitvoeren.
 
 De eerste actie die de install agent gaat ondernemen is het uitpakken van het zip bestand.
 Met de Dockerfile uit de installer en de docker-py\footnote{\url{https://docker-py.readthedocs.io/en/stable/}} module wordt een Docker image aangemaakt die de basis zal vormen voor de container.
