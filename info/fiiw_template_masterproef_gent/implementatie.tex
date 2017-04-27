@@ -59,15 +59,7 @@ Bij het indienen van de gegevens van de installer zelf worden de nodige handelin
 Eerst worden de pakketten en installer toegevoegd aan de databank.
 Vervolgens wordt de nodige folder structuur opgebouwd zoals aangegeven werd in Figuur~\vref{fig:installerStructuur}.
 In de config folder wordt een leeg Dockerfile en een metadata bestand met daarin de volledige beschrijving van de installer.
-Tijdens het creëren van de installer moet één van de pakketten aangeduid worden als een framework pakket.
-Bij het toevoegen van de verschillende bestanden zal dit pakket een start\_script meekrijgen.
-Dit is het script dat wordt uitgevoerd iedere keer als het framework wordt opgestart.
-Hierna worden alle pakketten overlopen.
-Als het pakket nieuw is, worden de nodige folders en bestanden aangemaakt anders worden de oude bestanden uit de meta folder gekopieerd.
-Nadat de folder structuur aangemaakt is, is het mogelijk om de verschillende scripts aan te passen.
-Net als bij het QT Installer Framework is het de bedoeling om te scripts te personaliseren naargelang het pakket.
-Op deze wijze heeft ieder pakket een uniek installatie en test proces.
-De installer is hierna klaar om gereleased te worden.
+
 Van zodra in de overview GUI het release signaal gegeven wordt, schiet het tweede deel van het release proces in werking.
 Een install agent wordt aangemaakt en wordt toegevoegd aan de lijst van agenten horende bij de installer.
 De folder structuur uit het eerste deel wordt gezipt zodanig dat minder data verzonden moet worden.

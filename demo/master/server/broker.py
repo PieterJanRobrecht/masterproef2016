@@ -81,7 +81,7 @@ class Broker(Dock):
 
     def perform_action(self, message):
         """
-            Perform the action
+            Perform action that belongs with the message type
         :param message:
         :return:
         """
