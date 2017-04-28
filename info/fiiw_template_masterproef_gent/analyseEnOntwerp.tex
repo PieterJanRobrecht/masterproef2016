@@ -147,7 +147,8 @@ Alle componenten behalve het field dock zijn aanwezig aan de serverzijde.
 \subsubsection{Release Dock}
 Uit het klassendiagram in Figuur~\ref{fig:classDiagram} wordt al snel duidelijk dat de ReleaseDock klasse geassocieerd kan worden met de OverviewGUI klasse en ReleaseCreator klasse.
 Dit wordt is ook duidelijk zichtbaar in het deployment diagram waarin weergegeven wordt dat deze drie aanwezig zijn op één server.
-%%% TODO schrijven wat doel van release dock is -> kijk naar klassendiagram
+De belangrijkste functionaliteiten van het release dock bestaat uit het wegschrijven van informatie naar de databank en het afhandelen van de verschillende release aanvragen.
+De weg te schrijven informatie bestaat vooral uit gegenereerde rapporten van verscheidene testen maar ook nieuwe gebruikers die moeten toegevoegd worden aan de databank.
 
 De OverviewGUI klasse wordt ontworpen als managersinterface.
 De grafische user interface die hiervoor ontworpen werd, is terug te vinden in Figuur~\vref{fig:overviewGUI}.
@@ -254,7 +255,7 @@ In Bijlage~\ref{sec:flowcharts} zijn verschillende activiteitendiagrammen terug 
 Door agenten te gebruiken, een strategie die ook gezien werd in de Atlas case studie in Sectie~\ref{sec:ATLAS}, wordt het mogelijk om alle stappen in de software levenscyclus uniek te behandelen.
 Hiernaast kan bij iedere installer een andere set van agenten geassocieerd worden waardoor iedere installer verder gepersonaliseerd kan worden.
 
-\subsubsection{Initialisatie}
+\subsubsection{Initialisatie}\label{sec:initServer}
 Het deployment diagram in Figuur~\vref{fig:deploymentDiagram} geeft weer dat aan de serverzijde verschillende componenten aanwezig zijn die samenwerken.
 Hierbij is het belangrijk om een goede opstartsequentie te voorzien.
 Figuur~\vref{fig:seqStartServer} geeft weer hoe de nodige componenten opgestart worden.
@@ -308,7 +309,6 @@ Net als bij het QT Installer Framework is het de bedoeling om te scripts te pers
 Op deze wijze heeft ieder pakket een uniek installatie en test proces.
 De installer is hierna klaar om gereleased te worden.
 
-%%% TODO hier zeggen wat de release flow is?
 Vanuit de Overview is het mogelijk om een installer te releasen.
 Figuur~\vref{fig:releaseSeq} geeft het sequentie diagram weer dat gevolgd wordt om de installer van het release dock naar het field dock te brengen.
 Het release dock maakt een Message object aan, geeft de installer informatie mee en zet het type van het bericht op release.
@@ -381,23 +381,51 @@ Deze informatie kan gebruikt worden om problemen in testtorens te vermijden.
 
 \subsection{Deployment environment}
 De deployment environment komt overeen met de field dock in de software dock architectuur.
-In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodanig dat het test framework geïnstalleerd wordt.
-Aan dit proces zijn de verschillende problemen verbonden die besproken werden in Sectie~\vref{sec:softwareLevenscyclus}.
-Om de verschillende deployment problemen te vermijden en om ervoor te zorgen dat geen uitgebreide rollback strategieën nodig zijn, wordt een geïsoleerde omgeving voorzien waarin de software geïnstalleerd wordt. 
-Dit wordt gerealiseerd aan de hand van virtualisatie technieken, meer bepaald aan de hand van Docker.
+In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodat de software geïnstalleerd wordt.
+Aan dit proces zijn de volgende problemen verbonden die grondig besproken werden in Sectie~\ref{sec:softwareLevenscyclus}.
+
+Het opstarten van een client gebeurd op een gelijkaardige manier als het opstarten van een server.
+Figuur~\vref{fig:seqClient} bevat het sequentie diagram voor het opstarten van een client.
+Hiervoor wordt eerst een FieldDock aangemaakt en deze zal zich vervolgens bij de broker inschrijven voor berichten van het type release en update.
+Bij het eerst gebruik moet het systeem eerst beschreven worden zodanig dat deze beschrijving toegevoegd kan worden aan de database.
+Het ontwerp van de grafische user interface is terug te vinden in Figuur~\vref{fig:startClient}.
+Na het registeren van de client kan de gebruiker gebruik maken van de grafische user interface in Figuur~\vref{fig:overviewClient}.
+Van hieruit is het mogelijk om nieuwe software die van het release dock te beoordelen en eventueel te installer.
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[scale=0.6]{afbeelding/seqStartClient.png}}
+\caption{Sequentie diagram voor het opstarten van een client}
+\label{fig:seqClient}
+\end{figure}
+
+Om de verschillende deploymentproblemen te vermijden en om ervoor te zorgen dat er geen uitgebreide rollback strategieën nodig zijn, wordt een geïsoleerde omgeving voorzien waarin de software geïnstalleerd wordt. 
+Dit wordt gerealiseerd aan de hand van virtualisatietechnieken, meer bepaald aan de hand van Docker.
 Docker wordt verkozen boven een gewone virtuele machine omdat het uitvoeren van handelingen (zoals opstarten, stoppen, \ldots) op een container minder resources en tijd vraagt in vergelijking met een virtuele machine.
-Doordat een virtualisatie techniek wordt gebruikt, wordt het zeer eenvoudig om problemen tijdens de verschillende processen op te vangen.
-In Figuur~\vref{fig:flow:install} en Figuur~\vref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollback proces zeer eenvoudig is.
+Doordat een virtualisatietechniek wordt gebruikt, wordt het zeer eenvoudig om problemen tijdens de verschillende processen op te vangen.
+In Figuur~\vref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollback proces zeer eenvoudig is.
+Hierbij is het belangrijk om te weten dat de container met de defecte code niet wordt verwijdert.
+De defecte code wordt in ``quarantaine'' geplaatst.
+Mochten logische fouten aanwezig zijn in een test kan dit leiden tot het afkeuren van de software terwijl de installatie wel correct verlopen is.
+Door de container in quarantaine te plaatsen is het mogelijk om na het installatieproces de container te ondervragen en te achterhalen wat fout gelopen is.
 Figuur~\vref{fig:fieldDock} geeft weer op welke manier de agenten met de containers gaan communiceren en geeft ook weer hoe Docker wordt geïntegreerd in het geheel.
 
 \begin{figure}[!ht]
 \centering
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/fieldDock.png}}
+\makebox[0pt]{\includegraphics[width=\textwidth]{afbeelding/fieldDock.png}}
 \caption{Structuur van een field dock}
 \label{fig:fieldDock}
+
+\makebox[0pt]{\includegraphics[scale=0.6]{afbeelding/overviewClient.png}}
+\caption{Grafische user interface van de client}
+\label{fig:overviewClient}
+
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/startClient.png}}
+\caption{Grafische user interface bij eerste gebruik}
+\label{fig:startClient}
+
 \end{figure}
 
-De volledige architectuur wordt weergegeven in Figuur~\vref{fig:architectuur}.
-In de figuur worden de verschillende docks afgebeeld samen met zowel Docker als de packager.
-Met deze architectuur is het mogelijk om aan de slag te gaan en een goede oplossing te vinden voor het probleem van Televic.
+Alle componenten samen vormen het geheel die zichtbaar was in Figuur~\vref{fig:architectuur}.
+Met deze architectuur vormt een goede basis van de implementatie die in het volgende hoofdstuk besproken wordt.
 

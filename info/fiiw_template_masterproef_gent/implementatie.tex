@@ -1,14 +1,44 @@
 \chapter{Implementatie}
-Na de literatuurstudie en de ontwerpfase, is het tijd om het ontwerp dat besproken werd in Hoofdstuk~\vref{sec:anaEnOntwerp} te implementeren.
-Als programmeertaal werd Python gekozen zodanig dat de applicatie uniform is met het testraamwerk.
+\section{Inleiding}
+Na de literatuurstudie en de ontwerpfase, moet het ontwerp dat besproken werd in het vorige hoofdstuk geïmplementeerd worden.
+Als programmeertaal werd Python gekozen.
+In het bedrijf is een zeker kennis van Python aanwezig waardoor de overname vlotter zal verlopen.
+Het doel is om een programma te ontwikkelen dat de belangrijkste functies omvat en dat gemakkelijk uitgebreid kan worden.
 In de komende secties worden de verschillende implementatie beslissingen toegelicht en wordt de geschreven code toegelicht.
-De applicatie werd geschreven met twee doelen in het achterhoofd: de demo die gegeven gaat worden tijdens de verdediging en een basis vormen voor Televic om van te vertrekken.
-Het doel van de presentatie is het tonen van het installatieproces beginnende bij de creatie van een installer tot het installeren zelf in een container in een field dock.
-Om dit te kunnen realiseren, was het niet nodig/mogelijk om alle nodige functionaliteiten te implementeren en toe te voegen aan de applicatie.
-Tijdens het implementeren, werden de server-side en client-side van elkaar gescheiden en er werden twee verschillende packages aangemaakt.
-In wat volgt, zullen deze dan ook afzonderlijk besproken worden.
+In wat volgt, zullen de server-side en client-side van elkaar gescheiden worden en afzonderlijk besproken worden.
 
 \section{Server-side}
+Zoals werd aangegeven in Hoofdstuk~\ref{sec:initServer} bestaat het opstarten van een server uit het creëren van een ReleaseDock object gevolgd door het creëren van een Broker object.
+Vervolgens gaat het release dock zich inschrijven voor de nodige berichten (zie Figuur~\vref{fig:seqStartServer}).
+
+\begin{figure}[!ht]
+\centering
+\makebox[0pt]{\includegraphics[width=\textwidth]{afbeelding/seqStartServer.png}}
+\caption{Sequentie diagram voor het opstarten van een server}
+\label{fig:seqStartServer}
+\end{figure}
+
+Bij het opstarten van de docks moeten verschillende parameters meegegeven worden.
+Listing~\ref{list:startServer} geeft weer welke parameter ingevuld moeten worden voor een correcte functionaliteit.
+De broker interface en port worden gebruikt door de Broker om een socket te openen maar ook door ReleaseDock om te connecteren met de broker.
+De release\_dock interface en port zijn bedoelt voor in de ReleaseDock een poort te openen waar de Broker berichten naar kan verzenden.
+Als laatste moeten de release interface en port gespecificeerd worden.
+Met deze variabelen wordt een socket geopend die gebruikt wordt door het FieldDock om een installer op te halen\footnote{Het ophalen van een installer is het enige moment waarop een FieldDock direct contact opneemt met een ReleaseDock}.			
+
+\begin{minipage}{\linewidth}
+\begin{center}
+%\lstset{language=Python}
+\begin{lstlisting}[caption={Parameters voor server en broker},label={list:startServer}]
+    broker_interface = "10.129.58.139"
+    broker_port = 12347
+    release_dock_interface = "10.129.58.139"
+    release_dock_port = 12345
+    release_interface = "10.129.58.139"
+    release_port = 12346
+\end{lstlisting}
+\end{center}
+\end{minipage}
+
 \paragraph{Initialisatie} 
 De server package bevat alle logica die hoort bij het release dock als bij de broker, maar bevat ook enkele modules die gebruikt worden om de realiteit af te beelden.
 De flow van de applicatie begint met het opstarten van de deployment\_server module.
