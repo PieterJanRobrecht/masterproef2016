@@ -261,8 +261,11 @@ class FieldDock(Dock):
         :return:
         """
         print("FIELD DOCK -- Sending change message")
-        save_installer_info(installer)
-        data = {"idInstaller": installer.id_installer, "name": installer.name, "version": installer.version}
+        if installer is not None:
+            save_installer_info(installer)
+            data = {"idInstaller": installer.id_installer, "name": installer.name, "version": installer.version}
+        else:
+            data = {"idInstaller": "None", "name": "None", "version": "None"}
         message = Message()
         message.create_message(self.host, "change", str(data))
         self.send_message(message)

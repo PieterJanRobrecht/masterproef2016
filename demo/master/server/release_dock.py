@@ -283,6 +283,13 @@ def add_diagnostics(cnx, start, end, result, id_sender, id_installer, id_package
     cnx.commit()
 
 
+def change_tower_to_nullinstaller(cnx, id_tower):
+    cursor = cnx.cursor(buffered=True, dictionary=True)
+    cursor.execute("""UPDATE tower SET Installer_idInstaller = NULL WHERE idTower = %s""", (id_tower,))
+    cnx.commit()
+    print("RELEASE DOCK -- Updated information of tower null")
+
+
 class ReleaseDock(Dock):
     database_user = 'root'
     database_password = 'root'
@@ -539,24 +546,17 @@ class ReleaseDock(Dock):
             send_file(conn, zip_location)
 
             # Sending agents to release dock
-            ready = conn.recv(1024)
-            if str(ready) == "Ready":
-                list_agents = dill.dumps(self.agents)
-                file_size = len(list_agents)
-                conn.send(str(file_size))
-                okay = conn.recv(1024)
-                if str(okay) == "Received length":
-                    conn.send(list_agents)
-                # send_file(conn, pkl)
-                print("RELEASE DOCK -- Done sending release to " + str(address))
-            conn.close()
+            self.send_agents(conn, address)
         print("RELEASE DOCK -- Closing listening thread")
 
     def update_installer_info(self, d, sender):
         print("RELEASE DOCK -- Changing installer information")
         id_tower = get_tower_of_sender(self.cnx, sender)
-        id_installer = get_installer_of_sender(self.cnx, d["name"], d["version"])
-        change_tower_installer(self.cnx, id_tower, id_installer)
+        if d["idInstaller"] != "None":
+            id_installer = get_installer_of_sender(self.cnx, d["name"], d["version"])
+            change_tower_installer(self.cnx, id_tower, id_installer)
+        else:
+            change_tower_to_nullinstaller(self.cnx, id_tower)
 
     def update_component_info(self, d, sender):
         # TODO
@@ -565,3 +565,16 @@ class ReleaseDock(Dock):
     def update_gui(self):
         # TODO
         pass
+
+    def send_agents(self, conn, address):
+        ready = conn.recv(1024)
+        if str(ready) == "Ready":
+            list_agents = dill.dumps(self.agents)
+            file_size = len(list_agents)
+            conn.send(str(file_size))
+            okay = conn.recv(1024)
+            if str(okay) == "Received length":
+                conn.send(list_agents)
+            # send_file(conn, pkl)
+            print("RELEASE DOCK -- Done sending release to " + str(address))
+        conn.close()

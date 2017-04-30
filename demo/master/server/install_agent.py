@@ -47,7 +47,7 @@ class InstallAgent(Agent):
 
     def action(self, client):
         """
-            Rename the fieldcontainer
+            Rename the fieldconta   iner
             Create new container
             Send update to broker
             Get meta_data file
@@ -99,6 +99,7 @@ class InstallAgent(Agent):
             self.install_package(self.client, package)
             if not self.check_installation(self.client, package):
                 success = False
+                print("INSTALL AGENT -- Test failed, container will be quarantined in the end")
 
         # Install all the other packages
         optional_packages = (package for package in self.installer.packages if package.optional)
@@ -106,6 +107,7 @@ class InstallAgent(Agent):
             self.install_package(self.client, package)
             if not self.check_installation(self.client, package):
                 success = False
+                print("INSTALL AGENT -- Test failed, container will be quarantined in the end")
 
         # If all test are successful
         if success:

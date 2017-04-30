@@ -90,11 +90,12 @@ class Broker(Dock):
         print("BROKER -- Action " + message.message_type + " notification send")
 
     def other_action(self, message):
-        """Perform an action other than un/subscribe
+        """
+            Perform an action other than un/subscribe
 
-        Take the message and make a dictionary out of it
-        Put the message in payload of notification
-        Send notification to everyone in the list
+            Take the message and make a dictionary out of it
+            Put the message in payload of notification
+            Send notification to everyone in the list
 
         :param message: received message from elsewhere
         :return:

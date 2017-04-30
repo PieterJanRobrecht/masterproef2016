@@ -1,113 +1,109 @@
 \chapter{Evaluatie}
-Na de ontwerp- en implementatiefase was het tijd om de gecreëerde applicatie te beoordelen en testen.
-In het komende hoofdstuk is het dan ook de bedoeling om de applicatie te onderwerpen aan verschillende tests die enkele aspecten in de applicatie gaan testen.
-Hierbij is het de bedoeling om te achterhalen wat wel en niet mogelijk is met de huidige versie van de applicatie.
-Na het testen van de applicatie, wordt nagedacht voor mogelijke uitbreidingen voor de applicatie.
+%Na de ontwerp- en implementatiefase was het tijd om de gecreëerde applicatie te beoordelen en testen.
+%In het komende hoofdstuk is het dan ook de bedoeling om de applicatie te onderwerpen aan verschillende tests die enkele aspecten in de applicatie gaan testen.
+%Hierbij is het de bedoeling om te achterhalen wat wel en niet mogelijk is met de huidige versie van de applicatie.
+%Na het testen van de applicatie, wordt nagedacht voor mogelijke uitbreidingen voor de applicatie.
+\section{Installatie van de software}
+De ontworpen applicatie heeft verscheidene afhankelijkheden met Python modules en externe programma's.
+Om de applicatie uit te kunnen testen, moet de testomgeving correct geconfigureerd zijn.
+In wat volgt, wordt een korte beschrijving gegeven over de nodige handelingen die ondernomen moeten worden om de applicatie werkende te krijgen.
+Hierbij wordt gebruik gemaakt van Listing~\ref{list:install}.
 
-\section{Testen}
-%%% TODO testen
-\subsection{Cross-platform host}
-\paragraph{Doel}
-Het doel van deze test is het uittesten hoeverre de geschreven applicatie uitvoerbaar is op verschillende besturingssystemen.
-De applicatie zelf is volledig geschreven in Python met modules die cross-platform zijn.
+%%% TODO
+\subsection{Server-side}
+\subsection{Client-side}
 
-\paragraph{Scenario}
-Om uit te testen of de applicatie cross-platform is, wordt een virtuele machine aangemaakt met de nodige programma's.
-Als guest-besturingssysteem voor deze virtuele machine, wordt Linux Mint gekozen. 
-Docker, Mysql workbench en wxPython worden geïnstalleerd en met hulp van pip worden de docker-py en dill modules aan python toegevoegd waardoor het systeem klaar is om getest te worden.
-De databank werd aangemaakt en de code werd overgebracht naar de virtuele machine.
-
-Tijdens de test is het de bedoeling om alle functionaliteiten van de applicatie uit te testen.
-De verschillende docks moeten correct subscriben bij de broker en de nieuwe field dock moet zonder fouten worden toegevoegd aan de databank.
-Vervolgens wordt getest of een installer kan aangemaakt worden, verscheept worden naar de field dock en geïnstalleerd kan worden.
-Er wordt een installer aangemaakt die bestaat uit 3 verschillende pakketten: één framework pakket, één optioneel pakket en één niet-optioneel pakket.
-De twee niet-framework pakketten bevatten een eenvoudig script die output genereert.
-Het framework pakket bevat een Grafische User Interface gemaakt met wxPython.
-
-De test is geslaagd als alle verschillende handelingen in de goede volgorde overlopen, ondertussen geen fouten optreden en op het einde het framework opgestart kan worden.
-
-\paragraph{Uitvoering}
-
-
+\section{Testscenario's}
 \subsection{Cross-platform containers}
-\paragraph{Doel}
-Naast het controleren of de applicatie zelf cross-platform is, is het belangrijk om te achterhalen of de applicatie om kan met Windows containers.
-Het doel van deze test is dan ook om een installer te creëren specifiek bedoelt voor deze Windows containers.
+\subsubsection{Doel}
+Zoals reeds werd aangegeven (Sectie~\ref{}), werd tijdens de implementatie van de applicatie Linux gebruikt als basis voor de containers.
+Het is echter wel belangrijk om te achterhalen in hoeverre het mogelijk is om de ontworpen applicatie te gebruiken in combinatie met Windows images.
+Om dit uit te testen, werd een test ontworpen.
 
-\paragraph{Scenario}
-Om gebruik te kunnen maken van Windows containers, moeten enkele vereisten voltooid worden.
-Met hulp van \citet{windowsContainers} is het mogelijk om een field dock op te zetten die om kan gaan met de Windows containers.
-De testomgeving bestaat, naast de enkele field dock, verder nog uit één release dock.
-Deze wordt gebruikt om een installer te creëren die bestaat uit alle nodige pakketten om het Python testraamwerk werkende te krijgen.
-Het framework pakket zal dan ook bestaan uit het daadwerkelijke testraamwerk.
-Op deze wijze is het mogelijk voor Televic om te achterhalen welke stappen allemaal gezet zijn en welke nog moeten gezet worden om de applicatie zo snel mogelijk in gebruik te nemen.
+Het eerste deel van de test bestaat uit het creëren van een container die losstaat van de applicatie.
+Door dit uit te voeren, is het eenvoudig om te achterhalen of het mogelijk is om:
+\begin{itemize}
+\item een image te maken van een Dockerfile
+\item een container te maken met de gecreëerde image
+\item commando's uit te voeren in de container
+\end{itemize}
+Als dit lukt, wordt in deel twee een testomgeving opgezet die bestaat uit één release dock, één broker en één field dock.
+Er wordt een installer gecreëerd die vervolgens gereleased wordt.
+Op deze manier is het mogelijk om de mogelijkheden van de ontworpen applicatie in te schatten.
 
-\paragraph{Uitvoering}
+Om dit uit te kunnen testen, wordt er gebruik gemaakt van een laptop afkomstig van Televic.
+Deze is voorzien van Windows 10 Professional 64-bit versie aangezien dit een vereiste is om gebruik te kunnen maken van Docker for Windows\footnote{\url{https://www.docker.com/docker-windows}}.
 
-\subsection{Meerdere clients}
-\paragraph{Doel}
-Voor deze test is het de bedoeling om te achterhalen of de applicatie meerdere clients kan ondersteunen.
-Het doel is dan ook een omgeving op te zetten waarin verschillende clients aanwezig zijn.
-
-\paragraph{Scenario}
-De omgeving die gebruikt gaat worden bestaat uit één laptop die zowel gebruikt wordt als release dock en als field dock en twee andere computers die gebruikt worden als field docks.
-Op de ieder computer is Docker, Python, wxPython, docker-py en dill aanwezig zodat de geschreven code bruikbaar is.
-
-Tijdens de test wordt op één release dock een installer aangemaakt en klaargemaakt voor release.
-De installer bestaat uit 2 verschillende pakketten: één framework pakket en één optioneel pakket.
-Beide pakketten zullen bestaan uit enkele scripts die output zullen generen wanneer deze worden uitgevoerd.
-Naast de release dock zullen 3 field docks toegevoegd worden aan het netwerk.
-
-Om een geslaagde test te verkrijgen, moet de installer bij alle field docks toekomen en correct geïnstalleerd worden.
-Dit moet op het einde van het proces zichtbaar zijn in zowel het overzicht op de release dock als in de databank.
-
-\paragraph{Uitvoering}
-Na het instellen van de nodige parameters, was het tijd om de nodige systemen op te starten.
-Het duurde dan ook niet lang om drie torens te beschrijven die elk bestaan uit één hardware component.
-Deze opstellingen werden vervolgens naar het release dock gestuurd en opgeslagen in de databank.
-
-De volgende stap bestaat uit het beschrijven van een simpele installer bestaande uit twee pakketten en deze klaar te maken voor release.
-
+\subsubsection{Resultaten}
+Tijdens het eerste deel van de test werd gebruik gemaakt van de microsoft/nanoserver als basis-image.
+Om gebruik te kunnen maken van deze image werd het commando ``docker pull microsoft/nanoserver'' gebruikt.
+Dit zorgde direct voor een error die zichtbaar is in Figuur~\ref{fig:testContainer:crosscontainer}.
+De oorzaak van het probleem ligt hoogstwaarschijnlijk bij de geïnstalleerde anti-virus software\footnote{\url{https://github.com/moby/moby/issues/30296}}.
+Dit is een speculatie aangezien geen tijd meer aanwezig was om hierop dieper in te gaan.
 
 \subsection{Meerdere servers}
-\paragraph{Doel}
+\subsubsection{Doel}
 Een volgende test bestaat uit het testen van de functionaliteiten als meerdere servers aanwezig zijn.
-Het doel van de test is te achterhalen wat er gebeurd als meerdere servers aanwezig zijn.
-
-\paragraph{Scenario}
-Na het testen of het mogelijk is om meerdere clients te ondersteunen, wordt nu getest of meerdere servers ondersteunt wordt.
-Dit gebeurt wederom aan de hand van een virtuele machine met Windows 10.
+Dit gebeurt aan de hand van een virtuele machine met Windows 10.
 Iedere virtuele machine bevat de server code samen met een databank om alle gegevens in op te slaan.
+De testomgeving bestaat uit drie release docks, één broker en één field dock.
 
-Gedurende de test worden 3 release docks aangemaakt en één field dock.
-In het eerste deel van de test zal iedere release dock apart een installer creëren en deployen.
-De installers zullen bestaan uit één pakket, namelijk een framework pakket.
-Het pakket bevat een simpel script dat uitgevoerd wordt.
-Voor ieder release dock zal dit script lichtjes verschillen.
-Het tweede deel van de test bestaat uit het releasen van 3 verschillende installers op eenzelfde moment.
-%%% TODO hier nog iets kleins bijschrijven?
+De test bestaat uit het toevoegen van de beschrijving van het field dock aan alle databanken.
+Hierna wordt een installer gecreëerd op één van de release docks en wordt deze gereleased.
+Het is de bedoeling om in ieder release dock de aanpassing door te voeren.
 
-Om de test te doen slagen is het nodig dat: iedere installer moet goed toekomen bij het field dock, de installers moeten in de correcte volgorde geïnstalleerd worden, alle databanken moeten geüpdatet worden en in de verschillende aanpassingen moeten in volgorde toegevoegd worden aan de databank.
+\subsubsection{Resultaten}
+Het eerste deel van de test bestaat uit het toevoegen van de client aan de nodige databanken.
+Figuur~\ref{fig:testServer:setup} toont de beschrijving van het field dock weer.
+Figuur~\ref{fig:testServer:receiveSetup} geeft weer hoe de beschrijving van het field dock toekomt bij de release docks.
+Figuur~\ref{fig:testServer:overview} toont vervolgens de managersinterface van beide release docks.
+Hieruit kan afgeleid worden dat ieder release dock de beschrijving correct heeft toegevoegd aan de databank.
 
-\paragraph{Uitvoering}
-Met de huidige versie van de applicatie is het mogelijk om drie verschillende servers op te starten en te verbinden met de broker.
-Hierbij moet wel rekening gehouden worden met het feit dat het deployment\_server script naast een release dock ook een broker opstart.
-Om dit niet te gebruiken moet een boolean op false gezet worden zodanig dat deze code niet wordt uitgevoerd.
+Bij het releasen van de installer loopt het echter verkeerd af.
+De gereleasde installer komt correct bij de client toe (zie Figuur~\ref{fig:testServer:installation}) en wordt correct geïnstalleerd  maar het verzenden van een update naar de release docks zorgt voor een fout.
+De fout die opgegooid wordt, ontstaat doordat het release dock de ID van de installer gaat opvragen in de databank.
+Het release dock die de installer heeft aangemaakt, vindt de correcte installer maar de andere release docks vinden deze niet terug in de databank.
+Dit komt doordat de informatie van de installer niet doorgegeven wordt aan de verschillende release docks.
+De installer komt dus niet in de databank terecht.
 
-Een eerste fase uit de test bestaat uit het correct configureren van een client in het systeem.
-Deze wordt correct uitgevoerd en na de beschrijving van de toren worden alle nodige databases aangepast.
-Vervolgens wordt op één van de release docks een installer aangemaakt die bestaat uit een simpel script die output genereert.
+Er zijn echter verscheidene oplossingen voor dit probleem.
+Zo kan bijvoorbeeld gewerkt worden met maar één databank.
+Een andere manier bestaat uit het subscriben van de release docks bij de broker voor berichten van het type ``release''.
+Mocht een notificatie van de broker toekomen met hierin de informatie over een nieuwe installer, dan kan deze gebruikt worden om de installer toe te voegen aan de databank.
 
-%%% SHIT probleem -> release wordt niet doorgegeven aan de verschillende release docks -> daardoor niet in databank en niet mogelijk om data van client up te daten
+\subsection{Meerdere clients}
+\subsubsection{Doel}
+Eén van de hoofddoelstellingen was het ontwerpen van een applicatie die software kan installeren bij een groeiend aantal gebruikers.
+Hiernaast moest de ontworpen applicatie bruikbaar zijn op verschillende besturingssystemen.
+Om dit uit te testen werd de volgende test ontworpen:
+Er wordt een testomgeving opgezet die bestaat uit één release dock, één broker en negen field docks.
+Twee van de negen field docks gebruiken Linux als besturingssysteem.
+De rest gebruikt Windows als besturingssysteem.
+Vervolgens wordt een installer gecreëerd en gereleased.
+Het doel is dat de software op alle doelsystemen correct wordt geïnstalleerd en dat de aanpassingen in de databank van het release dock zichtbaar zijn.
+Hierna worden enkele field docks uitgeschakeld en wordt een tweede installer verspreid.
 
+\subsubsection{Uitvoering}
+De figuren in Bijlage~\ref{sec:testen} tonen verschillende screenshots tijdens het installatieproces.
+Figuren~\ref{fig:testClient:overviewTijdensToevoegen}, \ref{fig:testClient:windowsBeschrijving} en \ref{fig:testClient:linuxBeschrijving} geven weer hoe enkele testtoren beschreven worden en hoe deze zijn toegevoegd aan de databank.
+
+Tijdens het installatieproces traden echter enkele fouten op.
+Op één van de Windows machines kwam het systeem vast te zitten tijdens het creëren van de Docker image.
+Wat de oorzaak is, is niet geweten.
+Hiernaast trad er een fout op bij beide Linux machines tijdens het installeren van de software (zie Figuur~\ref{fig:testClient:linuxError}).
+Het enige dat geweten is, is dat er een segmentatiefout optrad en dat deze optrad ter hoogte van het uitpakken van de gezipte installer.
+De oorzaak van deze fout is niet geweten en er zal extra onderzoek uitgevoerd moeten worden om te achterhalen hoe deze fout opgelost kan worden.
+
+Op alle andere systemen verliep het installatieproces zonder veel moeite.
+De software werd correct geïnstalleerd op alle systemen zoals zichtbaar is op Figuur~\ref{fig:testClient:overviewNaDeployment1}.
+Ook de tweede installer wordt correct geïnstalleerd op de systemen die nog aanstonden en die nog geen fout hadden gegeven.
 
 \subsection{Slecht werkend pakket}
-\paragraph{Doel}
+\subsubsection{Doel}
 De geschreven applicatie bevat enkele methodes om te controleren of het installatieproces foutloos is verlopen.
 Mocht dit niet het geval zijn, dan wordt de foutieve container in quarantaine geplaatst.
 Het doel van deze test is het uittesten of dit wel degelijk gebeurt.
 
-\paragraph{Scenario}
 Om deze eigenschap van de applicatie uit te testen wordt een simpele omgeving gerealiseerd waarin getest kan worden.
 Eén release dock en field dock worden opgestart in het begin.
 Vervolgens wordt een installer gemaakt die bestaat uit twee pakketten.
@@ -118,34 +114,63 @@ Om de test te laten slagen, moet de test van het niet-framework pakket registere
 Op het einde van het installatieproces moet de container in quarantaine geplaatst worden.
 Zo is het mogelijk om na het installatieproces te controleren wat het probleem is in de container.
 
-\paragraph{Uitvoering}
-
+\subsubsection{Uitvoering}
+De figuren in Sectie~\ref{sec:badPackage} tonen welke stappen doorlopen worden tijdens het installatieproces.
+Het test script eindigt met een status code die niet nul is.
+Hierdoor wordt de container gemarkeerd om in quarantaine geplaatst te worden (zie Figuur~\ref{fig:badPackage:tijdens}).
+Na het installatieproces wordt de container hernoemt waardoor het mogelijk is om achteraf een manuele controle van de container uit te voeren.
 
 \subsection{Netwerk monitoring}
-\paragraph{Doel}
+\subsubsection{Doel}
 Als laatste test wordt nagegaan hoe het netwerkverkeer eruit ziet tijdens het releasen van een nieuwe installer.
-
-\paragraph{Scenario}
 Deze test wordt gebruikt om te achterhalen hoeveel en wat voor netwerkverkeer gecreëerd wordt door de applicatie.
 Het monitoren van het netwerk wordt uitgevoerd tijdens de meerdere client test.
 De test produceert voldoende netwerk verkeer om een idee te krijgen van de hoeveelheid verkeer die zal geproduceerd worden.
 De volledige communicatie tussen de verschillende docks wordt opgenomen met Wireshark voor later een analyse op uit te voeren.
 
-\paragraph{Uitvoering}
-
+\subsubsection{Uitvoering}
+De figuren in Sectie~\ref{sec:network} geven een notie van het netwerk verkeer dat gegenereerd wordt door de applicatie.
+Het genereerde verkeer blijft beperkt tot enkele kilobytes voor iedere handeling die wordt uitgevoerd.
+Hierbij moet wel vermeld worden dat meerdere van deze berichten verzonden worden per release.
+Wat de impact gaat zijn als een groot aantal gebruikers aanwezig is, is moeilijk in te schatten.
+Figuur~\ref{fig:network:stats} geeft wel een algemeen beeld hiervoor.
+Wat ook vermeld moet worden, is het feit dat de installer grotendeels bestond uit scripts en tekstbestanden.
+Het gebruik van executables gaat echter voor meer netwerkverkeer zorgen.
 
 \section{SWOT analyse}
 \subsection{Strengths}
+Het gebruik van de software dock architectuur zorgt voor een schaalbare en flexibele applicatie die de continue toename van gebruikers en software pakketten ondersteunt.
+De ontworpen applicatie vormt een goede basis voor Televic om uit te breiden.
+
+Hiernaast zorgt Docker voor een veilige installatieomgeving.
+Dit zorgt ervoor dat fouten tijdens het installatieproces geen invloed hebben op het systeem en er altijd een versie van de software van Televic beschikbaar gaat zijn.
 %Schaalbaar naar de toekomst toe
 %Goed omgaan met verschillende types van installatie
-\subsection{Weaknesses}
-% Broker die een chokepoint vormt -> http://ieeexplore.ieee.org.kuleuven.ezproxy.kuleuven.be/stamp/stamp.jsp?arnumber=375173 -> werken met broker die handle terug geeft in plaats van het doorgeven van berichten 
-\subsection{Opportunities}
-\subsection{Threats}
-%Afhankelijk van de developpers bij Docker om de windows containers te implementeren
 
-%%% TODO goede en slechte punten opsommen
-%%% SWOT ANALYSE
+\subsection{Weaknesses}
+Een zwakte van de architectuur ligt bij de broker.
+Aangezien de broker alle berichten moet afhandelen, vormt deze een choke point in de architectuur.
+Er zijn echter oplossingen mogelijk waarbij de broker een handle terug geeft aan de docks \citep{adler1995distributed}. 
+Een andere strategie bestaat uit het gebruiken van meerdere brokers.
+
+Veiligheid vormt ook een zwakte voor de applicatie.
+Het verzenden en ontvangen van berichten gebeurt momenteel niet veilig aangezien alle berichten ongeëncrypteerd verzonden worden.
+Dit is echter op te lossen door cryptografische primitieven toe te voegen aan de applicatie.
+
+\subsection{Opportunities}
+De voornaamste gelegenheden bestaan uit het verder vervolledigen van de applicatie.
+Naast het installatieproces moet het ook mogelijk zijn om een updateproces uit te voeren.
+Hiervoor zijn al enkele methodes aanwezig die gebruikt kunnen worden.
+
+Verder is het ook mogelijk om meer gebruik te maken van de rapporten die worden toegevoegd aan de databank.
+Exit statussen kunnen gebruikt worden om rapporten te generen over één bepaalde release.
+Hiernaast kunnen linken gelegd worden tussen hardware en software waardoor afhankelijkheden beter in kaart gebracht kunnen worden.
+
+\subsection{Threats}
+Een bedreiging van de applicatie ligt bij het gebruik van Docker.
+Mochten problemen bij de Docker Python module of Docker voor Windows, dan is Televic afhankelijk van een aparte groep van ontwikkelaars die deze problemen zo snel mogelijk moeten oplossen.
+%Afhankelijk van de developpers bij Docker om de windows containers te implementeren
+%Tijdens ontwerpen heeft het vrijgeven van een windows update alles kapot gemaakt
 
 %geen beveiliging aanwezig
 
