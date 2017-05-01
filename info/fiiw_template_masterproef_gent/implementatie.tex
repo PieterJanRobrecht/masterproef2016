@@ -8,8 +8,6 @@ In de komende secties worden de verschillende implementatie beslissingen toegeli
 In wat volgt, zullen de server-side en client-side van elkaar gescheiden worden en afzonderlijk besproken worden.
 De verschillende Python modules worden overlopen en alle methodes met speciale kenmerken worden toegelicht.
 
-\section{Installeren van de software}
-
 \section{Server-side}
 \subsection{deployment\_server}
 Zoals werd aangegeven in Hoofdstuk~\ref{sec:initServer} bestaat het opstarten van een server uit het creëren van een ReleaseDock object gevolgd door het creëren van een Broker object.
@@ -142,7 +140,7 @@ Vervolgens kan het field dock de string terug omzetten naar een object door gebr
 %-> initiate actions
 
 \subsection{Agents}
-\subsubsection{agent}
+\subsubsection{agent}\label{sec:agentImpl}
 \paragraph{Maken van een Docker image}
 De basis van een container bestaat uit een image die opgebouwd wordt aan de hand van een Dockerfile.
 Om een image te maken aan de hand van een Dockerfile wordt gebruik gemaakt van de docker-py module\footnote{\url{https://docker-py.readthedocs.io/en/stable/}}.

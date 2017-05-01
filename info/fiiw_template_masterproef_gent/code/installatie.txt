@@ -9,8 +9,11 @@ CLIENT
 ------
 Python 2.7 installeren
 wxPython installeren
+docker of docker toolbox installeren
 pip install dill
 pip install docker
+De nodige interfaces aanpassen
+Bij het gebruik van de docker toolbox, env variabele in het field dock aanpassen
 client en server package in site-packages van Python installatie plaatsen
 
 SERVER
@@ -18,6 +21,7 @@ SERVER
 Python 2.7 installeren
 wxPython installeren
 pip install dill
+pip install mysql.connector
 server package in site-packages van Python installatie plaatsen
 Mysql database installeren
 database aanmaken met sql bestand
@@ -29,7 +33,7 @@ LINUX
 CLIENT
 ------
 installeer Python
-apt-get install python-wxgtk3.0
+sudo apt-get install python-wxgtk3.0
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 \
       --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
@@ -38,3 +42,13 @@ sudo apt install linux-image-generic linux-image-extra-virtual
 sudo reboot
 pip install dill
 pip install docker
+
+SERVER
+------
+Python 2.7 installeren
+sudo apt-get install python-wxgtk3.0
+pip install dill
+pip install mysql.connector
+server package in site-packages van Python installatie plaatsen
+Mysql database installeren
+database aanmaken met sql bestand
