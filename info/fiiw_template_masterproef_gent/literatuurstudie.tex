@@ -20,7 +20,7 @@ De levenscyclus van software deployment kan volgens \citet{softwareDeployment,ha
 \item \emph{Updaten}: dit is het proces waarin de software wordt aangepast. Deze stap wordt vaak geactiveerd door het uitbrengen van een nieuwe versie van de software.
 \item \emph{Deïnstallatie}: tijdens deze stap zal de geïnstalleerd software van het gebruikerssysteem gehaald worden.
 \end{itemize}
-De enige fase van de levenscyclus die zich uitsluitend op de server afgespeeld is de release fase.
+De enige fase van de levenscyclus die zich uitsluitend op de server afspeelt is de release fase.
 De rest van de fases spelen zich af op de verschillende gebruikerssystemen.
 
 \begin{figure}[!ht]
@@ -38,7 +38,7 @@ Deze oorzaken kunnen in twee grote categorieën ingedeeld worden, namelijk de om
 
 \paragraph{Omgevingsproblemen}
 In de eerste categorie ligt de nadruk vooral op correctheid.
-Voordat de software geïnstalleerd wordt op een doelsysteem, wordt de doelomgeving ondervraagt naar alle eigenschappen: zijn de nodige programma's aanwezig, bestaan alle configuratiebestanden, \ldots .
+Voordat de software geïnstalleerd wordt op een doelsysteem, wordt de doelomgeving ondervraagd naar alle eigenschappen: zijn de nodige programma's aanwezig, bestaan alle configuratiebestanden, \ldots .
 Als deze eisen niet voldaan zijn, dan zal de software niet werken zoals gewenst.
 \citet{dolstra2006purely} haalt enkele concrete voorbeelden aan van omgevingsproblemen:
 \begin{itemize}
@@ -400,7 +400,7 @@ Appartementen bieden ook bescherming tegen ongewenste gasten, maar zij zijn gebo
 Het appartementsgebouw biedt gemeenschappelijk water, verwarming, \ldots  aan, aan elk appartement.
 Elk appartement verschilt ook nog van grootte.
 Er bestaan kleine appartementen maar ook grote met meerder slaapkamers.
-Men huurt enkel hetgeen dat nodig is.
+Men huurt enkel hetgeen nodig is.
 
 In Figuur~\vref{fig:VMvsDocker} zijn de architecturen van virtuele machines en Docker terug te vinden.
 Het verschil tussen beiden wordt al snel duidelijk.
@@ -410,12 +410,12 @@ Een container bevat de applicatie en de verschillende dependencies maar de kerne
 \citet{chamberlain2014using} bespreekt kort hoe Docker werkt.
 Docker is een platform dat gebruik maakt van de Linux Containers (LXC de user-space control package voor Linux Containers) om software te encapsuleren.
 LXC is een virtualisatie techniek waarmee virtuele omgevingen in Linux opgebouwd kunnen worden.
-De containers zullen processen van elkaar sandboxen zodanig dat een proces een ander niet kan beïnvloeden \citep{merkel2014docker}.
+De containers zullen processen van elkaar gescheiden houden zodanig dat een proces een ander niet kan beïnvloeden \citep{merkel2014docker}.
 Docker zal de LXC software uitbreiden waardoor deployment, distributie en versioning mogelijk wordt.
 Naast LXC gebruikt Docker AuFS (Advanced Multi-Layered Unification Filesystem) als het filesysteem voor de containers.
 Doordat het filesysteem gelaagd is, is het mogelijk om verschillende filesystemen over elkaar te leggen.
 
-\citet{merkel2014docker} vergelijkt de twee virtualisatie technieken en bespreekt de verschillende tussen de twee.
+\citet{merkel2014docker} vergelijkt de twee virtualisatie technieken en bespreekt de verschillen tussen de twee.
 Bij virtuele machines moet voor iedere virtuele machine een besturingssysteem geïnstalleerd worden.
 Al deze besturingssystemen verbruiken RAM, CPU en bandbreedte.
 Containers zullen piggybacken op het bestaande host besturingssysteem.
@@ -670,17 +670,17 @@ Met de toolset kunnen .msi installatie pakketten, .msm merge modules en .msp pat
 
 Aan deze technologie zijn verschillende voor- en nadelen verbonden (zie Tabel~\ref{tab:voorNadelen}).
 Een fragment van de WiX toolset code is terug te vinden in Listing~\vref{list:wix}.
-De WiX toolset maakt installer uitsluitend bedoelt voor de Windows installation engine.
+De WiX toolset maakt installer uitsluitend bedoeld voor de Windows installation engine.
 Hierdoor worden verscheidene functionaliteiten eenvoudig te gebruiken, zoals het maken van uitzonderingen in de Windows Firewall.
-Door gebruik te maken van de Windows installation engine is het niet mogelijk om de executabel te gebruiken in Linux omgevingen\footnote{Dit kan eventueel omzeilt worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}. Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.}.
+Door gebruik te maken van de Windows installation engine is het niet mogelijk om de executabel te gebruiken in Linux omgevingen\footnote{Dit kan eventueel omzeild worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}. Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.}.
 WiX maakt gebruik van XML broncode om verschillende elementen te definiëren.
-\citet{xmill} geeft al aan dat XML niet een van de meest efficiënte dataformaten is, maar het verhoogd de flexibiliteit wel.
+\citet{xmill} geeft al aan dat XML niet een van de meest efficiënte dataformaten is, maar het verhoogt de flexibiliteit wel.
 Het creëren van een XML bestand met de hand is een langdradig en moeilijk werk.
 
 \subsubsection{NSIS}
 Nullsoft Scriptable Install System is een open source systeem waarmee Windows installers gemaakt kunnen worden.
 Zoals de naam aangeeft, is NSIS script-based.
-Hierdoor bevatten installers de nodige om verschillende installatie taken uit te voeren.
+Hierdoor bevatten installers het nodige om verschillende installatie taken uit te voeren.
 Door de grote gebruikersbasis is een grote hoeveelheid plug-ins en scripts beschikbaar.
 Alle plug-ins en scripts kunnen op een eenvoudige manier aan een installer toegevoegd worden voor een verhoogde functionaliteit \citep{nsisMain}.
 
@@ -689,10 +689,10 @@ Met de scripting taal van NSIS is het mogelijk om eenvoudige installer te defini
 De scripting taal is intuïtiever te gebruiken in vergelijking met de XML bestanden van Wix Toolset.
 Dankzij grote hoeveelheid aan plug-ins die aanwezig zijn, is het eenvoudig om een installer te creëren met verschillende functionaliteiten.
 De gecreëerde installer is een Windows executabel en de opmerking gegeven bij de WiX Toolset is hier ook van toepassing.
-Het feit dat NSIS bedoelt is om eenvoudige installers te maken zorgt ervoor dat het niet mogelijk is om aparte pakketten te definiëren.
+Het feit dat NSIS bedoeld is om eenvoudige installers te maken zorgt ervoor dat het niet mogelijk is om aparte pakketten te definiëren.
 Ieder pakket kan wel een eigen configuratie hebben maar dit wordt allemaal toegevoegd aan één script.
-Bij een grote hoeveelheid aan pakketten leidt tot wanorde en is er geen globaal overzicht.
-NSIS beidt ook geen mogelijkheden aan om geïnstalleerde software up te daten.
+Een grote hoeveelheid aan pakketten leidt tot wanorde.
+NSIS biedt ook geen mogelijkheden aan om geïnstalleerde software up te daten.
 Om die eigenschappen toe te voegen moet er beroep gedaan worden op andere software.
 
 \subsubsection{Chocolatey}
@@ -710,7 +710,7 @@ Het grootste nadeel aan deze technologie is, net zoals de vorige opties, het nie
 
 \subsubsection{Qt Installer Framework}
 Het Qt Installer Framework biedt een set van tools aan voor het creëren van installers op verschillende platformen.
-Aan de hand van een set van pagina's wordt de gebruiker door het installatie-, update- en verwijderproces.
+Aan de hand van een set van pagina's wordt de gebruiker door het installatie-, update- en verwijderproces geleid.
 Hierbij kunnen scripts gebruikt worden om het proces te vereenvoudigen \citep{qtDoc}.
 Door een folder structuur op te bouwen zoals zichtbaar is in Figuur~\vref{fig:folder} kan het Qt installer framework een installer creëren die vervolgens op het doelsysteem uitgevoerd kan worden.
 
@@ -731,7 +731,7 @@ Aan deze technologie zijn verschillende plus- en minpunten verbonden.
 Een vergelijking van de verschillende voor- en nadelen is terug te vinden in Tabel~\ref{tab:voorNadelen}.
 Het grootste voordeel van het Qt Installer framework is het cross-platform zijn.
 Hierdoor is het mogelijk om installers te maken voor zowel Windows als Linux.
-Een nadeel dat hieraan verbonden is, is dat een Linux installer enkel kan gemaakt worden op in een Linux omgeving.
+Een nadeel dat hieraan verbonden is, is dat een Linux installer enkel kan gemaakt worden in een Linux omgeving.
 Het is niet mogelijk om een Linux installer te maken op een Windows systeem.
 Hiernaast is het wel mogelijk om voor ieder pakket een aparte installatieprocedure te implementeren.
 

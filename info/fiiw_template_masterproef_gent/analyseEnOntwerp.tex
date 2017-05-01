@@ -56,7 +56,7 @@ Na de probleemanalyse is het nu duidelijk dat het werk op te delen valt in vier 
 Deze vier onderdelen zullen de basis vormen voor de architectuur en zullen gebruikt worden als leidraad.
 Het eerste onderdeel zal bestaan uit de packager met als doel het inpakken van de nodige drivers, bibliotheken, \ldots .
 Naast de packager bestaat de deployment server die instaat is om de installers die de packager aflevert te verspreiden naar de verschillende gebruikers.
-Aan de client-side zal de deployment environment aanwezig zijn waardoor installatie-complicaties vermindert worden door de installatie te isoleren.
+Aan de client-side zal de deployment environment aanwezig zijn waardoor installatie-complicaties verminderd worden door de installatie te isoleren.
 Mocht een rollback nodig zijn, dan kan deze op een eenvoudige manier gebeuren.
 In Figuur~\vref{fig:overzichtsDiagram} wordt de algemene structuur van de applicatie weergegeven.
 Met behulp van deze basis is het mogelijk om een demo te produceren voor de finale verdediging.
@@ -179,7 +179,7 @@ Na het creëren van de installer wordt deze doorgegeven aan de ReleaseDock.
 Vanaf dat moment is het mogelijk om vanuit de OverviewGUI de installer op te geven voor release.
 
 \subsubsection{Event Service}
-Nevens de verschillende docks beschrijft de software dock architectuur een Event Service.
+Naast de verschillende docks beschrijft de software dock architectuur een Event Service.
 Deze staat in voor het afhandelen van de communicatie tussen de verschillende docks.
 Om dit te implementeren, wordt er beroep gedaan op Sectie~\vref{sec:event}.
 Er worden evenwel enkele kleine aanpassingen gemaakt aan het formaat van de publish/subscribe eventen.
@@ -203,7 +203,7 @@ Op deze wijze wordt eenzelfde referentie punt gebruikt en is het mogelijk om de 
 \item \emph{Type}: ieder bericht hoort toe aan een bepaald type.
 De verschillende types van berichten zijn: subscribe, unsubscribe, new, change, rapport, update, release.
 Afhankelijk van het type bericht dat toekomt, bij zowel de broker als een dock, zal een andere actie ondernomen worden.
-De eerste twee types zijn uitsluitend bedoelt voor de broker.
+De eerste twee types zijn uitsluitend bedoeld voor de broker.
 De volgende drie voor een release dock en de laatste twee voor de field docks.
 \item \emph{ID}: naast een timestamp wordt aan ieder bericht een id meegegeven. 
 Dit attribuut wordt meegegeven zodanig dat de field docks kunnen achterhalen of zij achterlopen op berichten.
@@ -250,7 +250,7 @@ De agent begint met het hernoemen van de oude Docker container met daarin de vor
 Hierna wordt een nieuwe container aangemaakt waarin de nieuwe installer wordt losgelaten.
 Vervolgens zal de agent de installatie aanvangen en zullen de scripts horende bij de pakketten uitgevoerd worden in de container.
 Zoals reeds werd aangegeven, zijn de handelingen van een agent gebaseerd op het model van ORYA.
-Zo wordt het creëren van een nieuwe container in de installatie agent wordt gezien als zo'n basis activiteit.
+Zo wordt het creëren van een nieuwe container in de installatie agent gezien als zo'n basis activiteit.
 In Bijlage~\ref{sec:flowcharts} zijn verschillende activiteitendiagrammen terug te vinden die horen bij enkele types van agenten.
 Door agenten te gebruiken, een strategie die ook gezien werd in de Atlas case studie in Sectie~\ref{sec:ATLAS}, wordt het mogelijk om alle stappen in de software levenscyclus uniek te behandelen.
 Hiernaast kan bij iedere installer een andere set van agenten geassocieerd worden waardoor iedere installer verder gepersonaliseerd kan worden.
@@ -329,7 +329,7 @@ De lijst van agenten wordt overlopen en het install agent object zal zijn functi
 \subsection{Databank ontwerp}\label{sec:databank}
 Eén van de problemen is de continue toename aan pakketten waar het framework gebruikt van maakt en het aantal gebruikers die het framework gebruiken.
 Om dit probleem aan te pakken wordt een databank ontworpen voor het opslaan van alle cruciale data over zowel het installatieproces en als de gebruikers.
-In overleg met Televic werd ervoor gekozen om MySQL te gebruiken als managementsysteem.
+In overleg met Televic werd ervoor gekozen om MySQL te gebruiken als databasesysteem.
 Het ontwerp van de databank is terug te vinden in Figuur~\ref{fig:databank}.
 
 \begin{figure}[!ht]
