@@ -2,6 +2,7 @@ import os
 import tarfile
 import zipfile
 import time
+import socket
 
 from agent import Agent
 from installer import Installer
@@ -65,9 +66,10 @@ class InstallAgent(Agent):
         # Check if container exists if so rename it
         self.rename_container("fieldcontainer", "old_container")
         # Parameters to pass on the X11 display
+        ip = socket.gethostbyname(socket.gethostname())
         self.client.containers.create(self.docker_image, entrypoint="/bin/bash", tty=True, name="fieldcontainer",
                                       # environment=["DISPLAY=192.168.1.4:0.0"])
-                                      environment=["DISPLAY=10.2.0.72:0.0"])
+                                      environment=["DISPLAY="+ip+":0.0"])
         for container in self.client.containers.list(all=True):
             if container.name == "fieldcontainer":
                 self.container = container

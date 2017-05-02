@@ -187,9 +187,10 @@ Hierna moet de ``DISPLAY'' variabele in de container ingesteld worden op het loc
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
 \begin{lstlisting}[caption={Creatie van fieldcontainer},label={list:createFieldcontainer}]
+ip = socket.gethostbyname(socket.gethostname())
 self.client.containers.create(self.docker_image, entrypoint="/bin/bash",
                               tty=True, name="fieldcontainer",
-                              environment=["DISPLAY=10.2.0.72:0.0"])
+                              environment=["DISPLAY="+ip+":0.0"])
 for container in self.client.containers.list(all=True):
     if container.name == "fieldcontainer":
         self.container = container
