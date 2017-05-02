@@ -94,8 +94,8 @@ Figuur~\vref{fig:architectuur} geeft de volledig ontworpen architectuur weer.
 
 De basis van de architectuur is overgenomen van de software dock architectuur uit Sectie~\ref{sec:softwareDock}.
 Door gebruik te maken deze architectuur is het mogelijk om de deployment server samen met de packager te combineren tot een release dock en de deployment client te implementeren als een field dock. 
-Het gebruik van software dock zorgt voor een schaalbare architectuur waarbij het aantal gebruikers en producenten mag toenemen.
-Zowel het release dock als het field dock moet niet bijhouden welke docks aanwezig zijn in het netwerk aangezien dit de taak is van de broker.
+Het gebruik van software dock zorgt voor een schaalbare architectuur waarbij het aantal gebruikers en software producenten mag toenemen.
+Zowel het release dock als het field dock moeten niet bijhouden welke docks aanwezig zijn in het netwerk aangezien dit de taak is van de broker.
 Verder zorgen de agenten voor een verhoogde flexibiliteit in alle stappen van de deployment levenscyclus.
 Technologieën zoals ElectricFlow en ATLAS gebruiken ook agenten voor het installeren van software.
 Bij deze technologieën zijn de agenten afgestemd op de software die moet geïnstalleerd worden en niet op een stap uit de deployment levenscyclus.
@@ -115,7 +115,7 @@ Een laatste element uit de architectuur is de deployment omgeving die zal bestaa
 Het doel van de deployment omgeving is het creëren van een veilige omgeving waarin de installer van het release dock in geïnstalleerd en geüpdatet kan worden.
 Zoals reeds werd aangegeven is het installatieproces en updateproces foutgevoelig en moet hiervoor een oplossing gevonden worden.
 Dit wordt dan ook opgelost door Docker containers te gebruiken.
-Er wordt niet gekozen voor één van de rollback strategieën aangezien deze ofwel een beperking opleggen (zoals het gebruik moeten maken van het transactieprogrammeermodel) of veroorzaken extra overhead (zoals bij het gebruiken van checkpoints).
+Er wordt niet gekozen voor één van de rollback strategieën aangezien deze ofwel een beperking opleggen (zoals het gebruik moeten maken van het transactieprogrammeermodel) ofwel veroorzaken deze extra overhead (zoals bij het gebruiken van checkpoints).
 Virtuele machines kunnen eventueel ook gebruikt worden als oplossing.
 Bij het optreden van een fout kan de VM verwijdert worden zodanig dat er geen software achterblijft die later voor problemen kan zorgen.
 Het nadeel van virtuele machines is dat acties die uitgevoerd worden op VMs lang duren.

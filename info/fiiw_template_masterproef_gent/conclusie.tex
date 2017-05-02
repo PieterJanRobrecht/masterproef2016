@@ -2,13 +2,28 @@
 %zeggen of doel bereikt is 
 Het doel van deze thesis was het ontwerpen van een oplossing voor het complexe installatieproces en updateproces.
 Hiernaast moet rekening gehouden worden met een toenemend aantal gebruikers en software pakketten die geïnstalleerd moeten worden en bij de gebruiker moeten geraken.
+Verder dient elk nieuw toestel op het raamwerk ondersteunt te worden waardoor er jaarlijks ettelijke releases van het raamwerk verspreid worden.
 Hierbij was het belangrijk om een oplossing te voorzien die zowel schaalbaar als flexibel is.
 
 Om dit probleem op te lossen wordt gebruik gemaakt van de software dock architectuur die de basis vormt voor de applicatie.
-Door deze architectuur te combineren met een software packager waarvan het architectuur gebaseerd is op dat van het Qt installer framework en met Docker, was het mogelijk om een flexibele en schaalbare oplossing te voorzien.
+Door deze architectuur te combineren met een software packager waarvan het architectuur gebaseerd is op dat van het Qt installer framework en met Docker, was het mogelijk om een flexibele en schaalbare oplossing te voorzien die kan omgaan met fouten tijdens het installatieproces.
 De implementatie van het ontwerp vormt een goede basis die Televic kan gebruiken om uit te breiden en aan te passen.
 
+Uit de verschillende testen bleek dat het doel van de thesis gehaald werd.
+Het is mogelijk om een software pakket te creëren bij een installer en deze te verspreiden naar een aantal gebruikers.
+Hierbij kan iedere stap in het deployment proces gepersonaliseerd worden door gebruik te maken van agenten.
+Hiernaast zorgt de opdeling van de software in pakketten ervoor dat ieder pakket op een unieke manier behandelt kan worden.
+De doelstelling om een schaalbare en flexibele oplossing te vinden is dus behaald.
+Additionele proeven tonen aan dat het gebruik van Docker voor een afscheiding zorgt van verscheidene releases van de software.
+Fouten die optreden tijdens het installatieproces hebben geen invloed op eerdere releases aangezien deze in een aparte container zitten.
+
+Verder onderzoek is echter wel nodig.
+Nog niet alle functionaliteiten zijn aanwezig.
+Het updateproces wordt momenteel nog niet ondersteunt en uit testen bleek dat er nog geen volledige ondersteuning aanwezig is om meerdere servers te gebruiken.
+Hiernaast functioneer de broker als bottleneck in de architectuur.
+Met verder onderzoek, is het mogelijk om hiervoor een oplossing te bedenken.
+
 %zeggen wat in de toekomst nog kan komen
-Er werd reeds al aangegeven dat het geleverde werk een goede basis vormt voor Televic.
+Er werd reeds aangegeven dat het geleverde werk een goede basis vormt voor Televic.
 Dit is echter nog geen volwaardig eindproduct aangezien verscheidene functionaliteiten nog niet beschikbaar zijn.
 Er moeten nog verscheidene stappen gezet worden om een totaal oplossing af te kunnen leveren maar de grootste stappen zijn reeds al gezet.
