@@ -1,12 +1,12 @@
 \chapter{Literatuurstudie}
 \section{Inleiding}
 %%% Leuke insmijter waarbij vertelt wordt dat software deployment oud is
-In dit hoofdstuk, wordt een bespreking gegeven over alle mogelijke technieken, technologieën, architecturen, \ldots die een oplossing kunnen bieden op het probleem dat in het vorige hoofdstuk besproken werd.
-Eerst wordt het deployment proces besproken en wordt nagegaan welke problemen hiermee geassocieerd worden.
+In dit hoofdstuk, wordt een bespreking gegeven over alle mogelijke technieken, technologieën, architecturen, \ldots die een oplossing kunnen bieden voor het probleem dat in het vorige hoofdstuk besproken werd.
+Eerst wordt het deploymentproces besproken en wordt nagegaan welke problemen hiermee geassocieerd worden.
 Vervolgens worden enkele case studies besproken om een beeld te krijgen van alle verschillende tools die aanwezig zijn en die gebruikt kunnen worden om het probleem omtrent het verspreiden van de software van de producent naar de gebruiker op te lossen.
 Na de cases studies worden ook enkele architecturen besproken die gebruikt kunnen worden om een applicatie te ontwerpen die om kan gaan met een groeiend aantal gebruikers.
-Hierna wordt nagegaan op welke manier een rampenplan geïmplementeerd kan worden zodanig dat problemen die ontstaan tijdens het deployment proces opgelost kunnen worden.
-Uit de probleembespreking is ook gebleken dat er nood is aan een applicatie die overweg kan met verschillende programma's die Televic gemaakt heeft of nog zal maken, één van deze programma's is dan het Python testraamwerk.
+Hierna wordt nagegaan op welke manier een ``rampenplan'' geïmplementeerd kan worden zodat de problemen die ontstaan tijdens het deploymentproces opgelost kunnen worden.
+Uit de probleembespreking is ook gebleken dat er nood is aan een applicatie die overweg kan met verschillende programma's die Televic gemaakt heeft of nog zal maken.
 Om te achterhalen wat mogelijk is om dit te realiseren, worden verscheidene technologieën besproken die hiervoor een oplossing kunnen bieden.
 
 \section{Software deployment}\label{sec:softwareLevenscyclus}
@@ -33,51 +33,50 @@ De rest van de fases spelen zich af op de verschillende gebruikerssystemen.
 In theorie zou het deployen van software een eenvoudige klus moeten zijn.
 Aangezien software bestaat uit een set van bestanden, zou het deployen van software naar een doelcomputer slechts bestaan uit het kopiëren van de nodige bestanden.
 Maar dit is vaak niet het geval.
-Volgens \citet{dolstra2006purely} zijn er in de praktijk verschillende oorzaken die aan de basis liggen van een ingewikkeld deployment proces.
+Volgens \citet{dolstra2006purely} zijn er in de praktijk verschillende oorzaken die aan de basis liggen van een ingewikkeld deploymentproces.
 Deze oorzaken kunnen in twee grote categorieën ingedeeld worden, namelijk de omgevings- en de onderhoudsproblemen.
 
 \paragraph{Omgevingsproblemen}
 In de eerste categorie ligt de nadruk vooral op correctheid.
 Voordat de software geïnstalleerd wordt op een doelsysteem, wordt de doelomgeving ondervraagd naar alle eigenschappen: zijn de nodige programma's aanwezig, bestaan alle configuratiebestanden, \ldots .
-Als deze eisen niet voldaan zijn, dan zal de software niet werken zoals gewenst.
+Als deze eisen niet voldaan zijn, dan zal de software niet correct werken.
 \citet{dolstra2006purely} haalt enkele concrete voorbeelden aan van omgevingsproblemen:
 \begin{itemize}
 \item De deployment van software kan een gedistribueerd probleem opleveren.
 Software kan afhankelijk zijn van componenten draaiende op externe systemen of van andere processen draaiende op het doelsysteem.  
-\item Software is vaak afhankelijk van verschillende andere software componenten. 
+\item Software is vaak afhankelijk van verschillende andere softwarecomponenten. 
 Deze afhankelijkheden (dependencies) moeten voor de deployment bepaald worden.
 Dit proces is moeilijk en een fout kan pas laat ontdekt worden.
 \item De afhankelijkheden moeten compatibel zijn met wat de software verwacht.
 Bepaalde versies van een afhankelijkheid zijn compatibel met de software terwijl andere versies dit niet zijn.
 Dit komt doordat sommige depencies build-time variaties vertonen.
 At build-time worden bepaalde eigenschappen geselecteerd met als gevolg dat de dependency meer of minder functionaliteiten bevat ten opzichte van een vorige build.
-\item Sommige software-componenten zijn afhankelijk van specifieke hardware.
+\item Sommige softwarecomponenten zijn afhankelijk van specifieke hardware.
 Dit kan enkel verholpen worden door op voorhand te controleren welke hardware aanwezig is.
 \end{itemize}
 
-Uit deze concrete voorbeelden wordt al snel duidelijk dat er twee problemen zijn: de verschillende eisen van de software moeten geïdentificeerd worden en vervolgens moeten deze eisen voldaan worden in het doelsysteem.
+Uit deze concrete voorbeelden wordt al snel duidelijk dat er twee problemen zijn: de verschillende eisen van de software moeten geïdentificeerd worden en vervolgens moet aan deze eisen voldaan worden in het doelsysteem.
 
 \paragraph{Onderhoudsproblemen}
 Naast de verschillende omgevingsproblemen, beschrijft \citet{dolstra2006purely} ook enkele onderhoudsproblemen.
 Deze hebben te maken met het feit dat software moet kunnen ``evolueren''.
-Om dit te ondersteunen, moeten allerlei actie zoals upgraden en updaten uitgevoerd wordens.
+Om dit te ondersteunen, moeten allerlei actie zoals upgraden en updaten uitgevoerd worden.
 Enkele voorbeelden van zulke acties zijn:
 \begin{itemize}
 \item Tijdens het verwijderen van software moeten alle componenten verwijderd worden.
 Er mogen echter geen componenten verwijderd worden die nog in gebruik zijn door andere software.
 \item Ook tijdens het updaten van software moet rekening gehouden worden met andere software.
 Het updaten van een component kan voor problemen en failure zorgen in een andere component.
-Een DLL-hell wordt best ten alle tijden vermeden.
+Een DLL-hell wordt best vermeden.
 \item Na het upgraden/updaten van een component, is het soms aangewezen om een rollback uit te voeren.
 Zo'n actie kan overwogen worden als na de upgrade belangrijke functionaliteiten van de software niet meer functioneren.
 \end{itemize}
 
 \section{Case studies}\label{sec:caseStudies}
-Uit de vorige sectie blijkt dat het software deployment proces een uitgebreid en ingewikkeld proces is.
-Er moet rekening gehouden worden met verscheidene stappen die elk een eigen doel en functie hebben.
-Maar ook met verschillende problemen die kunnen optreden voor, na en tijdens deze stappen.
+Uit de vorige sectie blijkt dat het software-deploymentproces een uitgebreid en ingewikkeld proces is.
+Er moet rekening gehouden worden met verscheidene stappen die elk een eigen doel en functie hebben, maar ook met verschillende problemen die kunnen optreden voor, tijdens en na deze stappen.
 Door de jaren heen zijn er verschillende technologieën ontwikkeld die het probleem van software deployment aanpakken.
-In wat volgt, worden dan ook enkele van deze technologieën besproken en wordt nagegaan op welke manier zij software deployment aanpakken.
+In wat volgt, worden enkele van deze technologieën besproken en wordt nagegaan op welke manier zij software-deployment aanpakken.
 Op deze manier wordt een beeld gecreëerd van de mogelijke technologieën die gebruikt kunnen worden om de software van Televic van de producenten naar de gebruikers te krijgen.
 
 %\subsection{Java Beans}
@@ -101,21 +100,21 @@ Op deze manier wordt een beeld gecreëerd van de mogelijke technologieën die ge
 %http://electric-cloud.com/wp-content/uploads/Ovum-Decision-Matrix-Selecting-DevOps-Release-Management-Solution-2016-2017-print.pdf
 %https://www.gartner.com/doc/reprints?id=1-3DSWYP2&ct=160801&st=sb
 Electric cloud is een bedrijf opgericht in 2002 met een focus op application release automation (ARA).
-Hun product, ElectricFlow, is ontworpen om gebruikers in staat te stellen om het beschikbaar stellen, het bouwen en het verspreiden van mutlitiered applicaties te vereenvoudigen.
-Dit allemaal aan de hand van de model-driven architectuur \citep{gartner}.
+Hun product, ElectricFlow, is ontworpen om het beschikbaar stellen, het bouwen en het verspreiden van mutlitiered applicaties te vereenvoudigen.
+Dit gebeurt aan de hand van de model-driven architectuur \citep{gartner}.
 \citet{electricflow} beschrijft ElectricFlow als een enterprise-grade DevOps Release Automation platform.
 Met behulp van de model-driven aanpak is het mogelijk voor gebruikers om meerde pipelines en releases over verschillende infrastructuren te coördineren op een eenvoudige manier.
 
-De kern van ElectricFlow bestaat uit een web-based systeem dat gebruikt wordt voor de automatie en het onderhouden van het bouw-, test-, deployment en releaseproces.
-Het automatieplatform bestaat uit een drie-lagen architectuur, een web interface en mogelijkheden om build en release analyses uit te voeren.
+De kern van ElectricFlow bestaat uit een web-based systeem dat gebruikt wordt voor het automatiseren en het onderhouden van het bouw-, test-, deployment en releaseproces.
+Het automatiseringsplatform bestaat uit een drie-lagen architectuur, een web interface en mogelijkheden om build en release analyses uit te voeren.
 De drie-lagen architectuur van ElectricFlow bestaat uit:
 \begin{itemize}
 \item \textbf{ElectricFlow Server}: een server die instaat voor het managen van resources, commando's en het generen van rapporten.
 \item \textbf{Databank}: een databank die instaat voor het opslaan van commando's, meta-data en logfiles.
 \item \textbf{Agents}: verschillende agenten die instaan voor het uitvoeren van commando's, het monitoren van statussen en het verzamelen van resultaten.
 \end{itemize}
-Figuur~\vref{fig:electricflowArchitecture} geeft een architecturaal overzicht weer van ElectricFlow.
-In de figuur zijn de verschillende lagen zichtbaar samen verschillende andere tools die vervat zitten in het automatisatie platform \citep{electricflow}.
+Figuur~\vref{fig:electricflowArchitecture} geeft de architectuur weer van ElectricFlow.
+In de figuur zijn de verschillende lagen zichtbaar samen met de verschillende andere tools die vervat zitten in het automatiseringsplatform \citep{electricflow}.
 
 \begin{figure}[!ht]
 \centering
@@ -142,9 +141,9 @@ Verder wordt niks vermeld over hoe omgegaan wordt met installaties en updates di
 
 \subsection{Redhat package manager}
 In Linux wordt de Redhat package manager (RPM) het vaakst gebruikt voor de deployment van software.
-Met hulp van de RPM is het mogelijk om enkele operaties uit te voeren zoals onder andere installatie, updaten, \ldots .
+Met hulp van RPM is het mogelijk om enkele operaties uit te voeren zoals onder andere installatie, updaten, \ldots .
 De operaties worden ondersteund door een databank die alle informatie en details van de geïnstalleerde pakketten bevat.
-Een RPM pakket bestaat uit executables gecombineerd met configuratie bestanden en documentatie.
+Een RPM pakket bestaat uit executables gecombineerd met configuratiebestanden en documentatie.
 Doordat een pakket executables bevat, zal een pakket gekoppeld zijn aan het besturingssysteem van de host \citep{bailey1997maximum}.
 Naast de RPM files bevat een pakket verschillende scripts geschreven in de standaard Unix scripting taal.
 De verscheidene scripts zijn ingedeeld in sets horende bij een specifieke taak.
@@ -153,16 +152,16 @@ Dit is de taak van de script schrijver \citep{softwareDeployment}.
 
 De Redhat Package Manager is een grofkorrelige, taal onafhankelijke maar besturingssysteem afhankelijke oplossing.
 Het grootste probleem van RPM schuilt in de afhankelijkheden tussen de pakketten.
-Niet alle afhankelijkheden zijn explicite gemodelleerd en de afhankelijkheden die wel gemodelleerd zijn, zijn gevormd met de nadruk op de inhoud en niet op de pakketten zelf \citep{softwareDeployment}.  
+Niet alle afhankelijkheden zijn expliciet gemodelleerd en de afhankelijkheden die wel gemodelleerd zijn, zijn gevormd met de nadruk op de inhoud en niet op de pakketten zelf \citep{softwareDeployment}.  
 
 \subsection{ATLAS}\label{sec:ATLAS}
 ATLAS is één van de vier grote experimenten bij de Large Hadron Collider (LHC) in CERN (de Europese organisatie voor nucleair onderzoek).
-Het is een algemeen deeltjesfysica experiment onderhouden door een internationale samenwerking met als doel het exploiteren van de mogelijkheden van de Large Hadron Collider.
-Fysici testen de voorspellingen van het Standaard Model \cite{standardModel} wat kan leiden tot grote ontdekkingen zoals het Higgs  boson \cite{atlas}.
+%Het is een algemeen deeltjesfysica experiment onderhouden door een internationale samenwerking met als doel het exploiteren van de mogelijkheden van de Large Hadron Collider.
+%Fysici testen de voorspellingen van het Standaard Model \cite{standardModel} wat kan leiden tot grote ontdekkingen zoals het Higgs  boson \cite{atlas}.
 
-Om in de ATLAS samenwerking om te gaan met de grote hoeveelheid bronnen, is er een volledig automatisch installatie systeem ontworpen voor het LCG/EGEE project, LHC Computing Grid/Enabling Grids for E-sciencE \citep{bird2005lhc}. 
+Om in de ATLAS-samenwerking (specifiek voor het LCG/EGEE project, LHC Computing Grid/Enabling Grids for E-sciencE \citep{bird2005lhc}) om te gaan met de grote hoeveelheid bronnen, is er een volledig automatisch installatiesysteem ontworpen. 
 \citet{salvo2008atlas} beschrijft de architectuur van het ontworpen systeem.
-Het ontwerp van het installatie systeem werd gebaseerd op het Light Job Submission Framework for installation, ook wel LJSFi.
+Het ontwerp van het installatiesysteem werd gebaseerd op het Light Job Submission Framework for installation, ook wel LJSFi.
 
 \begin{figure}[!ht]
 \centering
@@ -172,55 +171,55 @@ Het ontwerp van het installatie systeem werd gebaseerd op het Light Job Submissi
 \end{figure}
 
 De architectuur van het framework is zichtbaar in Figuur~\ref{fig:ljsfiArchi}.
-Het framework vormt een dunne laag over de middleware van Grid.
-De kern van het systeem bestaat uit de installatie database en de command line interface (CLI).
+Het framework vormt een dunne laag over de middleware van Grid (Grid is een gedistribueerde computerinfrastructuur voor geavanceerde wetenschappen. De focus ligt bij het delen van resources en innovatieve applicaties.\citep{foster2001anatomy}).
+De kern van het systeem bestaat uit de installatiedatabase en de command line interface (CLI).
 De laatste zorgt voor de interacties met de Grid middleware.
-Met hulp van de installatie database kan de CLI verschillende taken en job informatie opslaan.
+Met hulp van de installatiedatabase kan de CLI de verschillende taken en de job informatie opslaan.
 Aan de hand van deze informatie kunnen installaties uitgevoerd worden.
-De installatie databank staat in contact met alle componenten van het framework.
+De installatiedatabank staat in contact met alle componenten van het framework.
 Zo kan de status van verscheidene acties en configuraties van verschillende taken opgeslagen worden.
 
-Naast deze twee grote componenten bevat LJSFi service modules en extensies waarmee installatie aanvragen afgehandeld worden.
+Naast deze twee grote componenten bevat LJSFi servicemodules en extensies waarmee installatie aanvragen afgehandeld worden.
 Het systeem bevat drie verschillende componenten die horen bij de LJSFi service modules:
 \begin{itemize}
-\item \textbf{RAI module} De Request An Installation module dient als web interface voor het ontvangen van user-driven installatie aanvragen.
-\item \textbf{AIR module} De Automatic Installation Requester schiet in actie als de software release aangeduid staan als productie of veroudert en als de release aangeduid staat met de parameter auto-installatie.
+\item \textbf{RAI module} De Request An Installation module dient als web interface voor het ontvangen van user-driven installatie-aanvragen.
+\item \textbf{AIR module} De Automatic Installation Requester schiet in actie als de software release aangeduid staat als productie of veroudert en als de release aangeduid staat met de parameter auto-installatie.
 De module zal respectievelijk de software installeren of verwijderen op alle sites waar de software tag nog niet aanwezig is.
 Door de AIR module periodiek te gebruiken, zullen de nodige aanvragen snel afgehandeld worden.
 \item \textbf{InAgent module} Met de InAgent module wordt het mogelijk om volledig geautomatiseerde installatieprocessen te voorzien.
-Iedere 10 minuten wordt de Installation database gelezen en via de CLI interface worden de nodige installatieprocessen opgestart.
-Elk installatieproces wordt bijgestaan door een installation agent.
-De agent zal instaan voor het updaten van de Installatie database met real-time informatie die zichtbaar is online.
+Iedere 10 minuten wordt de installatiedatabase gelezen en via de CLI interface worden de nodige installatieprocessen opgestart.
+Elk installatieproces wordt bijgestaan door een installatie agent.
+De agent zal instaan voor het updaten van de installatiedatabase met real-time informatie die online zichtbaar is.
 \end{itemize}
 
-Naast de verscheidene automatische services biedt LJSFi enkele gebruiker services aan.
-Een gebruiker kan zich subscriben voor bepaalde acties op een doel systeem.
+Naast de verscheidene automatische services biedt LJSFi enkele gebruikerservices aan.
+Een gebruiker kan zich inschrijven voor bepaalde acties op een doelsysteem.
 Als deze actie wordt uitgevoerd dan krijgt de gebruiker een mail.
 Hiernaast kan een gebruiker een software release vastpinnen zodat deze niet verwijderd kan worden door het systeem.
 
 Het installatieproces wordt uitgevoerd in drie verschillende stappen.
-In een eerste stap wordt een site check uitgevoerd door een pilot job naar de site te sturen.
+In een eerste stap wordt een sitecontrole uitgevoerd door een piloot taak naar de site te sturen.
 Als de check succesvol uitgevoerd wordt, kan het installatieproces beginnen.
-De acties tijdens het installatieproces worden uitgevoerd door softwaremanagement scripts.
-Op het einde van het proces, haalt het systeem de job output en exit code op.
-De laatste wordt opgeslagen in de Installation database.
+De acties tijdens het installatieproces worden uitgevoerd door softwaremanagementscripts.
+Op het einde van het proces, haalt het systeem de joboutput en exit-code op.
+De laatste wordt opgeslagen in de installatiedatabase.
 
-\citet{Obreshkov2008244} bespreekt hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
+\citet{Obreshkov2008244} bespreken hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
 Het ATLAS project gebruikt CMT \citep{cmt} als configuratie manager.
 Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen.
 \citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
 Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
-Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandelt moet worden.
+Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandeld moet worden.
 
 De LJSFi architectuur is een architectuur die om kan gaan met een grote hoeveelheid pakketten.
 Door gebruik te maken van de modules is het mogelijk om de verschillende pakketten te installeren en te verwijderen op een grote schaal zonder dat menselijke interactie nodig is.
 Hierbij zorgt CMT voor de nodige meta-data waardoor installatietools niet afhankelijk zijn van de mens.
 Een nadeel aan deze architectuur is dat het gebruik van Grid nodig is om de LJSFi architectuur in te bouwen.
 Verder wordt in de lectuur niet ingegaan op welke wijze er wordt omgegaan met een fout tijdens het installatieproces of het verwijderproces.
-Het enige dat hierover vermeld wordt is dat de exit code van de job wordt opgeslagen in de databank.
+Het enige dat hierover vermeld wordt is dat de exit-code van de job niet rechtstreeks gebruikt worden.
 
 \subsection{ORYA}\label{sec:ORYA}
-\citet{lestideau2003providing} legt uit hoe ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
+\citet{lestideau2003providing} leggen uit hoe ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
 Aan de hand van een deployment PSEE \citep{belkhatir2007adele} wordt het mogelijk om het installatieproces te automatiseren.
 
 In het ontwerp van ORYA worden er drie verschillende entiteiten besproken die nodig zijn om het automatische installatieproces mogelijk te maken.
@@ -231,24 +230,24 @@ Hieronder bevindt zich onder andere een pakket met de nodige resources en een ma
 Iedere target wordt beschreven door de verschillende applicaties die al aanwezig zijn en de fysische beschrijving.
 \item \textbf{Deployment Server} De deployment server vormt de kern van de deployment omgeving en staat in voor het uitvoeren van de deployments. 
 De deployment server zoekt de nodige pakketten, voert een transfer van de pakketten uit en installeert de applicatie.
-Op het einde moet de deployment server garanderen dat vorige programma's correct blijven functioneren.
+Op het einde moet de deployment server garanderen dat andere programma's correct blijven functioneren.
 \end{itemize}
 
-\citet{lestideau2003providing} beschrijft verder de verschillende modellen die gehanteerd worden om een succesvolle deployment uit te voeren.
-In Figuur~\vref{fig:deploymentModel} is het deployment proces model terug te vinden.
-Een deployment proces zal bestaan uit verschillende basis activiteiten en deployment processen.
+\citet{lestideau2003providing} beschrijven verder de verschillende modellen die gehanteerd worden om een succesvolle deployment uit te voeren.
+In Figuur~\ref{fig:deploymentModel} is het deployment-procesmodel terug te vinden.
+Een deploymentproces zal bestaan uit verschillende basisactiviteiten en deploymentprocessen.
 Iedere activiteit wordt uitgevoerd door een agent.
 
 \begin{figure}[!ht]
 \centering
 \makebox[0pt]{\includegraphics[scale=1]{afbeelding/deploymentModelORYA.png}}
-\caption{Deployment proces model \citep{lestideau2003providing}}
+\caption{Deployment-procesmodel \citep{lestideau2003providing}}
 \label{fig:deploymentModel}
 \end{figure}
 
 Een toegepast voorbeeld van een deployment aan de hand van dit model is terug te vinden in Figuur~\vref{fig:deploymentVoorbeeld}.
-Een basis activiteit wordt voorgesteld aan de hand van een grijze rechthoek en een deployment proces aan de hand van een witte rechthoek.
-In het voorbeeld zijn dus vier deployment processen aanwezig en 3 basis activiteiten.
+Een basisactiviteit wordt voorgesteld aan de hand van een grijze rechthoek en een deploymentproces aan de hand van een witte rechthoek.
+In het voorbeeld zijn dus vier deploymentprocessen aanwezig en 3 basisactiviteiten.
 
 \begin{figure}[!ht]
 \centering
@@ -257,7 +256,7 @@ In het voorbeeld zijn dus vier deployment processen aanwezig en 3 basis activite
 \label{fig:deploymentVoorbeeld}
 \end{figure}
 
-Aan de hand van deze structuur wordt het mogelijk om het volledige deployment proces voor te stellen.
+Aan de hand van deze structuur wordt het mogelijk om het volledige deploymentproces voor te stellen.
 
 %\subsection{Unix}
 %\citet{dolstra2006purely} bespreekt Nix deployment systeem omgaan met het deployment probleem.
@@ -281,10 +280,10 @@ Aan de hand van deze structuur wordt het mogelijk om het volledige deployment pr
 
 \subsection{Ansible}
 Als laatste case studie wordt Ansible besproken.
-Ansible is een open source IT configuratie management, deployment en organisatie tool.
+Ansible is een open source IT configuratiemanagement-, deployment- en organisatietool.
 De architectuur van Ansible bestaat uit een agentless push model.
-Dit wil zeggen dat er geen additionele software nodig is op de client toestellen.
-Dit wordt behaald door gebruik te maken van de remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en Unix en WinRM voor Windows.
+Dit wil zeggen dat er geen additionele software nodig is op de clienttoestellen.
+Dit wordt gerealiseerd door gebruik te maken van de remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en Unix en WinRM voor Windows.
 Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang de Ansible het systeem niet aan het gebruiken is \citep{ansible}.
 
 \citep{ansible} beschrijft verder dat Ansible gebruik maakt van \emph{Playbooks} voor de organisatie van de IT omgevingen.
@@ -297,7 +296,7 @@ Hiernaast is het mogelijk om de mogelijkheden van Ansible uit te breiden.
 Modules kunnen zelf geschreven worden in eender welke taal met als enige beperking dat een JSON bestand als input moet gegeven worden en dat een JSON bestand gegenereerd moet worden.
 De inventory van een Playbook kan dynamisch ontdekt worden at runtime.
 
-In tegenstelling tot ATLAS en Electric Cloud bevat Ansible geen agenten die gebruikt worden om het deployment proces in goede banen te leiden.
+In tegenstelling tot ATLAS en Electric Cloud bevat Ansible geen agenten die gebruikt worden om het deploymentproces in goede banen te leiden.
 Het is wel mogelijk om het proces te beïnvloeden door gebruik te maken van de Playbooks.
 Door gebruik te maken van modules is het in Ansible mogelijk om de functionaliteiten uit te breiden.
 Wederom is het niet duidelijk wat er gebeurt mochten er fouten optreden tijdens het installatieproces of updateproces.
@@ -488,7 +487,7 @@ Tot op heden werd vooral gekeken naar mogelijke technologieën en tools die gebr
 In de komende secties worden enkele architecturen aangehaald die ook een oplossing bieden voor het verspreiden van software.
 Met een architectuur is het mogelijk om zelf verscheidene ontwerp- en implementatiebeslissingen te nemen.
 Zo ligt de programmeertaal niet vast en kan een taal gekozen worden die besturingssysteem onafhankelijk is.
-In de volgende secties wordt vooral gekeken of de architecturen een schaalbare oplossing bieden voor het deployment proces.
+In de volgende secties wordt vooral gekeken of de architecturen een schaalbare oplossing bieden voor het deploymentproces.
 
 \subsection{Drie lagen architectuur}
 Volgens \citet{micro} is het mogelijk om een applicatie in te delen in drie logische groepen of ook wel lagen.
@@ -520,7 +519,7 @@ Figuur~\vref{fig:threeLayerExample} geeft weer op welke wijze de architectuur ge
 
 Het verspreiden van software kan met deze architectuur op een eenvoudige manier gerealiseerd worden.
 Clients kunnen verbinding maken met een web server.
-Vanuit een browser is het vervolgens mogelijk om verschillende software componenten te combineren tot één geheel die naar de gebruiker verscheept wordt voor installatie.
+Vanuit een browser is het vervolgens mogelijk om verschillende softwarecomponenten te combineren tot één geheel die naar de gebruiker verscheept wordt voor installatie.
 De web server zorgt voor de nodige flexibiliteit waarbij het voor een gebruiker mogelijk is om vanuit een browser de te installeren software zelf te selecteren.
 De software kan bij de gebruiker geraken maar de architectuur biedt geen mogelijkheden aan die toestaan om de software te installeren.
 Hiervoor is echter ondersteuning nodig die niet is opgenomen in de architectuur.
@@ -553,7 +552,7 @@ In de release dock wordt ieder release semantisch beschreven aan de hand van een
 Dit bestand bevat onder andere:
 \begin{itemize}
 \item \textbf{Assertion}: deze worden gebruikt om beperkingen die aan de gebruikerskant waar moeten te beschrijven.
-Als niet aan deze beperkingen voldaan wordt, zal het deployment proces falen.
+Als niet aan deze beperkingen voldaan wordt, zal het deploymentproces falen.
 \item \textbf{Afhankelijkheden}: deze worden gebruikt om beperkingen van de release te beschrijven.
 Als deze niet voldaan zijn aan de gebruikerskant dan kunnen nog oplossingen gevonden worden.
 Bijvoorbeeld door additionele software te installeren kan de beperking voldaan worden.
