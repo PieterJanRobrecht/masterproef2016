@@ -1,5 +1,6 @@
 from threading import Thread
 
+import sys
 from wx import wx
 
 from main_gui_impl import MainGui
@@ -50,11 +51,11 @@ def main():
         Start GUI,
         Wait until all threads are closed
     """
-    field_dock_interface = "localhost"
+    field_dock_interface = sys.argv[1]
     field_dock_port = 54321
     release_interface = None
     release_port = 12346
-    broker_interface = "localhost"
+    broker_interface = sys.argv[2]
     broker_port = 12347
     field_dock, field_dock_thread = start_field_dock(field_dock_interface, field_dock_port,
                                                      release_interface, release_port)

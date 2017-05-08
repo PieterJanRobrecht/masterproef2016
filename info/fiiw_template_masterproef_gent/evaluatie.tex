@@ -25,15 +25,29 @@ Als dit lukt, wordt in deel twee een testomgeving opgezet die bestaat uit één 
 Er wordt een installer gecreëerd die vervolgens gereleased wordt.
 Op deze manier is het mogelijk om de mogelijkheden van de ontworpen applicatie in te schatten.
 
-Om dit uit te kunnen testen, wordt er gebruik gemaakt van een laptop afkomstig van Televic.
-Deze is voorzien van Windows 10 Professional 64-bit versie aangezien dit een vereiste is om gebruik te kunnen maken van Docker for Windows\footnote{\url{https://www.docker.com/docker-windows}}.
+Om dit uit te kunnen testen, wordt er gebruik gemaakt van een laptop.
+Deze is voorzien van Windows 10 Professional 64-bit versie aangezien dit een vereiste is om gebruik te kunnen maken van Docker for Windows \citep{dockerWindows}.
 
 \subsubsection{Resultaten}
 Tijdens het eerste deel van de test werd gebruik gemaakt van de microsoft/nanoserver als basis-image.
 Om gebruik te kunnen maken van deze image werd het commando ``docker pull microsoft/nanoserver'' gebruikt.
 Dit zorgde direct voor een error die zichtbaar is in Figuur~\ref{fig:testContainer:crosscontainer}.
-De oorzaak van het probleem ligt hoogstwaarschijnlijk bij de geïnstalleerde anti-virus software\footnote{\url{https://github.com/moby/moby/issues/30296}}.
+De oorzaak van het probleem ligt hoogstwaarschijnlijk bij de geïnstalleerde anti-virus software (\url{https://github.com/moby/moby/issues/30296}).
 Dit is een speculatie aangezien geen tijd meer aanwezig was om hierop dieper in te gaan.
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/testCrossContainer/bad_cut.png}
+\caption{Error tijdens het gebruiken van Windows Docker containers}
+\label{fig:testContainer:crosscontainer}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/testMultiServer/receivedSetup.png}
+\caption{Ontvangen van client informatie bij servers}
+\label{fig:testServer:receiveSetup}
+\end{sidewaysfigure}
 
 \subsection{Meerdere servers}
 \subsubsection{Doel}
@@ -78,7 +92,6 @@ Het doel is dat de software op alle doelsystemen correct wordt geïnstalleerd en
 Hierna worden enkele field docks uitgeschakeld en wordt een tweede installer verspreid.
 
 \subsubsection{Uitvoering}
-De figuren in Bijlage~\ref{sec:testen} tonen verschillende screenshots tijdens het installatieproces.
 Figuren~\ref{fig:testClient:overviewTijdensToevoegen}, \ref{fig:testClient:windowsBeschrijving} en \ref{fig:testClient:linuxBeschrijving} geven weer hoe enkele testtoren beschreven worden en hoe deze zijn toegevoegd aan de databank.
 
 Tijdens het installatieproces traden echter enkele fouten op.
@@ -120,7 +133,7 @@ Als laatste test wordt nagegaan hoe het netwerkverkeer eruit ziet tijdens het re
 Deze test wordt gebruikt om te achterhalen hoeveel en wat voor netwerkverkeer gecreëerd wordt door de applicatie.
 Het monitoren van het netwerk wordt uitgevoerd tijdens de meerdere client test.
 De test produceert voldoende netwerk verkeer om een idee te krijgen van de hoeveelheid verkeer die zal geproduceerd worden.
-De volledige communicatie tussen de verschillende docks wordt opgenomen met Wireshark voor later een analyse op uit te voeren.
+De volledige communicatie tussen de verschillende docks wordt opgenomen met Wireshark om er later een analyse op uit te voeren.
 
 \subsubsection{Uitvoering}
 De figuren in Sectie~\ref{sec:network} geven een notie van het netwerk verkeer dat gegenereerd wordt door de applicatie.

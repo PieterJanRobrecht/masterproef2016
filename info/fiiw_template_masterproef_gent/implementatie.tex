@@ -5,11 +5,12 @@ Als programmeertaal werd Python gekozen.
 In het bedrijf is een zeker kennis van Python aanwezig waardoor de overname vlotter zal verlopen.
 Het doel is om een programma te ontwikkelen dat de belangrijkste functies omvat en dat gemakkelijk uitgebreid kan worden.
 In de komende secties worden de verschillende implementatie beslissingen toegelicht en wordt de geschreven code toegelicht.
-In wat volgt, zullen de server-side en client-side van elkaar gescheiden worden en afzonderlijk besproken worden.
-De verschillende Python modules worden overlopen en alle methodes met speciale kenmerken worden toegelicht.
+In wat volgt, zullen de server-side en client-side afzonderlijk besproken worden.
+De verschillende Python modules worden overlopen en alle methoden met speciale kenmerken worden toegelicht.
+De volledige code is terug te vinden in de bijgevoegde CD-Rom.
 
 \section{Server-side}
-\subsection{deployment\_server}
+\subsection{Deployment\_server}
 Zoals werd aangegeven in Hoofdstuk~\ref{sec:initServer} bestaat het opstarten van een server uit het creëren van een ReleaseDock object gevolgd door het creëren van een Broker object.
 Vervolgens gaat het release dock zich inschrijven voor de nodige berichten (zie Figuur~\vref{fig:seqStartServerNew}).
 
@@ -23,36 +24,37 @@ Vervolgens gaat het release dock zich inschrijven voor de nodige berichten (zie 
 Bij het opstarten van de docks moeten verschillende parameters meegegeven worden.
 Listing~\ref{list:startServer} geeft weer welke parameters ingevuld moeten worden voor een correcte functionaliteit.
 De broker interface en port worden gebruikt door de Broker om een socket te openen maar ook door ReleaseDock om te connecteren met de broker.
-De release\_dock interface en port zijn bedoelt voor in de ReleaseDock een socket te openen waar de Broker berichten naar kan verzenden.
+De release\_dock interface en port zijn bedoeld om in de ReleaseDock een socket te openen waar de Broker berichten naar kan verzenden.
 Als laatste moeten de release interface en port gespecificeerd worden.
-Met deze variabelen wordt een socket geopend die gebruikt wordt door het FieldDock om een installer op te halen\footnote{Het ophalen van een installer is het enige moment waarop een FieldDock direct connecteert met een ReleaseDock}.			
+Met deze variabelen wordt een socket geopend die gebruikt wordt door het FieldDock om een installer op te halen.
+Het ophalen van een installer is het enige moment waarop een FieldDock direct connecteert met een ReleaseDock.			
 
 \begin{minipage}{\linewidth}
 \begin{center}
 %\lstset{language=Python}
-\begin{lstlisting}[caption={Parameters voor server en broker},label={list:startServer}]
-    broker_interface = "10.129.58.139"
+\begin{lstlisting}[captionpos=b,caption={Parameters voor server en broker},label={list:startServer}]
+    broker_interface = sys.argv[1]
     broker_port = 12347
-    release_dock_interface = "10.129.58.139"
+    release_dock_interface = sys.argv[2]
     release_dock_port = 12345
-    release_interface = "10.129.58.139"
+    release_interface = sys.argv[3]
     release_port = 12346
 \end{lstlisting}
 \end{center}
 \end{minipage}
 
-\subsection{dock}
+\subsection{Dock}
 \paragraph{Starten van de services} %-> queue systeem uitleggen
 Na het creëren van een dock moeten verscheidene acties uitgevoerd worden.
 Zo zal een ReleaseDock een connectie met een databank opstarten en een FieldDock zal een connectie maken met de Docker client.
-Uit het klassendiagram in Figuur~\vref{fig:classDiagram} bleek al dat beide klassen methodes overerven van de Dock klasse.
+Uit het klassendiagram in Figuur~\ref{fig:classDiagram} bleek al dat beide klassen methoden overerven van de Dock klasse.
 Ieder Dock object moet dan ook in staat zijn om binnenkomende berichten correct af te kunnen handelen.
 Om deze taak uit te voeren, worden twee threads opgestart (zie Listing~\vref{list:startService}).
 
 \begin{minipage}{\linewidth}
 \begin{center}
 %\lstset{language=Python}(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
-\begin{lstlisting}[caption={Starten van dock services},label={list:startService}]
+\begin{lstlisting}[captionpos=b,caption={Starten van dock services},label={list:startService}]
     self.open_socket()
     thread = Thread(target=self.listen_for_data, args=())
     thread.daemon = True
@@ -74,7 +76,7 @@ De threads worden geblockt totdat de juiste acties uitgevoerd worden.
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Ontvangen en afhandelen van data},label={list:receiveData}]
+\begin{lstlisting}[captionpos=b,caption={Ontvangen en afhandelen van data},label={list:receiveData}]
     def listen_for_data(self):
         while True:
             conn, address = self.message_socket.accept()
@@ -92,7 +94,7 @@ De threads worden geblockt totdat de juiste acties uitgevoerd worden.
 \end{center}
 \end{minipage}
 
-\subsection{release\_dock}
+\subsection{Release\_dock}
 \paragraph{Kopiëren van bestanden} %-> Copy old meta folder
 Tijdens het creëren van een installer wordt gecontroleerd of een geselecteerd pakket al bestaat.
 Mocht dit het geval zijn dan moeten de nodige bestanden uit de originele meta-data folder gekopieerd worden naar de nieuwe locatie.
@@ -101,7 +103,7 @@ De doellocatie wordt door deze methode overschreven met bestanden uit de oorspro
 
 \paragraph{Agenten verzenden}
 Een onderdeel van het deploymentproces bestaat uit het kopiëren van de nodige agenten naar het field dock.
-Om dit uit te voeren wordt Dill\footnote{\url{https://pypi.python.org/pypi/dill}} gebruikt om de nodige objecten te serialiseren en deserialiseren.
+Om dit uit te voeren wordt Dill \citep{dill} gebruikt om de nodige objecten te serialiseren en deserialiseren.
 Listing~\vref{list:serDeser} geeft de code weer die hiervoor gebruikt wordt.
 De dill.dumps methode zorgt ervoor dat het object omgezet wordt naar een string die kan worden verzonden over een socket.
 Om dit correct uit te voeren wordt eerst de lengte van de string verzonden zodat aan de field dock zijde geweten is hoeveel bytes ontvangen moeten worden. 
@@ -110,7 +112,7 @@ Vervolgens kan het field dock de string terug omzetten naar een object door gebr
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Verzenden en ontvangen van agenten},label={list:serDeser}]
+\begin{lstlisting}[captionpos=b,caption={Verzenden en ontvangen van agenten},label={list:serDeser}]
     def send_agents(self, conn, address):
         ready = conn.recv(1024)
         if str(ready) == "Ready":
@@ -140,10 +142,9 @@ Vervolgens kan het field dock de string terug omzetten naar een object door gebr
 %-> initiate actions
 
 \subsection{Agents}
-\subsubsection{agent}\label{sec:agentImpl}
-\paragraph{Maken van een Docker image}
+\paragraph{Maken van een Docker image}\label{sec:agentImpl}
 De basis van een container bestaat uit een image die opgebouwd wordt aan de hand van een Dockerfile.
-Om een image te maken aan de hand van een Dockerfile wordt gebruik gemaakt van de docker-py module\footnote{\url{https://docker-py.readthedocs.io/en/stable/}}.
+Om een image te maken aan de hand van een Dockerfile wordt gebruik gemaakt van de docker-py module \citep{dockerPy}.
 Eerst wordt naar de locatie van de Dockerfile gezocht en vervolgens wordt deze meegegeven als parameter.
 De tag parameter zorgt ervoor dat de image eenvoudiger kan teruggevonden worden en de rm parameter zorgt ervoor dat tussenliggende containers verwijdert worden.
 Tijdens de implementatie werd altijd gebruik gemaakt van Docker images met Linux als basis.
@@ -154,7 +155,7 @@ Dit wordt in het volgende hoofdstuk verder besproken.
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Creatie van een Docker image},label={list:createImage}]
+\begin{lstlisting}[captionpos=b,caption={Creatie van een Docker image},label={list:createImage}]
 dockerfile = str(self.find("Dockerfile", self.release_zip_location))
 self.docker_image = self.client.images.build(path=dockerfile,
                                              tag="fieldimage", rm=True)
@@ -162,11 +163,6 @@ self.docker_image = self.client.images.build(path=dockerfile,
 \end{center}
 \end{minipage}
 
-\subsubsection{install\_agent}
-Zoals in Hoofdstuk~\ref{sec:anaEnOntwerp} werd aangehaald, bestaat het installatieproces uit verscheidene stappen.
-Het activiteitendiagram voor de InstallAgent in Figuur~\ref{fig:flow:installAgent} toont dat het installatieproces bestaat uit verschillende handelingen.
-Het creëren van een Docker image aan de hand van een Dockerfile werd hiervoor al besproken.
-In wat volgt, worden de volgende stappen van het installatieproces besproken.
 
 \paragraph{Container creatie}
 Na het creëren van de Docker image en het hernoemen van de oude container, moet een nieuwe container aangemaakt worden.
@@ -186,7 +182,7 @@ Hierna moet de ``DISPLAY'' variabele in de container ingesteld worden op het loc
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Creatie van fieldcontainer},label={list:createFieldcontainer}]
+\begin{lstlisting}[captionpos=b,caption={Creatie van fieldcontainer},label={list:createFieldcontainer}]
 ip = socket.gethostbyname(socket.gethostname())
 self.client.containers.create(self.docker_image, entrypoint="/bin/bash",
                               tty=True, name="fieldcontainer",
@@ -207,7 +203,7 @@ Verder bevatten Listing~\ref{list:installPackage}de code om een pakket te instal
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Kopieer pakket naar container},label={list:copyPackage}]
+\begin{lstlisting}[captionpos=b,caption={Kopieer pakket naar container},label={list:copyPackage}]
 package_name = package.name + package.version
 package_location = self.find(package_name, self.release_zip_location)
 has_include_folder = has_include(package_name, self.release_zip_location)
@@ -221,7 +217,7 @@ self.container.put_archive("/usr/test/", tar)
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Installatie van een pakket},label={list:installPackage}]
+\begin{lstlisting}[captionpos=b,caption={Installatie van een pakket},label={list:installPackage}]
 script_location = "/usr/test/" + package_name + 
                   "/meta/install_script.py"
 command = "python " + script_location
@@ -242,7 +238,7 @@ Zo niet dan is de test gefaald en wordt de container gemarkeerd voor quarantaine
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Controle van een pakket},label={list:checkPackage}]
+\begin{lstlisting}[captionpos=b,caption={Controle van een pakket},label={list:checkPackage}]
 package_name = package.name + package.version
 script_location = "/usr/test/" + package_name + "/meta/test_script.py"
 command = "python " + script_location
@@ -262,35 +258,35 @@ for val in exe_start:
 \end{minipage}
 
 \section{Client-side}
-\subsection{deployment\_client}
-Net als bij het opstarten van de server, moet bij het opstarten van een client verschillende parameters meegegeven worden (Zie Listing~\ref{list:paraClient}).
+\subsection{Deployment\_client}
+Net als bij het opstarten van de server, moet bij het opstarten van een client verschillende parameters meegegeven worden.
 Uiteraard moet de broker interface en port overeenkomen met de parameters die zijn meegegeven tijdens het opstarten van de server.
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Parameters voor een client},label={list:paraClient}]
-field_dock_interface = "10.129.58.139"
-field_dock_port = 54321
-release_interface = None
-release_port = 12346
-broker_interface = "10.129.58.139"
-broker_port = 12347
-\end{lstlisting}
-\end{center}
-\end{minipage}
+%\begin{minipage}{\linewidth}
+%\begin{center}
+%\lstset{escapeinside={(*@}{@*)}}
+%\begin{lstlisting}[captionpos=b,caption={Parameters voor een client},label={list:paraClient}]
+%field_dock_interface = "10.129.58.139"
+%field_dock_port = 54321
+%release_interface = None
+%release_port = 12346
+%broker_interface = "10.129.58.139"
+%broker_port = 12347
+%\end{lstlisting}
+%\end{center}
+%\end{minipage}
 
-\subsection{field\_dock}
+\subsection{Field\_dock}
 Een belangrijk element uit de FieldDock klasse is de code die weergegeven wordt in Listing~\ref{list:dockerClient}.
 Tijdens het opstarten van de services van het field dock, wordt een client aangemaakt om te kunnen interageren met Docker-machine.
-Deze stap is enkel nodig als er gewerkt wordt met de Docker Toolbox\footnote{\url{https://www.docker.com/products/docker-toolbox}}.
-De Docker Toolbox is een alternatieve Docker omgeving voor Windows computers die niet voldoen aan de voorwaarden\footnote{Microsoft Windows 10 Professional of Enterprise 64-bit} om Docker te installeren.
-Computers met Windows 10 Professional of met Linux hebben voldoende aan het alternatief (zie Listing~\ref{list:altDockerClient}).
+Deze stap is enkel nodig als er gewerkt wordt met de Docker Toolbox \citep{dockertoolbox}.
+De Docker Toolbox is een alternatieve Docker omgeving voor Windows computers die niet voldoen aan de voorwaarden (Microsoft Windows 10 Professional of Enterprise 64-bit) om Docker te installeren.
+Computers met Windows 10 Professional of met Linux moeten environment variabele meegeven aan de methode.
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Parameters voor de Docker client},label={list:dockerClient}]
+\begin{lstlisting}[captionpos=b,caption={Parameters voor de Docker client},label={list:dockerClient}]
 def init_client(self):
     env = {"DOCKER_TLS_VERIFY": "1",
            "DOCKER_HOST": "tcp://192.168.99.100:2376",
@@ -303,15 +299,15 @@ def init_client(self):
 \end{center}
 \end{minipage}
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\lstset{escapeinside={(*@}{@*)}}
-\begin{lstlisting}[caption={Alternatief voor de Docker client},label={list:altDockerClient}]
-def init_client(self):
-    self.client = docker.from_env()
-\end{lstlisting}
-\end{center}
-\end{minipage}
+%\begin{minipage}{\linewidth}
+%\begin{center}
+%\lstset{escapeinside={(*@}{@*)}}
+%\begin{lstlisting}[captionpos=b,caption={Alternatief voor de Docker client},label={list:altDockerClient}]
+%def init_client(self):
+%    self.client = docker.from_env()
+%\end{lstlisting}
+%\end{center}
+%\end{minipage}
 
 %\paragraph{Initialisatie} 
 %De server package bevat alle logica die hoort bij het release dock als bij de broker, maar bevat ook enkele modules die gebruikt worden om de realiteit af te beelden.

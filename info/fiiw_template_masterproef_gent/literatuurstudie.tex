@@ -290,20 +290,17 @@ Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang de An
 Playbooks zijn YAML\footnote{Een human-readable data serialisatie taal (Een superset van JSON)} definities van taken die beschrijven hoe een taak moet geautomatiseerd worden.
 Een Playbook bestaat uit een aantal ``plays'' die uitgevoerd kunnen worden op een set van hosts, ook wel een ``inventory'' genoemd.
 Iedere play bestaat uit een set van taken die op een subset van de inventory uitgevoerd kan worden.
-Een task zelf voert een Ansible module uit\footnote{Een klein stuk code met een specifieke taak}.
+Een taak bestaat uit Ansible modules (Een klein stuk code met een specifieke taak).
 
 Hiernaast is het mogelijk om de mogelijkheden van Ansible uit te breiden.
-Modules kunnen zelf geschreven worden in eender welke taal met als enige beperking dat een JSON bestand als input moet gegeven worden en dat een JSON bestand gegenereerd moet worden.
+Modules kunnen zelf geschreven worden in eender welke taal met als enige beperking dat een JSON bestand als input en output gebruikt moet worden.
 De inventory van een Playbook kan dynamisch ontdekt worden at runtime.
-
 In tegenstelling tot ATLAS en Electric Cloud bevat Ansible geen agenten die gebruikt worden om het deploymentproces in goede banen te leiden.
-Het is wel mogelijk om het proces te beïnvloeden door gebruik te maken van de Playbooks.
-Door gebruik te maken van modules is het in Ansible mogelijk om de functionaliteiten uit te breiden.
 Wederom is het niet duidelijk wat er gebeurt mochten er fouten optreden tijdens het installatieproces of updateproces.
 
 \section{Recovery na fouten}\label{sec:rollback}
-Tijdens de bespreking van het probleem in Sectie~\vref{sec:probleem} werd al aangehaald dat een soort van rampenplan voorzien moet worden.
-Zowel omgevingsproblemen als onderhoudsproblemen (zie Sectie~\vref{sec:softwareLevenscyclus}) kunnen tijdens één van de toestanden in de deployment levenscyclus optreden.
+Tijdens de bespreking van het probleem in Sectie~\ref{sec:probleem} werd al aangehaald dat een soort van ``rampenplan'' voorzien moet worden.
+Zowel omgevingsproblemen als onderhoudsproblemen (zie Sectie~\ref{sec:softwareLevenscyclus}) kunnen tijdens één van de toestanden in de deployment levenscyclus optreden.
 Voor Televic is het niet wenselijk dat een probleem tijdens één van deze toestanden ervoor zorgt dat hun software niet meer correct functioneert aangezien dit kan leiden tot het stilleggen van de productie.
 Daarom wordt in de volgende secties verschillende mechanismen besproken waarmee de verscheidene problemen aangepakt kunnen worden.
 In wat volgt, wordt vooral rekening gehouden met mechanismen die gebruikt kunnen worden als het probleem zich al voor heeft gedaan.
@@ -311,13 +308,13 @@ Deze strategieën zullen typisch proberen terug te keren naar een vorige correct
 De actie waarbij wordt teruggekeerd naar een vorige toestand wordt ook wel rollback genoemd.
 
 \subsection{Rollback strategieën}
-\citet{srinivasan2004flashback} spreekt over drie manieren waarop rollback strategieën geïmplementeerd worden in hedendaagse systemen.
-Checkpointing, main-memory transactions en software rejuvination zijn strategieën die vaak gebruikt zijn.
+\citet{srinivasan2004flashback} spreken over drie manieren waarop rollback strategieën geïmplementeerd worden in hedendaagse systemen.
+Checkpointing, main-memory transactions en software rejuvination zijn strategieën die vaak gebruikt worden.
 
 \paragraph{Checkpointing}
-Checkpointing is een eenvoudige recovery strategie.
+Checkpointing is een eenvoudige recovery-strategie.
 De toestand van een programma wordt periodiek opgeslagen in een bestand op een extern opslagmedium.
-Deze kan, na het falen van het programma, gebruikt worden om te herstellen van fouten \citep{plank1994libckpt}.
+Deze kan, na het falen van het programma, gebruikt worden om te herstellen \citep{plank1994libckpt}.
 Bij een checkpointing systeem wordt de volledige toestand van het programma opgeslagen.
 Dit zorgt voor een verhoogde overhead waardoor het niet mogelijk is om frequent een checkpoint uit te voeren \citep{srinivasan2004flashback}.
 
@@ -329,8 +326,8 @@ Hierdoor zullen wel verschillende recovery bestanden nodig zijn.
 Het is aangewezen om op regelmatige tijdstippen de verschillende recovery bestanden samen te voegen tot één bestand \citep{plank1994libckpt, elnozahy2002survey}.
 
 \paragraph{Main-memory transactions}
-Een andere rollback strategie zijn de main-memory transactions.
-Systemen die deze transacties ondersteunen bezitten vaak de mogelijkheid om terug te keren naar een vorig executie punt.
+Een andere rollback strategie is de main-memory transactions.
+Systemen die deze transacties ondersteunen bezitten vaak de mogelijkheid om terug te keren naar een vorig uitvoeringspunt.
 Om deze strategie te kunnen implementeren, moeten applicaties gebruik maken van het transactieprogrammeermodel, waardoor de keuzevrijheden van de programmeur beperkt worden \citep{srinivasan2004flashback}.
 
 \paragraph{Software rejuvenation}
@@ -345,28 +342,26 @@ De meeste studies over software rejuvenation focussen vooral op het herstarten v
 
 \subsection{Virtualisatie}\label{sec:virtualisatie}
 Door middel van virtualisatie wordt de complexiteit die ontstaat door de interactie tussen het programma, de installatieomgeving en de uitvoeringsbeperkingen gelimiteerd.
-Door het creëren van een perfecte omgeving komen deze problemen niet voor.
 Er zijn verschillende voordelen gekoppeld aan het gebruiken van een virtuele machine (VM).
 Bijvoorbeeld, besturingssystemen op verschillende hardware platformen eisen verschillende drivers en deze drivers hebben misschien afhankelijkheden op een bepaalde firmware en BIOS.
-Een guest OS draaiende op een virtuele machine heeft deze eisen niet \citep{shumate2004implications}.
+Een gastbesturingssysteem draaiende op een virtuele machine heeft deze eisen niet \citep{shumate2004implications}.
 
 \begin{figure}[!ht]
 \centering
 \makebox[0pt]{\includegraphics[scale=0.4]{afbeelding/hypervisors.png}}
-\caption{Typer 1 hypervisor in vergelijking met een type 2 hypervisor \citep{hypervisors}}
+\caption{Type 1 hypervisor in vergelijking met een type 2 hypervisor \citep{hypervisors}}
 \label{fig:hypervisors}
 \end{figure}
 
 Met virtualisatie is het mogelijk om van één computer meerder computers te maken.
 Dit kan bereikt worden door gebruik te maken van een speciaal programma (een hypervisor).
-Volgens \citet{fenn2008evaluation} bestaan er twee types hypervisors:
+Volgens \citet{fenn2008evaluation} bestaan er twee types hypervisors (zie Figuur~\ref{fig:hypervisors}):
 \begin{itemize}
 \item \textbf{Type 1} hypervisors zorgen voor een directe interface naar de host hardware.
 Er is typisch één virtuele machine met speciale privileges die de andere virtuele machines onderhoudt.
 \item \textbf{Type 2} hypervisors draaien als een normaal programma in het host besturingssysteem.
 Iedere virtuele machine draait dan als proces in het host besturingssysteem.
 \end{itemize}
-Deze twee types zijn zichtbaar in Figuur~\vref{fig:hypervisors}.
 
 Een virtuele machine bevat een volledig besturingssysteem.
 Een gevolg hiervan is dat het uitvoeren van handelingen (zoals opstarten, afsluiten, kopiëren, \ldots) lang duren.
@@ -388,8 +383,7 @@ Virtualisatie is niet de enige techniek die gebruikt kan worden om rollbacks te 
 Docker containers is een technologie waarmee een stuk software wordt ingepakt in een volledig filesysteem dat alle benodigdheden bevat om correct te functioneren.
 Hierdoor zal de software overal op eenzelfde manier draaien, ongeacht de omgeving \citep{dockerMain}.
 Docker containers zijn niet hetzelfde als virtuele machines.
-In de vergelijking \citep{dockerEbook} worden virtuele machines voorgesteld als huizen terwijl Docker containers worden voorgesteld als appartementen.
-
+In \citep{dockerEbook} worden virtuele machines voorgesteld als huizen terwijl Docker containers worden voorgesteld als appartementen.
 De huizen staan volledig op zichzelf en bieden bescherming tegen ongewenste gasten.
 Ze hebben een eigen infrastructuur met hun eigen water, verwarming, \ldots .
 Hiernaast zal ieder huis op zijn minste een badkamer, living, slaapkamer en keuken hebben.
@@ -397,24 +391,24 @@ Het vinden van een klein huis is een ganse klus en vaak zal een huis meer bevatt
 
 Appartementen bieden ook bescherming tegen ongewenste gasten, maar zij zijn gebouwd rond een gemeenschappelijke infrastructuur.
 Het appartementsgebouw biedt gemeenschappelijk water, verwarming, \ldots  aan, aan elk appartement.
-Elk appartement verschilt ook nog van grootte.
+Elk appartement kan van grootte verschillen.
 Er bestaan kleine appartementen maar ook grote met meerder slaapkamers.
 Men huurt enkel hetgeen nodig is.
 
-In Figuur~\vref{fig:VMvsDocker} zijn de architecturen van virtuele machines en Docker terug te vinden.
+In Figuur~\ref{fig:VMvsDocker} zijn de architecturen van virtuele machines en Docker terug te vinden.
 Het verschil tussen beiden wordt al snel duidelijk.
 Een virtuele machine zal typisch de applicatie, de nodige binaries en bibliotheken en een volledig besturingssysteem bevatten.
 Een container bevat de applicatie en de verschillende dependencies maar de kernel wordt gedeeld met alle andere containers en gedragen zich als een geïsoleerd proces in de user space van het host besturingssysteem.
 
-\citet{chamberlain2014using} bespreekt kort hoe Docker werkt.
+\citet{chamberlain2014using} bespreken kort hoe Docker werkt.
 Docker is een platform dat gebruik maakt van de Linux Containers (LXC de user-space control package voor Linux Containers) om software te encapsuleren.
-LXC is een virtualisatie techniek waarmee virtuele omgevingen in Linux opgebouwd kunnen worden.
-De containers zullen processen van elkaar gescheiden houden zodanig dat een proces een ander niet kan beïnvloeden \citep{merkel2014docker}.
+LXC is een virtualisatietechniek waarmee virtuele omgevingen in Linux opgebouwd kunnen worden.
+De containers zullen processen van elkaar gescheiden houden zodat een proces een ander niet kan beïnvloeden \citep{merkel2014docker}.
 Docker zal de LXC software uitbreiden waardoor deployment, distributie en versioning mogelijk wordt.
 Naast LXC gebruikt Docker AuFS (Advanced Multi-Layered Unification Filesystem) als het filesysteem voor de containers.
 Doordat het filesysteem gelaagd is, is het mogelijk om verschillende filesystemen over elkaar te leggen.
 
-\citet{merkel2014docker} vergelijkt de twee virtualisatie technieken en bespreekt de verschillen tussen de twee.
+\citet{merkel2014docker} vergelijkt de twee virtualisatie technieken.
 Bij virtuele machines moet voor iedere virtuele machine een besturingssysteem geïnstalleerd worden.
 Al deze besturingssystemen verbruiken RAM, CPU en bandbreedte.
 Containers zullen piggybacken op het bestaande host besturingssysteem.
@@ -439,7 +433,7 @@ In de volgende secties worden deze twee verschillende focussen verder besproken.
 \begin{itemize}
 \item disk image-based deployment
 \item behavior-based deployment
-\item package-based deployments
+\item package-based deployment
 \end{itemize}
 Bij disk image-based deployment worden de software en het besturingssysteem op eenzelfde moment naar de target node verzonden.
 Er zullen verschillende image-servers aanwezig zijn die elk een service aanbieden.
@@ -467,7 +461,7 @@ Zo'n oplossing is misschien doenbaar mochten slechts een handvol gebruikers de a
 \citet{patterson2008data} haalt verschillende argumenten aan voor het distribueren van deze service en haalt enkele punten aan (betrouwbaarheid, bandbreedte en lage wachttijden) waar rekening mee moet gehouden worden alvorens een ontwerpbeslissing genomen wordt.
 Zoals \citet{patterson2008data} aanhaalt, is het belangrijk dat alle gebruikers ten alle tijden de service kunnen gebruiken.
 Hiernaast moet er rekening gehouden worden met de deployment strategie.
-\citet{munch2012software} spreekt over verschillende strategieën om software uit te brengen:
+\citet{munch2012software} spreken over verschillende strategieën om software uit te brengen:
 \begin{itemize}
 \item \emph{Big-bang}: iedere gebruiker van de applicatie zal op eenzelfde moment overschakelen van de oude naar de nieuwe software. 
 Hierdoor wordt vermeden dat verschillende afdelingen met een andere versie van de software werken. 
@@ -487,9 +481,9 @@ Tot op heden werd vooral gekeken naar mogelijke technologieën en tools die gebr
 In de komende secties worden enkele architecturen aangehaald die ook een oplossing bieden voor het verspreiden van software.
 Met een architectuur is het mogelijk om zelf verscheidene ontwerp- en implementatiebeslissingen te nemen.
 Zo ligt de programmeertaal niet vast en kan een taal gekozen worden die besturingssysteem onafhankelijk is.
-In de volgende secties wordt vooral gekeken of de architecturen een schaalbare oplossing bieden voor het deploymentproces.
+In de volgende secties wordt vooral gekeken welke architecturen een schaalbare oplossing bieden voor het deploymentproces.
 
-\subsection{Drie lagen architectuur}
+\subsection{Client-server architectuur}
 Volgens \citet{micro} is het mogelijk om een applicatie in te delen in drie logische groepen of ook wel lagen.
 Het gebruik van een laag stelt de ontwerper in staat om verscheidene taken van elkaar te onderscheiden waardoor het eenvoudiger is om een laag te ontwerpen die herbruikbaar is.
 Figuur~\vref{fig:threeLayer} toont welke drie basis lagen gebruikt worden om de architectuur op te bouwen.
@@ -528,16 +522,16 @@ Iedere laag kan redundant gemaakt worden waarbij meerdere server van eenzelfde l
 De drie lagen architectuur voorziet voldoende flexibiliteit en schaalbaarheid maar logica voor het opvangen van fouten tijdens het installatieproces en updateproces is niet aanwezig.
 
 \subsection{Software dock architectuur}\label{sec:softwareDock}
-\citet{hall1999cooperative} bespreekt een interessante architectuur die gebruikt kan worden voor het verspreiden van software.
+\citet{hall1999cooperative} bespreken een interessante architectuur die gebruikt kan worden voor het verspreiden van software.
 Het Software Dock research project creëerde een raamwerk om de samenwerking tussen software producenten en gebruikers te verbeteren.
-In Figuur~\vref{fig:softwareDock} wordt de ontworpen architectuur voorgesteld.
+In Figuur~\ref{fig:softwareDock} wordt de ontworpen architectuur voorgesteld.
 Er worden twee verschillende componenten gedefinieerd waarmee de producenten en gebruikers voorgesteld worden.
 In de architectuur worden de verschillende producenten voorgesteld aan de hand van een release dock en worden de gebruikers voorgesteld als een field dock.
 Aan deze docks worden verschillende agenten gekoppeld.
 Elke agent hoort typisch bij één stap uit de software levenscyclus die besproken werd in Sectie~\ref{sec:softwareLevenscyclus}.
 Naast de verschillende docks wordt ook een wide-area eventsysteem gedefinieerd.
-Met dit systeem wordt de communicatie tussen de docks aangeboden.
-\citet{hall1997architecture} bespreekt in detail hoe de Software Dock architectuur gebruikt kan worden voor het verspreiden van software.
+Met dit systeem wordt de communicatie tussen de docks geregeld.
+\citet{hall1997architecture} bespreken in detail hoe de Software Dock architectuur gebruikt kan worden voor het verspreiden van software.
 
 \begin{figure}[!ht]
 \centering
@@ -546,7 +540,7 @@ Met dit systeem wordt de communicatie tussen de docks aangeboden.
 \label{fig:softwareDock}
 \end{figure}
 
-De release dock is een server die zich bevindt bij de softwareproducent.
+De release dock is een softwarecomponent die zich bevindt bij de softwareproducent.
 De release dock biedt een release-repository aan waaruit de gebruikers de applicaties selecteren voor deployment.
 In de release dock wordt ieder release semantisch beschreven aan de hand van een Deployable Software Description file.
 Dit bestand bevat onder andere:
@@ -555,19 +549,19 @@ Dit bestand bevat onder andere:
 Als niet aan deze beperkingen voldaan wordt, zal het deploymentproces falen.
 \item \textbf{Afhankelijkheden}: deze worden gebruikt om beperkingen van de release te beschrijven.
 Als deze niet voldaan zijn aan de gebruikerskant dan kunnen nog oplossingen gevonden worden.
-Bijvoorbeeld door additionele software te installeren kan de beperking voldaan worden.
+Bijvoorbeeld door additionele software te installeren kan aan de beperking voldaan worden.
 \item \textbf{Configuratie}: deze zorgt voor een beschrijving van de software die wordt uitgegeven.
 Hierbij horen bijvoorbeeld varianten en aangepaste versies.
 \end{itemize}
 Elke release wordt vergezeld door enkele agents die de semantische betekenis lezen en zo de deployment kunnen uitvoeren.
 Aan de hand van interfaces kunnen de agents aan de services en inhoud van de release dock.
 Bij het wijzigen van een software release zal de release dock verschillende events afvuren.
-Agents kunnen zich subscriben bij deze events en weten zo wanneer bepaalde handelingen uitgevoerd moeten worden \citep{hall1999cooperative}.
+Agenten kunnen zich inschrijven voor deze events en weten zo wanneer bepaalde handelingen uitgevoerd moeten worden \citep{hall1999cooperative}.
 
-De field dock dient als een interface naar de gebruiker kant toe.
-Deze interface biedt informatie over de resources en configuratie van het gebruiker systeem.
+De field dock dient als een interface naar de gebruikerskant toe.
+Deze interface biedt informatie over de resources en configuratie van het gebruikerssysteem.
 Op basis van deze informatie wordt een context opgebouwd waarin de releases van de resource dock worden gedeployed.
-De agents die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het gebruikers systeem ondervragen.
+De agenten die horen bij een release, docken zichzelf in de field dock en kunnen aan de hand van deze interface het gebruikerssysteem ondervragen.
 Aangezien kritische client-side informatie op een gestandaardiseerde wijze aangeboden wordt, met behulp van een geneste collectie van pair-values die een hiërarchie vormen, kan de installatie van de software gepersonaliseerd worden \citep{hall1999cooperative}.
 
 \subsubsection{Communicatie}\label{sec:event}
@@ -576,8 +570,8 @@ Een belangrijk onderdeel van de software dock architectuur is de event service.
 Deze handelt de communicatie af tussen de verschillende docks en is een spilfiguur in de architectuur.
 Aan de hand van \citet{pietzuch2002hermes} en \citet{carzaniga2001design} is het mogelijk om een bespreking te geven over hoe de event service geïmplementeerd kan worden.
 
-Meeste middleware systemen zijn invocation-based systemen waarbij het request/response paradigma gebruikt wordt om de communicatie tussen client en server te onderhouden.
-Een client verzoekt een service van de server, waar de server vervolgens op antwoord.
+De meeste middleware systemen zijn invocation-based systemen waarbij het request/response paradigma gebruikt wordt om de communicatie tussen client en server te onderhouden.
+Een client verzoekt een service van de server, waar de server vervolgens op antwoordt.
 Het toepassen van deze strategie is doenbaar in een omgeving met een beperkt aantal clients en servers.
 Om een grootschalig netwerk op te bouwen en om te kunnen gaan met een dynamische omgeving moet een andere manier van communiceren gebruikt worden.
 Publish/subscribe systemen bieden een oplossing voor deze problemen.
@@ -608,10 +602,10 @@ Het is belangrijk om stil te staan bij enkele ontwerp beslissingen zodanig dat d
 \end{figure}
 
 Naast de architectuur is het belangrijk om te weten wat wordt verzonden en op welke manier.
-\citet{carzaniga2001design} haalt een structuur aan waarin een event beschreven wordt als een set van attributen.
+\citet{carzaniga2001design} halen een structuur aan waarin een event beschreven wordt als een set van attributen.
 Ieder attribuut bestaat uit een type, naam en waarde.
 De naam van een attribuut is een string en het type komt uit een set van primitieven die terug gevonden worden bij de meeste hedendaagse programmeertalen.
-Een voorbeeld van zo'n event is terug te vinden in Figuur~\vref{fig:pubsubNot}
+Een voorbeeld van zo'n event is terug te vinden in Figuur~\ref{fig:pubsubNot}
 
 \begin{figure}[!ht]
 \centering
@@ -622,56 +616,80 @@ Een voorbeeld van zo'n event is terug te vinden in Figuur~\vref{fig:pubsubNot}
 
 \section{Technologieën voor software packaging}\label{sec:technologieen}
 In de vorige secties werden oplossingen gezocht voor het verspreiden van software naar verschillende gebruikers.
-Hierbij werd vooral rekening gehouden met op welke wijze de software verzonden word.
+Hierbij werd vooral rekening gehouden met de wijze waarop de software verzonden wordt.
 Er werd nagegaan of een oplossing zorgde voor een schaalbare architectuur die mogelijkheden biedt naar de toekomst toe.
-Er werd zelfs gezocht naar een rampenplan dat gebruikt kan worden als er fouten optreden tijdens het installatieproces (Sectie~\vref{sec:rollback}.
 In wat volgt wordt niet meer gekeken naar hoe de software bij de gebruiker raakt maar wat er bij de gebruiker raakt.
 
-Implementaties in verschillende programmeertalen, verschillende data representatie formats of incompatibele runtime environments kunnen aan de basis liggen voor een lastige integratie van computerprogramma's.
+Implementaties in verschillende programmeertalen, verschillende datarepresentatieformaten of incompatibele runtime-environments kunnen aan de basis liggen van een lastige integratie van computerprogramma's.
 Door gebruik te maken van additionele software, wordt het mogelijk om het gat tussen de verschillen te overbruggen  \citep{callahan1998software}.
 Het Python testraamwerk is een verzameling van verschillende drivers en bibliotheken elk met een eigen implementatie.
-Door additionele software toe te voegen is het mogelijk dat verschillende software ``pakketten'' op een gelijkaardige manier behandelt worden.
+Door additionele software toe te voegen is het mogelijk dat verschillende software ``pakketten'' op een gelijkaardige manier behandeld worden.
 In wat volgt zullen verschillende technologieën en tools besproken worden die ervoor zorgen dat verschillende software ``pakketten'' een geheel vormen.
 Dit geheel kan vervolgens verzonden worden naar de gebruikers waar de software geïnstalleerd moet worden.
 
 Om de verschillende technologieën te vergelijken werd een algemeen testscenario uitgedacht.
-Het scenario ziet er als volgt uit: er moet een geheel gemaakt worden waarmee twee verschillende pakketten (die drivers en bibliotheken moeten voorstellen) geïnstalleerd moeten worden.
+Er moet een geheel gemaakt worden waarmee twee verschillende pakketten (die drivers en bibliotheken moeten voorstellen) geïnstalleerd moeten worden.
 Hierna werd er onderzocht hoe één van de twee pakketten geüpdatet kon worden.
 Door de technologieën te onderwerpen aan een test, wordt het mogelijk om de voor- en nadelen van iedere technologie te achterhalen.
 Hiernaast wordt het ook mogelijk om de technologieën te vergelijken aangezien zij eenzelfde functionaliteit moeten voorzien.
 
+%\begin{table}[]
+%\centering
+%\begin{tabular*}{\linewidth}{clll}
+%\hline
+%\multicolumn{4}{p{\linewidth}}{\centering \textbf{WiX Toolset}}                    \\ 
+%\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+%\multicolumn{2}{p{0.5\linewidth}}{Diepe integratie met Windows \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{p{0.5\linewidth}}{XML structuren zorgt voor veel overhead \par Niet cross-platform}    \\ \hline
+%\multicolumn{4}{p{\linewidth}}{\centering \textbf{NSIS}}                           \\ 
+%\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+%\multicolumn{2}{p{0.5\linewidth}}{Scripting taal \par Verschillende plug-ins beschikbaar}   & \multicolumn{2}{p{0.5\linewidth}}{ Niet cross-platform \par Geen structuur voor packages}    \\ \hline
+%\multicolumn{4}{p{\linewidth}}{\centering \textbf{Chocolatey}}                     \\ 
+%\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+%\multicolumn{2}{p{0.5\linewidth}}{Volledige deployment infrastructuur al aanwezig}   & \multicolumn{2}{p{0.5\linewidth}}{Niet cross-platform \par Command-line tool}    \\ \hline
+%\multicolumn{4}{p{\linewidth}}{\centering \textbf{Qt Installer Framework}}         \\ 
+%\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
+%\multicolumn{2}{p{0.5\linewidth}}{Cross-platform \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{p{0.5\linewidth}}{XML structuren zorgt voor veel schrijfwerk \par Enkel Linux installer maken in Linux} \\ \hline
+%\end{tabular*}
+%\caption{Voor- en nadelen van de verschillende technologieën}
+%\label{tab:voorNadelen}
+%\end{table}
+
 \begin{table}[]
 \centering
-\begin{tabular*}{\linewidth}{clll}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|l|l|}
 \hline
-\multicolumn{4}{p{\linewidth}}{\centering \textbf{WiX Toolset}}                    \\ 
-\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
-\multicolumn{2}{p{0.5\linewidth}}{Diepe integratie met Windows \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{p{0.5\linewidth}}{XML structuren zorgt voor veel overhead \par Niet cross-platform}    \\ \hline
-\multicolumn{4}{p{\linewidth}}{\centering \textbf{NSIS}}                           \\ 
-\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
-\multicolumn{2}{p{0.5\linewidth}}{Scripting taal \par Verschillende plug-ins beschikbaar}   & \multicolumn{2}{p{0.5\linewidth}}{ Niet cross-platform \par Geen structuur voor packages}    \\ \hline
-\multicolumn{4}{p{\linewidth}}{\centering \textbf{Chocolatey}}                     \\ 
-\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
-\multicolumn{2}{p{0.5\linewidth}}{Volledige deployment infrastructuur al aanwezig}   & \multicolumn{2}{p{0.5\linewidth}}{Niet cross-platform \par Command-line tool}    \\ \hline
-\multicolumn{4}{p{\linewidth}}{\centering \textbf{Qt Installer Framework}}         \\ 
-\multicolumn{2}{p{0.5\linewidth}}{\centering Pro} & \multicolumn{2}{p{0.5\linewidth}}{\centering Cons} \\ \hline
-\multicolumn{2}{p{0.5\linewidth}}{Cross-platform \par Mogelijkheid om externe executables te includeren}   & \multicolumn{2}{p{0.5\linewidth}}{XML structuren zorgt voor veel schrijfwerk \par Enkel Linux installer maken in Linux} \\ \hline
-\end{tabular*}
+\multicolumn{1}{|l|}{}                                                                  & \multicolumn{1}{c|}{Voordeel}                                            & \multicolumn{1}{c|}{Nadeel}                                       \\ \hline
+                                                                                        & Diepe integratie met Windows                                             & XML structuren zorgt voor veel overhead                           \\
+\multirow{-2}{*}{WiX Toolset}                                                           & Mogelijkheid om externe executables te includeren                        & Niet cross-platform                                               \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}                                                                & Scripting taal                                                           & Geen structuur voor packages                                      \\
+\rowcolor[HTML]{C0C0C0} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}NSIS}                                          & Verschillende plug-ins beschikbaar                                       & Niet cross-platform                                               \\ \hline
+                                                                                        & Volledige deployment infrastructuur al aanwezig                          & Command-line tool                                                 \\
+\multirow{-2}{*}{Chocolatey}                                                            &                                                                          & Niet cross-platform                                               \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}{\color[HTML]{000000} }                                         & {\color[HTML]{000000} Cross-platform}                                    & {\color[HTML]{000000} XML structuren zorgt voor veel schrijfwerk} \\
+\rowcolor[HTML]{C0C0C0} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}{\color[HTML]{000000} Qt Installer Framework}} & {\color[HTML]{000000} Mogelijkheid om externe executables te includeren} & {\color[HTML]{000000} Enkel Linux installer maken in Linux}       \\ \hline
+\end{tabular}%
+}
 \caption{Voor- en nadelen van de verschillende technologieën}
 \label{tab:voorNadelen}
 \end{table}
 
 \subsubsection{WiX Toolset}
-Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt worden van XML broncode.
+Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt worden met behulp van XML broncode.
 De toolset is geschreven in C\# en heeft het .Net framework nodig om te kunnen functioneren.
-Bron code wordt gecompileerd en vervolgens gelinkt om een executable te maken.
-Met de toolset kunnen .msi installatie pakketten, .msm merge modules en .msp patches gecombineerd worden tot een Windows executabel.\citep{wixToolset}.
+Broncode wordt gecompileerd en vervolgens gelinkt om een executable te maken.
+Met de toolset kunnen .msi installatie pakketten, .msm merge modules en .msp patches gecombineerd worden tot een Windows executabel \citep{wixToolset}.
 
 Aan deze technologie zijn verschillende voor- en nadelen verbonden (zie Tabel~\ref{tab:voorNadelen}).
-Een fragment van de WiX toolset code is terug te vinden in Listing~\vref{list:wix}.
-De WiX toolset maakt installer uitsluitend bedoeld voor de Windows installation engine.
+Een fragment van de WiX toolset code is terug te vinden in Listing~\ref{list:wix}.
+De WiX toolset maakt installer die uitsluitend bedoeld zijn voor de Windows installation engine.
 Hierdoor worden verscheidene functionaliteiten eenvoudig te gebruiken, zoals het maken van uitzonderingen in de Windows Firewall.
-Door gebruik te maken van de Windows installation engine is het niet mogelijk om de executabel te gebruiken in Linux omgevingen\footnote{Dit kan eventueel omzeild worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}. Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.}.
+Door gebruik te maken van de Windows installation engine is het niet mogelijk om de executable te gebruiken in Linux omgevingen. 
+Dit kan eventueel omzeild worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}. Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.
 WiX maakt gebruik van XML broncode om verschillende elementen te definiëren.
 \citet{xmill} geeft al aan dat XML niet een van de meest efficiënte dataformaten is, maar het verhoogt de flexibiliteit wel.
 Het creëren van een XML bestand met de hand is een langdradig en moeilijk werk.
@@ -679,22 +697,22 @@ Het creëren van een XML bestand met de hand is een langdradig en moeilijk werk.
 \subsubsection{NSIS}
 Nullsoft Scriptable Install System is een open source systeem waarmee Windows installers gemaakt kunnen worden.
 Zoals de naam aangeeft, is NSIS script-based.
-Hierdoor bevatten installers het nodige om verschillende installatie taken uit te voeren.
+Hierdoor bevatten installers het nodige om verschillende installatietaken uit te voeren.
 Door de grote gebruikersbasis is een grote hoeveelheid plug-ins en scripts beschikbaar.
 Alle plug-ins en scripts kunnen op een eenvoudige manier aan een installer toegevoegd worden voor een verhoogde functionaliteit \citep{nsisMain}.
 
 De voor- en nadelen verbonden aan NSIS zijn terug te vinden in Tabel~\ref{tab:voorNadelen}.
-Met de scripting taal van NSIS is het mogelijk om eenvoudige installer te definiëren (een voorbeeld hiervan is terug te vinden in Listing~\vref{list:nsis}).
+Met de scripting taal van NSIS is het mogelijk om eenvoudige installer te definiëren (een voorbeeld hiervan is terug te vinden in Listing~\ref{list:nsis}).
 De scripting taal is intuïtiever te gebruiken in vergelijking met de XML bestanden van Wix Toolset.
-Dankzij grote hoeveelheid aan plug-ins die aanwezig zijn, is het eenvoudig om een installer te creëren met verschillende functionaliteiten.
-De gecreëerde installer is een Windows executabel en de opmerking gegeven bij de WiX Toolset is hier ook van toepassing.
+Dankzij de grote hoeveelheid aan plug-ins die aanwezig zijn, is het eenvoudig om een installer te creëren met verschillende functionaliteiten.
+De gecreëerde installer is een Windows executable en de opmerking gegeven bij de WiX Toolset is hier ook van toepassing.
 Het feit dat NSIS bedoeld is om eenvoudige installers te maken zorgt ervoor dat het niet mogelijk is om aparte pakketten te definiëren.
 Ieder pakket kan wel een eigen configuratie hebben maar dit wordt allemaal toegevoegd aan één script.
 Een grote hoeveelheid aan pakketten leidt tot wanorde.
 NSIS biedt ook geen mogelijkheden aan om geïnstalleerde software up te daten.
 Om die eigenschappen toe te voegen moet er beroep gedaan worden op andere software.
 
-\subsubsection{Chocolatey}
+\subsubsection{Chocolatey \& apt-get}
 Volgens \citep{chocoAbout} is Chocolatey een package mangager voor Windows net zoals apt-get voor Linux is.
 Het is ontworpen als een gedecentraliseerd framework met als doel het snel installeren van applicaties en tools.
 Chocolatey werd gebouwd boven op de NuGet infrastructuur gecombineerd voor het verspreiden van de packages en gebruikt PowerShell voor een gepersonaliseerde installatie.
@@ -711,7 +729,7 @@ Het grootste nadeel aan deze technologie is, net zoals de vorige opties, het nie
 Het Qt Installer Framework biedt een set van tools aan voor het creëren van installers op verschillende platformen.
 Aan de hand van een set van pagina's wordt de gebruiker door het installatie-, update- en verwijderproces geleid.
 Hierbij kunnen scripts gebruikt worden om het proces te vereenvoudigen \citep{qtDoc}.
-Door een folder structuur op te bouwen zoals zichtbaar is in Figuur~\vref{fig:folder} kan het Qt installer framework een installer creëren die vervolgens op het doelsysteem uitgevoerd kan worden.
+Door een folder structuur op te bouwen zoals Figuur~\ref{fig:folder} kan het Qt installer framework een installer creëren die vervolgens op het doelsysteem uitgevoerd kan worden.
 
 \begin{figure}[!ht]
 \centering
@@ -720,10 +738,10 @@ Door een folder structuur op te bouwen zoals zichtbaar is in Figuur~\vref{fig:fo
 \label{fig:folder}
 \end{figure}
 
-De data folder van een pakket bevat alle nodige databestanden die moeten uitgevoerd worden (zoals een executable of een zip archief).
-De meta folder bevat een beschrijving van het pakket (zie voorbeeld in Listing~\vref{list:qtpakket}).
-Hiernaast is ook een installatiescript aanwezig dat uitgevoerd wordt tijdens de installatie van het pakket zelf (zie Listing~\vref{list:qtscript}).
-Met de installer informatie uit de config folder (zie Listing~\vref{list:qtinstaller}) weet het Qt installer framework voldoende om een executable te produceren die alle pakketten installeert aan de hand van de opgegeven installatiescripts.
+De datafolder van een pakket bevat alle nodige databestanden die moeten uitgevoerd worden (zoals een executable of een zip archief).
+De metafolder bevat een beschrijving van het pakket (zie voorbeeld in Listing~\ref{list:qtpakket}).
+Hiernaast is ook een installatiescript aanwezig dat uitgevoerd wordt tijdens de installatie van het pakket zelf (zie Listing~\ref{list:qtscript}).
+Met de installer informatie uit de config folder (zie Listing~\ref{list:qtinstaller}) weet het Qt installer framework voldoende om een executable te produceren die alle pakketten installeert aan de hand van de opgegeven installatiescripts.
 Op deze wijze is het mogelijk om verschillende pakketten te combineren tot één geheel en ondertussen toch ieder pakket apart te behandelen.
 
 Aan deze technologie zijn verschillende plus- en minpunten verbonden.

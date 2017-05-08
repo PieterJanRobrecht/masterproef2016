@@ -2,12 +2,12 @@
 \tikzstyle{every node} = [circle, minimum size = 2cm, fill=gray!30]
 \node[align=center] (a) at (0, 0) {Deployment\\ Server};
 \node[shape = rectangle,minimum size = 1.5cm] (packager) at +(25: 3) {Packager};
-\node[shape = rectangle,minimum size = 1.5cm, align=center] (logger) at +(155: 3) {Database};
-\node[align=center] (b) at +(225: 5) {Testtoren\\ Sacramento\\ USA};
-\node[align=center] (c) at +(270: 3.5) {Testtoren\\ Tsaratsovo\\ Bulgarije};
-\node[align=center] (d) at +(315: 5) {Testtoren\\ Izegem\\ België};
+\node[cylinder, shape border rotate=90, draw,minimum height=3cm,minimum width=2cm] (logger) at +(155: 3) {Database};
+\node[align=center] (b) at +(225: 5) {Deployment \\ environment 1};
+\node[align=center] (c) at +(270: 3.5) {Deployment \\ environment 2};
+\node[align=center] (d) at +(315: 5) {Deployment \\ environment 3};
 \foreach \from/\to in {a/b, a/c, a/d}
 \draw [<->] (\from) -- (\to);
-\draw [-] (a) -- (packager);
-\draw [-] (a) -- (logger);
+\draw [<->] (a) -- (packager);
+\draw [<-] (a) -- (logger);
 \end{tikzpicture}
