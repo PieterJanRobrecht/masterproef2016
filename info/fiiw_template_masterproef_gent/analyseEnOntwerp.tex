@@ -182,7 +182,8 @@ Hiernaast wordt de Broker klasse zo ontworpen dat er slechts één broker aanwez
 Dit zorgt voor een vereenvoudiging van de implementatie aangezien geen protocollen voorzien moeten worden om tussen verschillende brokers te kunnen communiceren.
 Het is wel belangrijk om hierbij te vermelden dat dit een impact heeft op de schaalbaarheid van de applicatie.
 Van zodra een te groot aantal docks aanwezig is, zal de broker een bottleneck vormen voor de applicatie.
-Dit wordt in een verder hoofdstuk nog besproken.
+Dit kan echter opgevangen worden door meerdere brokers samen te laten werken zodat dat er aan load balancing gedaan kan worden.
+De brokers zullen een netwerk vormen zoals in Figuur~\ref{fig:pubsubArchi}.
 
 Bij de broker worden verschillende lijsten bijgehouden voor ieder type van bericht dat mogelijk is.
 Bij het toekomen van een subscribe/unsubscribe bericht, zal de broker de zender van het bericht toevoegen of verwijderen uit de de verschillende lijsten.

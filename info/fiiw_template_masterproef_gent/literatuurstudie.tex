@@ -10,7 +10,6 @@ Uit de probleembespreking is ook gebleken dat er nood is aan een applicatie die 
 Om te achterhalen wat mogelijk is om dit te realiseren, worden verscheidene technologieën besproken die hiervoor een oplossing kunnen bieden.
 
 \section{Software deployment}\label{sec:softwareLevenscyclus}
-%%% TODO aanvullen met info van andere bronnen
 De levenscyclus van software deployment kan volgens \citet{softwareDeployment,hall1999cooperative} beschreven worden in verschillend stappen, namelijk:
 \begin{itemize}
 \item \emph{Release}: de software is volledig samengesteld uit pakketten die voldoende metadata bevatten om de verschillende bronnen te beschrijven waarvan het pakket afhangt.
@@ -484,42 +483,64 @@ Zo ligt de programmeertaal niet vast en kan een taal gekozen worden die besturin
 In de volgende secties wordt vooral gekeken welke architecturen een schaalbare oplossing bieden voor het deploymentproces.
 
 \subsection{Client-server architectuur}
-Volgens \citet{micro} is het mogelijk om een applicatie in te delen in drie logische groepen of ook wel lagen.
-Het gebruik van een laag stelt de ontwerper in staat om verscheidene taken van elkaar te onderscheiden waardoor het eenvoudiger is om een laag te ontwerpen die herbruikbaar is.
-Figuur~\vref{fig:threeLayer} toont welke drie basis lagen gebruikt worden om de architectuur op te bouwen.
-Hierbij wordt de presentatie laag gebruikt om alle functionaliteiten die instaan voor het onderhouden van de gebruikersinteracties met het systeem te groeperen.
-De bussiness laag encapsuleert alle relevante bussiness logica die de kern van het systeem bevat.
-De laatste laag, de data laag, voorziet toegang tot verschillende databronnen binnen in het netwerk maar ook daarbuiten.
- 
-\begin{figure}[!ht]
-\centering
-\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/threeLayer.png}}
-\caption{Drie lagen architectuur \citep{micro}}
-\label{fig:threeLayer}
-\end{figure}
-
-Het gebruik van deze architectuur gaat gepaard met enkele voordelen.
-Zo zorgt het gebruik van lagen ervoor dat het aanpassen van één laag amper of geen invloed heeft op de andere lagen.
-Verder zorgt het opdelen van de applicatie en database functionaliteiten ervoor dat beter load balancing kan worden toegepast.
-In de verschillende lagen is het mogelijk om voldoende veiligheidsmaatregelen toe te passen zonder de gebruikers te hinderen.
-Figuur~\ref{fig:threeLayerExample} geeft weer op welke wijze de architectuur gebruikt kan worden om een applicatie hosten.
+\citep{encyclo} beschrijft de client-server architectuur als een architectuur van een computernetwerk waarin verscheidene clients services van een gecentraliseerde server opvragen en ontvangen.
+De client computers dienen als interface voor de gebruikers om services op te vragen en het resultaat van de server weer te geven.
+De architectuur bevordert het ontwerpen van systemen die modulair, flexibel en uitbreidbaar zijn door eventuele data, resources of computeroperaties te integreren, te organiseren en aan te bieden als een service \citep{adler1995distributed}. 
+Figuur~\ref{fig:clientServer} geeft de client-server architectuur weer.
 
 \begin{figure}[!ht]
 \centering
-\makebox[0pt]{\includegraphics[scale=1]{afbeelding/threeLayerExample.png}}
-\caption{Voorbeeld van een drie lagen architectuur \citep{hanson2000client}}
-\label{fig:threeLayerExample}
+\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/clientServerSimple.png}}
+\caption{Client-server architectuur}
+\label{fig:clientServer}
 \end{figure}
 
-Het verspreiden van software kan met deze architectuur op een eenvoudige manier gerealiseerd worden.
-Clients kunnen verbinding maken met een web server.
-Vanuit een browser is het vervolgens mogelijk om verschillende softwarecomponenten te combineren tot één geheel die naar de gebruiker verscheept wordt voor installatie.
-De web server zorgt voor de nodige flexibiliteit waarbij het voor een gebruiker mogelijk is om vanuit een browser de te installeren software zelf te selecteren.
-De software kan bij de gebruiker geraken maar de architectuur biedt geen mogelijkheden aan die toestaan om de software te installeren.
-Hiervoor is echter ondersteuning nodig die niet is opgenomen in de architectuur.
-Hiernaast laat de architectuur ook een groeiend aantal gebruikers toe.
-Iedere laag kan redundant gemaakt worden waarbij meerdere server van eenzelfde laag parallel naast elkaar kunnen draaien.
-De drie lagen architectuur voorziet voldoende flexibiliteit en schaalbaarheid maar logica voor het opvangen van fouten tijdens het installatieproces en updateproces is niet aanwezig.
+Een voordeel aan de client-server architectuur is dat clients zich niet moeten bezig houden met het verwerken van data.
+Clients kunnen zich focussen op het opvragen van informatie van de gebruikers en de server en clients kunnen zich focussen op het weergeven van deze data \citep{oracleClientServer}.
+Doordat de architectuur bestaat uit een server die verscheidene requests van clients afhandelt, is deze server ook de zwakke schakel in de architectuur.
+Bij het uitvallen van deze component, is het niet mogelijk om 
+Een netwerk waar slechts één server in aanwezig is, bevordert dan ook niet de schaalbaarheid.
+Hiernaast wordt de communicatie tussen de client en de server geïnitieerd door de client die een service van de server wilt gebruiken.
+Aangezien het doel het verspreiden van software vanuit de server is, moet het mogelijk zijn om vanuit de server updates te verspreiden.
+\citet{mesbah2008component} legt uit dat het client-geïnitieerde afhaalmodel inefficiënt is voor real-time event notificaties.
+Een oplossing voor dit probleem is het hanteren van een push-gebaseerd model waarbij de server aanpassingen uitzendt naar alle clients.
+
+%Volgens \citet{micro} is het mogelijk om een applicatie in te delen in drie logische groepen of ook wel lagen.
+%Het gebruik van een laag stelt de ontwerper in staat om verscheidene taken van elkaar te onderscheiden waardoor het eenvoudiger is om een laag te ontwerpen die herbruikbaar is.
+%Figuur~\vref{fig:threeLayer} toont welke drie basis lagen gebruikt worden om de architectuur op te bouwen.
+%Hierbij wordt de presentatie laag gebruikt om alle functionaliteiten die instaan voor het onderhouden van de gebruikersinteracties met het systeem te groeperen.
+%De bussiness laag encapsuleert alle relevante bussiness logica die de kern van het systeem bevat.
+%De laatste laag, de data laag, voorziet toegang tot verschillende databronnen binnen in het netwerk maar ook daarbuiten.
+% 
+%\begin{figure}[!ht]
+%\centering
+%\makebox[0pt]{\includegraphics[scale=0.7]{afbeelding/threeLayer.png}}
+%\caption{Drie lagen architectuur \citep{micro}}
+%\label{fig:threeLayer}
+%\end{figure}
+%
+%Het gebruik van deze architectuur gaat gepaard met enkele voordelen.
+%Zo zorgt het gebruik van lagen ervoor dat het aanpassen van één laag amper of geen invloed heeft op de andere lagen.
+%Verder zorgt het opdelen van de applicatie en database functionaliteiten ervoor dat beter load balancing kan worden toegepast.
+%In de verschillende lagen is het mogelijk om voldoende veiligheidsmaatregelen toe te passen zonder de gebruikers te hinderen.
+%Figuur~\ref{fig:threeLayerExample} geeft weer op welke wijze de architectuur gebruikt kan worden om een applicatie hosten.
+%
+%\begin{figure}[!ht]
+%\centering
+%\makebox[0pt]{\includegraphics[scale=1]{afbeelding/threeLayerExample.png}}
+%\caption{Voorbeeld van een drie lagen architectuur \citep{hanson2000client}}
+%\label{fig:threeLayerExample}
+%\end{figure}
+%
+%Het verspreiden van software kan met deze architectuur op een eenvoudige manier gerealiseerd worden.
+%Clients kunnen verbinding maken met een web server.
+%Vanuit een browser is het vervolgens mogelijk om verschillende softwarecomponenten te combineren tot één geheel die naar de gebruiker verscheept wordt voor installatie.
+%De web server zorgt voor de nodige flexibiliteit waarbij het voor een gebruiker mogelijk is om vanuit een browser de te installeren software zelf te selecteren.
+%De software kan bij de gebruiker geraken maar de architectuur biedt geen mogelijkheden aan die toestaan om de software te installeren.
+%Hiervoor is echter ondersteuning nodig die niet is opgenomen in de architectuur.
+%Hiernaast laat de architectuur ook een groeiend aantal gebruikers toe.
+%Iedere laag kan redundant gemaakt worden waarbij meerdere server van eenzelfde laag parallel naast elkaar kunnen draaien.
+%De drie lagen architectuur voorziet voldoende flexibiliteit en schaalbaarheid maar logica voor het opvangen van fouten tijdens het installatieproces en updateproces is niet aanwezig.
 
 \subsection{Software dock architectuur}\label{sec:softwareDock}
 \citet{hall1999cooperative} bespreken een interessante architectuur die gebruikt kan worden voor het verspreiden van software.

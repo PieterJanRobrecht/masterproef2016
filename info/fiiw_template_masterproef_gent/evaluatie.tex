@@ -22,13 +22,19 @@ Hierna worden enkele field docks uitgeschakeld en wordt een tweede installer ver
 
 \subsubsection{Uitvoering}
 Figuren~\ref{fig:testClient:windowsBeschrijving}, \ref{fig:testClient:overviewTijdensToevoegen} en \ref{fig:testClient:linuxBeschrijving} geven weer hoe enkele testtoren beschreven worden en hoe deze zijn toegevoegd aan de databank.
+Hieruit blijkt al snel de verschillende field docks correct kunnen communiceren met het release dock.
+Uit de figuren blijkt ook dat de communicatie ondersteund wordt op alle toestellen (zowel Windows als Linux).
+Eventuele fouten die zouden kunnen optreden, zijn dan ook afkomstig van de agenten of omdat nog niet alle functionaliteiten aanwezig zijn.
 
 Tijdens het installatieproces traden echter enkele fouten op.
 Op één van de Windows machines kwam het systeem vast te zitten tijdens het creëren van de Docker image.
-Wat de oorzaak is, is niet geweten.
+De oorzaak ligt hoogstwaarschijnlijk bij het afhalen van de Docker basisimages.
+Er is dus geen logische fout aanwezig in de code van de InstallAgent.
 Hiernaast trad er een fout op bij beide Linux machines tijdens het installeren van de software (zie Figuur~\ref{fig:testClient:linuxError}).
 Het enige dat geweten is, is dat er een segmentatiefout optrad en dat deze optrad ter hoogte van het uitpakken van de gezipte installer.
 De oorzaak van deze fout is niet geweten en er zal extra onderzoek uitgevoerd moeten worden om te achterhalen hoe deze fout opgelost kan worden.
+Hierbij moet wel meegegeven worden dat de software, die aanwezig was tijdens het installeren van de nieuwe software, geen invloed van de fout ondervond.
+De software zat afgezonderd in zijn eigen container en blijft beschikbaar.
 
 Op alle andere systemen verliep het installatieproces zonder veel moeite.
 De software werd correct geïnstalleerd op alle systemen zoals zichtbaar is op Figuur~\ref{fig:testClient:overviewNaDeployment1}.
@@ -138,10 +144,12 @@ De fout die opgegooid wordt, ontstaat doordat het release dock de ID van de inst
 Het release dock die de installer heeft aangemaakt, vindt de correcte installer maar de andere release docks vinden deze niet terug in de databank.
 Dit komt doordat de informatie van de installer niet doorgegeven wordt aan de verschillende release docks.
 De installer komt dus niet in de databank terecht.
+In het ontwerp werd hier echter wel rekening mee gehouden.
+Deze functionaliteit werd nog niet geïmplementeerd.
 
-Er zijn echter verscheidene oplossingen voor dit probleem.
+De functionaliteit kan op verscheidene manier geïmplementeerd worden.
 Zo kan bijvoorbeeld gewerkt worden met maar één databank.
-Een andere manier bestaat uit het subscriben van de release docks bij de broker voor berichten van het type ``release''.
+Een andere manier bestaat uit het inschrijven van de release docks bij de broker voor berichten van het type ``release''.
 Mocht een notificatie van de broker toekomen met hierin de informatie over een nieuwe installer, dan kan deze gebruikt worden om de installer toe te voegen aan de databank.
 
 
