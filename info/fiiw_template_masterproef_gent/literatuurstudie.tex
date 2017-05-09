@@ -245,7 +245,7 @@ Iedere activiteit wordt uitgevoerd door een agent.
 \label{fig:deploymentModel}
 \end{figure}
 
-Een toegepast voorbeeld van een deployment aan de hand van dit model is terug te vinden in Figuur~\vref{fig:deploymentVoorbeeld}.
+Een toegepast voorbeeld van een deployment aan de hand van dit model is terug te vinden in Figuur~\ref{fig:deploymentVoorbeeld}.
 Een basisactiviteit wordt voorgesteld aan de hand van een grijze rechthoek en een deploymentproces aan de hand van een witte rechthoek.
 In het voorbeeld zijn dus vier deploymentprocessen aanwezig en 3 basisactiviteiten.
 
@@ -502,7 +502,7 @@ Het gebruik van deze architectuur gaat gepaard met enkele voordelen.
 Zo zorgt het gebruik van lagen ervoor dat het aanpassen van één laag amper of geen invloed heeft op de andere lagen.
 Verder zorgt het opdelen van de applicatie en database functionaliteiten ervoor dat beter load balancing kan worden toegepast.
 In de verschillende lagen is het mogelijk om voldoende veiligheidsmaatregelen toe te passen zonder de gebruikers te hinderen.
-Figuur~\vref{fig:threeLayerExample} geeft weer op welke wijze de architectuur gebruikt kan worden om een applicatie hosten.
+Figuur~\ref{fig:threeLayerExample} geeft weer op welke wijze de architectuur gebruikt kan worden om een applicatie hosten.
 
 \begin{figure}[!ht]
 \centering
@@ -654,42 +654,22 @@ Hiernaast wordt het ook mogelijk om de technologieën te vergelijken aangezien z
 %\label{tab:voorNadelen}
 %\end{table}
 
-\begin{table}[]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|c|l|l|}
-\hline
-\multicolumn{1}{|l|}{}                                                                  & \multicolumn{1}{c|}{Voordeel}                                            & \multicolumn{1}{c|}{Nadeel}                                       \\ \hline
-                                                                                        & Diepe integratie met Windows                                             & XML structuren zorgt voor veel overhead                           \\
-\multirow{-2}{*}{WiX Toolset}                                                           & Mogelijkheid om externe executables te includeren                        & Niet cross-platform                                               \\ \hline
-\rowcolor[HTML]{C0C0C0} 
-\cellcolor[HTML]{C0C0C0}                                                                & Scripting taal                                                           & Geen structuur voor packages                                      \\
-\rowcolor[HTML]{C0C0C0} 
-\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}NSIS}                                          & Verschillende plug-ins beschikbaar                                       & Niet cross-platform                                               \\ \hline
-                                                                                        & Volledige deployment infrastructuur al aanwezig                          & Command-line tool                                                 \\
-\multirow{-2}{*}{Chocolatey}                                                            &                                                                          & Niet cross-platform                                               \\ \hline
-\rowcolor[HTML]{C0C0C0} 
-\cellcolor[HTML]{C0C0C0}{\color[HTML]{000000} }                                         & {\color[HTML]{000000} Cross-platform}                                    & {\color[HTML]{000000} XML structuren zorgt voor veel schrijfwerk} \\
-\rowcolor[HTML]{C0C0C0} 
-\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}{\color[HTML]{000000} Qt Installer Framework}} & {\color[HTML]{000000} Mogelijkheid om externe executables te includeren} & {\color[HTML]{000000} Enkel Linux installer maken in Linux}       \\ \hline
-\end{tabular}%
-}
-\caption{Voor- en nadelen van de verschillende technologieën}
-\label{tab:voorNadelen}
-\end{table}
-
 \subsubsection{WiX Toolset}
 Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt worden met behulp van XML broncode.
 De toolset is geschreven in C\# en heeft het .Net framework nodig om te kunnen functioneren.
 Broncode wordt gecompileerd en vervolgens gelinkt om een executable te maken.
 Met de toolset kunnen .msi installatie pakketten, .msm merge modules en .msp patches gecombineerd worden tot een Windows executabel \citep{wixToolset}.
 
-Aan deze technologie zijn verschillende voor- en nadelen verbonden (zie Tabel~\ref{tab:voorNadelen}).
-Een fragment van de WiX toolset code is terug te vinden in Listing~\ref{list:wix}.
-De WiX toolset maakt installer die uitsluitend bedoeld zijn voor de Windows installation engine.
+Aan deze technologie zijn verschillende voor- en nadelen verbonden.
+De WiX toolset is diep geïntegreerd met Windows waardoor er tijdens de installatie van software gebruik gemaakt kan worden van verscheidene functionaliteiten die bij Windows horen.
+De WiX toolset maakt installers die uitsluitend bedoeld zijn voor de Windows installation engine.
 Hierdoor worden verscheidene functionaliteiten eenvoudig te gebruiken, zoals het maken van uitzonderingen in de Windows Firewall.
+Hiernaast kan tijdens het installatieproces rekening gehouden worden met externe installers.
+Op deze manier is het mogelijk om verscheidene software pakketten te combineren tot één geheel.
+Een fragment van de WiX toolset code is terug te vinden in Listing~\ref{list:wix}.
 Door gebruik te maken van de Windows installation engine is het niet mogelijk om de executable te gebruiken in Linux omgevingen. 
-Dit kan eventueel omzeild worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}. Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.
+Dit kan eventueel omzeild worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}.
+Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.
 WiX maakt gebruik van XML broncode om verschillende elementen te definiëren.
 \citet{xmill} geeft al aan dat XML niet een van de meest efficiënte dataformaten is, maar het verhoogt de flexibiliteit wel.
 Het creëren van een XML bestand met de hand is een langdradig en moeilijk werk.
@@ -701,11 +681,10 @@ Hierdoor bevatten installers het nodige om verschillende installatietaken uit te
 Door de grote gebruikersbasis is een grote hoeveelheid plug-ins en scripts beschikbaar.
 Alle plug-ins en scripts kunnen op een eenvoudige manier aan een installer toegevoegd worden voor een verhoogde functionaliteit \citep{nsisMain}.
 
-De voor- en nadelen verbonden aan NSIS zijn terug te vinden in Tabel~\ref{tab:voorNadelen}.
 Met de scripting taal van NSIS is het mogelijk om eenvoudige installer te definiëren (een voorbeeld hiervan is terug te vinden in Listing~\ref{list:nsis}).
-De scripting taal is intuïtiever te gebruiken in vergelijking met de XML bestanden van Wix Toolset.
+De scripting taal is intuïtiever te gebruiken in vergelijking met de XML bestanden van Wix Toolset en is dan ook een voordeel bij deze technologie.
 Dankzij de grote hoeveelheid aan plug-ins die aanwezig zijn, is het eenvoudig om een installer te creëren met verschillende functionaliteiten.
-De gecreëerde installer is een Windows executable en de opmerking gegeven bij de WiX Toolset is hier ook van toepassing.
+De gecreëerde installer is een Windows executable en de opmerking gegeven bij de WiX Toolset is hier ook van toepassing en is dan ook een nadeel van deze technologie.
 Het feit dat NSIS bedoeld is om eenvoudige installers te maken zorgt ervoor dat het niet mogelijk is om aparte pakketten te definiëren.
 Ieder pakket kan wel een eigen configuratie hebben maar dit wordt allemaal toegevoegd aan één script.
 Een grote hoeveelheid aan pakketten leidt tot wanorde.
@@ -717,12 +696,12 @@ Volgens \citep{chocoAbout} is Chocolatey een package mangager voor Windows net z
 Het is ontworpen als een gedecentraliseerd framework met als doel het snel installeren van applicaties en tools.
 Chocolatey werd gebouwd boven op de NuGet infrastructuur gecombineerd voor het verspreiden van de packages en gebruikt PowerShell voor een gepersonaliseerde installatie.
 
-In Tabel~\ref{tab:voorNadelen} zijn de verschillende voor- en nadelen gekoppeld aan Chocolatey terug te vinden.
 Het grootste voordeel dat bekomen wordt bij het gebruiken van een package manager is het al bestaan van een deployment infrastructuur. 
 Na het installeren van Chocolatey op de client kunnen alle nodige packages voor het framework geïnstalleerd worden.
 Hiernaast kunnen scripts gekoppeld worden aan iedere package zodanig dat een aangepaste installatie mogelijk is.
 Net zoals apt-get voor Linux, is Chocolatey te gebruiken in de command-line.
 Dit is vooral een nadeel naar gebruiksvriendelijkheid toe aangezien er vanuit wordt gegaan dat de gebruikers amper tot geen ervaring hebben met de command-line in Windows/Linux.
+Dit is echter eenvoudig op te lossen door het toevoegen van een grafische user interface.
 Het grootste nadeel aan deze technologie is, net zoals de vorige opties, het niet cross-platform zijn.
 
 \subsubsection{Qt Installer Framework}
@@ -745,12 +724,45 @@ Met de installer informatie uit de config folder (zie Listing~\ref{list:qtinstal
 Op deze wijze is het mogelijk om verschillende pakketten te combineren tot één geheel en ondertussen toch ieder pakket apart te behandelen.
 
 Aan deze technologie zijn verschillende plus- en minpunten verbonden.
-Een vergelijking van de verschillende voor- en nadelen is terug te vinden in Tabel~\ref{tab:voorNadelen}.
 Het grootste voordeel van het Qt Installer framework is het cross-platform zijn.
 Hierdoor is het mogelijk om installers te maken voor zowel Windows als Linux.
 Een nadeel dat hieraan verbonden is, is dat een Linux installer enkel kan gemaakt worden in een Linux omgeving.
 Het is niet mogelijk om een Linux installer te maken op een Windows systeem.
 Hiernaast is het wel mogelijk om voor ieder pakket een aparte installatieprocedure te implementeren.
+
+\subsection{Conclusie}
+Tabel~\ref{tab:voorNadelen} geeft een overzicht van de besproken technologieën en de voor- en nadelen die aan iedere technologie gekoppeld zijn.
+Hieruit wordt snel duidelijk dat geen enkele technologie enkele pluspunten bevat.
+Naar het ontwerp van de applicatie toe, moet er rekening gehouden worden met alle voor- en nadelen die aan de technologieën gekoppeld zijn.
+De beste technologie wordt gekozen of er wordt zelf software voor het combineren van pakketten ontworpen die gebaseerd is op deze technologieën.
+
+\begin{table}[]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|l|l|}
+\hline
+\multicolumn{1}{|l|}{}                                                                  & \multicolumn{1}{c|}{Voordeel}                                            & \multicolumn{1}{c|}{Nadeel}                                       \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}                                                                & Diepe integratie met Windows                                             & XML structuren zorgt voor veel overhead                           \\
+\rowcolor[HTML]{C0C0C0} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}WiX Toolset}                                   & Mogelijkheid om externe executables te includeren                        & Niet cross-platform                                               \\ \hline
+\rowcolor[HTML]{FFFFFF} 
+\cellcolor[HTML]{FFFFFF}                                                                & Scripting taal                                                           & Geen structuur voor packages                                      \\
+\rowcolor[HTML]{FFFFFF} 
+\multirow{-2}{*}{\cellcolor[HTML]{FFFFFF}NSIS}                                          & Verschillende plug-ins beschikbaar                                       & Niet cross-platform                                               \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}                                                                & Volledige deployment infrastructuur al aanwezig                          & Command-line tool                                                 \\
+\rowcolor[HTML]{C0C0C0} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}Chocolatey}                                    &                                                                          & Niet cross-platform                                               \\ \hline
+\rowcolor[HTML]{FFFFFF} 
+\cellcolor[HTML]{FFFFFF}{\color[HTML]{000000} }                                         & {\color[HTML]{000000} Cross-platform}                                    & {\color[HTML]{000000} XML structuren zorgt voor veel schrijfwerk} \\
+\rowcolor[HTML]{FFFFFF} 
+\multirow{-2}{*}{\cellcolor[HTML]{FFFFFF}{\color[HTML]{000000} Qt Installer Framework}} & {\color[HTML]{000000} Mogelijkheid om externe executables te includeren} & {\color[HTML]{000000} Enkel Linux installer maken in Linux}       \\ \hline
+\end{tabular}%
+}
+\caption{Voor- en nadelen van de verschillende technologieën}
+\label{tab:voorNadelen}
+\end{table}
 
 %%% TODO Schrijven over het gebruiken van Windows .exe in Linux? Bijvoorbeeld hoe Wine misschien een oplossing is?
 

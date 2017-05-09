@@ -12,7 +12,7 @@ De volledige code is terug te vinden in de bijgevoegde CD-Rom.
 \section{Server-side}
 \subsection{Deployment\_server}
 Zoals werd aangegeven in Hoofdstuk~\ref{sec:initServer} bestaat het opstarten van een server uit het creëren van een ReleaseDock object gevolgd door het creëren van een Broker object.
-Vervolgens gaat het release dock zich inschrijven voor de nodige berichten (zie Figuur~\vref{fig:seqStartServerNew}).
+Vervolgens gaat het release dock zich inschrijven voor de nodige berichten (zie Figuur~\ref{fig:seqStartServerNew}).
 
 \begin{figure}[!ht]
 \centering
@@ -104,7 +104,7 @@ De doellocatie wordt door deze methode overschreven met bestanden uit de oorspro
 \paragraph{Agenten verzenden}
 Een onderdeel van het deploymentproces bestaat uit het kopiëren van de nodige agenten naar het field dock.
 Om dit uit te voeren wordt Dill \citep{dill} gebruikt om de nodige objecten te serialiseren en deserialiseren.
-Listing~\vref{list:serDeser} geeft de code weer die hiervoor gebruikt wordt.
+Listing~\ref{list:serDeser} geeft de code weer die hiervoor gebruikt wordt.
 De dill.dumps methode zorgt ervoor dat het object omgezet wordt naar een string die kan worden verzonden over een socket.
 Om dit correct uit te voeren wordt eerst de lengte van de string verzonden zodat aan de field dock zijde geweten is hoeveel bytes ontvangen moeten worden. 
 Vervolgens kan het field dock de string terug omzetten naar een object door gebruik te maken van dill.loads.

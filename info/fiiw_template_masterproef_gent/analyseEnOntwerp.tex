@@ -140,8 +140,12 @@ Dit is ook duidelijk zichtbaar in het deployment diagram waarin weergegeven word
 De belangrijkste functionaliteiten van het release dock bestaat uit het wegschrijven van informatie naar de databank en het afhandelen van de verschillende release-aanvragen.
 De weg te schrijven informatie bestaat vooral uit gegenereerde rapporten van verscheidene testen maar bijvoorbeeld ook nieuwe gebruikers die moeten toegevoegd worden aan de databank.
 
-De OverviewGUI klasse wordt ontworpen als managersinterface.
-De grafische user interface die hiervoor ontworpen werd, is terug te vinden in Figuur~\vref{fig:overviewGUI}.
+Om de verscheidene grafische user interfaces te ontwerpen en implementeren, wordt er gebruik gemaakt van het model-view-controller ontwerppatroon.
+Een view wordt eerst geschetst met behulp van een wireframe en vervolgens geïmplementeerd met behulp van wxPython \citep{wxPython}.
+Vervolgens wordt een controller gedefinieerd en geïmplementeerd die data uit het model haalt om deze weer te geven in de view.
+
+De OverviewGUI klasse wordt ontworpen als managersinterfacecontroller.
+De view die hiervoor ontworpen werd, is terug te vinden in Figuur~\vref{fig:overviewGUI}.
 Het doel is om de informatie die aanwezig is in de database weer te geven.
 Op deze wijze is het mogelijk om een overzicht te geven van alle clients die verbonden zijn met het systeem maar ook welke software zij gebruiken.
 Door dit overzicht krijgt Televic een algemeen beeld van hoe het verspreiden van hun software verloopt.
@@ -161,8 +165,8 @@ Door dit overzicht krijgt Televic een algemeen beeld van hoe het verspreiden van
 \end{figure}
 
 Het release dock is indirect verbonden met de ReleaseCreator.
-Dit is de grafische user interface die instaat voor het creëren van een nieuwe release indien dit nodig is.
-Figuur~\ref{fig:releaseCreator} geeft het ontwerp van de grafische user interface weer.
+Deze is de controller van de view die instaat voor het creëren van een nieuwe release indien dit nodig is.
+Figuur~\ref{fig:releaseCreator} geeft het ontwerp van de view weer.
 Zoals reeds werd toegelicht, zal een installer bestaan uit verschillende softwarepakketten.
 Hoe een installer exact wordt opgebouwd en welke bestanden worden aangemaakt, wordt verderop besproken.
 Na het creëren van de installer wordt deze doorgegeven aan de ReleaseDock.
@@ -248,7 +252,7 @@ Hiernaast kan bij iedere installer een andere set van agenten geassocieerd worde
 \subsubsection{Initialisatie}\label{sec:initServer}
 Het deployment diagram in Figuur~\ref{fig:deploymentDiagram} geeft weer dat aan de serverzijde verschillende componenten aanwezig zijn die samenwerken.
 Hierbij is het belangrijk om een goede opstartsequentie te voorzien.
-Figuur~\vref{fig:seqStartServer} geeft weer hoe de nodige componenten opgestart worden.
+Figuur~\ref{fig:seqStartServer} geeft weer hoe de nodige componenten opgestart worden.
 
 \begin{sidewaysfigure}
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/seqStartServer.png}
@@ -375,11 +379,12 @@ In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden z
 Aan dit proces zijn de volgende problemen verbonden die grondig besproken werden in Sectie~\ref{sec:softwareLevenscyclus}.
 
 Het opstarten van een client gebeurt op een gelijkaardige manier als het opstarten van een server.
-Figuur~\vref{fig:seqClient} bevat het sequentie diagram voor het opstarten van een client.
+Figuur~\ref{fig:seqClient} bevat het sequentie diagram voor het opstarten van een client.
 Hiervoor wordt eerst een FieldDock aangemaakt en deze zal zich vervolgens bij de broker inschrijven voor berichten van het type release en update.
 Bij het eerst gebruik moet het systeem eerst beschreven worden zodanig dat deze beschrijving toegevoegd kan worden aan de database.
-Na het registeren van de client kan de gebruiker gebruik maken van de grafische user interface in Figuur~\ref{fig:overviewClient}.
-Het ontwerp van de grafische user interface is terug te vinden in Figuur~\ref{fig:startClient}.
+Na het registeren van de client kan de gebruiker gebruik maken van de view in Figuur~\ref{fig:overviewClient}.
+Het ontwerp van de view is terug te vinden in Figuur~\ref{fig:startClient}.
+Aan deze views is de MainGUI controller gekoppeld.
 Van hieruit is het mogelijk om nieuwe software die van het release dock te beoordelen en eventueel te installer.
 
 \begin{sidewaysfigure}

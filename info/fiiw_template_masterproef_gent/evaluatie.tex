@@ -8,6 +8,71 @@ De ontworpen applicatie heeft verscheidene afhankelijkheden met Python modules e
 Om de applicatie uit te kunnen testen, moet de testomgeving correct geconfigureerd zijn.
 Om de verscheidene omgevingen correct in te stellen, wordt gebruik gemaakt van Listing~\ref{list:install}.
 
+\subsection{Meerdere clients}
+\subsubsection{Doel}
+Eén van de hoofddoelstellingen was het ontwerpen van een applicatie die software kan installeren bij een groeiend aantal gebruikers.
+Hiernaast moest de ontworpen applicatie bruikbaar zijn op verschillende besturingssystemen.
+Om dit uit te testen werd de volgende test ontworpen:
+Er wordt een testomgeving opgezet die bestaat uit één release dock, één broker en negen field docks.
+Twee van de negen field docks gebruiken Linux als besturingssysteem.
+De rest gebruikt Windows als besturingssysteem.
+Vervolgens wordt een installer gecreëerd en gereleased.
+Het doel is dat de software op alle doelsystemen correct wordt geïnstalleerd en dat de aanpassingen in de databank van het release dock zichtbaar zijn.
+Hierna worden enkele field docks uitgeschakeld en wordt een tweede installer verspreid.
+
+\subsubsection{Uitvoering}
+Figuren~\ref{fig:testClient:windowsBeschrijving}, \ref{fig:testClient:overviewTijdensToevoegen} en \ref{fig:testClient:linuxBeschrijving} geven weer hoe enkele testtoren beschreven worden en hoe deze zijn toegevoegd aan de databank.
+
+Tijdens het installatieproces traden echter enkele fouten op.
+Op één van de Windows machines kwam het systeem vast te zitten tijdens het creëren van de Docker image.
+Wat de oorzaak is, is niet geweten.
+Hiernaast trad er een fout op bij beide Linux machines tijdens het installeren van de software (zie Figuur~\ref{fig:testClient:linuxError}).
+Het enige dat geweten is, is dat er een segmentatiefout optrad en dat deze optrad ter hoogte van het uitpakken van de gezipte installer.
+De oorzaak van deze fout is niet geweten en er zal extra onderzoek uitgevoerd moeten worden om te achterhalen hoe deze fout opgelost kan worden.
+
+Op alle andere systemen verliep het installatieproces zonder veel moeite.
+De software werd correct geïnstalleerd op alle systemen zoals zichtbaar is op Figuur~\ref{fig:testClient:overviewNaDeployment1}.
+Ook de tweede installer wordt correct geïnstalleerd op de systemen die nog aanstonden en die nog geen fout hadden gegeven.
+
+\subsection{Slecht werkend pakket}
+\subsubsection{Doel}
+De geschreven applicatie bevat enkele methodes om te controleren of het installatieproces foutloos is verlopen.
+Mocht dit niet het geval zijn, dan wordt de foutieve container in quarantaine geplaatst.
+Het doel van deze test is het uittesten of dit wel degelijk gebeurt.
+
+Om deze eigenschap van de applicatie uit te testen wordt een simpele omgeving gerealiseerd waarin getest kan worden.
+Eén release dock en field dock worden opgestart in het begin.
+Vervolgens wordt een installer gemaakt die bestaat uit twee pakketten.
+Het eerste pakket wordt gebruikt om een bestand aan te maken dat nodig is voor het framework pakket.
+Het eerstgenoemde pakket zal weliswaar geen bestand aanmaken.
+
+Om de test te laten slagen, moet de test van het niet-framework pakket registeren dat het bestand niet is aangemaakt.
+Op het einde van het installatieproces moet de container in quarantaine geplaatst worden.
+Zo is het mogelijk om na het installatieproces te controleren wat het probleem is in de container.
+
+\subsubsection{Uitvoering}
+De figuren in Sectie~\ref{sec:badPackage} tonen welke stappen doorlopen worden tijdens het installatieproces.
+Het test script eindigt met een status code die niet nul is.
+Hierdoor wordt de container gemarkeerd om in quarantaine geplaatst te worden (zie Figuur~\ref{fig:badPackage:tijdens}).
+Na het installatieproces wordt de container hernoemt waardoor het mogelijk is om achteraf een manuele controle van de container uit te voeren.
+
+\subsection{Netwerk monitoring}
+\subsubsection{Doel}
+Als laatste test wordt nagegaan hoe het netwerkverkeer eruit ziet tijdens het releasen van een nieuwe installer.
+Deze test wordt gebruikt om te achterhalen hoeveel en wat voor netwerkverkeer gecreëerd wordt door de applicatie.
+Het monitoren van het netwerk wordt uitgevoerd tijdens de meerdere client test.
+De test produceert voldoende netwerk verkeer om een idee te krijgen van de hoeveelheid verkeer die zal geproduceerd worden.
+De volledige communicatie tussen de verschillende docks wordt opgenomen met Wireshark om er later een analyse op uit te voeren.
+
+\subsubsection{Uitvoering}
+De figuren in Sectie~\ref{sec:network} geven een notie van het netwerk verkeer dat gegenereerd wordt door de applicatie.
+Het genereerde verkeer blijft beperkt tot enkele kilobytes voor iedere handeling die wordt uitgevoerd.
+Hierbij moet wel vermeld worden dat meerdere van deze berichten verzonden worden per release.
+Wat de impact gaat zijn als een groot aantal gebruikers aanwezig is, is moeilijk in te schatten.
+Figuur~\ref{fig:network:stats} geeft wel een algemeen beeld hiervoor.
+Wat ook vermeld moet worden, is het feit dat de installer grotendeels bestond uit scripts en tekstbestanden.
+Het gebruik van executables gaat echter voor meer netwerkverkeer zorgen.
+
 \subsection{Cross-platform containers}
 \subsubsection{Doel}
 Zoals reeds werd aangegeven (Sectie~\ref{sec:agentImpl}), werd tijdens de implementatie van de applicatie Linux gebruikt als basis voor de containers.
@@ -79,70 +144,6 @@ Zo kan bijvoorbeeld gewerkt worden met maar één databank.
 Een andere manier bestaat uit het subscriben van de release docks bij de broker voor berichten van het type ``release''.
 Mocht een notificatie van de broker toekomen met hierin de informatie over een nieuwe installer, dan kan deze gebruikt worden om de installer toe te voegen aan de databank.
 
-\subsection{Meerdere clients}
-\subsubsection{Doel}
-Eén van de hoofddoelstellingen was het ontwerpen van een applicatie die software kan installeren bij een groeiend aantal gebruikers.
-Hiernaast moest de ontworpen applicatie bruikbaar zijn op verschillende besturingssystemen.
-Om dit uit te testen werd de volgende test ontworpen:
-Er wordt een testomgeving opgezet die bestaat uit één release dock, één broker en negen field docks.
-Twee van de negen field docks gebruiken Linux als besturingssysteem.
-De rest gebruikt Windows als besturingssysteem.
-Vervolgens wordt een installer gecreëerd en gereleased.
-Het doel is dat de software op alle doelsystemen correct wordt geïnstalleerd en dat de aanpassingen in de databank van het release dock zichtbaar zijn.
-Hierna worden enkele field docks uitgeschakeld en wordt een tweede installer verspreid.
-
-\subsubsection{Uitvoering}
-Figuren~\ref{fig:testClient:overviewTijdensToevoegen}, \ref{fig:testClient:windowsBeschrijving} en \ref{fig:testClient:linuxBeschrijving} geven weer hoe enkele testtoren beschreven worden en hoe deze zijn toegevoegd aan de databank.
-
-Tijdens het installatieproces traden echter enkele fouten op.
-Op één van de Windows machines kwam het systeem vast te zitten tijdens het creëren van de Docker image.
-Wat de oorzaak is, is niet geweten.
-Hiernaast trad er een fout op bij beide Linux machines tijdens het installeren van de software (zie Figuur~\ref{fig:testClient:linuxError}).
-Het enige dat geweten is, is dat er een segmentatiefout optrad en dat deze optrad ter hoogte van het uitpakken van de gezipte installer.
-De oorzaak van deze fout is niet geweten en er zal extra onderzoek uitgevoerd moeten worden om te achterhalen hoe deze fout opgelost kan worden.
-
-Op alle andere systemen verliep het installatieproces zonder veel moeite.
-De software werd correct geïnstalleerd op alle systemen zoals zichtbaar is op Figuur~\ref{fig:testClient:overviewNaDeployment1}.
-Ook de tweede installer wordt correct geïnstalleerd op de systemen die nog aanstonden en die nog geen fout hadden gegeven.
-
-\subsection{Slecht werkend pakket}
-\subsubsection{Doel}
-De geschreven applicatie bevat enkele methodes om te controleren of het installatieproces foutloos is verlopen.
-Mocht dit niet het geval zijn, dan wordt de foutieve container in quarantaine geplaatst.
-Het doel van deze test is het uittesten of dit wel degelijk gebeurt.
-
-Om deze eigenschap van de applicatie uit te testen wordt een simpele omgeving gerealiseerd waarin getest kan worden.
-Eén release dock en field dock worden opgestart in het begin.
-Vervolgens wordt een installer gemaakt die bestaat uit twee pakketten.
-Het eerste pakket wordt gebruikt om een bestand aan te maken dat nodig is voor het framework pakket.
-Het eerstgenoemde pakket zal weliswaar geen bestand aanmaken.
-
-Om de test te laten slagen, moet de test van het niet-framework pakket registeren dat het bestand niet is aangemaakt.
-Op het einde van het installatieproces moet de container in quarantaine geplaatst worden.
-Zo is het mogelijk om na het installatieproces te controleren wat het probleem is in de container.
-
-\subsubsection{Uitvoering}
-De figuren in Sectie~\ref{sec:badPackage} tonen welke stappen doorlopen worden tijdens het installatieproces.
-Het test script eindigt met een status code die niet nul is.
-Hierdoor wordt de container gemarkeerd om in quarantaine geplaatst te worden (zie Figuur~\ref{fig:badPackage:tijdens}).
-Na het installatieproces wordt de container hernoemt waardoor het mogelijk is om achteraf een manuele controle van de container uit te voeren.
-
-\subsection{Netwerk monitoring}
-\subsubsection{Doel}
-Als laatste test wordt nagegaan hoe het netwerkverkeer eruit ziet tijdens het releasen van een nieuwe installer.
-Deze test wordt gebruikt om te achterhalen hoeveel en wat voor netwerkverkeer gecreëerd wordt door de applicatie.
-Het monitoren van het netwerk wordt uitgevoerd tijdens de meerdere client test.
-De test produceert voldoende netwerk verkeer om een idee te krijgen van de hoeveelheid verkeer die zal geproduceerd worden.
-De volledige communicatie tussen de verschillende docks wordt opgenomen met Wireshark om er later een analyse op uit te voeren.
-
-\subsubsection{Uitvoering}
-De figuren in Sectie~\ref{sec:network} geven een notie van het netwerk verkeer dat gegenereerd wordt door de applicatie.
-Het genereerde verkeer blijft beperkt tot enkele kilobytes voor iedere handeling die wordt uitgevoerd.
-Hierbij moet wel vermeld worden dat meerdere van deze berichten verzonden worden per release.
-Wat de impact gaat zijn als een groot aantal gebruikers aanwezig is, is moeilijk in te schatten.
-Figuur~\ref{fig:network:stats} geeft wel een algemeen beeld hiervoor.
-Wat ook vermeld moet worden, is het feit dat de installer grotendeels bestond uit scripts en tekstbestanden.
-Het gebruik van executables gaat echter voor meer netwerkverkeer zorgen.
 
 \section{SWOT analyse}
 \subsection{Strengths}
@@ -164,14 +165,13 @@ Veiligheid vormt ook een zwakte voor de applicatie.
 Het verzenden en ontvangen van berichten gebeurt momenteel niet veilig aangezien alle berichten ongeëncrypteerd verzonden worden.
 Dit is echter op te lossen door cryptografische primitieven toe te voegen aan de applicatie.
 
-\subsection{Opportunities}
-De voornaamste gelegenheden bestaan uit het verder vervolledigen van de applicatie.
+De voornaamste zwakte bestaat uit het verder vervolledigen van de applicatie.
 Naast het installatieproces moet het ook mogelijk zijn om een updateproces uit te voeren.
 Hiervoor zijn al enkele methodes aanwezig die gebruikt kunnen worden.
 
-Verder is het ook mogelijk om meer gebruik te maken van de rapporten die worden toegevoegd aan de databank.
-Exit statussen kunnen gebruikt worden om rapporten te generen over één bepaalde release.
-Hiernaast kunnen linken gelegd worden tussen hardware en software waardoor afhankelijkheden beter in kaart gebracht kunnen worden.
+\subsection{Opportunities}
+Met de ontworpen architectuur is het mogelijk om verschillende applicaties te verspreiden naar een groep gebruikers.
+Dit biedt de mogelijkheid voor Televic om samen te werken met verschillende softwareverkopers om software tussen softwaregebruikers te verspreiden.
 
 \subsection{Threats}
 Een bedreiging van de applicatie ligt bij het gebruik van Docker.
