@@ -22,7 +22,7 @@ Het testraamwerk bestaat uit verschillende componenten, hieronder vallen de driv
 Elke component heeft een aparte installatiewijze en sommige componenten moeten voor andere geïnstalleerd worden.
 Zo zal Python één van de eerste componenten zijn die geïnstalleerd moet worden.
 Hiernaast moeten verscheidene componenten geconfigureerd tijdens het installatieproces aan de hand van een configuratiebestand.
-Dit configuratiebestand is afhankelijk van testtoren waarop het testraamwerk op geïnstalleerd word.
+Dit configuratiebestand is afhankelijk van de testtoren waarop het testraamwerk op geïnstalleerd word.
 Door gebruik te maken van additionele software worden verschillen in implementaties, door bijvoorbeeld verschillende programmeertalen, opgevangen.
 Een deel van de applicatie zal dus bestaan uit deze additionele software die instaat voor het inpakken van de componenten: de \emph{packager}.
 Hiervoor kan beroep gedaan worden op verscheidene technologieën, structuren en architecturen die besproken werden in Sectie~\ref{sec:technologieen}.
@@ -32,7 +32,7 @@ Door gebruik te maken van één van deze technologieën is geweten wat er wordt 
 Naast de wat moet er ook geweten zijn hoe de software bij de gebruikers moet geraken.
 Door dit proces te automatiseren, is het mogelijk om waardevolle informatie te verzamelen.
 Met deze informatie kunnen rapporten gegeneerd worden over het deploymentproces.
-In Secties~\ref{sec:deployment} - \ref{sec:caseStudies} werden verschillende problemen maar ook oplossingen besproken die aan de basis liggen voor het ontwerp van dit onderdeel van de applicatie. 
+In Secties~\ref{sec:caseStudies} en \ref{sec:deployment} werden verschillende problemen maar ook oplossingen besproken die aan de basis liggen voor het ontwerp van dit onderdeel van de applicatie. 
 In het vervolg van de thesis zal dit onderdeel (dat zal instaan voor het verspreiden van het testraamwerk maar ook voor de communicatie tussen de producten van het testraamwerk en de gebruikers) vermeld worden als de \emph{deployment server}.
 
 %Environment
@@ -63,7 +63,7 @@ In Figuur~\ref{fig:overzichtsDiagram} wordt de algemene structuur van de applica
 De huidige architecturen en technologieën voldoen niet aan de verwachtingen en bieden geen sluitende oplossing voor alle problemen van Televic.
 De meeste technologieën bieden een deeloplossing aan.
 Zo biedt de LJSFi architectuur van ATLAS een mooie oplossing aan voor het verspreiden van verschillende softwarepakketten naar een groot aantal computers maar bij deze architectuur moet gebruik gemaakt worden van de Grid middleware.
-De Redhat package manager biedt een volledig beschikbare infrastructuur aan maar afhankelijkheden tussen pakketten zijn dan weer minder goed gedefinieerd.
+De Redhat Package Manager biedt een volledig beschikbare infrastructuur aan maar afhankelijkheden tussen pakketten zijn dan weer minder goed gedefinieerd.
 De client-server architectuur is een goede architectuur voor het verspreiden van de software maar biedt geen mogelijkheden aan voor de installatie van softwarepakketten.
 Om toch een oplossing te bieden voor de problemen wordt zelf een architectuur ontworpen die bestaat uit een combinatie van besproken technologieën en architecturen.
 
@@ -84,7 +84,7 @@ Zoals in de analyse al werd aangehaald, zal de architectuur bestaan uit de volge
 
 Figuur~\ref{fig:architectuur} geeft de volledig ontworpen architectuur weer.
 De basis van de architectuur is overgenomen van de software dock architectuur uit Sectie~\ref{sec:softwareDock}.
-Door gebruik te maken deze architectuur is het mogelijk om de deploymentserver samen met de packager te combineren tot een release dock en de deployment client te implementeren als een field dock. 
+Door gebruik te maken deze architectuur is het mogelijk om de deployment server samen met de packager te combineren tot een release dock en de deployment environment te implementeren als een field dock. 
 Het gebruik van software dock zorgt voor een schaalbare architectuur waarbij het aantal gebruikers en software producenten mag toenemen.
 Zowel het release dock als het field dock moeten niet bijhouden welke docks aanwezig zijn in het netwerk aangezien dit de taak is van de broker.
 Verder zorgen de agenten voor een verhoogde flexibiliteit in alle stappen van de deployment levenscyclus.
@@ -94,7 +94,7 @@ Bij deze technologieën zijn de agenten afgestemd op de software die moet geïns
 Om de functionaliteiten van de packager te implementeren wordt een systeem ontworpen dat gebaseerd is op het Qt installer framework.
 Andere software packaging oplossingen (zoals NSIS en WiX Toolset) bieden ook een oplossing voor het combineren van softwarepakketten.
 Er wordt toch voor het Qt installer framework als basis gekozen omdat softwarepakketten beter van elkaar gescheiden worden.
-Dit geeft een beter overzicht van wat aanwezig is in een installer en welke installatiescripts uit de meta folder invloed heeft op de data.
+Dit geeft een beter overzicht van wat aanwezig is in een installer en welke installatiescripts uit de metafolder invloed heeft op de data.
 Door gebruik te maken van een gelijkaardige structuur wordt een packager ontworpen die kan omgaan met verschillende types van softwarepakketten.
 Het Qt installer framework zelf volstaat niet aangezien het niet mogelijk is om op één besturingssysteem een installer te creëren die werkt op zowel Linux als Windows.
 Aangezien de packager zelf ontworpen wordt, is het mogelijk om eender welke programmeertaal te kiezen.
@@ -102,11 +102,11 @@ Er wordt dus best een taal gekozen die volledig besturingssysteem-onafhankelijk 
 Door deze packager te combineren met de software dock architectuur is het mogelijk om naast het personaliseren van iedere stap in het deploymentproces ook de behandeling van ieder softwarepakket apart te personaliseren.
 De packager wordt opgenomen in de code van het release dock en wordt door gebruikt om installers te produceren.
 
-Een laatste element uit de architectuur is de deployment omgeving die zal bestaan uit het field dock van de software dock architectuur.
-Het doel van de deployment omgeving is het creëren van een veilige omgeving waarin de installer van het release dock in geïnstalleerd en geüpdatet kan worden.
+Een laatste element uit de architectuur is de deployment environment die zal bestaan uit het field dock van de software dock architectuur.
+Het doel van de deployment environment is het creëren van een veilige omgeving waarin de installer van het release dock in geïnstalleerd en geüpdatet kan worden.
 Zoals reeds werd aangegeven is het installatieproces en updateproces foutgevoelig en moet hiervoor een oplossing gevonden worden.
 Dit wordt dan ook opgelost door Docker containers te gebruiken.
-Er wordt niet gekozen voor één van de rollback strategieën aangezien deze ofwel een beperking opleggen (zoals het gebruik moeten maken van het transactieprogrammeermodel) ofwel veroorzaken deze extra overhead (zoals bij het gebruiken van checkpoints).
+Er wordt niet gekozen voor één van de rollback strategieën aangezien deze ofwel beperkingen opleggen (zoals het gebruik moeten maken van het transactieprogrammeermodel) ofwel veroorzaken deze extra overhead (zoals bij het gebruiken van checkpoints).
 Virtuele machines kunnen eventueel ook gebruikt worden als oplossing.
 Bij het optreden van een fout kan de VM verwijdert worden zodanig dat er geen software achterblijft die later voor problemen kan zorgen.
 Het nadeel van virtuele machines is dat acties die uitgevoerd worden op VMs lang duren.
@@ -131,7 +131,7 @@ In wat volgt, wordt dieper ingegaan op de vier componenten waaruit de architectu
 \subsection{Deployment server}
 Het centrale systeem in de architectuur is de deployment server.
 Zoals reeds uitgelegd zal dit onderdeel instaan voor het verspreiden van de verschillende installers en functioneren als een verzamelcentrum voor alle informatie.
-De software dock architectuur bestaat uit 4 grote componenten, namelijk het release dock, field dock, event service en de agenten (zie figuur~\ref{fig:architectuur}).
+De software dock architectuur bestaat uit 4 grote componenten, namelijk het release dock, field dock, event service en de agenten (zie Figuur~\ref{fig:architectuur}).
 Alle componenten behalve het field dock zijn aanwezig aan de serverzijde.
 
 \subsubsection{Release Dock}
@@ -140,9 +140,9 @@ Dit is ook duidelijk zichtbaar in het deployment diagram waarin weergegeven word
 De belangrijkste functionaliteiten van het release dock bestaat uit het wegschrijven van informatie naar de databank en het afhandelen van de verschillende release-aanvragen.
 De weg te schrijven informatie bestaat vooral uit gegenereerde rapporten van verscheidene testen maar bijvoorbeeld ook nieuwe gebruikers die moeten toegevoegd worden aan de databank.
 
-Om de verscheidene grafische user interfaces te ontwerpen en implementeren, wordt er gebruik gemaakt van het model-view-controller ontwerppatroon.
+Om de verscheidene grafische user interfaces te ontwerpen en te implementeren, wordt er gebruik gemaakt van het model-view-controller ontwerppatroon.
 Een view wordt eerst geschetst met behulp van een wireframe en vervolgens geïmplementeerd met behulp van wxPython \citep{wxPython}.
-Vervolgens wordt een controller gedefinieerd en geïmplementeerd die data uit het model haalt om deze weer te geven in de view.
+Hiernaast wordt een controller gedefinieerd en geïmplementeerd die data uit het model haalt om deze weer te geven in de view.
 
 De OverviewGUI klasse wordt ontworpen als managersinterfacecontroller.
 De view die hiervoor ontworpen werd, is terug te vinden in Figuur~\vref{fig:overviewGUI}.
@@ -178,7 +178,7 @@ Deze staat in voor het afhandelen van de communicatie tussen de verschillende do
 Om dit te implementeren, wordt er beroep gedaan op de info uit Sectie~\ref{sec:event}.
 Er worden evenwel enkele kleine aanpassingen gemaakt aan het formaat van de publish/subscribe eventen.
 Er wordt een eigen formaat ontworpen zodat alle nodige elementen zeker in een bericht vervat zit.
-Hiernaast wordt de Broker klasse zo ontworpen dat er slechts één broker aanwezig kan zijn.
+Hiernaast wordt de Broker klasse zo geïmplementeerd dat er slechts één broker aanwezig is.
 Dit zorgt voor een vereenvoudiging van de implementatie aangezien geen protocollen voorzien moeten worden om tussen verschillende brokers te kunnen communiceren.
 Het is wel belangrijk om hierbij te vermelden dat dit een impact heeft op de schaalbaarheid van de applicatie.
 Van zodra een te groot aantal docks aanwezig is, zal de broker een bottleneck vormen voor de applicatie.
@@ -192,27 +192,27 @@ Het uiterlijk van zo'n bericht is gelijkaardig als het uiterlijk van een bericht
 In Listing~\ref{list:bericht} wordt een voorbeeld van een bericht weergegeven.
 Ieder bericht heeft dezelfde set aan attributen die elk een eigen functie hebben:
 \begin{itemize}
-\item \emph{Timestamp}: ieder bericht zal op het moment van de creatie een timestamp krijgen.
+\item \textbf{Timestamp}: ieder bericht zal op het moment van de creatie een timestamp krijgen.
 De timestamp wordt uitgedrukt in seconden sinds epoch.
 Op deze wijze wordt eenzelfde referentie punt gebruikt en is het mogelijk om de creatie van berichten in de tijd te ordenen.
-\item \emph{Type}: ieder bericht hoort toe aan een bepaald type.
+\item \textbf{Type}: ieder bericht hoort toe aan een bepaald type.
 De verschillende types van berichten zijn: subscribe, unsubscribe, new, change, rapport, update, release.
 Afhankelijk van het type bericht dat toekomt, bij zowel de broker als een dock, zal een andere actie ondernomen worden.
 De eerste twee types zijn uitsluitend bedoeld voor de broker.
 De volgende drie voor een release dock en de laatste twee voor de field docks.
-\item \emph{ID}: naast een timestamp wordt aan ieder bericht een id meegegeven. 
+\item \textbf{ID}: naast een timestamp wordt aan ieder bericht een id meegegeven. 
 Dit attribuut wordt meegegeven zodat de field docks kunnen achterhalen of zij achterlopen op berichten.
-\item \emph{Data}: Dit is het meest flexibele attribuut. 
+\item \textbf{Data}: dit is het meest flexibele attribuut. 
 Hier wordt de data meegegeven die hoort bij het bericht.
-Als het type van een bericht ``subscribe'' is, dan zit in het data veld een lijst met alle types waarvoor de gebruiker zich voor wilt inschrijven.
-\item \emph{Sender}: Het laatste attribuut dat wordt meegegeven is de zender van het bericht.
+Als het type van een bericht ``subscribe'' is, dan zit in het dataveld een lijst met alle types waarvoor de gebruiker zich voor wilt inschrijven.
+\item \textbf{Sender}: het laatste attribuut dat wordt meegegeven is de zender van het bericht.
 De broker moet bij een subscribe bericht kunnen achterhalen wie de zender is.
 Op die manier weet de broker wie moet worden toegevoegd aan de nodige lijsten.
 \end{itemize}
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\begin{lstlisting}[caption={Formaat voor een bericht},label={list:bericht}, xleftmargin=.3\textwidth]
+\begin{lstlisting}[caption={Formaat voor een bericht},captionpos=b,label={list:bericht}, xleftmargin=.3\textwidth]
 {
  'timestamp': 1491982212.555,
  'type': 'subscribe',
@@ -234,8 +234,8 @@ Op die manier weet de broker wie moet worden toegevoegd aan de nodige lijsten.
 %%schrijven over hoe de agenten werken en hoe ze gaan werken volgens de handelingen van ORYA
 Een laatste element die aangemaakt wordt aan de serverzijde zijn de agenten.
 Deze staan in voor het uitvoeren van allerlei deploymentgerelateerde handelingen.
-Iedere agent is gekoppeld aan één stap uit de software levenscyclus die besproken werd in Sectie~\ref{sec:softwareLevenscyclus}.
-Hiernaast zal aan iedere installer afkomstig van het release dock een subset van alle agenten toegevoegd en  naar het field dock verscheept worden.
+Iedere agent is gekoppeld aan één stap uit de deployment levenscyclus die besproken werd in Sectie~\ref{sec:softwareLevenscyclus}.
+Hiernaast zal aan iedere installer afkomstig van het release dock een subset van alle agenten toegevoegd worden en naar het field dock verscheept worden.
 Op deze manier is het mogelijk om iedere stap in de levenscyclus van de installer te personaliseren.
 Ieder agent zal een bepaalde set van handelingen uitvoeren die overeenkomt met een deploymentproces die besproken werd in de ORYA case studie in Sectie~\ref{sec:ORYA}.
 Net zoals bij ORYA wordt ieder deploymentproces beschreven aan de hand van andere deploymentprocessen en basisactiviteiten.
@@ -258,7 +258,7 @@ Figuur~\ref{fig:seqStartServer} geeft weer hoe de nodige componenten opgestart w
 \begin{sidewaysfigure}
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/seqStartServer.png}
 \centering
-\caption{Sequentie diagram voor het opstarten van een server}
+\caption{Sequentiediagram voor het opstarten van een server}
 \label{fig:seqStartServer}
 \end{sidewaysfigure}
 
@@ -270,8 +270,8 @@ Nadat de nodige services zijn opgestart is het mogelijk om de overviewGUI op te 
 
 \subsection{Packager}
 De architectuur van de packager wordt gebaseerd op de architectuur van het Qt installer framework.
-Er wordt een installer geproduceerd die bestaat uit verschillende pakketten die elk instaan voor het installeren van een software component.
-Voor iedere installer wordt een aparte folder structuur aangemaakt die zichtbaar is in Figuur~\ref{fig:installerStructuur}.
+Er wordt een installer geproduceerd die bestaat uit verschillende pakketten die elk instaan voor het installeren van een softwarecomponent.
+Voor iedere installer wordt een aparte folderstructuur aangemaakt die zichtbaar is in Figuur~\ref{fig:installerStructuur}.
 
 \begin{figure}[!ht]
 \centering
@@ -286,7 +286,7 @@ Zo kunnen testen op ieder moment in het installatieproces toegevoegd worden, een
 Hiernaast kan ervoor gezorgd worden dat de softwarepakketten beter overweg kunnen met Docker.
 Zo is er een vlottere integratie van Docker.
 
-In de config folder van de installer worden alle globale scripts en beschrijvingsbestanden bijgehouden.
+In de configfolder van de installer worden alle globale scripts en beschrijvingsbestanden bijgehouden.
 Verder bevat de installer subtrees voor ieder pakket.
 Een pakket bestaat vervolgens uit een data-, include- en metafolder.
 De datafolder wordt gebruikt om de effectieve driver/bibliotheek in op te slaan.
@@ -294,30 +294,30 @@ Hiernaast is een includefolder aanwezig waarin verschillende afzonderlijke scrip
 Op deze manier kunnen willekeurige scripts (bijvoorbeeld een script die de firewall instellingen aanpast) gemakkelijk toegevoegd worden aan een pakket.
 Als laatste bevat de metafolder alle meta-data horende het pakket.
 
-Tijdens het creëren van de installer moet één van de pakketten aangeduid worden als een applicatie pakket.
+Tijdens het creëren van de installer moet één van de pakketten aangeduid worden als een applicatiepakket.
 Bij het toevoegen van de verschillende bestanden zal dit pakket een start\_script meekrijgen.
-Dit is het script dat wordt uitgevoerd iedere keer als het framework wordt opgestart.
+Dit is het script dat wordt uitgevoerd iedere keer als de applicatie wordt opgestart.
 Hierna worden alle pakketten overlopen.
-Als het pakket nieuw is, worden de nodige folders en bestanden aangemaakt anders worden de oude bestanden uit de meta folder gekopieerd.
-Nadat de folder structuur aangemaakt is, is het mogelijk om de verschillende scripts aan te passen.
+Als het pakket nieuw is, worden de nodige folders en bestanden aangemaakt anders worden de oude bestanden uit de metafolder gekopieerd.
+Nadat de folderstructuur aangemaakt is, is het mogelijk om de verschillende scripts aan te passen.
 Net als bij het QT Installer Framework is het de bedoeling om te scripts te personaliseren naargelang het pakket.
 Op deze wijze heeft ieder pakket een uniek installatie- en testproces.
 De installer is hierna klaar om gereleased te worden.
 
-Vanuit de Overview is het mogelijk om een installer te releasen.
-Figuur~\ref{fig:releaseSeq} geeft het sequentie diagram weer dat gevolgd wordt om de installer van het release dock naar het field dock te brengen.
+Vanuit de OverviewGUI is het mogelijk om een installer te releasen.
+Figuur~\ref{fig:releaseSeq} geeft het sequentiediagram weer dat gevolgd wordt om de installer van het release dock naar het field dock te brengen.
 Het release dock maakt een Message object aan, geeft de installer informatie mee en zet het type van het bericht op release.
 Vervolgens wordt deze doorgestuurd naar de broker.
-Deze zal op zijn beurt het bericht inpakken als een notificatie bericht en het nieuwe bericht doorsturen naar de docks die voor release gesubscribed zijn.
+Deze zal op zijn beurt het bericht inpakken als een notificatie bericht en het nieuwe bericht doorsturen naar de docks die voor release ingeschreven zijn.
 Met de informatie uit het bericht is het field dock in staat om een Installer object te maken.
-Het field dock achterhaalt wie de zender van het bericht en contacteert dan direct de zender. Dit is het enige moment dat directe communicatie tussen de field en release docks mogelijk is.
-Nadat een connectie tussen de twee werd opgestart, wordt de gezipte installer samen met de nodige agenten verzonden naar het field.
-De lijst van agenten wordt overlopen en het install-agentobject zal zijn functie uitvoeren.
+Het field dock achterhaalt wie de zender van het bericht is en contacteert dan direct de zender. Dit is het enige moment dat directe communicatie tussen de field en release docks mogelijk is.
+Nadat een connectie tussen de twee werd opgestart, wordt de gezipte installer samen met de nodige agenten verzonden naar het field dock.
+De lijst van agenten wordt overlopen en het InstallAgent object zal zijn functie uitvoeren.
 
 \begin{sidewaysfigure}
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/seqRelease.png}
 \centering
-\caption{Sequentie diagram voor het releasen van een installer}
+\caption{Sequentiediagram voor het releasen van een installer}
 \label{fig:releaseSeq}
 \end{sidewaysfigure}
 
@@ -375,23 +375,23 @@ Zo kan bijvoorbeeld een verband gelegd worden tussen een bepaalde versie van een
 Deze informatie kan gebruikt worden om problemen in testtorens te vermijden.
 
 \subsection{Deployment environment}
-De deployment environment komt overeen met de field dock in de software dock architectuur.
+De deployment environment komt overeen met het field dock in de software dock architectuur.
 In de omgeving gaat de installer, afkomstig van de packager, uitgevoerd worden zodat de software geïnstalleerd wordt.
-Aan dit proces zijn de volgende problemen verbonden die grondig besproken werden in Sectie~\ref{sec:softwareLevenscyclus}.
+Aan dit proces zijn verschillende problemen verbonden die grondig besproken werden in Sectie~\ref{sec:softwareLevenscyclus}.
 
 Het opstarten van een client gebeurt op een gelijkaardige manier als het opstarten van een server.
-Figuur~\ref{fig:seqClient} bevat het sequentie diagram voor het opstarten van een client.
+Figuur~\ref{fig:seqClient} bevat het sequentiediagram voor het opstarten van een client.
 Hiervoor wordt eerst een FieldDock aangemaakt en deze zal zich vervolgens bij de broker inschrijven voor berichten van het type release en update.
 Bij het eerst gebruik moet het systeem eerst beschreven worden zodanig dat deze beschrijving toegevoegd kan worden aan de database.
-Na het registeren van de client kan de gebruiker gebruik maken van de view in Figuur~\ref{fig:overviewClient}.
 Het ontwerp van de view is terug te vinden in Figuur~\ref{fig:startClient}.
+Na het registeren van de client kan de gebruiker gebruik maken van de view in Figuur~\ref{fig:overviewClient}.
 Aan deze views is de MainGUI controller gekoppeld.
-Van hieruit is het mogelijk om nieuwe software die van het release dock te beoordelen en eventueel te installer.
+Van hieruit is het mogelijk om nieuwe software die van het release dock afkomstig is te beoordelen en eventueel te installer.
 
 \begin{sidewaysfigure}
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{afbeelding/seqStartClient.png}
 \centering
-\caption{Sequentie diagram voor het opstarten van een client}
+\caption{Sequentiediagram voor het opstarten van een client}
 \label{fig:seqClient}
 \end{sidewaysfigure}
 
@@ -399,7 +399,7 @@ Om de verschillende deploymentproblemen te vermijden en om ervoor te zorgen dat 
 Dit wordt gerealiseerd aan de hand van virtualisatietechnieken, meer bepaald aan de hand van Docker.
 Docker wordt verkozen boven een gewone virtuele machine omdat het uitvoeren van handelingen (zoals opstarten, stoppen, \ldots) op een container minder resources en tijd vraagt in vergelijking met een virtuele machine.
 Doordat een virtualisatietechniek wordt gebruikt, wordt het zeer eenvoudig om problemen tijdens de verschillende processen op te vangen.
-In Figuur~\ref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollback proces zeer eenvoudig is.
+In Figuur~\ref{fig:flow:rollback} is het duidelijk dat, door het gebruik van Docker, het rollbackproces zeer eenvoudig is.
 Hierbij is het belangrijk om te weten dat de container met de defecte code niet wordt verwijderd.
 De defecte code wordt in ``quarantaine'' geplaatst.
 Mochten logische fouten aanwezig zijn in een test kan dit leiden tot het afkeuren van de software terwijl de installatie wel correct verlopen is.
@@ -412,13 +412,15 @@ Figuur~\ref{fig:fieldDock} geeft weer op welke manier de agenten met de containe
 \caption{Structuur van een field dock}
 \label{fig:fieldDock}
 
+\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/startClient.png}}
+\caption{Grafische user interface bij eerste gebruik}
+\label{fig:startClient}
+
 \makebox[0pt]{\includegraphics[scale=0.6]{afbeelding/overviewClient.png}}
 \caption{Grafische user interface van de client}
 \label{fig:overviewClient}
 
-\makebox[0pt]{\includegraphics[scale=0.5]{afbeelding/startClient.png}}
-\caption{Grafische user interface bij eerste gebruik}
-\label{fig:startClient}
+
 
 \end{figure}
 

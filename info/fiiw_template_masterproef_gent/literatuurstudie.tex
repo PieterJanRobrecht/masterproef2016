@@ -9,15 +9,15 @@ Hierna wordt nagegaan op welke manier een ``rampenplan'' geïmplementeerd kan wo
 Uit de probleembespreking is ook gebleken dat er nood is aan een applicatie die overweg kan met verschillende programma's die Televic gemaakt heeft of nog zal maken.
 Om te achterhalen wat mogelijk is om dit te realiseren, worden verscheidene technologieën besproken die hiervoor een oplossing kunnen bieden.
 
-\section{Software deployment}\label{sec:softwareLevenscyclus}
-De levenscyclus van software deployment kan volgens \citet{softwareDeployment,hall1999cooperative} beschreven worden in verschillend stappen, namelijk:
+\section{Software-deployment}\label{sec:softwareLevenscyclus}
+De levenscyclus van software-deployment kan volgens \citet{softwareDeployment,hall1999cooperative} beschreven worden in verschillend stappen, namelijk:
 \begin{itemize}
-\item \emph{Release}: de software is volledig samengesteld uit pakketten die voldoende metadata bevatten om de verschillende bronnen te beschrijven waarvan het pakket afhangt.
-\item \emph{Installatie}: de software moet overgebracht worden naar de gebruiker en geconfigureerd worden in voorbereiding op de activatie.
-\item \emph{Activeren}: tijdens de activatie wordt de software-uitvoering opgestart of worden de nodige triggers geplaatst om de executie op het gepaste tijdstip op te starten.
-\item \emph{Deactiveren}: dit is het tegengestelde van activeren. Deze stap is nodig zodat een aanpassing of herconfiguratie uitgevoerd kan worden.
-\item \emph{Updaten}: dit is het proces waarin de software wordt aangepast. Deze stap wordt vaak geactiveerd door het uitbrengen van een nieuwe versie van de software.
-\item \emph{Deïnstallatie}: tijdens deze stap zal de geïnstalleerd software van het gebruikerssysteem gehaald worden.
+\item \textbf{Release}: de software is volledig samengesteld uit pakketten die voldoende metadata bevatten om de verschillende bronnen te beschrijven waarvan het pakket afhangt.
+\item \textbf{Installatie}: de software moet overgebracht worden naar de gebruiker en geconfigureerd worden in voorbereiding op de activatie.
+\item \textbf{Activeren}: tijdens de activatie wordt de software-uitvoering opgestart of worden de nodige triggers geplaatst om de executie op het gepaste tijdstip op te starten.
+\item \textbf{Deactiveren}: dit is het tegengestelde van activeren. Deze stap is nodig zodat een aanpassing of herconfiguratie uitgevoerd kan worden.
+\item \textbf{Updaten}: dit is het proces waarin de software wordt aangepast. Deze stap wordt vaak geactiveerd door het uitbrengen van een nieuwe versie van de software.
+\item \textbf{Deïnstallatie}: tijdens deze stap zal de geïnstalleerd software van het gebruikerssysteem gehaald worden.
 \end{itemize}
 De enige fase van de levenscyclus die zich uitsluitend op de server afspeelt is de release fase.
 De rest van de fases spelen zich af op de verschillende gebruikerssystemen.
@@ -38,7 +38,7 @@ Deze oorzaken kunnen in twee grote categorieën ingedeeld worden, namelijk de om
 \paragraph{Omgevingsproblemen}
 In de eerste categorie ligt de nadruk vooral op correctheid.
 Voordat de software geïnstalleerd wordt op een doelsysteem, wordt de doelomgeving ondervraagd naar alle eigenschappen: zijn de nodige programma's aanwezig, bestaan alle configuratiebestanden, \ldots .
-Als deze eisen niet voldaan zijn, dan zal de software niet correct werken.
+Als deze eisen niet voldaan zijn, zal de software niet correct werken.
 \citet{dolstra2006purely} haalt enkele concrete voorbeelden aan van omgevingsproblemen:
 \begin{itemize}
 \item De deployment van software kan een gedistribueerd probleem opleveren.
@@ -74,7 +74,7 @@ Zo'n actie kan overwogen worden als na de upgrade belangrijke functionaliteiten 
 \section{Case studies}\label{sec:caseStudies}
 Uit de vorige sectie blijkt dat het software-deploymentproces een uitgebreid en ingewikkeld proces is.
 Er moet rekening gehouden worden met verscheidene stappen die elk een eigen doel en functie hebben, maar ook met verschillende problemen die kunnen optreden voor, tijdens en na deze stappen.
-Door de jaren heen zijn er verschillende technologieën ontwikkeld die het probleem van software deployment aanpakken.
+Door de jaren heen zijn er verschillende technologieën ontwikkeld die het probleem van software-deployment aanpakken.
 In wat volgt, worden enkele van deze technologieën besproken en wordt nagegaan op welke manier zij software-deployment aanpakken.
 Op deze manier wordt een beeld gecreëerd van de mogelijke technologieën die gebruikt kunnen worden om de software van Televic van de producenten naar de gebruikers te krijgen.
 
@@ -102,10 +102,10 @@ Electric cloud is een bedrijf opgericht in 2002 met een focus op application rel
 Hun product, ElectricFlow, is ontworpen om het beschikbaar stellen, het bouwen en het verspreiden van mutlitiered applicaties te vereenvoudigen.
 Dit gebeurt aan de hand van de model-driven architectuur \citep{gartner}.
 \citet{electricflow} beschrijft ElectricFlow als een enterprise-grade DevOps Release Automation platform.
-Met behulp van de model-driven aanpak is het mogelijk voor gebruikers om meerde pipelines en releases over verschillende infrastructuren te coördineren op een eenvoudige manier.
+Met behulp van de model-driven aanpak is het mogelijk voor gebruikers om meerdere pipelines en releases over verschillende infrastructuren te coördineren op een eenvoudige manier.
 
-De kern van ElectricFlow bestaat uit een web-based systeem dat gebruikt wordt voor het automatiseren en het onderhouden van het bouw-, test-, deployment en releaseproces.
-Het automatiseringsplatform bestaat uit een drie-lagen architectuur, een web interface en mogelijkheden om build en release analyses uit te voeren.
+De kern van ElectricFlow bestaat uit een web-based systeem dat gebruikt wordt voor het automatiseren en het onderhouden van het bouw-, test-, deployment- en releaseproces.
+Het automatiseringsplatform bestaat uit een drie-lagen architectuur, een webinterface en mogelijkheden om build en release analyses uit te voeren.
 De drie-lagen architectuur van ElectricFlow bestaat uit:
 \begin{itemize}
 \item \textbf{ElectricFlow Server}: een server die instaat voor het managen van resources, commando's en het generen van rapporten.
@@ -122,12 +122,12 @@ In de figuur zijn de verschillende lagen zichtbaar samen met de verschillende an
 \label{fig:electricflowArchitecture}
 \end{figure}
 
-Om ElectricFlow te gebruiken voor bouw en test automatie, is het nodig om de volgende objecten te creëren, te configureren en bij te houden.
+Om ElectricFlow te gebruiken voor bouw en test automatie, is het nodig om de volgende objecten te creëren, te configureren en bij te houden:
 \begin{itemize}
 \item \textbf{Project}: een project in ElectricFlow dient als container waarin procedures, stappen, workflows, \ldots zitten.
 Op deze manier is het mogelijk om een scheiding te creëren tussen projecten die bijvoorbeeld een ander doel hebben.
-\item \textbf{Resource}: een resource wordt gedefinieerd als een agent machine waar stappen in uitgevoerd kunnen worden.
-\item \textbf{Procedures}: procedure en stappen worden gebruikt om taken in ElectricFlow te definiëren.
+\item \textbf{Resource}: een resource wordt gedefinieerd als een agentmachine waar stappen in uitgevoerd kunnen worden.
+\item \textbf{Procedures}: procedures en stappen worden gebruikt om taken in ElectricFlow te definiëren.
 Een procedure bestaat uit één of meerdere stappen waarbij in ieder stap een commando of script wordt uitgevoerd.
 \item \textbf{Workflow}: een workflow stelt de gebruiker in staat om build-test-deploy levenscycli te definiëren.
 Zo wordt het managen van verschillende procedures en stappen in een project eenvoudiger.
@@ -146,8 +146,8 @@ Een RPM pakket bestaat uit executables gecombineerd met configuratiebestanden en
 Doordat een pakket executables bevat, zal een pakket gekoppeld zijn aan het besturingssysteem van de host \citep{bailey1997maximum}.
 Naast de RPM files bevat een pakket verschillende scripts geschreven in de standaard Unix scripting taal.
 De verscheidene scripts zijn ingedeeld in sets horende bij een specifieke taak.
-Bij een error moet een roll back uitgevoerd worden.
-Dit is de taak van de script schrijver \citep{softwareDeployment}.
+Bij een error moet een rollback uitgevoerd worden.
+Dit is de taak van de scriptschrijver \citep{softwareDeployment}.
 
 De Redhat Package Manager is een grofkorrelige, taal onafhankelijke maar besturingssysteem afhankelijke oplossing.
 Het grootste probleem van RPM schuilt in de afhankelijkheden tussen de pakketten.
@@ -158,8 +158,8 @@ ATLAS is één van de vier grote experimenten bij de Large Hadron Collider (LHC)
 %Het is een algemeen deeltjesfysica experiment onderhouden door een internationale samenwerking met als doel het exploiteren van de mogelijkheden van de Large Hadron Collider.
 %Fysici testen de voorspellingen van het Standaard Model \cite{standardModel} wat kan leiden tot grote ontdekkingen zoals het Higgs  boson \cite{atlas}.
 
-Om in de ATLAS-samenwerking (specifiek voor het LCG/EGEE project, LHC Computing Grid/Enabling Grids for E-sciencE \citep{bird2005lhc}) om te gaan met de grote hoeveelheid bronnen, is er een volledig automatisch installatiesysteem ontworpen. 
-\citet{salvo2008atlas} beschrijft de architectuur van het ontworpen systeem.
+Om in de ATLAS-samenwerking (meer specifiek het LCG/EGEE project, LHC Computing Grid/Enabling Grids for E-sciencE \citep{bird2005lhc}) om te gaan met de grote hoeveelheid bronnen, is er een volledig automatisch installatiesysteem ontworpen. 
+\citet{salvo2008atlas} beschrijven de architectuur van het ontworpen systeem.
 Het ontwerp van het installatiesysteem werd gebaseerd op het Light Job Submission Framework for installation, ook wel LJSFi.
 
 \begin{figure}[!ht]
@@ -170,7 +170,9 @@ Het ontwerp van het installatiesysteem werd gebaseerd op het Light Job Submissio
 \end{figure}
 
 De architectuur van het framework is zichtbaar in Figuur~\ref{fig:ljsfiArchi}.
-Het framework vormt een dunne laag over de middleware van Grid (Grid is een gedistribueerde computerinfrastructuur voor geavanceerde wetenschappen. De focus ligt bij het delen van resources en innovatieve applicaties.\citep{foster2001anatomy}).
+Het framework vormt een dunne laag over de middleware van Grid.
+Grid is een gedistribueerde computerinfrastructuur voor geavanceerde wetenschappen.
+De focus ligt bij het delen van resources en innovatieve applicaties.\citep{foster2001anatomy}.
 De kern van het systeem bestaat uit de installatiedatabase en de command line interface (CLI).
 De laatste zorgt voor de interacties met de Grid middleware.
 Met hulp van de installatiedatabase kan de CLI de verschillende taken en de job informatie opslaan.
@@ -178,14 +180,14 @@ Aan de hand van deze informatie kunnen installaties uitgevoerd worden.
 De installatiedatabank staat in contact met alle componenten van het framework.
 Zo kan de status van verscheidene acties en configuraties van verschillende taken opgeslagen worden.
 
-Naast deze twee grote componenten bevat LJSFi servicemodules en extensies waarmee installatie aanvragen afgehandeld worden.
+Naast deze twee grote componenten bevat LJSFi servicemodules en extensies waarmee installatie-aanvragen afgehandeld worden.
 Het systeem bevat drie verschillende componenten die horen bij de LJSFi service modules:
 \begin{itemize}
-\item \textbf{RAI module} De Request An Installation module dient als web interface voor het ontvangen van user-driven installatie-aanvragen.
-\item \textbf{AIR module} De Automatic Installation Requester schiet in actie als de software release aangeduid staat als productie of veroudert en als de release aangeduid staat met de parameter auto-installatie.
+\item \textbf{RAI module}: de Request An Installation module dient als webinterface voor het ontvangen van user-driven installatie-aanvragen.
+\item \textbf{AIR module}: de Automatic Installation Requester schiet in actie als de software release aangeduid staat als productie of veroudert en als de release aangeduid staat met de parameter auto-installatie.
 De module zal respectievelijk de software installeren of verwijderen op alle sites waar de software tag nog niet aanwezig is.
 Door de AIR module periodiek te gebruiken, zullen de nodige aanvragen snel afgehandeld worden.
-\item \textbf{InAgent module} Met de InAgent module wordt het mogelijk om volledig geautomatiseerde installatieprocessen te voorzien.
+\item \textbf{InAgent module}: met de InAgent module wordt het mogelijk om volledig geautomatiseerde installatieprocessen te voorzien.
 Iedere 10 minuten wordt de installatiedatabase gelezen en via de CLI interface worden de nodige installatieprocessen opgestart.
 Elk installatieproces wordt bijgestaan door een installatie agent.
 De agent zal instaan voor het updaten van de installatiedatabase met real-time informatie die online zichtbaar is.
@@ -193,19 +195,19 @@ De agent zal instaan voor het updaten van de installatiedatabase met real-time i
 
 Naast de verscheidene automatische services biedt LJSFi enkele gebruikerservices aan.
 Een gebruiker kan zich inschrijven voor bepaalde acties op een doelsysteem.
-Als deze actie wordt uitgevoerd dan krijgt de gebruiker een mail.
+Als deze actie wordt uitgevoerd, krijgt de gebruiker een mail.
 Hiernaast kan een gebruiker een software release vastpinnen zodat deze niet verwijderd kan worden door het systeem.
 
 Het installatieproces wordt uitgevoerd in drie verschillende stappen.
 In een eerste stap wordt een sitecontrole uitgevoerd door een piloot taak naar de site te sturen.
-Als de check succesvol uitgevoerd wordt, kan het installatieproces beginnen.
+Als de controle succesvol uitgevoerd wordt, kan het installatieproces beginnen.
 De acties tijdens het installatieproces worden uitgevoerd door softwaremanagementscripts.
 Op het einde van het proces, haalt het systeem de joboutput en exit-code op.
 De laatste wordt opgeslagen in de installatiedatabase.
 
 \citet{Obreshkov2008244} bespreken hoe het ATLAS project te werk gaat bij het inpakken van alle nodige software.
-Het ATLAS project gebruikt CMT \citep{cmt} als configuratie manager.
-Met behulp van een configuratie bestand weten verscheidene tools hoe ze een pakket moeten afhandelen.
+Het ATLAS project gebruikt CMT \citep{cmt} als configuratiemanager.
+Met behulp van een configuratiebestand weten verscheidene tools hoe ze een pakket moeten afhandelen.
 \citet{packAtlas} spreekt ook over CMT als informatiebron voor het ophalen van meta-data.
 Aan de hand van deze data kan een Pacman pakket geproduceerd worden.
 Met behulp van een ``Pacman file'' is geweten hoe de ingepakte software behandeld moet worden.
@@ -215,7 +217,7 @@ Door gebruik te maken van de modules is het mogelijk om de verschillende pakkett
 Hierbij zorgt CMT voor de nodige meta-data waardoor installatietools niet afhankelijk zijn van de mens.
 Een nadeel aan deze architectuur is dat het gebruik van Grid nodig is om de LJSFi architectuur in te bouwen.
 Verder wordt in de lectuur niet ingegaan op welke wijze er wordt omgegaan met een fout tijdens het installatieproces of het verwijderproces.
-Het enige dat hierover vermeld wordt is dat de exit-code van de job niet rechtstreeks gebruikt worden.
+Het enige dat hierover vermeld wordt is dat de exit-code van de job niet rechtstreeks gebruikt wordt.
 
 \subsection{ORYA}\label{sec:ORYA}
 \citet{lestideau2003providing} leggen uit hoe ORYA (Open enviRonment to deploY Applications) verschillende deployment functionaliteiten aanbiedt aan gedistribueerde, autonome entiteiten zoals workstations en servers.
@@ -223,11 +225,11 @@ Aan de hand van een deployment PSEE \citep{belkhatir2007adele} wordt het mogelij
 
 In het ontwerp van ORYA worden er drie verschillende entiteiten besproken die nodig zijn om het automatische installatieproces mogelijk te maken.
 \begin{itemize}
-\item \textbf{Applicatie Server} De applicatie server bevat de informatie nodig voor de installatie.
+\item \textbf{Applicatie Server}: de applicatie server bevat de informatie nodig voor de installatie.
 Hieronder bevindt zich onder andere een pakket met de nodige resources en een manifest waarin de afhankelijkheden, beperkingen en kenmerken staan.
-\item \textbf{Target} De target is het doel waarop de deployment uitgevoerd wordt.
+\item \textbf{Target}: de target is het doel waarop de deployment uitgevoerd wordt.
 Iedere target wordt beschreven door de verschillende applicaties die al aanwezig zijn en de fysische beschrijving.
-\item \textbf{Deployment Server} De deployment server vormt de kern van de deployment omgeving en staat in voor het uitvoeren van de deployments. 
+\item \textbf{Deployment Server}: de deployment server vormt de kern van de deployment omgeving en staat in voor het uitvoeren van de deployments. 
 De deployment server zoekt de nodige pakketten, voert een transfer van de pakketten uit en installeert de applicatie.
 Op het einde moet de deployment server garanderen dat andere programma's correct blijven functioneren.
 \end{itemize}
@@ -283,13 +285,13 @@ Ansible is een open source IT configuratiemanagement-, deployment- en organisati
 De architectuur van Ansible bestaat uit een agentless push model.
 Dit wil zeggen dat er geen additionele software nodig is op de clienttoestellen.
 Dit wordt gerealiseerd door gebruik te maken van de remote manegement frameworks aanwezig op de toestellen, SSH voor Linux en Unix en WinRM voor Windows.
-Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang de Ansible het systeem niet aan het gebruiken is \citep{ansible}.
+Door geen agents te gebruiken, zal Ansible geen resources gebruiken zolang dat Ansible het systeem niet aan het gebruiken is \citep{ansible}.
 
 \citep{ansible} beschrijft verder dat Ansible gebruik maakt van \emph{Playbooks} voor de organisatie van de IT omgevingen.
-Playbooks zijn YAML\footnote{Een human-readable data serialisatie taal (Een superset van JSON)} definities van taken die beschrijven hoe een taak moet geautomatiseerd worden.
+Playbooks zijn YAML (Een human-readable data serialisatie taal (Een superset van JSON)) definities van taken die beschrijven hoe een taak moet geautomatiseerd worden.
 Een Playbook bestaat uit een aantal ``plays'' die uitgevoerd kunnen worden op een set van hosts, ook wel een ``inventory'' genoemd.
 Iedere play bestaat uit een set van taken die op een subset van de inventory uitgevoerd kan worden.
-Een taak bestaat uit Ansible modules (Een klein stuk code met een specifieke taak).
+Een taak bestaat uit Ansible modules (een klein stuk code met een specifieke taak).
 
 Hiernaast is het mogelijk om de mogelijkheden van Ansible uit te breiden.
 Modules kunnen zelf geschreven worden in eender welke taal met als enige beperking dat een JSON bestand als input en output gebruikt moet worden.
@@ -298,7 +300,7 @@ In tegenstelling tot ATLAS en Electric Cloud bevat Ansible geen agenten die gebr
 Wederom is het niet duidelijk wat er gebeurt mochten er fouten optreden tijdens het installatieproces of updateproces.
 
 \section{Recovery na fouten}\label{sec:rollback}
-Tijdens de bespreking van het probleem in Sectie~\ref{sec:probleem} werd al aangehaald dat een soort van ``rampenplan'' voorzien moet worden.
+Tijdens de bespreking van het probleem in Sectie~\ref{sec:probleem} werd aangehaald dat een ``rampenplan'' voorzien moet worden.
 Zowel omgevingsproblemen als onderhoudsproblemen (zie Sectie~\ref{sec:softwareLevenscyclus}) kunnen tijdens één van de toestanden in de deployment levenscyclus optreden.
 Voor Televic is het niet wenselijk dat een probleem tijdens één van deze toestanden ervoor zorgt dat hun software niet meer correct functioneert aangezien dit kan leiden tot het stilleggen van de productie.
 Daarom wordt in de volgende secties verschillende mechanismen besproken waarmee de verscheidene problemen aangepakt kunnen worden.
@@ -330,7 +332,7 @@ Systemen die deze transacties ondersteunen bezitten vaak de mogelijkheid om teru
 Om deze strategie te kunnen implementeren, moeten applicaties gebruik maken van het transactieprogrammeermodel, waardoor de keuzevrijheden van de programmeur beperkt worden \citep{srinivasan2004flashback}.
 
 \paragraph{Software rejuvenation}
-\citet{huang1995software} definieert software rejuvination als volgt:
+\citet{huang1995software} definiëren software rejuvenation als volgt:
 \begin{displayquote}
 ``Software rejuvenation is the concept of gracefully terminating an application and immediately restarting it at a clean internal state.''
 \end{displayquote}
@@ -385,9 +387,8 @@ Docker containers zijn niet hetzelfde als virtuele machines.
 In \citep{dockerEbook} worden virtuele machines voorgesteld als huizen terwijl Docker containers worden voorgesteld als appartementen.
 De huizen staan volledig op zichzelf en bieden bescherming tegen ongewenste gasten.
 Ze hebben een eigen infrastructuur met hun eigen water, verwarming, \ldots .
-Hiernaast zal ieder huis op zijn minste een badkamer, living, slaapkamer en keuken hebben.
+Hiernaast zal ieder huis op zijn minste een badkamer, woonkamer, slaapkamer en keuken hebben.
 Het vinden van een klein huis is een ganse klus en vaak zal een huis meer bevatten dan nodig is want dat komt door de manier waarop huizen gebouwd worden.
-
 Appartementen bieden ook bescherming tegen ongewenste gasten, maar zij zijn gebouwd rond een gemeenschappelijke infrastructuur.
 Het appartementsgebouw biedt gemeenschappelijk water, verwarming, \ldots  aan, aan elk appartement.
 Elk appartement kan van grootte verschillen.
@@ -412,7 +413,7 @@ Bij virtuele machines moet voor iedere virtuele machine een besturingssysteem ge
 Al deze besturingssystemen verbruiken RAM, CPU en bandbreedte.
 Containers zullen piggybacken op het bestaande host besturingssysteem.
 Hierdoor zal het resource gebruik efficiënter zijn.
-Een container is goedkoop waardoor het creëren en verwijderen van containers een snelle operatie.
+Een container is goedkoop waardoor het creëren en het verwijderen van containers een snelle operatie is.
 Dit komt omdat er enkel een proces moet afgesloten worden in tegenstelling tot het afsluiten van een volledig besturingssysteem.
 Een voordeel van de VMs ten opzichte van Docker is hun maturiteit.
 VMs bestaan langer en hebben zichzelf kunnen bewijzen in verschillende situaties.
@@ -428,7 +429,7 @@ Er kan op twee manieren naar dit proces gekeken worden:
 In de volgende secties worden deze twee verschillende focussen verder besproken.
 
 \subsection{Data focus}
-\citet{deploymentMethods} haalt drie methodes aan om software te deployen:
+\citet{deploymentMethods} halen drie methodes aan om software te deployen:
 \begin{itemize}
 \item disk image-based deployment
 \item behavior-based deployment
@@ -438,19 +439,19 @@ Bij disk image-based deployment worden de software en het besturingssysteem op e
 Er zullen verschillende image-servers aanwezig zijn die elk een service aanbieden.
 Zo zal de image-server van software A een andere image-server zijn dan de image-server die software B gebruikt.
 Het voordeel van deze strategie is dat, zolang de hardware en software vereisten voldaan zijn, de deployment bestaat uit een simpele read-write operatie.
-Maar, zoals \citet{deploymentMethods} al aangeeft, is deze methode niet flexibel.
+Maar, zoals \citet{deploymentMethods} al aangeven, is deze methode niet flexibel.
 Enkel software die op voorhand werd geconfigureerd op de image-server kan worden gedeployed.
 Gebruikers met speciale noden kunnen moeilijk worden geholpen.
 Voor Televic is flexibiliteit een hoofddoelstelling.
 Iedere node bevat verschillende hardware en is verschillend geconfigureerd.
 Een disk image-based deployment zal hierdoor niet gebruikt kunnen worden.
 Het basisidee achter behavior-based deployment is het opnemen van de schijfoperaties tijdens het deployen.
-Als geweten is welke bestanden aangepast, gecreëerd zijn, ... dan kan het proces nagebootst worden op andere nodes \citep{deploymentMethods}.
+Als geweten is welke bestanden aangepast of gecreëerd zijn, kan het proces nagebootst worden op andere nodes \citep{deploymentMethods}.
 Zo een proces nabootsen is moeilijk.
 Kerneloperaties moeten getraceerd worden.
 Deze methode biedt een verhoogde flexibiliteit aan ten opzichte van de disk image-based deployment maar dit is nog niet voldoende om deployments uit te voeren die uniek zijn per node.
-De laatste techniek die \citet{deploymentMethods} aan haalt is package-based deployment.
-Met behulp van een batch file, waarin alle nodige commando's aanwezig zijn, kan een installatie pakket gedeployed worden naar een target node.
+De laatste techniek die \citet{deploymentMethods} aanhalen, is package-based deployment.
+Met behulp van een batch file, waarin alle nodige commando's aanwezig zijn, kan een installatiepakket gedeployed worden naar een target node.
 Door het gebruik van een batch file wordt de flexibiliteit van de deployment verhoogd.
 
 \subsection{User focus}
@@ -462,10 +463,10 @@ Zoals \citet{patterson2008data} aanhaalt, is het belangrijk dat alle gebruikers 
 Hiernaast moet er rekening gehouden worden met de deployment strategie.
 \citet{munch2012software} spreken over verschillende strategieën om software uit te brengen:
 \begin{itemize}
-\item \emph{Big-bang}: iedere gebruiker van de applicatie zal op eenzelfde moment overschakelen van de oude naar de nieuwe software. 
+\item \textbf{Big-bang}: iedere gebruiker van de applicatie zal op eenzelfde moment overschakelen van de oude naar de nieuwe software. 
 Hierdoor wordt vermeden dat verschillende afdelingen met een andere versie van de software werken. 
 Een nadeel is dat voldoende support aanwezig moet zijn om mogelijke problemen op te lossen.
-\item \emph{Gefaseerd}: de nieuwe software zal bij een gefaseerde deployment enkel toegepast worden in specifiek geselecteerde projecten.
+\item \textbf{Gefaseerd}: de nieuwe software zal bij een gefaseerde deployment enkel toegepast worden in specifiek geselecteerde projecten.
 Als deze strategie voor een verlengde periode wordt toegepast, zullen verschillende versies van de software continu aanwezig zijn onder de gebruikers.
 \end{itemize}
 Aan beide strategieën zijn zowel voor- en nadelen gekoppeld.
@@ -567,17 +568,17 @@ De release dock biedt een release-repository aan waaruit de gebruikers de applic
 In de release dock wordt ieder release semantisch beschreven aan de hand van een Deployable Software Description file.
 Dit bestand bevat onder andere:
 \begin{itemize}
-\item \textbf{Assertion}: deze worden gebruikt om beperkingen die aan de gebruikerskant waar moeten te beschrijven.
+\item \textbf{Assertions}: deze worden gebruikt om beperkingen die aan de gebruikerskant waar moeten zijn te beschrijven.
 Als niet aan deze beperkingen voldaan wordt, zal het deploymentproces falen.
 \item \textbf{Afhankelijkheden}: deze worden gebruikt om beperkingen van de release te beschrijven.
 Als deze niet voldaan zijn aan de gebruikerskant dan kunnen nog oplossingen gevonden worden.
 Bijvoorbeeld door additionele software te installeren kan aan de beperking voldaan worden.
-\item \textbf{Configuratie}: deze zorgt voor een beschrijving van de software die wordt uitgegeven.
+\item \textbf{Configuraties}: deze zorgt voor een beschrijving van de software die wordt uitgegeven.
 Hierbij horen bijvoorbeeld varianten en aangepaste versies.
 \end{itemize}
 Elke release wordt vergezeld door enkele agents die de semantische betekenis lezen en zo de deployment kunnen uitvoeren.
 Aan de hand van interfaces kunnen de agents aan de services en inhoud van de release dock.
-Bij het wijzigen van een software release zal de release dock verschillende events afvuren.
+Bij het wijzigen van een software release zal het release dock verschillende events afvuren.
 Agenten kunnen zich inschrijven voor deze events en weten zo wanneer bepaalde handelingen uitgevoerd moeten worden \citep{hall1999cooperative}.
 
 De field dock dient als een interface naar de gebruikerskant toe.
@@ -611,10 +612,10 @@ Hiernaast moet de server niet weten wie allemaal de events ontvangt die hij prod
 \label{fig:pubsubArchi}
 \end{figure}
 
-Een naïeve aanpak, volgens \citet{carzaniga2001design}, is het gebruiken van één centrale server waar alle subscripties worden bijgehouden, waar alle events toekomen, waar de bestemming van het event beslist wordt en waar het event wordt doorgestuurd naar de gepaste subscribers.
+Een naïeve aanpak, volgens \citet{carzaniga2001design}, is het gebruiken van één centrale server waar alle inschrijvingen worden bijgehouden, waar alle events toekomen, waar de bestemming van het event beslist wordt en waar het event wordt doorgestuurd naar de gepaste subscribers.
 Deze strategie is eenvoudig te implementeren maar deze werkt de schaalbaarheid tegen.
 Dit was ook al duidelijk in Figuur~\ref{fig:pubsubArchi} waar verschillende ``Brokers'' aanwezig zijn.
-Het is belangrijk om stil te staan bij enkele ontwerp beslissingen zodanig dat de service die in Figuur~\ref{fig:pubsubService} zichtbaar is, implementeerbaar is.
+Het is belangrijk om stil te staan bij enkele ontwerpbeslissingen zodanig dat de service die in Figuur~\ref{fig:pubsubService} zichtbaar is, implementeerbaar is.
 
 \begin{figure}[!ht]
 \centering
@@ -680,20 +681,20 @@ Hiernaast wordt het ook mogelijk om de technologieën te vergelijken aangezien z
 Windows installer XML Toolset is een set van build tools waarmee Windows Installer packages gemaakt worden met behulp van XML broncode.
 De toolset is geschreven in C\# en heeft het .Net framework nodig om te kunnen functioneren.
 Broncode wordt gecompileerd en vervolgens gelinkt om een executable te maken.
-Met de toolset kunnen .msi installatie pakketten, .msm merge modules en .msp patches gecombineerd worden tot een Windows executabel \citep{wixToolset}.
+Met de toolset kunnen .msi installatiepakketten, .msm merge modules en .msp patches gecombineerd worden tot een Windows executable \citep{wixToolset}.
 
 Aan deze technologie zijn verschillende voor- en nadelen verbonden.
 De WiX toolset is diep geïntegreerd met Windows waardoor er tijdens de installatie van software gebruik gemaakt kan worden van verscheidene functionaliteiten die bij Windows horen.
 De WiX toolset maakt installers die uitsluitend bedoeld zijn voor de Windows installation engine.
 Hierdoor worden verscheidene functionaliteiten eenvoudig te gebruiken, zoals het maken van uitzonderingen in de Windows Firewall.
 Hiernaast kan tijdens het installatieproces rekening gehouden worden met externe installers.
-Op deze manier is het mogelijk om verscheidene software pakketten te combineren tot één geheel.
+Op deze manier is het mogelijk om verscheidene softwarepakketten te combineren tot één geheel.
 Een fragment van de WiX toolset code is terug te vinden in Listing~\ref{list:wix}.
 Door gebruik te maken van de Windows installation engine is het niet mogelijk om de executable te gebruiken in Linux omgevingen. 
 Dit kan eventueel omzeild worden door het gebruik te maken van software zoals Wine \citep{amstadt1994wine}.
 Als geen alternatieven aanwezig zijn, dan is deze strategie eventueel het overwegen waard.
 WiX maakt gebruik van XML broncode om verschillende elementen te definiëren.
-\citet{xmill} geeft al aan dat XML niet een van de meest efficiënte dataformaten is, maar het verhoogt de flexibiliteit wel.
+\citet{xmill} geven al aan dat XML niet een van de meest efficiënte dataformaten is, maar het verhoogt de flexibiliteit wel.
 Het creëren van een XML bestand met de hand is een langdradig en moeilijk werk.
 
 \subsubsection{NSIS}
@@ -707,7 +708,7 @@ Met de scripting taal van NSIS is het mogelijk om eenvoudige installer te defini
 De scripting taal is intuïtiever te gebruiken in vergelijking met de XML bestanden van Wix Toolset en is dan ook een voordeel bij deze technologie.
 Dankzij de grote hoeveelheid aan plug-ins die aanwezig zijn, is het eenvoudig om een installer te creëren met verschillende functionaliteiten.
 De gecreëerde installer is een Windows executable en de opmerking gegeven bij de WiX Toolset is hier ook van toepassing en is dan ook een nadeel van deze technologie.
-Het feit dat NSIS bedoeld is om eenvoudige installers te maken zorgt ervoor dat het niet mogelijk is om aparte pakketten te definiëren.
+Het feit dat NSIS bedoeld is om eenvoudige installers te maken, zorgt ervoor dat het niet mogelijk is om aparte pakketten te definiëren.
 Ieder pakket kan wel een eigen configuratie hebben maar dit wordt allemaal toegevoegd aan één script.
 Een grote hoeveelheid aan pakketten leidt tot wanorde.
 NSIS biedt ook geen mogelijkheden aan om geïnstalleerde software up te daten.
@@ -717,6 +718,7 @@ Om die eigenschappen toe te voegen moet er beroep gedaan worden op andere softwa
 Volgens \citep{chocoAbout} is Chocolatey een package mangager voor Windows net zoals apt-get voor Linux is.
 Het is ontworpen als een gedecentraliseerd framework met als doel het snel installeren van applicaties en tools.
 Chocolatey werd gebouwd boven op de NuGet infrastructuur gecombineerd voor het verspreiden van de packages en gebruikt PowerShell voor een gepersonaliseerde installatie.
+NuGet is de package manager voor het Microsoft development platform \citep{nuget}.
 
 Het grootste voordeel dat bekomen wordt bij het gebruiken van een package manager is het al bestaan van een deployment infrastructuur. 
 Na het installeren van Chocolatey op de client kunnen alle nodige packages voor het framework geïnstalleerd worden.
@@ -754,7 +756,6 @@ Hiernaast is het wel mogelijk om voor ieder pakket een aparte installatieprocedu
 
 \subsection{Conclusie}
 Tabel~\ref{tab:voorNadelen} geeft een overzicht van de besproken technologieën en de voor- en nadelen die aan iedere technologie gekoppeld zijn.
-Hieruit wordt snel duidelijk dat geen enkele technologie enkele pluspunten bevat.
 Naar het ontwerp van de applicatie toe, moet er rekening gehouden worden met alle voor- en nadelen die aan de technologieën gekoppeld zijn.
 De beste technologie wordt gekozen of er wordt zelf software voor het combineren van pakketten ontworpen die gebaseerd is op deze technologieën.
 

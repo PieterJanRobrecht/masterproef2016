@@ -13,7 +13,7 @@ Om de verscheidene omgevingen correct in te stellen, wordt gebruik gemaakt van L
 Eén van de hoofddoelstellingen was het ontwerpen van een applicatie die software kan installeren bij een groeiend aantal gebruikers.
 Hiernaast moest de ontworpen applicatie bruikbaar zijn op verschillende besturingssystemen.
 Om dit uit te testen werd de volgende test ontworpen:
-Er wordt een testomgeving opgezet die bestaat uit één release dock, één broker en negen field docks.
+er wordt een testomgeving opgezet die bestaat uit één release dock, één broker en negen field docks.
 Twee van de negen field docks gebruiken Linux als besturingssysteem.
 De rest gebruikt Windows als besturingssysteem.
 Vervolgens wordt een installer gecreëerd en gereleased.
@@ -164,7 +164,7 @@ Dit zorgt ervoor dat fouten tijdens het installatieproces geen invloed hebben op
 %Goed omgaan met verschillende types van installatie
 
 \subsection{Weaknesses}
-Een zwakte van de architectuur ligt bij de broker.
+Een zwakte van de architectuur ligt bij de huidige implementatie van de broker.
 Aangezien de broker alle berichten moet afhandelen, vormt deze een bottleneck in de architectuur.
 Er zijn echter oplossingen mogelijk waarbij de broker een handle terug geeft aan de docks \citep{adler1995distributed}. 
 Een andere strategie bestaat uit het gebruiken van meerdere brokers.
