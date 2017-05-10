@@ -483,7 +483,7 @@ Zo ligt de programmeertaal niet vast en kan een taal gekozen worden die besturin
 In de volgende secties wordt vooral gekeken welke architecturen een schaalbare oplossing bieden voor het deploymentproces.
 
 \subsection{Client-server architectuur}
-\citep{encyclo} beschrijft de client-server architectuur als een architectuur van een computernetwerk waarin verscheidene clients services van een gecentraliseerde server opvragen en ontvangen.
+\citet{encyclo} beschrijft de client-server architectuur als een architectuur van een computernetwerk waarin verscheidene clients services van een gecentraliseerde server opvragen en ontvangen.
 De client computers dienen als interface voor de gebruikers om services op te vragen en het resultaat van de server weer te geven.
 De architectuur bevordert het ontwerpen van systemen die modulair, flexibel en uitbreidbaar zijn door eventuele data, resources of computeroperaties te integreren, te organiseren en aan te bieden als een service \citep{adler1995distributed}. 
 Figuur~\ref{fig:clientServer} geeft de client-server architectuur weer.
@@ -495,14 +495,15 @@ Figuur~\ref{fig:clientServer} geeft de client-server architectuur weer.
 \label{fig:clientServer}
 \end{figure}
 
-Een voordeel aan de client-server architectuur is dat clients zich niet moeten bezig houden met het verwerken van data.
-Clients kunnen zich focussen op het opvragen van informatie van de gebruikers en de server en clients kunnen zich focussen op het weergeven van deze data \citep{oracleClientServer}.
+Een voordeel van de client-server architectuur is dat clients zich niet moeten bezig houden met het verwerken van data.
+Clients kunnen zich focussen op het opvragen van informatie van de computergebruikers en de server en clients kunnen zich focussen op het weergeven van deze data \citep{oracleClientServer}.
 Doordat de architectuur bestaat uit een server die verscheidene requests van clients afhandelt, is deze server ook de zwakke schakel in de architectuur.
-Bij het uitvallen van deze component, is het niet mogelijk om 
+Bij het uitvallen van de server, is het niet mogelijk om het netwerk in stand te houden.
 Een netwerk waar slechts één server in aanwezig is, bevordert dan ook niet de schaalbaarheid.
 Hiernaast wordt de communicatie tussen de client en de server geïnitieerd door de client die een service van de server wilt gebruiken.
 Aangezien het doel het verspreiden van software vanuit de server is, moet het mogelijk zijn om vanuit de server updates te verspreiden.
-\citet{mesbah2008component} legt uit dat het client-geïnitieerde afhaalmodel inefficiënt is voor real-time event notificaties.
+\citet{mesbah2008component} leggen uit dat het client-geïnitieerde afhaalmodel inefficiënt is voor real-time event notificaties.
+Dit is een groot nadeel aan deze architectuur aangezien het mogelijk moet zijn om vanuit een softwareproducent de verscheidene clients op de hoogte te brengen van bijvoorbeeld nieuwe software die beschikbaar is.
 Een oplossing voor dit probleem is het hanteren van een push-gebaseerd model waarbij de server aanpassingen uitzendt naar alle clients.
 
 %Volgens \citet{micro} is het mogelijk om een applicatie in te delen in drie logische groepen of ook wel lagen.
